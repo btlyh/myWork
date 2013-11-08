@@ -335,7 +335,7 @@ public class BossManager
 	public void attUp(Player player,int bossSid)
 	{
 		Map<String,Object> resultMap=checkAttUp(player,bossSid);
-		String error=resultMap.get("error").toString();
+		String error=(String)resultMap.get("error");
 		if(error!=null)
 		{
 			throw new DataAccessException(601,error);
