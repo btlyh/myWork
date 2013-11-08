@@ -1,0 +1,43 @@
+package com.cambrian.dfhm.skill;
+
+import java.util.ArrayList;
+import com.cambrian.dfhm.battle.BattleCard;
+
+/**
+ * 类说明：免伤
+ * @author：Sebastian
+ * 
+ */
+public class NoHurtSkill extends Skill{
+
+	/* static fields */
+
+	/* static methods */
+
+	/* fields */
+	/** 免伤次数 */
+	private int number;
+	
+	/* constructors */
+
+	/* properties */
+	public int getNumber()
+	{
+		return number;
+	}
+
+	/* init start */
+
+	/* methods */
+	public boolean isNoHurt()
+	{
+		return number > 0;
+	}
+	
+	@Override
+	public ArrayList<Integer> skillValue(BattleCard attCard, int[] aim, BattleCard[] aimList, ArrayList<Integer> record) {
+		super.clearDieIndex();
+		number --;
+		return super.getDieIndex();
+	}
+}

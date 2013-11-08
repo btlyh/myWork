@@ -1,0 +1,49 @@
+package com.cambrian.dfhm.skill;
+
+import java.util.ArrayList;
+
+import com.cambrian.common.net.ByteBuffer;
+import com.cambrian.dfhm.battle.BattleCard;
+
+/**
+ * 类说明：免伤
+ * @author：Sebastian
+ * 
+ */
+public class NoHurtSkill extends Skill{
+
+	/* static fields */
+
+	/* static methods */
+
+	/* fields */
+	private int hurt;
+	private int round;
+	/** 技能发动率 */
+	private int rate;
+
+	/* constructors */
+
+	/* properties */
+
+	/* init start */
+
+	/* methods */
+	@Override
+	public boolean skillValue(BattleCard attCard, int[] aim, BattleCard[] aimList, ArrayList<Integer> record) {
+		return false;
+	}
+	
+	@Override
+	public boolean buffValue(BattleCard aimCard) {
+		round --;
+		return false;
+	}
+	
+	@Override
+	public void bytesWrite(ByteBuffer data) {
+		data.writeInt(hurt);
+		data.writeInt(round);
+	}
+
+}

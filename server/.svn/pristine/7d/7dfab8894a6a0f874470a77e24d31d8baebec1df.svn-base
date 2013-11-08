@@ -1,0 +1,136 @@
+package com.cambrian.dfhm.common.entity;
+
+import java.util.ArrayList;
+
+import com.cambrian.common.net.ByteBuffer;
+
+/**
+ * 类说明：用户信息类
+ * 
+ * @author：zmk
+ */
+public class PlayerInfo
+{
+
+	/* static fields */
+
+	/* static methods */
+
+	/* fields */
+	/** 技能免费刷新次数 */
+	private int skillFlushFreeTimes;
+	/** 抽奖SID */
+	private int luckBoxSid;
+	/** 免费抽奖次数 */
+	private int luckBoxFreeTimes;
+	/** 上次抽奖时间 */
+	private long lastTime;
+	/** 随机到的卡牌列表 */
+	private ArrayList<Integer> randomCards=new ArrayList<Integer>();
+	/** 付费抽取的次数 */
+	private int payTimes=1;
+
+	/* constructors */
+
+	/* properties */
+	public int getSkillFlushFreeTimes()
+	{
+		return skillFlushFreeTimes;
+	}
+
+	public void setSkillFlushFreeTimes(int skillFlushFreeTimes)
+	{
+		this.skillFlushFreeTimes=skillFlushFreeTimes;
+	}
+
+	public int getLuckBoxSid()
+	{
+		return luckBoxSid;
+	}
+
+	public void setLuckBoxSid(int luckBoxSid)
+	{
+		this.luckBoxSid=luckBoxSid;
+	}
+
+	public int getLuckBoxFreeTimes()
+	{
+		return luckBoxFreeTimes;
+	}
+
+	public void setLuckBoxFreeTimes(int luckBoxFreeTimes)
+	{
+		this.luckBoxFreeTimes=luckBoxFreeTimes;
+	}
+
+	public long getLastTime()
+	{
+		return lastTime;
+	}
+
+	public void setLastTime(long lastTime)
+	{
+		this.lastTime=lastTime;
+	}
+	public ArrayList<Integer> getRandomCards()
+	{
+		return randomCards;
+	}
+
+	public void setRandomCards(ArrayList<Integer> cardList)
+	{
+		this.randomCards=cardList;
+	}
+
+	public int getPayTimes()
+	{
+		return payTimes;
+	}
+
+	public void setPayTimes(int payTimes)
+	{
+		this.payTimes=payTimes;
+	}
+	/* init start */
+
+	/* methods */
+	/** 序列化 和DC通信 存 */
+	public void dbBytesWrite(ByteBuffer data)
+	{
+		data.writeInt(skillFlushFreeTimes);
+		data.writeInt(luckBoxSid);
+		data.writeInt(luckBoxFreeTimes);
+		data.writeLong(lastTime);
+		data.writeInt(randomCards.size());
+		for(Integer integer:randomCards)
+		{
+			data.writeInt(integer);
+		}
+		data.writeInt(payTimes);
+	}
+	/** 序列化 和DC通信 取 */
+	public void dbBytesRead(ByteBuffer data)
+	{
+		skillFlushFreeTimes=data.readInt();
+		luckBoxSid=data.readInt();
+		luckBoxFreeTimes=data.readInt();
+		lastTime=data.readLong();
+		int len=data.readInt();
+		for(int i=0;i<len;i++)
+		{
+			randomCards.add(data.readInt());
+		}
+		payTimes=data.readInt();
+	}
+
+	public void decrLuckBoxFreeTimes(int times)
+	{
+		luckBoxFreeTimes-=times;
+	}
+
+	public void inPayTimes(int times)
+	{
+		payTimes+=times;
+	}
+
+}

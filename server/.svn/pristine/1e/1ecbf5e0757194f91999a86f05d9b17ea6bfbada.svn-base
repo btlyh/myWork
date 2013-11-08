@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	NPC配置~！
+	sid					唯一标签
+	class				程序使用
+	battleCardList		[怪物1，怪物2]NPC中的怪物卡牌
+	needToken 			攻击此NPC所需要的军令
+	type				NPC的类型[1主线,2挑战,3穿越,4活动]
+	isBoss				此NPC是否为BOSS 1是 0否
+	nextSid				下一个普通NPC的sid   如果为0表示最高副本
+	round				回合数
+	attConfine 			攻击次数限制
+	-->
+	
+	<sample sid="13001" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24001" needToken="2" type="3" isBoss="0" nextSid="11016" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13002" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24002" needToken="2" type="3" isBoss="0" nextSid="11016" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13003" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24003" needToken="2" type="3" isBoss="1" nextSid="11016" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13004" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24004" needToken="2" type="3" isBoss="0" nextSid="11016" _finitMonsters="1" round="30" attConfine="10"/>
+	<sample sid="13005" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24005" needToken="2" type="3" isBoss="0" nextSid="11031" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13006" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24006" needToken="2" type="3" isBoss="1" nextSid="11031" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13007" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24007" needToken="2" type="3" isBoss="0" nextSid="11031" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13008" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24008" needToken="2" type="3" isBoss="0" nextSid="11031" _finitMonsters="1" round="30" attConfine="10"/>
+	<sample sid="13009" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24009" needToken="2" type="3" isBoss="1" nextSid="11031" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13010" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24010" needToken="2" type="3" isBoss="0" nextSid="11046" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13011" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24011" needToken="2" type="3" isBoss="0" nextSid="11046" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13012" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24012" needToken="2" type="3" isBoss="1" nextSid="11046" _finitMonsters="1" round="30" attConfine="10"/>
+	<sample sid="13013" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24013" needToken="2" type="3" isBoss="0" nextSid="11046" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13014" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24014" needToken="2" type="3" isBoss="0" nextSid="11064" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13015" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24015" needToken="2" type="3" isBoss="1" nextSid="11064" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13016" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24016" needToken="2" type="3" isBoss="0" nextSid="11064" _finitMonsters="1" round="30" attConfine="10"/>
+	<sample sid="13017" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24017" needToken="2" type="3" isBoss="0" nextSid="11064" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13018" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24018" needToken="2" type="3" isBoss="1" nextSid="11064" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13019" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24019" needToken="2" type="3" isBoss="0" nextSid="11079" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13020" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24020" needToken="2" type="3" isBoss="0" nextSid="11079" _finitMonsters="1" round="30" attConfine="10"/>
+	<sample sid="13021" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24021" needToken="2" type="3" isBoss="1" nextSid="11079" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13022" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24022" needToken="2" type="3" isBoss="0" nextSid="11079" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13023" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24023" needToken="2" type="3" isBoss="0" nextSid="11079" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13024" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24024" needToken="2" type="3" isBoss="1" nextSid="11094" _finitMonsters="1" round="30" attConfine="10"/>
+	<sample sid="13025" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24025" needToken="2" type="3" isBoss="0" nextSid="11094" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13026" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24026" needToken="2" type="3" isBoss="0" nextSid="11094" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13027" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24027" needToken="2" type="3" isBoss="1" nextSid="11094" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13028" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24028" needToken="2" type="3" isBoss="0" nextSid="11094" _finitMonsters="1" round="30" attConfine="10"/>
+	<sample sid="13029" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24029" needToken="2" type="3" isBoss="0" nextSid="11109" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13030" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24030" needToken="2" type="3" isBoss="1" nextSid="11109" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13031" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24031" needToken="2" type="3" isBoss="0" nextSid="11109" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13032" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24032" needToken="2" type="3" isBoss="0" nextSid="11109" _finitMonsters="1" round="30" attConfine="10"/>
+	<sample sid="13033" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24033" needToken="2" type="3" isBoss="1" nextSid="11109" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13034" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24034" needToken="2" type="3" isBoss="0" nextSid="11129" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13035" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24035" needToken="2" type="3" isBoss="0" nextSid="11129" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13036" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24036" needToken="2" type="3" isBoss="1" nextSid="11129" _finitMonsters="1" round="30" attConfine="10"/>
+	<sample sid="13037" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24037" needToken="2" type="3" isBoss="0" nextSid="11129" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13038" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24038" needToken="2" type="3" isBoss="0" nextSid="11129" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13039" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24039" needToken="2" type="3" isBoss="1" nextSid="11150" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13040" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24040" needToken="2" type="3" isBoss="0" nextSid="11150" _finitMonsters="1" round="30" attConfine="10"/>
+	<sample sid="13041" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24041" needToken="2" type="3" isBoss="0" nextSid="11150" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13042" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24042" needToken="2" type="3" isBoss="1" nextSid="11150" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13043" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24043" needToken="2" type="3" isBoss="0" nextSid="11150" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13044" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24044" needToken="2" type="3" isBoss="0" nextSid="0" _finitMonsters="1" round="30" attConfine="10"/>
+	<sample sid="13045" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24045" needToken="2" type="3" isBoss="1" nextSid="0" _finitMonsters="4" round="30" attConfine="10"/>
+	<sample sid="13046" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24046" needToken="2" type="3" isBoss="0" nextSid="0" _finitMonsters="3" round="30" attConfine="10"/>
+	<sample sid="13047" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24047" needToken="2" type="3" isBoss="0" nextSid="0" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13048" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24048" needToken="2" type="3" isBoss="1" nextSid="0" _finitMonsters="2" round="30" attConfine="10"/>
+	<sample sid="13049" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="24001,24001,24001,24001,24049" needToken="2" type="3" isBoss="1" nextSid="0" _finitMonsters="2" round="30" attConfine="10"/>
+
+	
+</objects>

@@ -1,0 +1,344 @@
+package com.cambrian.dfhm.common.logic;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import com.cambrian.common.net.DataAccessException;
+import com.cambrian.common.object.Sample;
+import com.cambrian.common.util.MathKit;
+import com.cambrian.common.util.TimeKit;
+import com.cambrian.dfhm.Lang;
+import com.cambrian.dfhm.card.Card;
+import com.cambrian.dfhm.common.entity.LuckBoxCfg;
+import com.cambrian.dfhm.common.entity.Player;
+import com.cambrian.dfhm.mail.entity.Mail;
+import com.cambrian.dfhm.mail.util.MailFactory;
+
+/**
+ * 类说明：卡牌抽奖逻辑类
+ * 
+ * @author：LazyBear
+ */
+public class LuckBoxManager
+{
+
+	/* static fields */
+	private static LuckBoxManager instance=new LuckBoxManager();
+	/** 免费刷新、武魂刷新 */
+	private static final int FLUSH_FREE=0,FLUSH_SOUL=1;
+
+	/* static methods */
+	public static LuckBoxManager getInstance()
+	{
+		return instance;
+	}
+
+	/* fields */
+	MailFactory mf;
+
+	/* constructors */
+
+	/* properties */
+	public void setMailFactory(MailFactory mf)
+	{
+		instance.mf=mf;
+	}
+	/* init start */
+
+	/* methods */
+
+	/**
+	 * 直接购买
+	 * 
+	 * @param player 玩家对象
+	 * @param needGold 所需RMB
+	 * @return
+	 */
+	public Card buyCard(Player player,int needGold,int cardSid)
+	{
+		Map<String,Object> resultMap=checkBuyCard(player,needGold,cardSid);
+		String error=(String)resultMap.get("error");
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		player.decrGold(needGold);
+		player.getPlayerInfo().getRandomCards().remove(new Integer(cardSid));
+		Card card=null;
+		if(player.getCardBag().getSurplusCapacity()<=0)
+		{
+			ArrayList<Integer> cards = new ArrayList<Integer>();
+			cards.add(cardSid);
+			Mail mail = mf.createSystemMail(cards,0,0,0,0,0);
+			player.addMail(mail);
+		}
+		else
+		{
+			card=player.getCardBag().add(cardSid);
+		}
+		return card;
+	}
+
+	/**
+	 * 检查直接购买
+	 * 
+	 * @param player 玩家对象
+	 * @param needGold 所需金钱
+	 * @return
+	 */
+	private Map<String,Object> checkBuyCard(Player player,int needGold,
+		int cardSid)
+	{
+		Map<String,Object> resultMap=new HashMap<String,Object>();
+		LuckBoxCfg lbc=(LuckBoxCfg)Sample.getFactory().getSample(
+			player.getPlayerInfo().getLuckBoxSid());
+		if(lbc==null)
+		{
+			resultMap.put("error",Lang.F1603);
+			return resultMap;
+		}
+		if(player.getVipLevel()<3)
+		{
+			resultMap.put("error",Lang.F1610);
+			return resultMap;
+		}
+		if(needGold>player.getGold())
+		{
+			resultMap.put("error",Lang.F1606);
+			return resultMap;
+		}
+		if(needGold!=lbc.getBuyGold())
+		{
+			resultMap.put("error",Lang.F1607);
+			return resultMap;
+		}
+		ArrayList<Integer> cards=player.getPlayerInfo().getRandomCards();
+		boolean isExist=isExist(cards,cardSid);
+		if(!isExist)
+		{
+			resultMap.put("error",Lang.F1608);
+			return resultMap;
+		}
+		Card card=(Card)Sample.getFactory().getSample(cardSid);
+		if(card==null)
+		{
+			resultMap.put("error",Lang.F1609);
+			return resultMap;
+		}
+		resultMap.put("error",null);
+		return resultMap;
+	}
+
+	/***
+	 * 抽取卡牌
+	 * 
+	 * @param player 玩家对象
+	 * @param needGold 所需RMB
+	 * @return
+	 */
+	public Card takeCard(Player player,int needGold)
+	{
+		Map<String,Object> resultMap=checkTakeCard(player,needGold);
+		String error=(String)resultMap.get("error");
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		ArrayList<Integer> randomCards=player.getPlayerInfo()
+			.getRandomCards();
+		if(player.getPlayerInfo().getLuckBoxFreeTimes()>0)
+		{
+			player.getPlayerInfo().decrLuckBoxFreeTimes(1);
+		}
+		else
+		{
+			player.getPlayerInfo().inPayTimes(1);
+			player.decrGold(needGold);
+		}
+		int cardSid=getRandomCard(randomCards);
+		Card card=null;
+		if(player.getCardBag().getSurplusCapacity()<=0)
+		{
+			ArrayList<Integer> cards = new ArrayList<Integer>();
+			cards.add(cardSid);
+			Mail mail = mf.createSystemMail(cards,0,0,0,0,0);
+			player.addMail(mail);
+		}
+		else
+		{
+			card=player.getCardBag().add(cardSid);
+		}
+		if(card==null)
+		{
+			card=new Card();
+			card.setSid(cardSid);
+		}
+		player.getPlayerInfo().getRandomCards().remove(new Integer(cardSid));
+		return card;
+	}
+
+	/**
+	 * 检查抽取卡牌
+	 * 
+	 * @param player 玩家对象
+	 * @return
+	 */
+	private Map<String,Object> checkTakeCard(Player player,int needGold)
+	{
+		Map<String,Object> resultMap=new HashMap<String,Object>();
+		LuckBoxCfg lbc=(LuckBoxCfg)Sample.getFactory().getSample(
+			player.getPlayerInfo().getLuckBoxSid());
+		if(lbc==null)
+		{
+			resultMap.put("error",Lang.F1603);
+			return resultMap;
+		}
+		if(needGold<player.getGold())
+		{
+			resultMap.put("error",Lang.F1605);
+			return resultMap;
+		}
+		int useGold=player.getPlayerInfo().getPayTimes()*lbc.getNeedGold();
+		if(player.getPlayerInfo().getLuckBoxFreeTimes()<1&&needGold!=useGold)
+		{
+			resultMap.put("error",Lang.F1604);
+			return resultMap;
+		}
+
+		return null;
+	}
+	/**
+	 * 刷新获取卡牌列表
+	 * 
+	 * @param player 用户对象
+	 * @param type 0自然刷新 1武魂刷新
+	 * @return 返回剩余时间
+	 */
+	public long flushCardList(Player player,int type)
+	{
+		Map<String,Object> resultMap=checkGetCardList(player,type);
+		String error=(String)resultMap.get("error");
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		LuckBoxCfg lbc=(LuckBoxCfg)resultMap.get("lbc");
+		long lastTime=player.getPlayerInfo().getLastTime();
+		if(type==FLUSH_FREE)
+		{
+			if(TimeKit.nowTimeMills()-lastTime>LuckBoxCfg.CDTime)
+			{
+				player.getPlayerInfo().setRandomCards(getRandomCards(lbc));
+				player.getPlayerInfo().setLastTime(TimeKit.nowTimeMills());
+				player.getPlayerInfo().setPayTimes(1);
+			}
+		}
+		else if(type==FLUSH_SOUL)
+		{
+			player.getPlayerInfo().setRandomCards(getRandomCards(lbc));
+			player.decrSoul(lbc.getNeedSoul());
+			player.getPlayerInfo().setLastTime(TimeKit.nowTimeMills());
+			player.getPlayerInfo().setPayTimes(1);
+		}
+		return LuckBoxCfg.CDTime-(TimeKit.nowTimeMills()-lastTime);
+	}
+
+	/**
+	 * 检查获取卡牌列表
+	 * 
+	 * @param player
+	 * @return
+	 */
+	private Map<String,Object> checkGetCardList(Player player,int type)
+	{
+		Map<String,Object> resultMap=new HashMap<String,Object>();
+		if(player.getPlayerInfo().getLuckBoxSid()==0)
+		{
+			resultMap.put("error",Lang.F1601);
+			return resultMap;
+		}
+		LuckBoxCfg lbc=(LuckBoxCfg)Sample.getFactory().getSample(
+			player.getPlayerInfo().getLuckBoxSid());
+		if(lbc==null)
+		{
+			resultMap.put("error",Lang.F1603);
+			return resultMap;
+		}
+		if(type==FLUSH_SOUL)
+		{
+			if(player.getSoul()<lbc.getNeedSoul())
+			{
+				resultMap.put("error",Lang.F1602);
+				return resultMap;
+			}
+		}
+		resultMap.put("error",null);
+		resultMap.put("lbc",lbc);
+		return resultMap;
+	}
+
+	/**
+	 * 获取随机卡组
+	 * 
+	 * @param lbc 抽奖配置对象
+	 * @return
+	 */
+	private ArrayList<Integer> getRandomCards(LuckBoxCfg lbc)
+	{
+		ArrayList<Integer> cards=new ArrayList<Integer>();
+		boolean isSave=false;
+		for(int i=0;i<lbc.getMaxTakeSize();i++)
+		{
+			int cardSid=MathKit.randomValue(lbc.getStartCardSid(),
+				lbc.getEndCardSid()+1);
+			Card card=(Card)Sample.getFactory().getSample(cardSid);
+			if((card.getType()==4||card.getType()==5))// 是否是紫卡或者橙卡
+			{
+				if(isSave)
+				{
+					i--;
+					continue;
+				}
+				else
+				{
+					isSave=true;
+				}
+			}
+			cards.add(cardSid);
+		}
+		return cards;
+	}
+
+	/**
+	 * 抽取卡牌
+	 * 
+	 * @param randomCards
+	 * @return
+	 */
+	private int getRandomCard(ArrayList<Integer> randomCards)
+	{
+		int index=MathKit.randomValue(0,randomCards.size());
+		return randomCards.get(index);
+	}
+
+	/**
+	 * 判断卡牌是否存在卡组里
+	 * 
+	 * @param cards 卡组SID集合
+	 * @param cardSid 卡牌的SID
+	 * @return
+	 */
+	private boolean isExist(ArrayList<Integer> cards,int cardSid)
+	{
+		boolean isExist=false;
+		for(Integer integer:cards)
+		{
+			if(integer==cardSid)
+			{
+				isExist=true;
+				break;
+			}
+		}
+		return isExist;
+	}
+}

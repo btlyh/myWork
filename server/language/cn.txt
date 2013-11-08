@@ -1,0 +1,540 @@
+﻿#基础领域--------------------------------------------------------------------
+CLIENT_INTERNAL_ERROR=客户端通用错误  
+CLIENT_PARAMETER_ERROR=参数错误
+CLIENT_IO_ERROR=通讯错误
+CLIENT_TIMEOUT=通讯超时
+CLIENT_SDATA_ERROR=本地读取数据错误
+CLIENT_SMSG_ERROR=本地消息错误
+SERVER_INTERNAL_ERROR=服务端通用错误
+SERVER_CDATA_ERROR=服务端读取数据错误
+SERVER_CMSG_ERROR=服务端消息错误
+SERVER_ACCESS_REFUSED=服务器拒绝访问
+SERVER_FILE_NOT_FOUND=服务器文件没有找到
+
+zlib.net.NetKit connectURL, null http head=没有HTTP消息头
+zlib.net.NetKit connectURL, invalid http head=无效的HTTP消息头
+zmyth.net.NBTcpConnect open, UnresolvedAddressException=网络不通，无法解析服务器地址！
+zmyth.net.NBTcpConnect open, NoRouteToHostException=网络不通，无法到达服务器！
+zmyth.net.NBTcpConnect open, ConnectException=无法连接到远程服务器！
+zmyth.net.NBTcpConnect open, open fail=通讯失败，无法与服务器建立连接！
+zmyth.net.TcpConnect open, UnknownHostException=网络不通，无法定位服务器地址！
+zmyth.net.TcpConnect open, NoRouteToHostException=网络不通，无法到达服务器！
+zmyth.net.TcpConnect open, ConnectException=无法连接到远程服务器！
+zmyth.net.TcpConnect open, open fail=通讯失败，无法与服务器建立连接！
+zmyth.net.ClientHttpConnect open, open fail=万维网络不通，无法与服务器建立连接！
+zmyth.net.ClientHttpConnect open, server data error=服务器回应消息错误，无法与服务器建立连接！
+zmyth.net.XConnectFactory openConnect, invalid protocol=无效的协议，无法建立连接！
+zmyth.net.XConnectFactory openTcpConnect, register err=本地TCP注册失败，连接被关闭！
+zmyth.net.DataAccessHandler getServicePort, invalid inner port=消息无法发送，无效的通讯端口！
+zmyth.net.DataAccessHandler access, timeout=通讯超时，请检查网络状况或再试一次。
+zmyth.net.DataAccessHandler access, io error=与服务器连接中断，请重新建立连接！
+zmyth.net.DataAccessHandler parseData, server data error=服务器回应消息解析失败，通讯失败！
+
+#通用服务器端--------------------------------------------------------------------
+zmyth.net.ProxyAccessPort access, access fail=代理访问端口消息访问失败
+
+zmyth.net.FilePort access, file not found=文件没有找到
+zmyth.net.FilePort access, file read fail=文件读取失败
+
+zmyth.server.DataAccessServlet service, null dataAccess=没有服务映射
+zmyth.server.DataAccessServlet service, unknown length=没有消息长度
+zmyth.server.DataAccessServlet service, overflow length=消息过长
+
+zmyth.server.HttpConnectServer service, client data error=客户消息错误
+zmyth.server.HttpConnectServer access, null connect=没有建立客户连接，请先建立连接！
+zmyth.server.HttpConnectServer access, connect is closed=客户连接已经被关闭，请重新建立连接！
+zmyth.server.HttpConnectServer access, connect invalid host=不正确的消息源地址，无法通讯！
+zmyth.server.HttpConnectServer access, access fail=消息访问失败
+
+zmyth.back.dc.DCManager certify, invalid certify message=无效的认证数据！
+zmyth.back.dc.DCManager certify, forbid to create visitor=禁止创建游客
+zmyth.back.dc.DCManager certify, already in process of certify=认证失败，已经在认证过程中，请稍后再试。
+zmyth.back.dc.DCManager certify, server can not be accessed=认证失败，数据中心当前不可访问，请稍后再试。
+zmyth.back.dc.DCManager certify, invalid name or password=认证失败，无效的帐号或密码！
+zmyth.back.dc.DCManager certifySid, already in process of certify=认证失败，已经在会话认证过程中，请稍后再试。
+zmyth.back.dc.DCManager certifySid, server can not be accessed=认证失败，数据中心当前不可访问，请稍后再试。
+zmyth.back.dc.DCManager certifySid, invalid sid=无效的会话，认证失败！
+zmyth.back.dc.DCManager load, invalid sid=无效的会话，加载数据失败！
+zmyth.back.dc.DCManager load, session is in process of save=正在存盘过程中，请稍后再试。
+zmyth.back.dc.DCManager load, invalid address=无效的地址，加载数据失败！
+zmyth.back.dc.DCManager save, invalid sid=无效的会话，保存数据失败！
+zmyth.back.dc.DCManager save, invalid address=无效的地址，保存数据失败！
+zmyth.back.dc.DCManager active, invalid sid=无效的会话，激活数据失败！
+zmyth.back.dc.DCManager active, invalid address=无效的地址，激活数据失败！
+zmyth.back.dc.DCManager update, invalid sid=无效的会话，更新数据失败！
+zmyth.back.dc.DCManager update, invalid address=无效的地址，更新数据失败！
+
+zmyth.back.ds.DSManager login, session amount is full==服务器达到最大会话数量，无法登陆，请稍后再试。
+zmyth.back.ds.DSManager login, already in process of login=已经在登陆过程中，无法登陆，请稍后再试。
+zmyth.back.ds.DSManager login, session is in process of save=正在存盘过程中，无法登陆，请稍后再试。
+zmyth.back.ds.DSManager login, server can not be accessed=数据中心当前不可访问，无法登陆，请稍后再试。
+zmyth.back.ds.DSManager login, session can not be renewed=无法断线续连，请重新登陆。
+zmyth.back.ds.DSManager exit, session is in process of save=正在存盘过程中，无法保存退出，请稍后再试。
+zmyth.back.ds.DSManager exit, server can not be accessed=数据中心当前不可访问，无法保存退出，请稍后再试。
+zmyth.back.ds.DSManager update, server can not be accessed=数据中心当前不可访问，无法更新数据，请稍后再试。
+zmyth.back.ds.DSManager update, session is in process of save=正在存盘过程中，无法更新数据，请稍后再试。
+
+zmyth.back.ds.DSCLLPort certify, server error=服务器错误，认证失败！
+
+zmyth.back.ds.SessionSortPort access, view invalid sortType=没有指定排序信息，无法进行用户排序！
+zmyth.back.ds.SessionSortPort access, search invalid sortType=没有指定排序信息，无法获得位置信息！
+zmyth.back.ds.SessionSortPort access, invalid type=用户排序失败，无效的通讯类型！
+
+zmyth.back.proxy.ProxyBalanceManager login, invalid version=代理登陆失败，无效的版本号！
+zmyth.back.proxy.ProxyBalanceManager getSpecifyConnect, invalid server url=代理连接失败，无效的服务器地址！
+zmyth.back.proxy.ProxyBalanceManager getSpecifyConnect, remote server is close=代理连接失败，远端服务器已经关闭！
+zmyth.back.proxy.ProxyBalanceManager getPreferredConnect, all remote server is close=代理连接失败，当前没有可用的服务器！
+
+zmyth.back.CommunityPort access, invalid name=访问失败，没有找到指定的社区服务器！
+zmyth.back.CommunityPort access, invalid type=访问失败，没有找到指定的通讯类型！
+
+zmyth.back.ControlPort access, invalid manager address=控制访问失败，无效的管理地址！
+zmyth.back.ControlPort certify, invalid manager name=控制认证失败，无效的管理者！
+
+
+#应用服务器端--------------------------------------------------------------------
+time.hms=小时:分钟:秒
+
+back.cc.CCMananger certify, invalid certify message=无效的认证信息
+back.cc.CCMananger certify, already in process of certify=正在认证中
+back.cc.CCMananger certify,invalid name or password=用户名或密码错误
+back.cc.CCMananger load, invalid sid=无效的标识
+back.cc.DBCCAccess ,invalid register message=无效的注册信息
+back.cc.DBCCAccess regedit, db error=读取错误
+back.cc.DBCCAccess valid, db error=读取错误
+back.cc.DBCCAccess valid, invalid pw=密码错误
+back.cc.DBCCAccess valid, db uidColumn must be no null=名字不能为空
+back.cc.DBCCAccess valid, db gameserver error=服务器异常
+back.cc.DBCCAccess, invalid update message=更新消息错误
+
+
+
+back.dc.GameDCAccess ,db error=网络错误,请稍候登陆
+back.dc.GameDCAccess ,load, invalid sid=无效的sid
+back.dc.GameDCAccess ,not activated=该账号没有激活,请激活后再登陆
+
+back.dc.LoadFriendsPort load loadDBFriends, db error=加载好友读取错误
+
+
+
+
+
+
+
+
+
+ww.award.Award bytesRead, invalid sid:=错误的奖励
+ww.back.WorldDSAccess getConnect, connect fail=获得连接失败
+ww.back.WorldDSManagergetWorldInfo null = 获取世界信息不存在
+ww.battle.BattleManager null scene=战斗异常
+
+
+#战斗--------------------------------------------------------------------
+ww.battle.BattleCommandEngine ,room null=房间不存在
+ww.battle.BattleRoom ,error stage id=该关卡不存在
+ww.battle.BattleRoom ,error map id=错误的地图
+ww.battle.BattleRoom ,error number=人数错误
+ww.battle.BattleRoom ,error army type=错误的抓取类型
+ww.battle.BattleRoom ,add fail=加入失败
+ww.battle.BattleRoom ,add player error, too much player=房间已满
+ww.battle.BattleRoom ,add player error, invalid pw=密码错误
+ww.battle.BattleRoom ,cdside error, invalid state=已开始比赛
+ww.battle.BattleRoom ,forces null=没有选择部队
+ww.battle.BattleRoom ,is normal train=存在军官在训练场训练
+ww.battle.BattleRoom ,is stage train=存在军官在关卡训练
+ww.battle.BattleRoom ,no avatar officer=角色军官必须参战
+ww.battle.BattleRoom ,add player error, invalid site=该座位已有人
+ww.battle.BattleRoom ,cdside error, you are not player=你不在该房间
+ww.battle.BattleRoom ,you are allready in the room=你已在该房间
+ww.battle.BattleRoom ,add player error, invalid site=你已在该座位
+ww.battle.BattleRoom ,kick, invalid state=比赛已开始
+ww.battle.BattleRoom ,kick, not master=你不是房主
+ww.battle.BattleRoom ,kick, no player=该玩家不在此房间
+ww.battle.BattleRoom ,getSideIndex, invalid side=请选择正确的座位
+ww.battle.BattleRoom ,some one is null=有玩家异常
+ww.battle.BattleRoom ,start error, invalid state=已开始比赛
+ww.battle.BattleRoom ,start error, not master=你不是房主
+ww.battle.BattleRoom ,start error, all player must be ready=存在玩家没有准备
+ww.battle.BattleRoom ,start error, all player must be select forces=存在玩家没有选择部队
+ww.battle.BattleRoom ,start error, forces max num=存在玩家出战部队大于最大出战数
+ww.battle.BattleRoom ,start error, some one's officer's rank is bigger than avatarOfficer's rank=存在玩家的军官军衔大于角色军衔
+ww.battle.BattleRoom ,start error, some one's avatar officer is not in battle=存在玩家没有选择角色军官
+ww.battle.BattleRoom ,error tired=活力不足
+ww.battle.BattleRoom ,team error, player must be choose team=存在玩家没有选择队伍
+ww.battle.BattleRoom ,team error, count must be equal=队伍人数必须相等
+ww.battle.BattleRoom ,add fail=加入失败
+ww.battle.BattleRoom ,is gua ji=有部队处于挂机中，不能参加战斗
+ww.battle.BattleManager null scene=错误的场景
+ww.battle.BattleManager rank limit=军衔等级不够
+ww.room.CopyRoom ,prop error=道具不足
+ww.room.CopyRoom ,rank error=受军衔限制，您不能进入
+ww.room.MatchRoom ,money error=金钱不足
+ww.room.MatchRoom ,error rank=玩家军衔不满足房间要求
+ww.room.TrainingRoom ,error rank=玩家军衔不满足房间要求
+ww.room.RoomManager ,money error=金钱不足
+ww.room.RoomManager ,error stage id=选择关卡错误
+ww.room.RoomManager ,tired error=活力不足
+ww.room.RoomManager ,prop error=道具不足
+ww.room.RoomManager ,rank error=你的军衔超出了此道具允许的范围
+ww.room.RoomManager ,SessionContainer, null=房间不存在
+ww.room.RoomManager ,add player, null room=房间不存在
+ww.room.RoomManager ,escape=%$1%离开房间
+ww.room.back.ReadyCommand SessionContainer, null=房间不存在
+ww.room.back.TeamCommand SessionContainer, null=房间不存在
+
+ww.battle.Map bytesRead, invalid sid:=错误的地图
+ww.battle.back.AddBattleCommand add player, null room=房间异常
+ww.battle.back.UsePropCommand sid error.=道具错误，无法使用道具
+
+#擂台--------------------------------------------------------------------
+ww.pk.back.PKPort ,session null=网络错误,请重新登录
+ww.pk.back.PKPort ,player null=网络错误,请重新登录
+ww.pk.back.PKPort ,manage null=没有符合你军衔的擂台赛
+ww.pk.PKManager ,not enter stage=非报名时段
+ww.pk.PKManager ,error enterCondition=没有达到报名条件
+ww.pk.PKManager ,limitedNum=已经报满
+ww.pk.PKManager ,enterd=你已经报名,请等待比赛开始
+ww.pk.PKManager ,not ready stage=非进场时段
+ww.pk.PKManager ,not in rankSchedule=不在此次赛程名单中
+ww.pk.PKManager ,already match=已经参加过本次比赛或轮空
+ww.pk.PKManager ,the win player=擂主
+
+
+ww.card.Card bytesRead, invalid sid=错误的勋章
+ww.card.CardCombine ,card is not enough=勋章不足，合成勋章需要前面6种勋章
+ww.card.CardCombine ,card combineCard=合成有误
+ww.country.back.BuyArmyCommand country null=国家异常
+ww.country.back.BuyArmyCommand enough money=没有足够的钱，购买该兵种
+ww.country.back.GiveMoneyCommand ,error prop=错误的物品
+ww.friend.back.FriendAccess can't find this player=无法找到此玩家
+ww.friend.back.FriendAccess you have the player=你已经添加此玩家
+ww.friend.back.FriendAccess not you friend=此人不是你的好友
+ww.war.back.ChangeForcesCommanderror number =错误的部队数量
+ww.war.back.ChangeForcesCommandtoo much count =部队数量过多
+ww.war.back.ChangeNameCommand ,null officer=此军官不存在
+ww.war.back.ChangeNameCommand ,is player officer=角色军官不能改名
+ww.war.back.ChangeNameCommand ,too long=姓名长度超出限制
+ww.war.back.ChangeNameCommand ,invalid name=无效的名字
+ww.common.back.UpdatePlayerCommand error name=无效的名字
+ww.war.back.LevelupForceCommandincrRank error, invalid force error=无效的部队
+ww.war.back.LevelupForceCommandincrRank error, is not free=军官非空闲状态
+ww.war.back.LevelupForceCommandincrRank error=未知错误
+ww.war.back.LevelupForceCommandincrRank error,player checkDecrProp error=部队生星所需的蓝宝石不足，部队无法提升星级
+ww.war.back.LevelupForceCommandincrRank error,player check level up error=部队升星所需经验不足，部队无法提升星级
+ww.war.back.LevelupForceCommandincrRank error,force exp error=部队经验不足
+ww.war.back.NewForcesCommand ,error offid=创建部队失败,错误的军官
+
+ww.common.Player forces rank is exceed avatar=所选将领军衔高于玩家角色将领
+ww.common.Player havn't the Avatar=角色军官必须出战
+ww.common.Player is gua ji=军官在训练场中训练，不能设置出战
+ww.common.Player, no forces=没有部队
+ww.common.Player is stage gua ji=关卡挂机中
+ww.common.Player max forces number=超过最大部队数量
+ww.common.Player exist gua ji=训练中的军官不能出战，其他军官已出战
+ww.common.PlayernewForces error=新部队错误
+ww.common.PlayerCrowdArmy not enough=兵不足
+ww.common.Playererror number =错误的数量
+ww.common.Playerforce null=此部队不存在
+ww.common.PlayerOfficer null=此军官不存在
+ww.common.Playernull officer=没有军官
+ww.common.Playeris in force=无法解雇军官，该军官正带领部队
+ww.common.Playeris in combat=无法解雇军官，该军官正在战斗
+ww.common.Playeris player officer=不能解雇主将
+ww.common.Playerhand equip is not off=武器装备没有卸下
+ww.common.Playerhead equip is not off=头部装备没有卸下
+ww.common.Playerbody equip is not off=身体装备没有卸下
+ww.common.PlayerFinger equip is not off=手指装备没有卸下
+ww.common.PlayerNeck equip is not off=颈部装备没有卸下
+ww.common.PlayerFoot equip is not off=脚部装备没有卸下
+ww.country.Building newBuilding, invalid sid=新建筑无效的标示
+ww.country.Building ,least building userMoney=购买失败，没有达到最低捐献要求
+ww.country.Building ,sid error=没有达到购买该兵种的条件
+
+#培养军官--------------------------------------------------------------------
+ww.common.Player ,not enough CrowdArmy=该士兵不存在，无法培养军官
+ww.common.Player ,officer generateing=军官培训中
+ww.common.Player ,graduate officer error army=该士兵不能培养为军官
+ww.common.Player ,not enough money=没有足够的金钱，因此无法进行军官训练
+ww.common.Player ,GenerateOfficer, army=错误
+
+#训练军官--------------------------------------------------------------------
+ww.theater.back.OfficerTrainCommand ,no avatar forces=角色军官没有选中
+ww.theater.back.OfficerTrainCommand ,tired error=疲劳不足，无法训练
+ww.theater.back.OfficerTrainCommand ,time error=选择场次不正确，无法训练
+ww.theater.back.StopOfficerTrainCommand ,tired error=疲劳不足，无法结束训练
+ww.common.Player ,train number error=训练数量超出限制
+ww.common.Player ,officer null=该军官不存在
+ww.common.Player ,train number error=训练数量超出限制
+ww.common.Player ,officer null=该军官不存在
+ww.common.Player ,avatar officer=主将军官不能在训练场进行训练
+ww.common.Player ,is combat=军官处于出战状态，无法训练
+ww.common.Player ,is stage train=该军官正在关卡训练
+ww.common.Player ,is train=该军官正在训练中
+#ww.common.Player ,not enough money=没有足够的金钱
+ww.common.Player ,is train=该军官正在训练中
+#ww.common.Player ,officer null=该军官不存在
+ww.common.Player ,stageId error=请选择正确的关卡
+ww.common.Player ,is normal train=训练场训练中
+#ww.common.Player ,is train=该军官正在训练中
+ww.common.Player ,no combat=不在出战状态
+#ww.common.Player ,officer null=该军官不存在
+ww.common.Player ,no train=不在训练中
+
+ww.equip.EquipLevelupManager ,levelupEquip error, configuration error - 1=翡翠sid错误
+ww.equip.EquipLevelupManager ,levelupEquip error, player checkDecrProp error - 1=翡翠不足
+ww.equip.EquipLevelupManager ,levelupEquip error, configuration error - 2=宝石sid错误
+ww.equip.EquipLevelupManager ,levelupEquip error, player checkDecrProp error - 2=钻石不足
+ww.equip.EquipLevelupManager ,levelupEquip error, player decrProp error - 1=翡翠不足
+ww.equip.EquipLevelupManager ,levelupEquip error, player decrProp error - 2=钻石不足
+ww.equip.EquipSet bytesRead, invalid sid:=套装错误
+ww.equip.back.GetEquipCommand ,equip not found=此装备不存在
+
+ww.item.AddonItem ,use allready=已经使用
+ww.item.AddonItem ,not in battle=不在战斗中
+ww.item.CatchItem ,use allready=已经使用
+ww.item.CatchItem ,can't catch=无法抓捕此军官
+ww.item.CatchItem ,not in battle=不在战斗中
+ww.item.ChestItem ,you don't have key=你没有钥匙
+ww.item.ChestItem ,you don't have chest=你没有此宝箱，请刷新
+ww.item.ChestItem ,knapsack full=背包满
+ww.item.ChestItem ,rank limit=军衔等级不够
+canCombineProp error, null CombineRecipe=此物品不能合成
+canCombineProp error, player checkDecrProp error=合成出错：材料扣除失败
+canCombineProp error, player checkIncrProp error=合成出错：新物品生成失败
+combineProp error, player decrProp error=合成出错：材料扣除失败
+combineProp error, player incrProp error=合成出错：新物品生成失败
+ww.item.DamageItem ,use allready=已经使用
+ww.item.DamageItem ,use damage error=使用错误
+ww.item.DamageItem ,not in battle=不在战斗中
+ww.item.DamageItem ,rank limit=等级不够
+ww.item.EscapeItem ,not in battle=不在战斗中
+ww.item.Prop bytesRead, invalid sid:=无效的道具
+ww.item.Prop ,you don't have this prop=道具不足
+ww.item.Prop ,rank limit=等级不足
+ww.item.RecoverItem ,use allready=已经使用
+ww.item.RecoverItem ,use recover error=道具使用错误
+ww.item.RecoverItem ,not in battle=不在战斗中
+ww.league.LeagueManager, new join=新加入成员
+ww.league.back.GetLeagueCommand ,league not found=没有找到联盟
+ww.league.back.GetLeagueEventCommand ,league not found=没有找到联盟
+ww.league.back.GetMemberCommand ,permission denied=权限错误
+ww.league.back.GetMemberCommand ,member not found=没找到该成员
+ww.league.back.ListInviteCommand ,permission denied=权限错误
+ww.league.back.ListJoinCommand ,permission denied=权限错误
+ww.league.back.ListMemberCommand ,permission denied=权限错误
+ww.mission.back.TaskPort ,is limited status=在防沉迷收益减少时间段
+ww.mission.task.Task bytesRead, invalid sid:=无效的标示
+ww.mission.condition.GetTaskCondition ,haven't finish limit task=没有完成前置任务
+ww.mission.condition.GetTaskCondition ,level too low=没有达到任务所需军衔
+ww.mission.condition.GetTaskCondition ,level too high=超过任务限制军衔
+
+ww.shop.back.PurchaseItemCommandexcute ok, canPurchaseItem error=不能购买此道具
+ww.shop.back.PurchaseItemCommandexcute ok, getPurchaseItemPrice error=获取道具价格失败
+ww.shop.back.PurchaseItemCommandexcute ok, checkPurchaseItemMoney error=金钱不够
+ww.shop.back.PurchaseItemCommandexcute ok, canAddPurchaseItem error=添加道具进背包失败
+ww.shop.back.PurchaseItemCommandexcute ok, decrMoney error=金钱不足，购买该物品失败
+ww.shop.back.PurchaseItemCommandexcute ok, rollbackDecrMoney error=退回金钱错误
+ww.shop.back.PurchaseItemCommandexcute ok, canAddPurchaseItem error=背包已满
+ww.theater.StageAward bytesRead, invalid sid:=无效的标示
+ww.theater.StageTraining bytesRead, invalid sid:=无效的标示
+ww.theater.back.GetMapCommand ,stage not found=没有找到战区
+ww.theater.back.GetTopStageCommand ,theater not found=没有找到关卡
+ww.theater.back.ListStageCommand ,theater not found=没有找到关卡
+ww.theater.back.ListTopStageCommand ,theater not found=没有找到关卡
+ww.war.Army bytesReadArmy, invalid sid:=无效的标示
+ww.war.Army newArmy, invalid sid:=无效的标示
+ww.war.CrowdArmy bytesReadCrowdArmy, invalid sid:=错误的标示
+ww.war.Forces newForces, invalid army=不可用的军队
+ww.war.Forces newForces, invalid officerId=不可用的军官
+ww.war.Forces newForces, invalid number=编队数量有误
+ww.war.OfficerManager ,officer null=不存在的军官
+ww.war.OfficerManager ,army error=军队有误
+ww.war.OfficerManager ,too much count=带兵数量超出上限
+ww.war.OfficerManager ,err type=后备兵力不足，请补充兵力
+ww.war.OfficerManager ,avatar officer can not get hide army=主将不能带领隐形部队
+ww.war.OfficerManager ,avatar officer can not get airForce=主将不能带领空军
+ww.war.OfficerManager ,null officer=无效的军官
+ww.war.OfficerManager ,armytype error=不能遗忘军官天赋带兵技能
+ww.war.OfficerManager ,officer is in force=该军官带有部队
+ww.war.OfficerManager ,incrRank error, invalid officer error=军官升级错误
+ww.war.OfficerManager ,incrRank error, officer canIncrRank error=军官升级军衔的等级不够，无法升级军衔
+ww.war.OfficerManager ,incrRank error, configuration error - 1=你的物品栏没有军官升级军衔所需的肩章，无法升级军衔
+ww.war.OfficerManager ,incrRank error, configuration error - 2=你使用了错误的升级军衔所需的肩章，无法升级军衔
+ww.war.OfficerManager ,incrRank error, you don't have enough hornor=军官升级军衔的声望不够，无法提升军衔
+ww.war.OfficerManager ,incrRank error, you don't have enough money=军官升级军衔的铜币不足，无法提升军衔
+ww.war.OfficerManager ,incrRank error, player checkDecrProp error=没有道具
+ww.war.OfficerManager ,incrRank error, player decrProp error=道具读取错误
+ww.war.OfficerManager ,incrRank error, rank is bigger than avatarOfficer's rank=军官不能高于角色军官军衔
+canUseProp error, invalid officer error=军官有误
+canUseProp error, officer max potential=最大潜质
+canUseProp error, player checkDecrProp error=道具读取错误
+useProp error, player decrProp error=学习技能失败，没有相对应的带兵教程
+useProp error, use prop error=学习技能失败，军官潜力不足
+useProp error, error=使用道具错误
+useProp error, MAX_POTENTIAL error=超过最大潜力
+ww.war.back.GetOfficerCommand ,officer not found=不存在的军官
+
+#拍卖行--------------------------------------------------------------------
+back.dc.AuctionWorldDCAccess,db error=读取错误
+back.dc.AuctionWorldDCAccess, save Country error=存取错误
+ww.auction.Auction, bill not exist=该拍卖单不存在
+ww.auction.AuctionBill, bill is completed=该拍卖单已完成
+ww.auction.AuctionBill, seller=您不能竞拍自己贩卖的物品
+ww.auction.AuctionBill, the same player=此物品已在拍卖
+ww.auction.AuctionBill, price error=价格输入有误
+ww.auction.AuctionBill, not seller=您不是卖家
+ww.auction.AuctionBill, money completed=金钱已取出
+ww.auction.AuctionBill, fail prop completed=物品已取出
+ww.auction.AuctionBill, not buyer=您不是买家
+ww.auction.AuctionBill, prop completed=物品已取出
+ww.auction.AuctionBill, buyer not null=已有人竞拍
+ww.auction.back.AuctionPort, error price=金钱不足
+ww.auction.back.AuctionPort, not enough money=手续费不足
+ww.auction.back.AuctionPort, not enough prop=不能拍卖已绑定物品
+ww.auction.back.AuctionPort, max count=发单数已达上限
+ww.auction.back.AuctionPort, Exception=无法购买自己拍卖的货物
+ww.auction.back.AuctionPort, not enough money=金钱不足
+ww.auction.back.AuctionPort, prop null=物品不存在
+ww.auction.back.AuctionPort, incr prop error=背包空间不足
+ww.auction.back.PlayerPropHandler, prop null=物品不存在
+
+#交易市场--------------------------------------------------------------------
+exchange.SqlExchangeAccessdb error=读取错误
+exchange.SqlExchangeAccessdb redundancy error=读取交易单错误
+ww.exchange.back.ExchangePort access, invalid exchange=接收交易信息错误
+ww.exchange.back.ExchangePort access, trend invalid breed=接收交易信息错误
+ww.exchange.back.ExchangePort access, invalid breed=交易物品错误
+ww.exchange.back.ExchangePort access, exchange is not opening=交易没有开放
+ww.exchange.back.ExchangePort access, trade overflow count=交易数量超出限制
+ww.exchange.back.ExchangePort access, trade invalid count=无效的交易数量
+ww.exchange.back.ExchangePort access, trade invalid price=无效的价格
+ww.exchange.back.ExchangePort access, trade overflow price=交易价格超出限制
+ww.exchange.back.ExchangePort access, view invalid bill=无效的交易单
+ww.exchange.back.ExchangePort access, cancel invalid bill=取消无效的交易单
+ww.exchange.back.ExchangePort access, trade invalid breed=无效的交易品种
+ww.exchange.back.ExchangePort access, cancel bill fail=取消交易单失败
+ww.exchange.back.ExchangePort access, transfer invalid bill=发送无效的交易单
+ww.exchange.back.ExchangePort access, error money=您输入了的价格有误
+ww.exchange.back.ProxyExchangePort access, trade invalid count=无效的数量
+ww.exchange.back.ProxyExchangePort access, trade overflow count=数量超出限制
+ww.exchange.back.ProxyExchangePort access, trade invalid price=无效的价格
+ww.exchange.back.ProxyExchangePort access, trade overflow price=价格超出限制
+ww.exchange.back.ProxyExchangePort access, trade buy, no much money=金钱不足，无法购买
+ww.exchange.back.ProxyExchangePort access, trade sell, no much prop=物品不足，无法出售
+ww.exchange.back.ProxyExchangePort access, transfercancel invalid bill=取消失败，无效的交易单
+ww.exchange.back.ProxyExchangePort access, transfercancel sell, check no much money=取消出售
+ww.exchange.back.ProxyExchangePort access, transfercancel sell, check prop overflow=物品
+ww.exchange.back.ProxyExchangePort access, transfercancel sell, no much money=金钱不足，无法进行交易
+ww.exchange.back.ProxyExchangePort access, transfer invalid bill:=无效的交易单
+ww.exchange.back.ProxyExchangePort access, transfer sell, check prop overflow=背包物品已满
+ww.exchange.back.ProxyExchangePort access, transfer all, check no much money =金钱不足
+ww.exchange.back.ProxyExchangePort access, transfer all, check prop overflow=物品已满
+ww.exchange.back.ProxyExchangePort access,transfer sell, no much money=金钱不足
+
+
+#信件--------------------------------------------------------------------
+ww.mail.back.MailPort ,session null=网络错误
+ww.mail.back.MailPort ,position error=没有权限
+ww.mail.back.MailPort ,receiver error=错误的收件人
+ww.mail.back.MailPort ,point error=金条不足
+ww.mail.back.MailPort ,point stop=此功能暂停使用
+
+
+back.dc.MailPointDCAccessupdateState error ,mail=更新状态错误
+ww.mail.Mail text error=文本内容错误
+ww.mail.MailManager, mail not exist=邮件已经存在
+ww.mail.MailManager, updateMailState error=更新邮件状态错误
+ww.mail.MailManager ,getPort null=获取端口为空
+ww.mail.MailManager ,getAttachBytesReader null=附件读取错误
+ww.mail.MailManager ,getAttachBytesWriter null=附件写入错误
+ww.mail.back.PostMailCommand ,position error=没有权限
+ww.mail.MailAttachment bag is full=背包已满
+
+
+#信件模板--------------------------------------------------------------------
+
+#交易所-购买成功 您在[日期时间]购买[数量]个[物品名字]成功，花费[数量]铜币，退回[数量]的额外铜币
+exchange buy ok=交易所-购买成功
+exchange buy ok text=您在%$1%购买%$2%个%$3%成功，花费%$4%铜币
+exchange buy ok text_=,退回%$1%的额外铜币
+
+#交易所-出售成功 您在[日期时间]出售[数量]个[物品名字]成功，获得[数量]铜币
+exchange sell ok=交易所-出售成功
+exchange sell ok text=您在%$1%出售%$2%个%$3%成功，扣除5%税收后实得%$4%铜币
+
+#交易所-取消购买 您在[日期时间]取消了对[数量]个[物品名字]的购买，退回[数量]铜币
+exchange buy cancel=交易所-取消购买
+exchange buy cancel text=您在%$1%取消了对%$2%个%$3%的购买，退回%$4%铜币
+
+#交易所-取消出售 您在[日期时间]取消了对[数量]个[物品名字]的贩卖，物品已退回
+exchange sell cancel=交易所-取消出售
+exchange sell cancel text=您在%$1%取消了对%$2%个%$3%的贩卖，物品已退回
+
+
+#拍卖行-取消出售 您在[日期时间]取消了对[数量]个[物品名字]的贩卖，物品已退回
+auction sell cancel=拍卖行-取消出售
+auction sell cancel text=您在%$1%取消了对%$2%个%$3%的贩卖，物品已退回
+
+#拍卖行-出售超时 您出售的[数量]个[物品名字]在[日期时间]过期，物品已退回
+auction sell timeout=拍卖行-出售超时
+auction sell timeout text=您出售的%$2%个%$3%在%$1%过期，物品已退回
+
+#拍卖行-竞标成功 您在[日期时间]竞标[数量]个[物品名字]成功，花费[数量]铜币
+auction buy ok=拍卖行-竞标成功
+auction buy ok text=您在%$1%竞标%$2%个%$3%成功，花费%$4%铜币
+
+#拍卖行-出售成功 您在[日期时间]出售[数量]个[物品名字]成功，获得[数量]铜币
+auction sell ok=拍卖行-出售成功
+auction sell ok text=您在%$1%出售%$2%个%$3%成功，扣除5%税收后实得%$4%铜币
+
+#拍卖行-竞标失败 您在[日期时间]竞标[数量]个[物品名字]失败，退回[数量]铜币
+auction buy lose=拍卖行-竞标失败
+auction buy lose text=您在%$1%竞标%$2%个%$3%失败，退回%$4%铜币
+
+
+#军官学校 恭喜您！培训军官成功！获得[所培训成功的军官的军衔]一名。
+generate Officer=军官学校
+generate Officer text=恭喜您！培训军官成功！获得军官%$1%！
+
+#抓获军官 恭喜你成功抓获军官[姓名]！
+catch Officer=抓获军官
+catch Officer text=恭喜你成功抓获军官%$1%！
+
+#背包已满 您获得的以下战利品[物品名字，物品名字，物品名字]因包裹空间不足，我们以邮件方式给予发送。
+war bag full=背包已满
+war bag full text=您获得的以下战利品[%$1%]因包裹空间不足，我们以邮件方式给予发送。
+
+#友好往来 玩家[玩家姓名]已经将你添加为好友。
+add friend=友好往来
+add friend text=玩家[%$1%]已经将你添加为好友。
+
+#=战斗回放 你在[房间类型]的战斗回放地址http://s.qx.37wan.com/fore/BattlefieldReportPlayer.html?[保存id]。
+battle log=战斗回放
+battle log text=你在[%$1%]的战斗回放地址http://s.qx.37wan.com/fore/BattlefieldReportPlayer.html?%$2%
+
+#关卡挂机奖励 你在“[关卡名字]”的训练已经结束，请收获奖励物品
+stage train award=关卡挂机奖励
+stage train award text=你在“%$1%”的训练已经结束，
+stage train award text_=通过“%$1%”分钟的训练，你获得了“%$2%”点经验，“%$3%”金币，以及物品“%$4%”，请查收。 
+#玩家禁言
+player has been Prohibit,left time=您已被禁言，还剩%$1%分钟
+
+
+youkia.back.dc.DCManager login, dsc can not be accessed=服务器未启动
+ww.common.back.MessagePortcan't find this player online=此玩家不在线
+ww.friend.back.FriendAccess can't find this player=无法找到该玩家
+ww.friend.back.FriendAccess not you friend=该玩家不是您的好友
+ww.item.ItemManager can't destory=已绑定物品，不能摧毁
+ww.item.ItemManager can't sell=已绑定物品，不能出售
+
+limited text1=你已经在线1小时，请注意休息
+limited text2=你已经在线满3小时，你的收益将减半，请注意休息
+limited text3=你已经在线满5小时，不会获得收益，请下线休息
+idc text=<a href="http://www.37wan.com/fcm/completeinfo.php?gamename=qx&gameserver=S1&username=%$1%" target="_blank">请点击此处补全身份证信息</a>
+idc text_=请访问下面地址补全身份证信息 http://www.37wan.com/fcm/completeinfo.php?gamename=qx&gameserver=S1&username=%$1%
+idc=请补全身份证信息
+
+country1=烈焰兵团
+country2=沙漠之刃
+country3=上帝之鞭
+country4=炙热青年

@@ -1,0 +1,695 @@
+package com.cambrian.dfhm.card;
+
+import java.util.Random;
+
+import com.cambrian.common.net.ByteBuffer;
+import com.cambrian.common.object.Sample;
+import com.cambrian.common.object.SampleFactory;
+import com.cambrian.common.util.MathKit;
+import com.cambrian.dfhm.back.GameCFG;
+
+/**
+ * 类说明：
+ * @author：Sebastian
+ *
+ */
+public class Card extends Sample{
+
+	/* static fields */
+	/** 样本工厂 */
+	public static SampleFactory factory = new SampleFactory();
+	/** 状态：没状态=1，上阵=,2，恢复=3 */
+	public static int NORMAL = 1, ATTACK = 2, RECOVER = 3;
+
+	/* static methods */
+
+	/* fields */
+	private String name;
+	/** 介绍 */
+	private String description;
+	/** 卡片头像(前台用) */
+	private String avatar;
+	/** 小卡片头像(前台用) */
+	private String tinyAvatar;
+	/** 类型（白绿蓝紫橙，5种） */
+	private int type;
+	/** 出售价格 */
+	private int money;
+	/** 攻击力 */
+	private int att;
+	/** 技能发动率 */
+	private int skillRate;
+	/** 最大体力 */
+	private int maxHp;
+	/** 当前体力 */
+	private int curHp;
+	/** 普通攻击范围 (跟技能攻击范围一样)*/
+	private int attRange;
+	/** 拥有技能ID */
+	private int skillId;	
+	/** 刷新出的技能ID */
+	private int flushSkillId = -1;
+	/** 可拥有技能范围 */
+	private int[] skillRange;
+	/** 等级 */
+	private int level = 1;
+	/** 培养点数 */
+	private int fosterNumber = 0;
+	/** 暴击率 */
+	private int critRate;
+	/** 闪避率 */
+	private int dodgeRate;	
+	/** 游戏币培养攻击成长最大值 */
+	private int moneyFosterAttMax;
+	/** 游戏币培养攻击成长最小值 */
+	private int moneyFosterAttMin;
+	/** rmb培养攻击成长最大值 */
+	private int goldFosterAttMax;
+	/** rmb培养攻击成长最小值 */
+	private int goldFosterAttMin;
+	/** 游戏币培养技能发动率成长最大值 */
+	private int moneyFosterRangeMax;
+	/** 游戏币培养技能发动率成长最小值 */
+	private int moneyFosterRangeMin;
+	/** rmb培养技能发动率成长最大值 */
+	private int goldFosterRangeMax;
+	/** rmb培养技能发动率成长最小值 */
+	private int goldFosterRangeMin;
+	/** 游戏币培养体力成长最大值 */
+	private int moneyFosterHpMax;
+	/** 游戏币培养体力成长最小值 */
+	private int moneyFosterHpMin;
+	/** rmb培养体力成长最大值 */
+	private int goldFosterHpMax;
+	/** rmb培养体力成长最小值 */
+	private int goldFosterHpMin;
+	/** 连携技[前置技能SID，发动率] */
+	private int doubleSkill[];
+	/** 状态 */
+	private int status;
+	/** 培养攻总增加值 */
+	private int forsterAtt;
+	/** 培养技能发动率总增加值 */
+	private int forsterRange;
+	/** 培养体力总增加值 */
+	private int forsterHp;
+	/** 最近一次培养攻,增加值 */
+	private int forsterAttLast;
+	/** 最近一次培养技能发动率，增加值 */
+	private int forsterRangeLast;
+	/** 最近一次培养体力，增加值 */
+	private int forsterHpLast;
+	/** 攻击目标对象，1=自身，2=敌人 */
+	private int aimType;
+	/** 攻击位置 */
+	private int attIndex;
+	/** 卡牌基础经验(被吞噬用) */
+	private int swallowExp;
+	/** 经验 */
+	private int exp;
+	/** 技能等级 */
+	private int skillLevel;
+	/** 境界突破限制 [等级，卡牌id,卡牌id,卡牌id,卡牌id,卡牌id,奖励培养次数] */
+	private int[] realmLimit;
+	/* constructors */
+
+	/* properties */	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public int getMoney() {
+		return money;
+	}
+	public void setMoney(int money) {
+		this.money = money;
+	}
+	public int getAtt() {
+		return att;
+	}
+	public void setAtt(int att) {
+		this.att = att;
+	}
+	public int getSkillRate() {
+		return skillRate;
+	}
+	public void setSkillRate(int skillRate) {
+		this.skillRate = skillRate;
+	}
+	public int getMaxHp() {
+		return maxHp;
+	}
+	public void setMaxHp(int maxHp) {
+		this.maxHp = maxHp;
+	}
+	public int getCurHp() {
+		return curHp;
+	}
+	public void setCurHp(int curHp) {
+		this.curHp = curHp;
+	}
+	public int getSkillId() {
+		return skillId;
+	}
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	public int getFosterNumber() {
+		return fosterNumber;
+	}
+	public void setFosterNumber(int fosterNumber) {
+		this.fosterNumber = fosterNumber;
+	}
+	public int[] getSkillRange() {
+		return skillRange;
+	}
+	public void setSkillRange(int[] skillRange) {
+		this.skillRange = skillRange;
+	}
+	public int getCritRate() {
+		return critRate;
+	}
+	public void setCritRate(int critRate) {
+		this.critRate = critRate;
+	}
+	public int getDodgeRate() {
+		return dodgeRate;
+	}
+	public void setDodgeRate(int dodgeRate) {
+		this.dodgeRate = dodgeRate;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public int getAttRange() {
+		return attRange;
+	}
+	public void setAttRange(int attRange) {
+		this.attRange = attRange;
+	}
+	public int[] getDoubleSkill() {
+		return doubleSkill;
+	}
+	public void setDoubleSkill(int[] doubleSkill) {
+		this.doubleSkill = doubleSkill;
+	}
+	public int getForsterAtt() {
+		return forsterAtt;
+	}
+	public void setForsterAtt(int forsterAtt) {
+		this.forsterAtt = forsterAtt;
+	}
+	public int getForsterAttLast() {
+		return forsterAttLast;
+	}
+	public void setForsterAttLast(int forsterAttLast) {
+		this.forsterAttLast = forsterAttLast;
+	}
+	
+	public int getMoneyFosterAttMax() {
+		return moneyFosterAttMax;
+	}
+	public void setMoneyFosterAttMax(int moneyFosterAttMax) {
+		this.moneyFosterAttMax = moneyFosterAttMax;
+	}
+	public int getMoneyFosterAttMin() {
+		return moneyFosterAttMin;
+	}
+	public void setMoneyFosterAttMin(int moneyFosterAttMin) {
+		this.moneyFosterAttMin = moneyFosterAttMin;
+	}
+	public int getGoldFosterAttMax() {
+		return goldFosterAttMax;
+	}
+	public void setGoldFosterAttMax(int goldFosterAttMax) {
+		this.goldFosterAttMax = goldFosterAttMax;
+	}
+	public int getGoldFosterAttMin() {
+		return goldFosterAttMin;
+	}
+	public void setGoldFosterAttMin(int goldFosterAttMin) {
+		this.goldFosterAttMin = goldFosterAttMin;
+	}
+	public int getMoneyFosterRangeMax() {
+		return moneyFosterRangeMax;
+	}
+	public void setMoneyFosterRangeMax(int moneyFosterRangeMax) {
+		this.moneyFosterRangeMax = moneyFosterRangeMax;
+	}
+	public int getMoneyFosterRangeMin() {
+		return moneyFosterRangeMin;
+	}
+	public void setMoneyFosterRangeMin(int moneyFosterRangeMin) {
+		this.moneyFosterRangeMin = moneyFosterRangeMin;
+	}
+	public int getGoldFosterRangeMax() {
+		return goldFosterRangeMax;
+	}
+	public void setGoldFosterRangeMax(int goldFosterRangeMax) {
+		this.goldFosterRangeMax = goldFosterRangeMax;
+	}
+	public int getGoldFosterRangeMin() {
+		return goldFosterRangeMin;
+	}
+	public void setGoldFosterRangeMin(int goldFosterRangeMin) {
+		this.goldFosterRangeMin = goldFosterRangeMin;
+	}
+	public int getMoneyFosterHpMax() {
+		return moneyFosterHpMax;
+	}
+	public void setMoneyFosterHpMax(int moneyFosterHpMax) {
+		this.moneyFosterHpMax = moneyFosterHpMax;
+	}
+	public int getMoneyFosterHpMin() {
+		return moneyFosterHpMin;
+	}
+	public void setMoneyFosterHpMin(int moneyFosterHpMin) {
+		this.moneyFosterHpMin = moneyFosterHpMin;
+	}
+	public int getGoldFosterHpMax() {
+		return goldFosterHpMax;
+	}
+	public void setGoldFosterHpMax(int goldFosterHpMax) {
+		this.goldFosterHpMax = goldFosterHpMax;
+	}
+	public int getGoldFosterHpMin() {
+		return goldFosterHpMin;
+	}
+	public void setGoldFosterHpMin(int goldFosterHpMin) {
+		this.goldFosterHpMin = goldFosterHpMin;
+	}
+	public int getForsterRange() {
+		return forsterRange;
+	}
+	public void setForsterRange(int forsterRange) {
+		this.forsterRange = forsterRange;
+	}
+	public int getForsterHp() {
+		return forsterHp;
+	}
+	public void setForsterHp(int forsterHp) {
+		this.forsterHp = forsterHp;
+	}
+	public int getForsterRangeLast() {
+		return forsterRangeLast;
+	}
+	public void setForsterRangeLast(int forsterRangeLast) {
+		this.forsterRangeLast = forsterRangeLast;
+	}
+	public int getForsterHpLast() {
+		return forsterHpLast;
+	}
+	public void setForsterHpLast(int forsterHpLast) {
+		this.forsterHpLast = forsterHpLast;
+	}
+	public int getAimType() {
+		return aimType;
+	}
+	public void setAimType(int aimType) {
+		this.aimType = aimType;
+	}
+	public int getSwallowExp() {
+		return swallowExp;
+	}
+	public void setSwallowExp(int swallowExp) {
+		this.swallowExp = swallowExp;
+	}
+	public int getExp() {
+		return exp;
+	}
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	public String getTinyAvatar() {
+		return tinyAvatar;
+	}
+	public void setTinyAvatar(String tinyAvatar) {
+		this.tinyAvatar = tinyAvatar;
+	}
+	public int getSkillLevel() {
+		return skillLevel;
+	}
+	public void setSkillLevel(int skillLevel) {
+		this.skillLevel = skillLevel;
+	}
+	private void setRealmLimit(int[] realmLimit) {
+		this.realmLimit = realmLimit;
+	}
+	public int getAttIndex() {
+		return attIndex;
+	}
+	public void setAttIndex(int attIndex) {
+		this.attIndex = attIndex;
+	}
+	public int getFlushSkillId() {
+		return flushSkillId;
+	}
+	public void setFlushSkillId(int flushSkillId) {
+		this.flushSkillId = flushSkillId;
+	}
+	/* init start */
+	public void init()
+	{
+		int index = MathKit.randomValue(0, skillRange.length);
+		skillId = skillRange[index];
+		curHp = maxHp;
+	}
+	
+	/* methods */
+	public void decrFosterNumber(int count)
+	{
+		fosterNumber -= count;
+	}
+	
+	public void incrFosterNumber(int count)
+	{
+		fosterNumber += count;
+	}
+	
+	public void incrForsterAtt(int forsterAtt)
+	{
+		this.forsterAtt += forsterAtt;
+	}
+	
+	public void incrForsterRange(int forsterRange)
+	{
+		this.forsterRange += forsterRange;
+	}
+	
+	public void incrForsterHp(int forsterHp)
+	{
+		this.forsterHp += forsterHp;
+	}
+	
+	public void incrExp(int exp)
+	{
+		this.exp += exp;
+	}
+	
+	/**
+	 * 获得境界突破限制
+	 * @param level	需求等级
+	 * @return	限制[卡牌id,卡牌id,卡牌id,卡牌id,卡牌id,奖励培养次数]
+	 */
+	public int[] getRealmByLevel()
+	{
+		int[] limit = new int[6];
+		for (int i = 0; i < realmLimit.length; i+=7) {
+			if(realmLimit[i] == level)
+			{
+				for (int j = 0; j < limit.length; j++) {
+					limit[j] = realmLimit[i + j + 1];
+				}
+				break;
+			}
+		}
+		return limit;
+	}
+	
+	/** 升级经验计算 */
+	public void levelUp()
+	{
+		//TODO 一共有99级，每级的经验配置在gameconfig里面
+//		while(exp > GameCFG.getExp(level))
+//		{
+//			level ++;			
+//		}
+	}
+	
+	/** 前台序列化读取 */
+	public void bytesWrite(ByteBuffer data)
+	{
+		data.writeUTF(name);
+		data.writeUTF(description);
+		data.writeUTF(avatar);
+		data.writeUTF(tinyAvatar);
+		data.writeInt(type);
+		data.writeInt(money);
+		data.writeInt(att);
+		data.writeInt(skillRate);
+		data.writeInt(maxHp);
+		data.writeInt(curHp);
+		data.writeInt(attRange);
+		data.writeInt(skillId);
+		data.writeInt(flushSkillId);
+		data.writeInt(level);
+		data.writeInt(fosterNumber);
+		data.writeInt(skillRange.length);
+//		System.err.println("name ==="+ name);
+//		System.err.println("description ==="+ description);
+//		System.err.println("type ==="+ type);
+//		System.err.println("money ==="+ money);
+//		System.err.println("att ==="+ att);
+//		System.err.println("skillRate ==="+ skillRate);
+//		System.err.println("maxHp ==="+ maxHp);
+//		System.err.println("curHp ==="+ curHp);
+//		System.err.println("attRange ==="+ attRange);
+//		System.err.println("skillId ==="+ skillId);
+//		System.err.println("level ==="+ level);
+//		System.err.println("fosterNumber ==="+ fosterNumber);
+//		System.err.println("skillRange.length ==="+ skillRange.length);
+		for (int i = 0; i < skillRange.length; i++) {
+			data.writeInt(skillRange[i]);
+//			System.err.println("skillRange[i] ==="+skillRange[i]);
+		}		
+		data.writeInt(critRate);
+		data.writeInt(dodgeRate);
+		data.writeInt(status);
+		data.writeInt(forsterAtt);
+		data.writeInt(forsterRange);
+		data.writeInt(forsterHp);
+		data.writeInt(aimType);
+		data.writeInt(swallowExp);
+		data.writeInt(exp);
+//		data.writeInt(skillLevel);
+//		data.writeInt(skillSwallowCount);
+		
+//		System.err.println("critRate ==="+ critRate);
+//		System.err.println("dodgeRate ==="+ dodgeRate);
+//		System.err.println("status ==="+ status);
+//		System.err.println("forsterAtt ==="+ forsterAtt);
+//		System.err.println("forsterRange ==="+ forsterRange);
+//		System.err.println("forsterHp ==="+ forsterHp);
+//		System.err.println("aimType ==="+ aimType);
+//		System.err.println("swallowExp ==="+ swallowExp);
+//		System.err.println("exp ==="+ exp);
+	}
+	
+	/** 写入db数据 */
+	public void bytesWrite_db(ByteBuffer data)
+	{
+		System.err.println("------Card.bytesWrite_db--------");
+		data.writeUTF(name);
+		data.writeUTF(description);
+		data.writeUTF(avatar);
+		data.writeUTF(tinyAvatar);
+		data.writeInt(type);
+		data.writeInt(money);
+		data.writeInt(att);
+		data.writeInt(skillRate);
+		data.writeInt(maxHp);
+		data.writeInt(curHp);
+		data.writeInt(attRange);
+		data.writeInt(skillId);
+		data.writeInt(flushSkillId);
+		data.writeInt(level);
+		data.writeInt(fosterNumber);
+		data.writeInt(skillRange.length);
+//		System.err.println("name ==="+ name);
+//		System.err.println("description ==="+ description);
+//		System.err.println("type ==="+ type);
+//		System.err.println("money ==="+ money);
+//		System.err.println("att ==="+ att);
+//		System.err.println("skillRate ==="+ skillRate);
+//		System.err.println("maxHp ==="+ maxHp);
+//		System.err.println("curHp ==="+ curHp);
+//		System.err.println("attRange ==="+ attRange);
+//		System.err.println("skillId ==="+ skillId);
+//		System.err.println("level ==="+ level);
+//		System.err.println("fosterNumber ==="+ fosterNumber);
+//		System.err.println("skillRange.length ==="+ skillRange.length);
+		for (int i = 0; i < skillRange.length; i++) {
+			data.writeInt(skillRange[i]);
+//			System.err.println("skillRange[i] ==="+ skillRange[i]);
+		}
+		data.writeInt(critRate);
+		data.writeInt(dodgeRate);
+		data.writeInt(moneyFosterAttMax);
+		data.writeInt(moneyFosterAttMin);
+		data.writeInt(goldFosterAttMax);
+		data.writeInt(goldFosterAttMin);
+		data.writeInt(moneyFosterRangeMax);
+		data.writeInt(moneyFosterRangeMin);
+		data.writeInt(goldFosterRangeMax);
+		data.writeInt(goldFosterRangeMin);
+		data.writeInt(moneyFosterHpMax);
+		data.writeInt(moneyFosterHpMin);
+		data.writeInt(goldFosterHpMax);
+		data.writeInt(goldFosterHpMin);
+		data.writeInt(doubleSkill[0]);
+		data.writeInt(doubleSkill[1]);
+		data.writeInt(status);
+		data.writeInt(forsterAtt);
+		data.writeInt(forsterRange);
+		data.writeInt(forsterHp);
+		data.writeInt(forsterAttLast);
+		data.writeInt(forsterRangeLast);
+		data.writeInt(forsterHpLast);
+		data.writeInt(aimType);
+		data.writeInt(swallowExp);
+		data.writeInt(exp);
+//		data.writeInt(skillLevel);
+//		data.writeInt(skillSwallowCount);
+//		data.writeInt(attIndex);
+//		System.err.println("critRate ==="+ critRate);
+//		System.err.println("dodgeRate ==="+ dodgeRate);
+//		System.err.println("moneyFosterAttMin ==="+ moneyFosterAttMin);
+//		System.err.println("moneyFosterAttMin ==="+ moneyFosterAttMin);
+//		System.err.println("goldFosterAttMax ==="+ goldFosterAttMax);
+//		System.err.println("goldFosterAttMin ==="+ goldFosterAttMin);
+//		System.err.println("moneyFosterRangeMax ==="+ moneyFosterRangeMax);
+//		System.err.println("moneyFosterRangeMin ==="+ moneyFosterRangeMin);
+//		System.err.println("goldFosterRangeMax ==="+ goldFosterRangeMax);
+//		System.err.println("goldFosterRangeMin ==="+ goldFosterRangeMin);
+//		System.err.println("moneyFosterHpMax ==="+ moneyFosterHpMax);
+//		System.err.println("moneyFosterHpMin ==="+ moneyFosterHpMin);
+//		System.err.println("goldFosterHpMax ==="+ goldFosterHpMax);
+//		System.err.println("goldFosterHpMin ==="+ goldFosterHpMin);
+//		System.err.println("doubleSkill[0] ==="+ doubleSkill[0]);
+//		System.err.println("doubleSkill[1] ==="+ doubleSkill[1]);
+//		System.err.println("status ==="+ status);
+//		System.err.println("forsterAtt ==="+ forsterAtt);
+//		System.err.println("forsterRange ==="+ forsterRange);
+//		System.err.println("forsterHp ==="+ forsterHp);
+//		System.err.println("forsterAttLast ==="+ forsterAttLast);
+//		System.err.println("forsterRangeLast ==="+ forsterRangeLast);
+//		System.err.println("forsterHpLast ==="+ forsterHpLast);
+//		System.err.println("aimType ==="+ aimType);
+//		System.err.println("swallowExp ==="+ swallowExp);
+//		System.err.println("exp ==="+ exp);
+	}
+	
+	/** 从db读取数据 */
+	public void bytesRead_db(ByteBuffer data)
+	{
+		System.err.println("------Card.bytesRead_db--------");
+		name = data.readUTF();
+		description = data.readUTF();
+		avatar = data.readUTF();
+		tinyAvatar = data.readUTF();
+		type = data.readInt();
+		money = data.readInt();
+		att = data.readInt();
+		skillRate = data.readInt();
+		maxHp = data.readInt();
+		curHp = data.readInt();
+		attRange = data.readInt();
+		skillId = data.readInt();
+		flushSkillId = data.readInt();
+		level = data.readInt();
+		fosterNumber = data.readInt();
+		int len = data.readInt();
+		skillRange = new int[len];
+//		System.err.println("name ==="+ name);
+//		System.err.println("description ==="+ description);
+//		System.err.println("type ==="+ type);
+//		System.err.println("money ==="+ money);
+//		System.err.println("att ==="+ att);
+//		System.err.println("skillRate ==="+ skillRate);
+//		System.err.println("maxHp ==="+ maxHp);
+//		System.err.println("curHp ==="+ curHp);
+//		System.err.println("attRange ==="+ attRange);
+//		System.err.println("skillId ==="+ skillId);
+//		System.err.println("level ==="+ level);
+//		System.err.println("fosterNumber ==="+ fosterNumber);
+//		System.err.println("skillRange.length ==="+ skillRange.length);
+		for (int i = 0; i < len; i++) {
+			skillRange[i] = data.readInt();
+//			System.err.println("skillRange[i] ==="+ skillRange[i]);
+		}
+		critRate = data.readInt();
+		dodgeRate = data.readInt();
+		moneyFosterAttMax = data.readInt();
+		moneyFosterAttMin = data.readInt();
+		goldFosterAttMax = data.readInt();
+		goldFosterAttMin = data.readInt();
+		moneyFosterRangeMax = data.readInt();
+		moneyFosterRangeMin = data.readInt();
+		goldFosterRangeMax = data.readInt();
+		goldFosterRangeMin = data.readInt();
+		moneyFosterHpMax = data.readInt();
+		moneyFosterHpMin = data.readInt();
+		goldFosterHpMax = data.readInt();
+		goldFosterHpMin = data.readInt();
+		doubleSkill[0] = data.readInt();
+		doubleSkill[1] = data.readInt();
+		status = data.readInt();
+		forsterAtt = data.readInt();
+		forsterRange = data.readInt();
+		forsterHp = data.readInt();
+		forsterAttLast = data.readInt();
+		forsterRangeLast = data.readInt();
+		forsterHpLast = data.readInt();
+		aimType = data.readInt();
+		swallowExp = data.readInt();
+		exp = data.readInt();
+//		skillLevel = data.readInt();
+//		skillSwallowCount = data.readInt();
+//		attIndex = data.readInt();
+//		System.err.println("critRate ==="+ critRate);
+//		System.err.println("dodgeRate ==="+ dodgeRate);
+//		System.err.println("moneyFosterAttMin ==="+ moneyFosterAttMin);
+//		System.err.println("moneyFosterAttMin ==="+ moneyFosterAttMin);
+//		System.err.println("goldFosterAttMax ==="+ goldFosterAttMax);
+//		System.err.println("goldFosterAttMin ==="+ goldFosterAttMin);
+//		System.err.println("moneyFosterRangeMax ==="+ moneyFosterRangeMax);
+//		System.err.println("moneyFosterRangeMin ==="+ moneyFosterRangeMin);
+//		System.err.println("goldFosterRangeMax ==="+ goldFosterRangeMax);
+//		System.err.println("goldFosterRangeMin ==="+ goldFosterRangeMin);
+//		System.err.println("moneyFosterHpMax ==="+ moneyFosterHpMax);
+//		System.err.println("moneyFosterHpMin ==="+ moneyFosterHpMin);
+//		System.err.println("goldFosterHpMax ==="+ goldFosterHpMax);
+//		System.err.println("goldFosterHpMin ==="+ goldFosterHpMin);
+//		System.err.println("doubleSkill[0] ==="+ doubleSkill[0]);
+//		System.err.println("doubleSkill[1] ==="+ doubleSkill[1]);
+//		System.err.println("status ==="+ status);
+//		System.err.println("forsterAtt ==="+ forsterAtt);
+//		System.err.println("forsterRange ==="+ forsterRange);
+//		System.err.println("forsterHp ==="+ forsterHp);
+//		System.err.println("forsterAttLast ==="+ forsterAttLast);
+//		System.err.println("forsterRangeLast ==="+ forsterRangeLast);
+//		System.err.println("forsterHpLast ==="+ forsterHpLast);
+//		System.err.println("aimType ==="+ aimType);
+//		System.err.println("swallowExp ==="+ swallowExp);
+//		System.err.println("exp ==="+ exp);
+	}
+}

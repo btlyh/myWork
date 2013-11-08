@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	moneyRate		游戏币掉率
+	money			游戏币数量
+	soulRate		武魂掉率
+	soul			武魂数量
+	goldRate		RMB掉率
+	gold			RMB数量
+	integralRate	积分掉率
+	integral		积分数量
+	cardRate		卡片掉率
+	card			卡片概率[卡片，概率，卡片，概率，...]
+
+	-->
+	<sample sid="29001" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="3000" soulRate="30000" soul="50" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10001,100000"/>
+	<sample sid="29002" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="3000" soulRate="30000" soul="50" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10002,100000"/>
+	<sample sid="29003" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="5000" soulRate="30000" soul="100" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10003,100000"/>
+	<sample sid="29004" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="5000" soulRate="30000" soul="100" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10004,100000"/>
+
+	<sample sid="30001" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="3000" soulRate="30000" soul="50" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10001,100000"/>
+	<sample sid="30002" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="3000" soulRate="30000" soul="50" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10002,100000"/>
+	<sample sid="30003" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="5000" soulRate="30000" soul="100" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10003,100000"/>
+	<sample sid="30004" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="5000" soulRate="30000" soul="100" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10004,100000"/>
+
+	<sample sid="31001" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="3000" soulRate="30000" soul="50" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10001,100000"/>
+	<sample sid="31002" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="3000" soulRate="30000" soul="50" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10002,100000"/>
+	<sample sid="31003" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="5000" soulRate="30000" soul="100" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10003,100000"/>
+	<sample sid="31004" class="com.cambrian.dfhm.drop.Monster" moneyRate="30000" money="5000" soulRate="30000" soul="100" goldRate="0" gold="0" integralRate="0" integral="0" cardRate="40000" _1card="10004,100000"/>
+
+</objects>

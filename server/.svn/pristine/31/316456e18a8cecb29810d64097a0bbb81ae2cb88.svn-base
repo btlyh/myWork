@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	战区
+
+	name		名字
+	description 介绍
+	beginStage	开始关卡id
+	endStage	结束关卡id
+
+	-->
+	<sample sid="10000" class="com.cambrian.dfhm.theater.Theater" name="太平要术战役" description="太平军城池据点，NPC由城外往城内分布" beginStage="10010" endStage="10010"/>
+</objects>

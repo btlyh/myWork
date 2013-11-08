@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	伤害免疫技能
+	sid			唯一标签
+	class		程序使用
+	name		名字
+	description	介绍
+	att			伤害系数
+	attRange	攻击范围
+	level		等级
+	aim			攻击对象，1=自己，2=敌人
+	number		免伤次数
+	
+	-->
+	<sample sid="20007" class="com.cambrian.dfhm.skill.NoHurtSkill" name="伤害免疫" description="免伤" att="1400" attRange="0" level="1" aim="2" number="3"/>
+</objects>

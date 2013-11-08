@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	NPC配置~！
+	sid					唯一标签
+	class				程序使用
+	battleCardList		[怪物1，怪物2]NPC中的怪物卡牌
+	needToken 			攻击此NPC所需要的军令
+	type				NPC的类型[1主线,2挑战,3穿越,4活动]
+	isBoss				此NPC是否为BOSS 1是 0否
+	nextSid				下一个普通NPC的sid   如果为0表示最高副本
+	round				回合数
+	attConfine 			攻击次数限制
+	-->
+	
+	<sample sid="10007" class="com.cambrian.dfhm.instancing.entity.CrossNPC" _1battleCardList="30001,30002,30003,30004,30005"  needToken="10" type="9992"   isBoss="0" nextSid="0" _finitMonsters="1" round="10" attConfine="10"/>
+	
+</objects>

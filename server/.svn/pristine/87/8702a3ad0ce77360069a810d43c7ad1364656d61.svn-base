@@ -1,0 +1,180 @@
+package com.cambrian.dfhm.instancing.entity;
+
+import com.cambrian.dfhm.Lang;
+import com.cambrian.dfhm.battle.BattleCard;
+import com.cambrian.dfhm.battle.BattleRecord;
+import com.cambrian.dfhm.common.Player;
+
+/**
+ * 类说明：
+ * 
+ * @author：LazyBear
+ */
+public class HardNPC extends NPC
+{
+
+	/* static fields */
+	/** 挑战NPC 击杀标准 */
+	private static final int KILLED=-1;
+	/* static methods */
+
+	/* fields */
+	/** 指定武将 */
+	private int assignCardId;
+	/** 是否需要武将全体存活 1是 0否 */
+	private int isAllLive;
+	/** 指定回合数 */
+	private int assignRound;
+	/** 指定武将个数 */
+	private int cardCount;
+	/** 一击所需造成的伤害 */
+	private int assignDamage;
+
+	/* constructors */
+
+	/* properties */
+	public int getAssignCardId()
+	{
+		return assignCardId;
+	}
+
+	public void setAssignCardId(int assignCardId)
+	{
+		this.assignCardId=assignCardId;
+	}
+
+	public int getIsAllLive()
+	{
+		return isAllLive;
+	}
+
+	public void setIsAllLive(int isAllLive)
+	{
+		this.isAllLive=isAllLive;
+	}
+
+	public int getAssignRound()
+	{
+		return assignRound;
+	}
+
+	public void setAssignRound(int assignRound)
+	{
+		this.assignRound=assignRound;
+	}
+
+	public int getCardCount()
+	{
+		return cardCount;
+	}
+
+	public void setCardCount(int cardCount)
+	{
+		this.cardCount=cardCount;
+	}
+
+	public int getAssignDamage()
+	{
+		return assignDamage;
+	}
+
+	public void setAssignDamage(int assignDamage)
+	{
+		this.assignDamage=assignDamage;
+	}
+	/* init start */
+
+	/* methods */
+	@Override
+	public String checkAttNpc(Player player,AttRecord checkRecord)
+	{
+		if(player.getCurIndexForHardNPC()<getIndex())
+		{
+			return Lang.F1402;
+		}
+		if(checkRecord!=null)
+		{
+			if(checkRecord.getAttacks()==KILLED)
+			{
+				return Lang.F1406;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void handleForWin(Player player)
+	{
+		if(getIsBoss()!=BOSS&&getNextIndex()>player.getCurIndexForHardNPC())
+		{
+			player.setCurIndexForHardNPC(getNextIndex());
+		}
+		AttRecord attRecord=new AttRecord(getSid(),KILLED,getType());
+		player.addAttRecord(attRecord);
+
+	}
+	@Override
+	public void handleForAtt(Player player)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	/** 检测指定卡牌 */
+	public boolean checkAssignCard(BattleCard[] battleCards)
+	{
+		if(assignCardId>0)// 指定卡牌
+		{
+			for(int i=0;i<battleCards.length;i++)
+			{
+				if(battleCards[i]!=null)
+				{
+					if(battleCards[i].getId()==assignCardId)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	/** 检查是否需要全体存活 */
+	public boolean checkIsAllLive(BattleRecord record)
+	{
+		if(isAllLive==1) // 全体存活
+		{
+			if(record.isDeath())
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	/** 检查是否超过是指定回合 */
+	public boolean checkAssignRound(int Round)
+	{
+		if(assignRound>0&&assignRound<Round)// 回合
+		{
+			return false;
+		}
+		return true;
+	}
+	/** 检查指定武将个数 */
+	public boolean checkCardCount(int count)
+	{
+		if(cardCount>0&&cardCount<count)
+		{
+			return false;
+		}
+		return true;
+	}
+	/** 检查造成指定伤害 */
+	public boolean checkAssignDamage(int damage)
+	{
+		if(damage<assignDamage) // 指定伤害
+		{
+			return false;
+		}
+		return true;
+	}
+}

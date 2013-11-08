@@ -1,0 +1,39 @@
+package com.cambrian.dfhm.prop;
+
+import com.cambrian.common.net.DataAccessException;
+
+
+/**
+ * 类说明：不可堆叠物品
+ * 
+ * @version 1.0
+ * @date 2013-5-29
+ * @author maxw<woldits@qq.com>
+ */
+public class UniqueProp extends Prop
+{
+	/* static fields */
+
+	/* static methods */
+
+	/* fields */
+	
+	/* constructors */
+
+	/* properties */
+	/* (non-Javadoc)
+	 * @see com.cambrian.pvz.prop.Prop#setCount(int)
+	 */
+	@Override
+	public void setCount(int count)
+	{
+		throw new DataAccessException(500,"prohibit set count");
+	}
+	/* init start */
+
+	/* methods */
+	
+	/* common methods */
+
+	/* inner class */
+}

@@ -1,0 +1,493 @@
+package com.cambrian.dfhm.battle;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import com.cambrian.common.log.Logger;
+import com.cambrian.common.util.ChangeListener;
+import com.cambrian.common.util.ChangeListenerList;
+import com.cambrian.common.util.MathKit;
+import com.cambrian.dfhm.card.Card;
+import com.cambrian.dfhm.monster.Monster;
+import com.cambrian.dfhm.skill.DizzySkill;
+import com.cambrian.dfhm.skill.Skill;
+import com.cambrian.dfhm.skill.TreatSkill;
+import com.cambrian.dfhm.theater.Stage;
+
+/**
+ * 类说明：战斗逻辑类
+ * 
+ * @version 1.0
+ * @author
+ */
+public class BattleScene
+{
+	/* static field */
+	/** 日志记录 */
+	public static final Logger log=Logger.getLogger(BattleScene.class);
+	
+	
+	/** 攻击目标类型，1=自己，2=敌人 */
+	public static final int OWN =1 , NENMY = 2;
+	/** 普通攻击，技能攻击 */
+	public static final int DEFAULTATT = 1, SKILLATT = 2;
+	/** 最大卡牌参战数 */
+	public static final int MAXBATTLECOUNT = 5;
+
+	/* static method */
+	
+	/* field */
+	boolean isStart=false;// 是否开始
+	/** 攻打的关卡 */
+	Stage stage;
+	/** 当前回合数 */
+	private int curRound = 1;
+	/** 战斗最大回合数 */
+	private int maxRound;
+	/** 最大技能发动率 */
+	private final int MAXSKILLRATE = 100000;
+	/** 战斗步骤数（攻击） */
+	private int step;
+	/** 发送给前台的战斗记录 */
+	private ArrayList<Integer> record = new ArrayList<Integer>();
+	/** 掉落记录：每个位置都有可能掉东西[类型，数量] */
+	private ArrayList<Integer> dropAward = new ArrayList<Integer>(10);
+	
+	/** 监听器 */
+	private ChangeListenerList listener=new ChangeListenerList();
+	
+	/* constructors */
+
+	/* properties */
+	public Stage getStage() {
+		return stage;
+	}
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+	public int getMaxRound() {
+		return maxRound;
+	}
+	public void setMaxRound(int maxRound) {
+		this.maxRound = maxRound;
+	}
+	/** 添加监听器 */
+	public void addListener(ChangeListener listener)
+	{
+		this.listener.addListener(listener);
+	}
+	/** 移除状态改变事件监听器 */
+	public void removeListener(ChangeListener listener)
+	{
+		this.listener.removeListener(listener);
+	}
+	/**移除所有的监听器*/
+	public void removeListeners()
+	{
+		this.listener.removeListeners();
+	}
+	public int getStep() {
+		return step;
+	}
+	public ArrayList<Integer> getRecord() {
+		return record;
+	}
+	public void setCurRound(int curRound) {
+		this.curRound = curRound;
+	}
+	public ArrayList<Integer> getDropAward() {
+		return dropAward;
+	}
+	/* init start */
+	
+	
+	
+	
+	/* methods */
+	/**刷新下一个关卡*/
+	public void refreshNextStage()
+	{
+		
+	}
+
+	/**
+	 * 比赛开始
+	 */
+	public void start(BattleCard[] attList, BattleCard[] defList)
+	{		
+		System.err.println("------出战，攻方人员人数-------"+attList.length);
+		for (BattleCard battleCard : attList) {
+			if(battleCard != null)
+				System.err.println(battleCard.getName()+", "+battleCard.getIndex());
+		}
+		System.err.println("------出战，守方人员人数-------"+defList.length);
+		for (BattleCard battleCard : defList) {
+			if(battleCard != null)
+				System.err.println(battleCard.getName()+", "+battleCard.getIndex());
+		}
+		System.err.println("------战斗开始-------");
+		//TODO 考虑写到BattleRoom里面去，每次战斗就new BattleRoom	
+		step = 0;//步骤数，前台要用
+		boolean die = false;
+		record.add(step);
+//		record.add(1);//pvp?pve?
+		while(curRound <= maxRound)
+		{			
+			for (int i = 0; i < MAXBATTLECOUNT; i++) {	
+				System.err.println("------攻方攻击-------");
+				die = attackLogic(attList, defList);//攻方攻击
+				if(die)
+				{
+//					record.add(1);//win
+					return ;
+				}
+	
+				System.err.println("------守方攻击-------");
+				die = attackLogic(defList, attList);//守方攻击
+				if(die)
+				{
+//					record.add(-1);//lose
+					return ;
+				}
+			}
+			
+			endRound(attList, defList);
+		}
+//		if(curRound > maxRound)
+//			record.add(0);
+	}
+	
+	/**
+	 * 攻击逻辑
+	 * @param attList
+	 * @param defList
+	 * @return	战斗结束
+	 */
+	private boolean attackLogic(BattleCard[] attList, BattleCard[] defList)
+	{
+		int[] aim;
+		boolean die = false;
+		BattleCard attCard = getAttackCard(attList);
+		if(attCard != null)
+		{
+			record.add(curRound);
+			step++;
+			record.add(attCard.getIndex());
+			System.err.println("出手人员 ==="+attCard.getName()+", 出手者位置 ==="+attCard.getIndex());
+			System.err.println("side ==="+attCard.getSide());
+			if(deBuffer(attCard))
+			{				
+				int attType = getAttType(attCard);
+				record.add(attType);
+				if(attCard.getAimType() == OWN)
+				{
+					record.add(attCard.getSide());
+					record.add(attType);
+					System.err.println("------攻击目标是自己人-------");
+					aim = getAttRange(attCard, attList);
+					System.err.println("攻击人数 ==="+aim.length);
+					for (int i = 0; i < aim.length; i++) {
+						System.err.print(", 攻击位置 ==="+aim[i]);
+					}
+					System.err.println();
+					die = attValue(attCard, attType, aim, attList);						
+				}
+				else
+				{
+					if(attCard.getSide() == 1)
+						record.add(2);
+					else
+						record.add(1);
+					record.add(attType);
+					System.err.println("------攻击目标是对手-------");
+					aim = getAttRange(attCard, defList);
+					System.err.print("攻击人数 ==="+aim.length);
+					for (int i = 0; i < aim.length; i++) {
+						System.err.print(", 攻击位置 ==="+aim[i]);
+					}
+					System.err.println();
+					die = attValue(attCard, attType, aim, defList);						
+				}			
+				System.err.println("die ==="+die);
+				if(die)
+				{
+					die = isEnd(defList);
+					System.err.println("战斗结束 ======"+die);
+					if(die)
+					{
+						record.add(1);
+						return die;
+					}
+					else
+						record.add(-1);
+				}
+				else
+					record.add(-1);
+				//TODO 暂时不考虑连续技，先不发连续技数据
+	//				record.add(-1);
+	//				doubleSkillAtt(attCard.getSkill().getSid(), attList);
+			}
+			attCard.setAttack(true);
+			record.add(-1);
+//			record.add(-999);
+		}
+		return die;
+	}
+	
+	/**
+	 * 连续技能攻击判断
+	 * @param skillId	触发技能ID
+	 * @param attList	
+	 * @param index	技能发动者所在位置
+	 * @return	发动技能对象
+	 */
+	private void doubleSkillAtt(int skillId, int index, BattleCard[] attList)
+	{
+		int[] aim;
+		BattleCard attCard;
+		int ran = 0;
+		for (int i = index; i < attList.length; i++) {
+			if(i == attList.length - 1)
+				i = 0;
+			if(i == index)
+				break;
+			attCard = attList[i];
+			ran = MathKit.randomValue(0, attCard.getSkillRate()) + 1;
+			if(attCard != null && attCard.getCurHp() > 0 && 
+					ran >= attCard.getSkillRate())
+			{								
+				addLog(attCard);
+				aim = getAttRange(attCard, attList);
+				attValue(attCard, SKILLATT, aim, attList);				
+			}			
+		}
+	}
+	
+	/**
+	 * 连续技，记录添加
+	 * @param attCard
+	 */
+	private void addLog(BattleCard attCard)
+	{
+		record.add(curRound);
+		record.add(attCard.getIndex());
+		record.add(1);//连续技不受debuff状态影响
+		if(attCard.getSide() == 1)
+			record.add(2);
+		else
+			record.add(1);
+		record.add(2);//技能攻击
+	}
+	
+	/**
+	 * 伤害效果计算
+	 * @param attCard	出手者
+	 * @param attType	攻击类型
+	 * @param aim		攻击目标数组
+	 * @param aimList	攻击对象数组
+	 * @return	是否死亡
+	 */
+	private boolean attValue(BattleCard attCard, int attType, int[] aim, BattleCard[] aimList)
+	{
+		boolean die = false;
+		if(attType == SKILLATT)
+		{
+			//	技能伤害等于技能伤害系数乘以玩家攻击力
+			//	实际伤害会在攻击力上进行正负5%区间的浮动
+			System.err.println("------技能攻击-------");
+			record.add(attCard.getSkill().getId());
+			record.add(aim.length);
+			ArrayList<Integer> dieIndex = attCard.getSkill().skillValue(attCard, aim, aimList, record);
+			BattleCard dieCard;
+			for (Integer index : dieIndex) {
+				dieCard = aimList[index];
+				if(dieCard.getCurHp() <= 0)
+				{
+//					drop(dieCard);
+					die = true;
+				}
+			}
+		}
+		else
+		{
+			System.err.println("------普通攻击-------");
+			int hurt = BattleAct.getAttValue(attCard);
+			BattleCard bCard;		
+			record.add(aim.length);
+			for (Integer i : aim) {
+				bCard = aimList[i];
+				die = bCard.decrHp(hurt);
+				record.add(bCard.getIndex());
+				record.add(hurt);
+				if(die)//死 = 1，没死=-1
+				{
+					record.add(1);
+//					drop(bCard);
+				}
+				else
+					record.add(-1);
+				System.err.println(bCard.getName()+",被照成伤害，血量损失 ==="+hurt+", 剩余血量 ==="+bCard.getCurHp());
+			}		
+		}		
+		return die;
+	}
+	
+	/** 获得出手攻击卡牌 */
+	private BattleCard getAttackCard(BattleCard[] list)
+	{
+		for (BattleCard bcard : list) {
+			if(bcard != null && !bcard.isAttack() && bcard.getCurHp() > 0)//出手状态判断
+				return bcard;
+		}
+		return null;
+	}
+	
+	/** 获得攻击范围 */
+	private int[] getAttRange(BattleCard attCard, BattleCard[] aimList)
+	{
+		int[] aim = null;
+		int attType = attCard.getAttRange();
+		System.err.println("攻击范围类型 ==="+attType);
+		BattleCard aimCard = aimList[attCard.getIndex()];
+		switch (attType) {
+		case BattleAct.DEFAULT://0=默认
+			aim = BattleAct.defaultAtt(aimCard, aimList);
+			break;
+		case BattleAct.RANDOM://1=随机
+			aim = BattleAct.randomAtt(aimList);
+			break;
+		case BattleAct.ENDLONG://2=纵向
+			aim = BattleAct.endLongAtt(aimCard, aimList);
+			break;
+		case BattleAct.HORIZONTAL://3=横向
+			aim = BattleAct.horizontalAtt(aimCard, aimList);
+			break;
+		case BattleAct.ENEMYALL://4=敌全体
+			aim = new int[]{0,1,2,3,4};
+			break;
+		case BattleAct.OWNALL://5=己全体
+			aim = new int[]{0,1,2,3,4};
+			break;
+		case BattleAct.LEFTINCLINED://6=左斜
+			aim = BattleAct.leftInclinedleAtt(aimCard, aimList);
+			break;
+		case BattleAct.RIGHTINCLINED://7=右斜
+			aim = BattleAct.rightInclinedleAtt(aimCard, aimList);
+			break;
+		case BattleAct.MITTLE://8=中间
+			aim = BattleAct.mittleAtt(aimList);
+			break;
+		case BattleAct.OWNHPMIN://9=己方血少
+			aim = BattleAct.HpMin(aimList);
+			break;
+		case BattleAct.ENEMYHPMIN://10=敌方血少
+			aim = BattleAct.HpMin(aimList);
+			break;
+
+		default:
+			break;
+		}
+		return aim;
+	}
+	
+	/** 获得攻击类型，1=普通，2=技能 */
+	private int getAttType(BattleCard attCard)
+	{		
+		int rate = MathKit.randomValue(0, MAXSKILLRATE + 1);
+		int attType = DEFAULTATT;
+		if(rate <= attCard.getSkillRate())
+			attType = SKILLATT;		
+		return attType;
+	}
+	
+	/**
+	 * 衰弱buffer计算
+	 * @param bCard	
+	 * @return 是否可以攻击
+	 */
+	private Boolean deBuffer(BattleCard attCard)
+	{
+		Skill skill = attCard.getDeSkill();	
+		if(skill != null)
+		{
+			record.add(skill.getSid());
+			System.err.println("出手人员拥有debuffer状态，debuff ==="+skill.getName());
+			if(skill instanceof DizzySkill)
+			{
+				skill.buffValue(attCard);
+				record.add(3);
+				return false;
+			}
+			skill.buffValue(attCard);
+		}
+		else
+		{
+			record.add(-1);
+		}
+		if(attCard.getCurHp() <= 0)//可能中毒死亡
+		{
+			record.add(2);
+			System.err.println("出手人员死亡，所以不能进行攻击");
+			return false;
+		}		
+		else
+		{
+			record.add(1);
+		}
+		return true;
+	}
+	
+	/** 回合结束计算 */
+	public void endRound(BattleCard[] attList, BattleCard[] defList)
+	{
+		curRound ++;
+		for (BattleCard attCard : attList) {
+			if(attCard != null && attCard.getCurHp() > 0)
+				attCard.setAttack(false);
+		}
+		for (BattleCard defCard : defList) {
+			if(defCard != null && defCard.getCurHp() > 0)
+				defCard.setAttack(false);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param aim
+	 * @return	比赛是否结束
+	 */
+	private boolean isEnd(BattleCard[] aim)
+	{
+		BattleCard bCard;
+		for (int i = 0; i < aim.length; i++) {
+			bCard = aim[i];
+			if(bCard != null)
+			{
+				System.err.println("判断战斗是否结束，血量剩余情况===="+bCard.getCurHp());
+			}
+			if(bCard != null && bCard.getCurHp() > 0)
+				return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * 掉落计算
+	 * @param dieCard
+	 * @return	掉落类型
+	 */
+	private void drop(BattleCard dieCard)
+	{
+		int type = 0;
+		if(dieCard.getAwardSid() > 0)
+		{
+			com.cambrian.dfhm.drop.Monster drop = com.cambrian.dfhm.drop.Monster.getDrop(dieCard.getAwardSid());
+			int[] award = drop.dispense();
+			type = award[0];
+			dropAward.add(award[0]);
+			dropAward.add(award[1]);
+			record.add(type);
+		}
+	}
+
+}

@@ -1,0 +1,53 @@
+package com.cambrian.dfhm.skill;
+
+import java.util.ArrayList;
+
+import com.cambrian.dfhm.battle.BattleCard;
+import com.cambrian.dfhm.battle.BattleRecord;
+
+/**
+ * 类说明：晕眩技能
+ * 
+ * @author：Sebastian
+ */
+public class DizzySkill extends Skill
+{
+
+	/* static fields */
+
+	/* static methods */
+
+	/* fields */
+	private int round;
+
+	/* constructors */
+
+	/* properties */
+
+	/* init start */
+
+	/* methods */
+	@Override
+	public ArrayList<Integer> skillValue(BattleCard attCard,
+		ArrayList<Integer> aim,BattleCard[] aimList,BattleRecord record)
+	{
+		clearHurt();
+		int value=getSkillHurt(attCard.getAtt());
+		record.setAttMax(value);
+		addHurt(value);
+		System.err.println("晕眩技能，照成伤害 ==="+value);
+		return getHurtList();
+	}
+
+	@Override
+	public int buffValue(BattleCard aimCard,BattleRecord record)
+	{
+		if(round>0)
+		{
+			round--;
+			if(round==0) aimCard.setDeSkill(null);
+			System.err.println("晕眩状态，剩余回合数 ==="+round);
+		}
+		return 0;
+	}
+}

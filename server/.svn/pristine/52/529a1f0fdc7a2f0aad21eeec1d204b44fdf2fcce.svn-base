@@ -1,0 +1,35 @@
+package com.cambrian.game.dc;
+
+import com.cambrian.common.net.ByteBuffer;
+import com.cambrian.common.net.Command;
+import com.cambrian.common.net.NioTcpConnect;
+
+/**
+ * ÀàËµÃ÷£º
+ * @author£ºSebastian
+ *
+ */
+public class CheckNicknameCommand extends Command
+{
+
+	DataCenter dc;
+
+	public void setDC(DataCenter dc)
+	{
+		this.dc=dc;
+	}
+	public void handle(NioTcpConnect connect,ByteBuffer data)
+	{
+		System.err.println("dc.CheckNicknameCommand ----------");
+		String nickName = data.readUTF();
+		try
+		{
+			dc.checkNickname(nickName);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}

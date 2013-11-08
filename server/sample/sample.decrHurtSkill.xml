@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	减少攻击技能
+	sid			唯一标签
+	class		程序使用
+	name		名字
+	description	介绍
+	att			伤害系数
+	attRange	攻击范围
+	level		等级
+	aim			攻击对象，1=自己，2=敌人
+	hurt		每次增加的攻击力百分比	[填1-100，程序自己转换]
+	round		回合数
+	
+	-->
+	<sample sid="37201" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·寒冰障" description="减伤" att="1000" attRange="0" level="1" aim="2" hurt="30" round="2" skillRate="25000"/>
+	<sample sid="37202" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·寒冰障" description="减伤" att="1100" attRange="0" level="2" aim="2" hurt="34" round="2" skillRate="30000"/>
+	<sample sid="37203" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·寒冰障" description="减伤" att="1200" attRange="0" level="3" aim="2" hurt="38" round="2" skillRate="35000"/>
+	<sample sid="37204" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·寒冰障" description="减伤" att="1300" attRange="0" level="4" aim="2" hurt="42" round="2" skillRate="40000"/>
+	<sample sid="37205" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·寒冰障" description="减伤" att="1400" attRange="0" level="5" aim="2" hurt="46" round="2" skillRate="45000"/>
+	<sample sid="37206" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·寒冰障" description="减伤" att="1500" attRange="0" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37207" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·寒冰障" description="减伤" att="1100" attRange="0" level="1" aim="2" hurt="30" round="2" skillRate="25000"/>
+	<sample sid="37208" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·寒冰障" description="减伤" att="1210" attRange="0" level="2" aim="2" hurt="34" round="2" skillRate="30000"/>
+	<sample sid="37209" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·寒冰障" description="减伤" att="1320" attRange="0" level="3" aim="2" hurt="38" round="2" skillRate="35000"/>
+	<sample sid="37210" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·寒冰障" description="减伤" att="1430" attRange="0" level="4" aim="2" hurt="42" round="2" skillRate="40000"/>
+	<sample sid="37211" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·寒冰障" description="减伤" att="1540" attRange="0" level="5" aim="2" hurt="46" round="2" skillRate="45000"/>
+	<sample sid="37212" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·寒冰障" description="减伤" att="1650" attRange="0" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37213" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·寒冰障" description="减伤" att="1200" attRange="0" level="1" aim="2" hurt="30" round="2" skillRate="25000"/>
+	<sample sid="37214" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·寒冰障" description="减伤" att="1320" attRange="0" level="2" aim="2" hurt="34" round="2" skillRate="30000"/>
+	<sample sid="37215" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·寒冰障" description="减伤" att="1440" attRange="0" level="3" aim="2" hurt="38" round="2" skillRate="35000"/>
+	<sample sid="37216" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·寒冰障" description="减伤" att="1560" attRange="0" level="4" aim="2" hurt="42" round="2" skillRate="40000"/>
+	<sample sid="37217" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·寒冰障" description="减伤" att="1680" attRange="0" level="5" aim="2" hurt="46" round="2" skillRate="45000"/>
+	<sample sid="37218" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·寒冰障" description="减伤" att="1800" attRange="0" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37219" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·寒冰障" description="减伤" att="1300" attRange="0" level="1" aim="2" hurt="30" round="2" skillRate="25000"/>
+	<sample sid="37220" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·寒冰障" description="减伤" att="1430" attRange="0" level="2" aim="2" hurt="34" round="2" skillRate="30000"/>
+	<sample sid="37221" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·寒冰障" description="减伤" att="1560" attRange="0" level="3" aim="2" hurt="38" round="2" skillRate="35000"/>
+	<sample sid="37222" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·寒冰障" description="减伤" att="1690" attRange="0" level="4" aim="2" hurt="42" round="2" skillRate="40000"/>
+	<sample sid="37223" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·寒冰障" description="减伤" att="1820" attRange="0" level="5" aim="2" hurt="46" round="2" skillRate="45000"/>
+	<sample sid="37224" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·寒冰障" description="减伤" att="1950" attRange="0" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37225" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="1400" attRange="0" level="1" aim="2" hurt="30" round="2" skillRate="25000"/>
+	<sample sid="37226" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="1540" attRange="0" level="2" aim="2" hurt="34" round="2" skillRate="30000"/>
+	<sample sid="37227" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="1680" attRange="0" level="3" aim="2" hurt="38" round="2" skillRate="35000"/>
+	<sample sid="37228" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="1820" attRange="0" level="4" aim="2" hurt="42" round="2" skillRate="40000"/>
+	<sample sid="37229" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="1960" attRange="0" level="5" aim="2" hurt="46" round="2" skillRate="45000"/>
+	<sample sid="37230" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="2100" attRange="0" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37231" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="2100" attRange="1" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37232" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="2100" attRange="2" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37233" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="2100" attRange="3" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37234" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="2100" attRange="4" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37235" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="2100" attRange="6" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37236" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="2100" attRange="7" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37237" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="2100" attRange="8" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37238" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·寒冰障" description="减伤" att="2100" attRange="10" level="6" aim="2" hurt="50" round="2" skillRate="50000"/>
+	<sample sid="37239" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·百冰封" description="减伤" att="0" attRange="3" level="1" aim="2" hurt="20" round="2" skillRate="10000"/>
+	<sample sid="37240" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·百冰封" description="减伤" att="0" attRange="3" level="2" aim="2" hurt="22" round="2" skillRate="12000"/>
+	<sample sid="37241" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·百冰封" description="减伤" att="0" attRange="3" level="3" aim="2" hurt="24" round="2" skillRate="14000"/>
+	<sample sid="37242" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·百冰封" description="减伤" att="0" attRange="3" level="4" aim="2" hurt="26" round="2" skillRate="16000"/>
+	<sample sid="37243" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·百冰封" description="减伤" att="0" attRange="3" level="5" aim="2" hurt="28" round="2" skillRate="18000"/>
+	<sample sid="37244" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="白·百冰封" description="减伤" att="0" attRange="3" level="6" aim="2" hurt="30" round="2" skillRate="20000"/>
+	<sample sid="37245" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·百冰封" description="减伤" att="0" attRange="3" level="1" aim="2" hurt="22" round="2" skillRate="10000"/>
+	<sample sid="37246" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·百冰封" description="减伤" att="0" attRange="3" level="2" aim="2" hurt="24" round="2" skillRate="12000"/>
+	<sample sid="37247" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·百冰封" description="减伤" att="0" attRange="3" level="3" aim="2" hurt="26" round="2" skillRate="14000"/>
+	<sample sid="37248" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·百冰封" description="减伤" att="0" attRange="3" level="4" aim="2" hurt="28" round="2" skillRate="16000"/>
+	<sample sid="37249" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·百冰封" description="减伤" att="0" attRange="3" level="5" aim="2" hurt="30" round="2" skillRate="18000"/>
+	<sample sid="37250" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="绿·百冰封" description="减伤" att="0" attRange="3" level="6" aim="2" hurt="32" round="2" skillRate="20000"/>
+	<sample sid="37251" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·百冰封" description="减伤" att="0" attRange="3" level="1" aim="2" hurt="24" round="2" skillRate="10000"/>
+	<sample sid="37252" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·百冰封" description="减伤" att="0" attRange="3" level="2" aim="2" hurt="26" round="2" skillRate="12000"/>
+	<sample sid="37253" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·百冰封" description="减伤" att="0" attRange="3" level="3" aim="2" hurt="28" round="2" skillRate="14000"/>
+	<sample sid="37254" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·百冰封" description="减伤" att="0" attRange="3" level="4" aim="2" hurt="30" round="2" skillRate="16000"/>
+	<sample sid="37255" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·百冰封" description="减伤" att="0" attRange="3" level="5" aim="2" hurt="32" round="2" skillRate="18000"/>
+	<sample sid="37256" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="蓝·百冰封" description="减伤" att="0" attRange="3" level="6" aim="2" hurt="34" round="2" skillRate="20000"/>
+	<sample sid="37257" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·百冰封" description="减伤" att="0" attRange="3" level="1" aim="2" hurt="26" round="2" skillRate="10000"/>
+	<sample sid="37258" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·百冰封" description="减伤" att="0" attRange="3" level="2" aim="2" hurt="28" round="2" skillRate="12000"/>
+	<sample sid="37259" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·百冰封" description="减伤" att="0" attRange="3" level="3" aim="2" hurt="30" round="2" skillRate="14000"/>
+	<sample sid="37260" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·百冰封" description="减伤" att="0" attRange="3" level="4" aim="2" hurt="32" round="2" skillRate="16000"/>
+	<sample sid="37261" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·百冰封" description="减伤" att="0" attRange="3" level="5" aim="2" hurt="34" round="2" skillRate="18000"/>
+	<sample sid="37262" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="紫·百冰封" description="减伤" att="0" attRange="3" level="6" aim="2" hurt="36" round="2" skillRate="20000"/>
+	<sample sid="37263" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·百冰封" description="减伤" att="0" attRange="3" level="1" aim="2" hurt="28" round="2" skillRate="10000"/>
+	<sample sid="37264" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·百冰封" description="减伤" att="0" attRange="3" level="2" aim="2" hurt="30" round="2" skillRate="12000"/>
+	<sample sid="37265" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·百冰封" description="减伤" att="0" attRange="3" level="3" aim="2" hurt="32" round="2" skillRate="14000"/>
+	<sample sid="37266" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·百冰封" description="减伤" att="0" attRange="3" level="4" aim="2" hurt="34" round="2" skillRate="16000"/>
+	<sample sid="37267" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·百冰封" description="减伤" att="0" attRange="3" level="5" aim="2" hurt="36" round="2" skillRate="18000"/>
+	<sample sid="37268" class="com.cambrian.dfhm.skill.DecrHurtSkill" name="橙·百冰封" description="减伤" att="0" attRange="3" level="6" aim="2" hurt="38" round="2" skillRate="20000"/>
+
+</objects>

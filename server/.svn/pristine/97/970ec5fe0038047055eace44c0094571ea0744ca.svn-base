@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	moneyRate		游戏币掉率
+	money			游戏币数量
+	soulRate		武魂掉率
+	soul			武魂数量
+	goldRate		RMB掉率
+	gold			RMB数量
+	integralRate	积分掉率
+	integral		积分数量
+	cardRate		卡片掉率
+	card			卡片概率[卡片，概率，卡片，概率，...]
+
+	-->
+	<sample sid="40005" class="com.cambrian.dfhm.common.Gift" moneyRate="80000" _1money="5000,80000,10000,10000,100000,9000,1000000,100" soulRate="10000" soul="100" goldRate="1000" gold="10" integralRate="0" integral="0" cardRate="9000" _1card="50004,50000,50005,50000"/>
+</objects>

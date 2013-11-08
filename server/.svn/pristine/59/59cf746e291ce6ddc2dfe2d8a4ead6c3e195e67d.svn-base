@@ -1,0 +1,174 @@
+package com.cambrian.dfhm.friend;
+
+import com.cambrian.common.net.ByteBuffer;
+import com.cambrian.common.object.DBSerializable;
+import com.cambrian.common.object.Serializable;
+import com.cambrian.common.util.ArrayList;
+
+/**
+ * 类说明：好友列表
+ * 
+ * @version 1.0
+ * @date 2013-5-29
+ * @author maxw<woldits@qq.com>
+ */
+public class FriendList implements Serializable,DBSerializable
+{
+
+	/* static fields */
+
+	/* static methods */
+
+	/* fields */
+	/** 好友 */
+	ArrayList friends;
+
+	/* constructors */
+
+	/* properties */
+
+	/* init start */
+
+	/* methods */
+	/** 是否已添加好友 */
+	public boolean isFriend(long userid)
+	{
+		for(int i=0;i<friends.size();i++)
+		{
+			NPlayer player=(NPlayer)friends.get(i);
+			if(player==null) continue;
+			if(player.userid==userid) return true;
+		}
+		return false;
+	}
+	/** 添加好友 */
+	public void addFriend(NPlayer player)
+	{
+		if(isFriend(player.userid)) return;
+		friends.add(player);
+	}
+	/** 删除好友 */
+	public boolean removeFriend(long userid)
+	{
+		for(int i=0;i<friends.size();i++)
+		{
+			NPlayer player=(NPlayer)friends.get(i);
+			if(player.userid==userid)
+			{
+				friends.remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/* common methods */
+	
+	public void bytesWrite(ByteBuffer data)
+	{
+		int len=(friends==null?0:friends.size());
+		data.writeInt(len);
+		for(int i=0;i<len;i++)
+		{
+			NPlayer player=(NPlayer)friends.get(i);
+			player.bytesWrite(data);
+		}
+	}
+	
+	public void bytesRead(ByteBuffer data)
+	{
+		friends=new ArrayList();
+		int len=data.readInt();
+		for(int i=0;i<len;i++)
+		{
+			friends.add(new NPlayer(data));
+		}
+	}
+	/* (non-Javadoc)
+	 * @see com.cambrian.common.object.DBSerializable#dbBytesWrite(com.cambrian.common.net.ByteBuffer)
+	 */
+	
+	public void dbBytesWrite(ByteBuffer data)
+	{
+		int len=(friends==null?0:friends.size());
+		data.writeInt(len);
+		for(int i=0;i<len;i++)
+		{
+			NPlayer player=(NPlayer)friends.get(i);
+			player.bytesWrite(data);
+		}
+	}
+	/* (non-Javadoc)
+	 * @see com.cambrian.common.object.DBSerializable#dbBytesRead(com.cambrian.common.net.ByteBuffer)
+	 */
+	
+	public void dbBytesRead(ByteBuffer data)
+	{
+		friends=new ArrayList();
+		int len=data.readInt();
+		for(int i=0;i<len;i++)
+		{
+			friends.add(new NPlayer(data));
+		}
+	}
+
+	/* inner class */
+	/** 好友 */
+	public static class NPlayer
+	{
+
+		/** userid */
+		long userid;
+		/** 名字 */
+		String name;
+		/** 头像 */
+		int image;
+
+		public NPlayer(ByteBuffer data)
+		{
+			this.bytesRead(data);
+		}
+		public NPlayer(long userid,String name,int image)
+		{
+			this.userid=userid;
+			this.name=name;
+			this.image=image;
+		}
+		/** 获得UID */
+		public long getUid()
+		{
+			return userid;
+		}
+		/** 获得名字 */
+		public String getName()
+		{
+			return name;
+		}
+
+		/** 序列化方法 */
+		public void bytesWrite(ByteBuffer data)
+		{
+			data.writeLong(userid);
+			data.writeUTF(name);
+			data.writeInt(image);
+		}
+
+		/** 反序列化方法(合服修改，从文件读取用) */
+		public void bytesRead(ByteBuffer data)
+		{
+			userid=data.readLong();
+			name=data.readUTF();
+			image=data.readInt();
+		}
+		/*
+		 * (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
+		
+		public String toString()
+		{
+			return "Friend [userid="+userid+", name="+name+", image="+image
+				+"]";
+		}
+	}
+}

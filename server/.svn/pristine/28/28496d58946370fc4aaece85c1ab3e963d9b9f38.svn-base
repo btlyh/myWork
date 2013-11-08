@@ -1,0 +1,57 @@
+package com.cambrian.dfhm.battle;
+
+import java.util.ArrayList;
+
+/**
+ * 类说明：
+ * @author：Sebastian
+ *
+ */
+public class BattleRecord {
+	
+	/* static fields */
+	/** 是否有成员战斗死亡 */
+	private boolean death = false;
+	/** 最高攻击力记录 */
+	private int attMax = 0;
+	/** 战斗记录 */
+	private ArrayList<Integer> record = new ArrayList<Integer>();
+	
+
+	/* static methods */
+
+	/* fields */
+
+	/* constructors */
+
+	/* properties */
+	public boolean isDeath() {
+		return death;
+	}
+	public void setDeath(boolean death) {
+		this.death = death;
+	}
+	public int getAttMax() {
+		return attMax;
+	}
+	public void setAttMax(int attMax) {
+		if(this.attMax < attMax)
+			this.attMax = attMax;
+	}
+	public ArrayList<Integer> getRecord() {
+		return record;
+	}
+
+	/* init start */
+
+	/* methods */
+	public void addRecord(int rec)
+	{
+		record.add(rec);
+	}
+
+	/* common methods */
+
+	/* inner class */
+
+}

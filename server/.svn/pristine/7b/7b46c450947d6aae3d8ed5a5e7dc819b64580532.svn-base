@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects>
+	<!-- 认证中心地址 -->
+	<constructor id="ccURL" class="com.cambrian.common.net.URL"><ref id="ds_cc_address"/></constructor>
+	<!-- 创建无阻塞的连接提供器 -->
+	<obj class="com.cambrian.common.net.ConnectProducer" id="cc.cp">
+		<method name="setURL"><ref id="ccURL"/></method>
+		<method name="timerStart"/>
+	</obj>
+	<constructor id="dcURL" class="com.cambrian.common.net.URL"><ref id="ds_dc_address"/></constructor>
+	<!-- 创建无阻塞的连接提供-->
+	<obj class="com.cambrian.common.net.ConnectProducer" id="dc.cp">
+		<method name="setURL"><ref id="dcURL"/></method>
+		<method name="timerStart"/>
+	</obj>
+
+	<!-- 创建数据服务管理器 -->
+	<obj class="com.cambrian.game.ds.DataServer" id="DS">
+		<!-- 安装认证访问接口 -->
+		<method name="setDSCCAccess">
+			<obj class="com.cambrian.game.ds.DirectDSCCAccess" id="dscaccess">
+				<method name="setConnectProducer"><ref id="cc.cp"/></method>
+			</obj>
+		</method>
+		<!-- 安装数据访问接口 -->
+		<method name="setDSDCAccess">
+			<obj class="com.cambrian.game.ds.DirectDSDCAccess">
+				<method name="setConnectProducer"><ref id="dc.cp"/></method>
+			</obj>
+		</method>
+		<method name="setDCRW"><obj class="com.cambrian.game.util.PlayerDCRW"/></method>
+		<method name="setUserWriter"><obj class="com.cambrian.game.util.PlayerWriter"/></method>
+		<!-- 注册状态改变事件处理监听器 -->
+		<method name="addListener"><obj class="com.cambrian.game.ds.DSChangeAdapter"/></method>
+		<!-- 定时器开始工作 -->
+		<method name="timerStart"/>
+	</obj>
+
+	<!-- 设置属性服务
+	<method ref="manager" name="getAttributes" id="attributes"/>
+	<method name="getPort" ref="service" id="__port"><field class="com.cambrian.common.net.ProxyDataHandler" name="ATTRIBUTE_PORT"/></method>
+	<method name="setAttributes" ref="__port"><ref id="attributes"/></method> -->
+
+	<!-- 通信-发送信息代理器 -->
+	<field class="com.cambrian.dfhm.ProxySendCommand" name="proxy" id="proxySendCommand"/>
+	<!-- 角色模式-功能处理分发器 -->
+	<field class="com.cambrian.common.actor.ProxyActorProcess" name="proxy" id="proxyActorProcess"/>
+
+	<!-- ########################################## -->
+
+	<!-- 安装认证代理服务
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.common.net.ProxyDataHandler" name="CERTIFY_PROXY_PORT"/>
+		<obj class="youkia.back.ds.CertifyProxyPort">
+			<method name="setConnectProducer"><ref id="cc.nbcp"/></method>
+			<method name="setPort"><field class="zmyth.net.PortService" name="CC_CERTIFY_PORT"/></method>
+		</obj>
+	</method> -->
+	<!-- 安装登陆服务 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.common.net.ProxyDataHandler" name="LOGIN_PORT"/>
+		<obj class="com.cambrian.game.ds.LoginCommand">
+			<method name="setDS"><ref id="DS"/></method>
+		</obj>
+	</method>
+	<!-- 安装加载服务 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.common.net.ProxyDataHandler" name="LOAD_PORT"/>
+		<obj class="com.cambrian.game.ds.LoadCommand">
+			<method name="setDS"><ref id="DS"/></method>
+		</obj>
+	</method>
+	<!-- 安装退出服务 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.common.net.ProxyDataHandler" name="EXIT_PORT"/>
+		<obj class="com.cambrian.game.ds.ExitCommand">
+			<method name="setDS"><ref id="DS"/></method>
+		</obj>
+	</method>
+	<!-- 安装CLL服务(认证登录加载服务) -->
+	<method name="setPort" ref="service">
+		<value>214</value>
+		<obj class="com.cambrian.game.ds.CLLCommand">
+			<method name="setDS"><ref id="DS"/></method>
+			<!-- 设置代理服务端口和连接提供器 -->
+			<method name="setProxy">
+				<field class="com.cambrian.common.net.ProxyDataHandler" name="CC_CERTIFY_PORT"/>
+				<ref id="cc.cp"/>
+			</method>
+		</obj>
+	</method>
+	<!-- 安装服务器列表代理服务
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.common.net.ProxyDataHandler" name="SERVER_LIST_PORT"/>
+		<obj class="zmyth.net.ProxyAccessPort">
+			<method name="setConnectProducer"><ref id="dc.nbcp"/></method>
+			<method name="setPort"><field class="zmyth.net.PortService" name="SERVER_LIST_PORT"/></method>
+		</obj>
+	</method> -->
+	
+	<!-- ########################################## -->
+	<!-- 创建战斗管理器 -->
+	<obj class="com.cambrian.dfhm.battle.BattleManager" id="battleManger">
+		<method name="setDSManager"><ref id="DS"/></method>
+		<method name="timerStart"/>
+	</obj>
+	<!--获取玩家关卡数据
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_BATTLE_GETSTAGE"/>
+		<obj class="com.cambrian.dfhm.battle.command.GetStageCommand"></obj>
+	</method> -->
+	<!--战斗开始-->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_BATTLE_START"/>
+		<obj class="com.cambrian.dfhm.battle.command.MatchStartCommand"></obj>
+	</method>
+	<!--战斗结束相关服务
+	<method name="setPort" ref="service">
+		<value type="int">1002</value>
+		<obj class="com.cambrian.dfhm.battle.command.MatchOverCommand"></obj>
+	</method>-->
+	<!-- ########################################## -->
+	<!-- 背包-前台发送-获取道具列表 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_BAG_PROPLIST"/>
+		<obj class="com.cambrian.dfhm.bag.command.PropListCommand"></obj>
+	</method>
+	<!-- 背包-前台发送-出售道具
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_BAG_SELLPROP"/>
+		<obj class="com.cambrian.dfhm.bag.command.SellPropCommand"></obj>
+	</method> -->
+	<!-- 背包-后台发送-添加道具
+	<method name="setPort" ref="proxySendCommand">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_BAG_ADDPROP"/>
+		<obj class="com.cambrian.dfhm.bag.command.send.AddPropCommand"></obj>
+	</method> -->
+	<!-- 背包-后台发送-移除道具
+	<method name="setPort" ref="proxySendCommand">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_BAG_REMOVEPROP"/>
+		<obj class="com.cambrian.dfhm.bag.command.send.RemovePropCommand"></obj>
+	</method> -->
+	<!-- 背包-功能处理器-出售道具
+	<method name="setProcess" ref="proxyActorProcess">
+		<field class="com.cambrian.dfhm.GlobalConst" name="PROCESS_BAG_SELLPROP"/>
+		<obj class="com.cambrian.dfhm.bag.process.SellPropProcess"></obj>
+	</method> -->
+
+	<!-- ########################################## -->
+	<!--  卡片图鉴-前台发送-获取卡片列表
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_CARD_CARDLIST"/>
+		<obj class="com.cambrian.dfhm.card.command.CardListCommand"></obj>
+	</method> -->
+	<!--  卡牌技能-前台发送-刷新卡牌技能 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_CARD_FLUSHSKILL"/>
+		<obj class="com.cambrian.dfhm.card.CardSkillFlushCommand"></obj>
+	</method>
+	<!--  卡牌技能-前台发送-保存技能 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_CARD_SAVESKILL"/>
+		<obj class="com.cambrian.dfhm.card.CardSaveSkillCommand"></obj>
+	</method>
+
+	<!-- ########################################## -->
+	<!--  好友-前台发送-获取好友列表
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_FRIEND_FRIENDLIST"/>
+		<obj class="com.cambrian.dfhm.friend.command.FriendListCommand"></obj>
+	</method> -->
+	<!--  好友-前台发送-申请添加
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_FRIEND_APPLYFRIEND"/>
+		<obj class="com.cambrian.dfhm.friend.command.ApplyAddFriendCommand"></obj>
+	</method> -->
+	<!--  好友-前台发送-处理添加好友申请
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_FRIEND_HANDLEAPPLYFRIEND"/>
+		<obj class="com.cambrian.dfhm.friend.command.HandleAddFriendCommand"></obj>
+	</method> -->
+	<!--  好友-前台发送-移除好友
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_FRIEND_REMOVEFRIEND"/>
+		<obj class="com.cambrian.dfhm.friend.command.RemoveFriendCommand"></obj>
+	</method> -->
+	<!-- 好友-功能处理器-添加好友请求结果消息
+	<method name="setProcess" ref="proxyActorProcess">
+		<field class="com.cambrian.dfhm.GlobalConst" name="PROCESS_FRIEND_HANDLEAPPLYFRIEND"/>
+		<obj class="com.cambrian.dfhm.friend.process.HandleAddFriendProcess"></obj>
+	</method> -->
+
+	<!-- ########################################## -->
+	<!-- 消息处理器 -->
+	<field class="com.cambrian.dfhm.message.MessageManager" name="instance" id="messageManager"></field>
+	<method name="setDataServer" ref="messageManager"><ref id="DS"/></method>
+	<method name="setAccess" ref="messageManager">
+		<obj class="com.cambrian.dfhm.message.MessageSqlAccess">
+			<method name="setConnectionManager"><ref id="cm"/></method>
+			<method name="setTable">player_message</method>
+			<method name="init"/>
+		</obj>
+	</method>
+	<!-- 消息-后台间发送-消息 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_MESSAGE"/>
+		<obj class="com.cambrian.dfhm.message.command.MessageCommand"></obj>
+	</method>
+	<!-- 消息-前台发送-获取消息列表 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_MESSAGELIST"/>
+		<obj class="com.cambrian.dfhm.message.command.MessageListCommand"></obj>
+	</method>
+	<!-- 消息-前台发送-读消息 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_READMESSAGE"/>
+		<obj class="com.cambrian.dfhm.message.command.ReadMessageCommand"></obj>
+	</method>
+	<!-- 消息-前台发送-处理消息 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_HANDLEMESSAGE"/>
+		<obj class="com.cambrian.dfhm.message.command.HandleMessageCommand"></obj>
+	</method>
+	<!-- 消息-前台发送-移除消息 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_REMOVEMESSAGE"/>
+		<obj class="com.cambrian.dfhm.message.command.RemoveMessageCommand"></obj>
+	</method>
+	<!-- 消息-后台发送-新增消息 -->
+	<method name="setPort" ref="proxySendCommand">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_ADDMESSAGE"/>
+		<obj class="com.cambrian.dfhm.message.command.send.AddMessageCommand"></obj>
+	</method>
+
+	<!-- ########################################## -->
+	<!--  任务-初始化所有任务列表
+	<method class="com.cambrian.dfhm.task.TaskContainer" name="init"/> -->
+	<!--  任务-前台发送-获取任务列表
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_TASK_TASKLIST"/>
+		<obj class="com.cambrian.dfhm.task.command.TaskListCommand"></obj>
+	</method> -->
+	<!--  任务-前台发送-完成任务
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_TASK_FINISHTASK"/>
+		<obj class="com.cambrian.dfhm.task.command.FinishTaskCommand"></obj>
+	</method> -->
+
+</objects>

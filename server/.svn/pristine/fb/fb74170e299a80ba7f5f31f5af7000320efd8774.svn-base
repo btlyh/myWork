@@ -1,0 +1,68 @@
+package com.cambrian.dfhm.friend.process;
+
+import com.cambrian.common.actor.Actor;
+import com.cambrian.common.net.ByteBuffer;
+import com.cambrian.dfhm.common.Player;
+import com.cambrian.dfhm.friend.FriendList.NPlayer;
+import com.cambrian.dfhm.message.Message;
+import com.cambrian.dfhm.message.MessageProcess;
+
+/**
+ * 类说明：好友-功能处理器-添加好友请求结果消息
+ * 
+ * @version 1.0
+ * @date 2013-6-6
+ * @author maxw<woldits@qq.com>
+ */
+public class HandleAddFriendProcess implements MessageProcess
+{
+	
+	public boolean handle(Actor actor,Object value)
+	{
+		Player player=(Player)actor;
+		Message message=(Message)value;
+		if(message.hasStatus(Message.HANDLE)) return false;
+		boolean b=(Boolean)message.objs[0];
+		if(b)
+		{
+			String name=(String)message.objs[1];
+			int img=(Integer)message.objs[2];
+			NPlayer nplayer=new NPlayer(message.scr,name,img);
+			player.friendList.addFriend(nplayer);
+		}
+		message.addStatus(Message.HANDLE);
+		return true;
+	}
+
+	
+	public void bytesWrite(ByteBuffer data,Object[] objs)
+	{
+		boolean b=(Boolean)objs[0];
+		data.writeBoolean(b);
+		if(b)
+		{
+			String name=(String)objs[1];
+			int img=(Integer)objs[2];
+			data.writeUTF(name);
+			data.writeInt(img);
+		}
+	}
+
+	
+	public Object[] bytesRead(ByteBuffer data)
+	{
+		Object[] objs;
+		boolean b=data.readBoolean();
+		if(b)
+		{
+			String name=data.readUTF();
+			int img=data.readInt();
+			objs=new Object[]{b,name,img};
+		}
+		else
+		{
+			objs=new Object[]{b};
+		}
+		return objs;
+	}
+}

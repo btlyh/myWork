@@ -1,0 +1,113 @@
+package com.cambrian.dfhm;
+
+public final class Lang
+{
+
+	/** 程序或策划bug,配置的物品数据错误 */
+	public static final String ERROR_1 = "101";
+	/** 程序或策划bug,前台传参数错误 */
+	public static final String ERROR_2 = "102";
+
+	/* 应用服务器端 */
+	/** 600；无效通讯 */
+	public static final String F600_CNCM = "600";
+	/** 611；网络错误 */
+	public static final String F611_DE = "611";
+	/** 613；该账号没有激活 */
+	public static final String F613_NA = "613";
+	/** 615；获得连接失败 */
+	public static final String F615_GCF = "615";
+
+	/* 玩家信息 */
+	/** 700；玩家不存在 */
+	public static final String F700 = "700";
+	/** 701；游戏币不足 */
+	public static final String F701 = "701";
+	/** 702；RMB不足 */
+	public static final String F702 = "702";
+	/** 703；购买军令出错 */
+	public static final String F703 = "703";
+	/** 704；购买军令的金币和服务端价格不符合 */
+	public static final String F704 = "704";
+	/** 705；购买数量达到限制 */
+	public static final String F705 = "705";
+	/** 706；当前军令已经是最大,无法购买 */
+	public static final String F706 = "706";
+
+	/* 战斗 */
+
+	/* 背包 */
+	/** 1100；卡牌背包容量已满 */
+	public static final String F1100 = "1100";
+
+	/* 卡牌 */
+	/** 1200；卡牌不存在 */
+	public static final String F1200 = "1200";
+	/** 1201；卡牌处于特殊状态中，不能出售 */
+	public static final String F1201 = "1201";
+	/** 1202; 卡牌背包容量已满 */
+	public static final String F1202 = "1202";
+	/** 1203; 卡牌培养点数不足 */
+	public static final String F1203 = "1203";
+	/** 1204; 错误培养消耗值 */
+	public static final String F1204 = "1204";
+	/** 1205; 错误的重置培养消耗RMB数 */
+	public static final String F1205 = "1205";
+	/** 1206; 已处于境界突破状态 */
+	public static final String F1206 = "1206";
+	/** 1207; 吞噬卡牌不存在 */
+	public static final String F1207 = "1207";
+	/** 1208; 错误的卡牌状态 */
+	public static final String F1208 = "1208";
+	/** 1209; 不是境界突破状态 */
+	public static final String F1209 = "1209";
+	/** 1210; 不是指定的吞噬卡牌 */
+	public static final String F1210 = "1210";
+	/** 1211; 没有选择卡牌吞噬 */
+	public static final String F1211 = "1211";
+	/** 1212; 吞噬的卡牌不一样 */
+	public static final String F1212 = "1212";
+	/** 1213; 吞噬卡牌，不是相同的技能 */
+	public static final String F1213 = "1213";
+	/** 1214; 指定下阵卡牌错误 */
+	public static final String F1214 = "1214";
+	/** 1215; 卡牌技能链表错误 */
+	public static final String F1215 = "1215";
+	/** 1216; 卡牌技能不存在 */
+	public static final String F1216 = "1216";
+	/** 1217; 卡牌技能等级错误 */
+	public static final String F1217 = "1217";
+	/** 1218; 卡牌刷新技能所需花费RMB错误 */
+	public static final String F1218 = "1218";
+	/** 1219; 卡牌刷新技能RMB不足 */
+	public static final String F1219 = "1219";
+	/** 1220; 卡牌保存技能ID不合法 */
+	public static final String F1220 = "1220";
+	/** 1221; 出战名额已满 */
+	public static final String F1221 = "1221";
+
+	/* 邮件 */
+	/** 1301; 发送邮件的玩家姓名不正确 */
+	public static final String F1301 = "1301";
+	/** 1302; 发送邮件内容长度不正确 */
+	public static final String F1302 = "1302";
+	/** 1303; 查看邮件的位置不正确 */
+	public static final String F1303 = "1303";
+	/** 1304; 当前没有邮件 */
+	public static final String F1304 = "1304";
+	/** 1305; 查看的邮件列表不存在 */
+	public static final String F1305 = "1305";
+	/** 1306; 收取的邮件不存在 */
+	public static final String F1306 = "1306";
+	/** 1307; 当前邮件没有附件 */
+	public static final String F1307 = "1307";
+	/** 1308; 此邮件的附件已经收取过了 */
+	public static final String F1308 = "1308";
+	/** 1309; 背包的空间不足，无法收取附件 */
+	public static final String F1309 = "1309";
+	/** 1310; 没有此人 */
+	public static final String F1310 = "1310";
+
+	/** 9000；网络错误,请重新登录 */
+	public static final String F9000_SDE = "9000";
+}

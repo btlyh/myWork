@@ -1,0 +1,46 @@
+package com.cambrian.dfhm.common;
+
+import com.cambrian.common.net.ByteBuffer;
+
+/**
+ * 类说明：
+ * @author：zmk
+ * 
+ */
+public class PlayerInfo
+{
+
+	/* static fields */
+
+	/* static methods */
+
+	/* fields */
+	/** 技能免费刷新次数 */
+	private int skillFlushFreeTimes = 0;
+	/* constructors */
+
+	/* properties */
+	/** 技能免费刷新次数 */
+	public int getSkillFlushFreeTimes()
+	{
+		return skillFlushFreeTimes;
+	}
+	
+	public void setSkillFlushFreeTimes(int skillFlushFreeTimes)
+	{
+		this.skillFlushFreeTimes = skillFlushFreeTimes;
+	}
+	/* init start */
+
+	/* methods */
+	/** 序列化 和DC通信 存 */
+	public void dbBytesWrite (ByteBuffer data)
+	{
+		data.writeInt(skillFlushFreeTimes);
+	}
+	/** 序列化 和DC通信 取 */
+	public void dbBytesRead (ByteBuffer data)
+	{
+		skillFlushFreeTimes = data.readInt();
+	}
+}

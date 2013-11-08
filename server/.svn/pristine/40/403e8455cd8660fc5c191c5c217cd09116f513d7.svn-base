@@ -1,0 +1,103 @@
+package com.cambrian.dfhm.prop;
+
+import com.cambrian.common.net.DataAccessException;
+import com.cambrian.common.object.Sample;
+import com.cambrian.common.object.SampleFactory;
+
+public class Prop extends Sample
+{
+
+	/* static field */
+	/** 样本工厂 */
+	public static SampleFactory factory=new SampleFactory();
+	
+	/** 物品类型 (道具，种子，材料，其他)*/
+	public static final int ITEM=0,SEED=1,MATE=2,OTHER=3;
+	/* static method */
+	/** 获得一张新的地图 */
+	public static Prop getProp(int sid)
+	{
+		Prop prop=(Prop)factory.getSample(sid);
+		if(prop==null)
+			throw new DataAccessException(
+				DataAccessException.CLIENT_SDATA_ERROR,sid+"");// 不准改为编号
+		return prop;
+	}
+
+	/* field */
+	/** 名字 */
+	String name;
+	/** 介绍 */
+	String description;
+	/** 图片路径 */
+	String img;
+	/** 类型 */
+	int type;
+	/** 出售价格 */
+	int money;
+	/** 数量 */
+	protected int count=1;
+	
+	/* commond method */
+	/** 获得类型 */
+	public int getType()
+	{
+		return type;
+	}
+	/** 设置类型 */
+	public void setType(int type)
+	{
+		this.type=type;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name=name;
+	}
+
+	public String getDescription()
+	{
+		return description;
+	}
+
+	public void setDescription(String description)
+	{
+		this.description=description;
+	}
+
+	public String getImg()
+	{
+		return img;
+	}
+
+	public void setImg(String img)
+	{
+		this.img=img;
+	}
+	
+	/**
+	 * @return the count
+	 */
+	public int getCount()
+	{
+		return count;
+	}
+	
+	/**
+	 * @param count the count to set
+	 */
+	public void setCount(int count)
+	{
+		this.count=count;
+	}
+	/** 最大堆叠数量 */
+	public int getPileCount()
+	{
+		return 1;
+	}
+}

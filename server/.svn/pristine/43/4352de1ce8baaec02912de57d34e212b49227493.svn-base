@@ -1,0 +1,63 @@
+package com.cambrian.dfhm.skill;
+
+import java.util.ArrayList;
+
+import com.cambrian.common.object.Sample;
+import com.cambrian.dfhm.battle.BattleCard;
+import com.cambrian.dfhm.battle.BattleRecord;
+
+/**
+ * 类说明：免伤
+ * @author：Sebastian
+ * 
+ */
+public class NoHurtSkill extends Skill{
+
+	/* static fields */
+
+	/* static methods */
+
+	/* fields */
+	/** 免伤次数 */
+	private int number;
+	
+	/* constructors */
+
+	/* properties */
+	public int getNumber()
+	{
+		return number;
+	}
+
+	/* init start */
+
+	/* methods */
+	
+	@Override
+	public ArrayList<Integer> skillValue(BattleCard attCard, ArrayList<Integer> aim, BattleCard[] aimList, BattleRecord record) {
+		clearHurt();
+		addHurt(0);
+		NoHurtSkill skill;
+		BattleCard bCard;
+		for(int i=0;i<aim.size();i++)
+		{
+			skill=(NoHurtSkill)Sample.factory.newSample(attCard.getSkill()
+				.getSid());
+			bCard=aimList[aim.get(i)];
+			if(bCard.getDeSkill()==null) bCard.setDeSkill(skill);
+		}		
+		return getHurtList();
+	}
+	
+	@Override
+	public int buffValue(BattleCard aimCard,BattleRecord record)
+	{
+		if(number>0)
+		{
+			number--;
+			if(number==0) aimCard.setDeSkill(null);
+			System.err.println("免伤状态，剩余次数 ==="+number);
+		}
+		return 0;
+	}
+}

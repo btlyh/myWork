@@ -1,0 +1,589 @@
+package com.cambrian.dfhm.card;
+
+import java.util.ArrayList;
+
+import com.cambrian.common.net.DataAccessException;
+import com.cambrian.common.util.MathKit;
+import com.cambrian.dfhm.Lang;
+import com.cambrian.dfhm.back.GameCFG;
+import com.cambrian.dfhm.battle.BattleCard;
+import com.cambrian.dfhm.common.Player;
+
+/**
+ * 类说明：
+ * 
+ * @author：Sebastian
+ */
+public class CardManager
+{
+
+	/* static fields */
+	private static CardManager instance=new CardManager();
+
+	/** 最大卡牌上阵数 */
+	public static final int MAXBATTLECOUNT=5;
+	/** 游戏币培养消耗数，RMB培养消耗数 */
+	public static final int FORSTERMONEY=100,FORSTERGOLD=100;
+	/** 重置培养点数，RMB消耗 */
+	public static final int RESETFORSTER=100;
+
+	/* static methods */
+	public static CardManager getInstance()
+	{
+		return instance;
+	}
+
+	/* fields */
+
+	/* constructors */
+
+	/* properties */
+
+	/* init start */
+
+	/* methods */
+
+	/** 卡牌锁定 */
+	public void lockCard(Player player,int cardId,boolean state)
+	{
+		Card card=player.getCardBag().getById(cardId);
+		String error=checkCard(card);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		card.setLock(state);
+	}
+
+	/** 卡牌吞噬 */
+	public boolean engulfCard(Player player,int cardId,
+		ArrayList<Integer> list)
+	{
+		Card card=player.getCardBag().getById(cardId);
+		String error=checkCard(card);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		boolean result=false;
+		if(card.isRealm())
+		{
+			result=realmBeyong(player,cardId,list);
+		}
+		else
+		{
+			result=levelUp(player,cardId,list);
+		}
+		return result;
+	}
+
+	/** 卡牌检查 */
+	private String checkCard(Card card)
+	{
+		if(card==null) return Lang.F1200;
+
+		return null;
+	}
+
+	/** 批量出售卡牌 */
+	public void sellCard(Player player,ArrayList<Integer> list)
+	{
+		String error=checkSellCard(player,list);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		int money=0;// 增加后的总游戏币
+		int id;// 卡片id
+		int cardMoney;// 卡片money
+		Card card;// 卡牌对象
+		for(int i=0;i<list.size();i++)
+		{
+			id=list.get(i);
+			card=player.getCardBag().getById(id);
+			cardMoney=card.getMoney();
+			money+=cardMoney;
+			player.getCardBag().remove(id);
+		}
+		player.incrMoney(money);
+	}
+
+	/** 出售卡牌检查 */
+	private String checkSellCard(Player player,ArrayList<Integer> list)
+	{
+		int id;// 卡片id
+		Card card;// 卡牌对象
+		for(int i=0;i<list.size();i++)
+		{
+			id=list.get(i);
+			card=player.getCardBag().getById(id);
+			if(card==null)
+			{
+				return Lang.F1200;
+			}
+			if(card.getStatus()!=Card.NORMAL&&card.isLock())
+			{
+				return Lang.F1201;
+			}
+		}
+		return null;
+	}
+
+	/** 选择卡牌上阵 */
+	private void selectBattle(Player player,Card card,int index,
+		BattleCard[] array)
+	{
+		String error=checkSelectBattle(card,index,array);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		card.setStatus(Card.ATTACK);
+		BattleCard bCard=new BattleCard(card.getId(),card.getName(),
+			card.getAvatar(),card.getTinyAvatar(),card.getLevel(),
+			card.getAtt(),card.getSkillRate(),card.getDoubleSkill(),
+			card.getAttRange(),card.getSkillId(),card.getMaxHp(),
+			card.getCurHp(),index,card.getAimType(),card.getCritRate(),
+			card.getDodgeRate(),0,card.getType());
+		array[index]=bCard;
+	}
+
+	/** 检查选择卡牌上阵 */
+	private String checkSelectBattle(Card card,int index,BattleCard[] bcard2)
+	{
+		int num=0;
+		for(BattleCard battleCard:bcard2)
+		{
+			if(battleCard!=null) num++;
+		}
+		if(num>=MAXBATTLECOUNT)
+		{
+			return Lang.F1221;
+		}
+		if(card==null)
+		{
+			return Lang.F1200;
+		}
+		// TODO 茶铺回血的时候还需要判断状态
+		return null;
+	}
+
+	/** 选择卡牌下阵 */
+	private void cancelBattle(Player player,Card card,int index,
+		BattleCard[] array)
+	{
+		String error=checkCancelBattle(player,card,index,array);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		card.setStatus(Card.NORMAL);
+		array[index]=null;
+	}
+
+	/** 选择卡牌下阵检查 */
+	private String checkCancelBattle(Player player,Card card,int index,
+		BattleCard[] array)
+	{
+		if(card==null)
+		{
+			return Lang.F1200;
+		}
+		BattleCard bCard=array[index];
+		System.err.println("bCard ==="+bCard);
+		if(bCard==null||bCard.getId()!=card.getId())
+		{
+			return Lang.F1214;
+		}
+		if(player.getCardBagCount()<=player.getCardBag().getList().size())
+		{
+			return Lang.F1100;
+		}
+		return null;
+	}
+
+	/**
+	 * 更换阵型位置:上阵，下阵，更换阵上位置
+	 * 
+	 * @param s
+	 * @param cardId
+	 * @param Index -1=背包中，1-5=阵中位置
+	 * @param type 1=上阵，2=下阵
+	 */
+	public void changeFormation(Player player,int cardId,int index,int type)
+	{
+		Card card=player.getCardBag().getById(cardId);
+		BattleCard[] array=player.formation.getFormation();
+		if(type==1)// 上阵
+			selectBattle(player,card,index,array);
+		else
+			// 下阵
+			cancelBattle(player,card,index,array);
+	}
+
+	/** 卡牌培养 */
+	public void forster(Player player,int cardId,int type,int value)
+	{
+		Card card=player.getCardBag().getById(cardId);
+		String error=checkForster(player,card,type,value);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		int att=0,range=0,hp=0;
+		if(type==1)// 游戏币
+		{
+			player.decrMoney(value);
+			att=MathKit.randomValue(card.getMoneyFosterAttMin(),
+				card.getMoneyFosterAttMax()+1);
+			range=MathKit.randomValue(card.getMoneyFosterRangeMin(),
+				card.getMoneyFosterRangeMax()+1);
+			hp=MathKit.randomValue(card.getMoneyFosterHpMin(),
+				card.getMoneyFosterHpMax()+1);
+		}
+		else
+		// RMB
+		{
+			player.decrGold(value);
+			att=MathKit.randomValue(card.getGoldFosterAttMin(),
+				card.getGoldFosterAttMax()+1);
+			range=MathKit.randomValue(card.getGoldFosterRangeMin(),
+				card.getGoldFosterRangeMax()+1);
+			hp=MathKit.randomValue(card.getGoldFosterHpMin(),
+				card.getGoldFosterHpMax()+1);
+		}
+		card.incrForsterAtt(att);
+		card.incrForsterRange(range);
+		card.incrForsterHp(hp);
+		card.setForsterAttLast(att);
+		card.setForsterRangeLast(range);
+		card.setForsterHpLast(hp);
+		card.decrFosterNumber(1);
+	}
+
+	/** 检查卡牌培养 */
+	private String checkForster(Player player,Card card,int type,int value)
+	{
+		if(card==null)
+		{
+			return Lang.F1200;
+		}
+		if(card.getFosterNumber()<=0)
+		{
+			return Lang.F1203;
+		}
+		if(type==1)// 游戏币
+		{
+			if(value!=FORSTERMONEY) return Lang.F1204;
+			if(player.getMoney()<value) return Lang.F701;
+		}
+		else
+		// RMB
+		{
+			if(value!=FORSTERGOLD) return Lang.F1204;
+			if(player.getGold()<value) return Lang.F702;
+		}
+		return null;
+	}
+
+	/** 重置培养 */
+	public void resetForster(Player player,int cardId,int gold)
+	{
+		Card card=player.getCardBag().getById(cardId);
+		String error=checkResetForster(player,card,gold);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		player.decrGold(gold);
+		card.setFosterNumber(card.getLevel());
+		card.setForsterAtt(0);
+		card.setForsterRange(0);
+		card.setForsterHp(0);
+	}
+
+	/** 重置培养检查 */
+	private String checkResetForster(Player player,Card card,int gold)
+	{
+		if(card==null) return Lang.F1200;
+		if(card.getFosterNumber()<=0) return Lang.F1203;
+		if(gold!=RESETFORSTER) return Lang.F1205;
+		if(player.getGold()<gold) return Lang.F702;
+		return null;
+	}
+
+	/**
+	 * 卡牌升级
+	 * 
+	 * @param player
+	 * @param cardId 升级卡牌id
+	 * @param list 吞噬卡牌id链表
+	 */
+	private boolean levelUp(Player player,int cardId,ArrayList<Integer> list)
+	{
+		Card card=player.getCardBag().getById(cardId);
+		Card card_;
+		ArrayList<Card> cardList=new ArrayList<Card>();
+		for(Integer id:list)
+		{
+			card_=player.getCardBag().getById(id);
+			cardList.add(card_);
+		}
+		String error=checkLevelUp(player,card,cardList);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		boolean result=skillLevelUp(player,cardId,list);
+		int exp=0;
+		if(!card.isRealm())
+		{
+			exp=getIncrExp(cardList);
+		}
+		card.incrExp(exp);
+		card.levelUp();
+		if(card.getRealmByLevel()[0]>0)
+		{
+			card.setRealm(true);
+		}
+		for(Integer id:list)
+		{
+			player.getCardBag().remove(id);
+		}
+		return result;
+	}
+
+	/** 检查卡牌升级 */
+	private String checkLevelUp(Player player,Card card,
+		ArrayList<Card> cardList)
+	{
+		Card card_;
+		for(int i=0;i<cardList.size();i++)
+		{
+			card_=cardList.get(i);
+			if(card_==null) return Lang.F1207;
+			if(card_.getStatus()!=Card.NORMAL&&card_.isLock())
+				return Lang.F1208;
+		}
+		return null;
+	}
+
+	/** 吞噬经验计算 */
+	private int getIncrExp(ArrayList<Card> cardList)
+	{
+		int exp=0;
+		for(Card card:cardList)
+		{
+			exp+=card.getSwallowExp();
+		}
+		return exp;
+	}
+
+	/**
+	 * 境界突破
+	 * 
+	 * @param player
+	 * @param cardId 需要突破的卡牌ID
+	 * @param list 吞噬卡牌ID
+	 */
+	private boolean realmBeyong(Player player,int cardId,
+		ArrayList<Integer> list)
+	{
+		Card card=player.getCardBag().getById(cardId);
+		int[] limit=card.getRealmByLevel();
+		String error=checkRealmBeyong(player,card,limit,list);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		boolean result=skillLevelUp(player,cardId,list);
+		int id;
+		for(int i=0;i<list.size()-1;i++)
+		{
+			id=list.get(i);
+			player.getCardBag().remove(id);
+		}
+		if(card.getEngulfCards().size()==(limit.length-1))
+		{
+			card.incrFosterNumber(list.get(list.size()-1));
+			// TODO 移除规则还要和策划讨论
+			card.setRealm(false);
+			card.getEngulfCards().clear();
+		}
+		return result;
+	}
+
+	/** 检查境界突破 */
+	private String checkRealmBeyong(Player player,Card card,int[] limit,
+		ArrayList<Integer> cardList)
+	{
+		Card card_;
+		int id;
+		for(int i=0;i<cardList.size();i++)
+		{
+			id=cardList.get(i);
+			for(int j=0;j<limit.length-1;j++)
+			{
+				if(limit[j]==id) break;
+				card.getEngulfCards().add(id);
+			}
+			card_=player.getCardBag().getById(id);
+			if(card_==null) return Lang.F1207;
+			if(card_.getStatus()!=Card.NORMAL&&card_.isLock())
+				return Lang.F1208;
+		}
+		return null;
+	}
+
+	/**
+	 * 技能升级,吞噬卡牌
+	 * 
+	 * @param player
+	 * @param cardId 升级卡牌
+	 * @param swallow 吞噬对象
+	 * @return
+	 */
+	public boolean skillLevelUp(Player player,int cardId,
+		ArrayList<Integer> swallow)
+	{
+		Card card=player.getCardBag().getById(cardId);
+		int needCount=GameCFG.getSkillLevel(card.getSkillLevel());
+		String error=checkskillLevelUp(player,card,swallow,needCount);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		int count=MathKit.randomValue(1,needCount+1);
+		boolean result=swallow.size()>=count;
+		if(result)
+		{
+			card.setSkillLevel(card.getSkillLevel()+1);
+		}
+		return result;
+	}
+
+	/** 检查技能升级吞噬卡牌 */
+	private String checkskillLevelUp(Player player,Card card,
+		ArrayList<Integer> swallow,int needCount)
+	{
+		if(swallow.size()<=0) return Lang.F1211;
+		int id=swallow.get(0);
+		Card card_;
+		for(int i=0;i<swallow.size();i++)
+		{
+			id=swallow.get(i);
+			card_=player.getCardBag().getById(id);
+			if(card_==null) return Lang.F1207;
+		}
+		return null;
+	}
+
+	/**
+	 * 刷新技能
+	 * 
+	 * @param player 玩家对象
+	 * @param cardId 卡牌ID
+	 * @param needGold 所需RMB
+	 * @return
+	 */
+	public int flushCardSkill(Player player,int cardId,int needGold)
+	{
+		Card card=player.getCardBag().getById(cardId);
+		String error=checkFlushCardSkill(card,player,needGold);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		int freeTimes=0; // 需要策划定免费次数 根据 vip 等级有关
+		if(freeTimes>0)
+		{
+
+		}
+		else
+		{
+			player.setGold(player.getGold()-needGold);
+		}
+		int newSkillId=card.getSkillRange()[MathKit.randomValue(0,
+			card.getSkillRange().length)];// 计算随机技能
+		card.setFlushSkillId(newSkillId);
+		return newSkillId;
+	}
+
+	/**
+	 * 检查技能刷新
+	 * 
+	 * @param card 卡牌对象
+	 * @param player 玩家对象
+	 * @param needGold 所需RMB
+	 * @return
+	 */
+	private String checkFlushCardSkill(Card card,Player player,int needGold)
+	{
+		int useGold=0; // 需要策划定值
+		if(card==null)
+		{
+			return Lang.F1200;
+		}
+		if(card.getSkillRange().length<0)
+		{
+			return Lang.F1215;
+		}
+		if(useGold!=needGold)
+		{
+			return Lang.F1218;
+		}
+		if(player.getGold()<needGold)
+		{
+			return Lang.F1219;
+		}
+		return null;
+	}
+
+	/**
+	 * 保存技能
+	 * 
+	 * @param player 玩家
+	 * @param cardId 卡牌ID
+	 * @param skillId 技能ID
+	 */
+	public void saveCardSkill(Player player,int cardId,int skillId)
+	{
+		Card card=player.getCardBag().getById(cardId);
+		String error=checkSaveCardSkill(card,skillId);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		card.setSkillId(skillId);
+		card.setSkillLevel(0);
+		card.setFlushSkillId(0);
+	}
+
+	/**
+	 * 检查保存技能
+	 * 
+	 * @param card
+	 * @param skillId
+	 * @return
+	 */
+	private String checkSaveCardSkill(Card card,int skillId)
+	{
+		if(card==null)
+		{
+			return Lang.F1200;
+		}
+		if(card.getSkillId()<0)
+		{
+			return Lang.F1216;
+		}
+		if(card.getSkillLevel()<0)
+		{
+			return Lang.F1217;
+		}
+		if(card.getFlushSkillId()!=skillId)
+		{
+			return Lang.F1220;
+		}
+		return null;
+	}
+}

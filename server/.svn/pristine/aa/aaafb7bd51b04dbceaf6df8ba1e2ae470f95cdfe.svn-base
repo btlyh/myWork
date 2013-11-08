@@ -1,0 +1,79 @@
+package com.cambrian.dfhm.skill;
+
+import java.util.ArrayList;
+
+import com.cambrian.common.object.Sample;
+import com.cambrian.dfhm.battle.BattleCard;
+import com.cambrian.dfhm.battle.BattleRecord;
+
+/**
+ * 类说明：中毒技能
+ * 
+ * @author：Sebastian
+ */
+public class PoisonSkill extends Skill
+{
+
+	/* static fields */
+
+	/* static methods */
+
+	/* fields */
+	/** 每次中毒扣血数 */
+	private int hurt;
+	private int round;
+	/** 中毒扣血数 */
+	private int decrHp;
+
+	/* constructors */
+
+	/* properties */
+	public int getDecrHp()
+	{
+		return decrHp;
+	}
+
+	/* init start */
+
+	/* methods */
+	@Override
+	public ArrayList<Integer> skillValue(BattleCard attCard,
+		ArrayList<Integer> aim,BattleCard[] aimList,BattleRecord record)
+	{
+		clearHurt();
+		int value=super.getSkillHurt(attCard.getAtt());
+		decrHp=(int)(value *0.3);
+		value+=decrHp*round;
+		record.setAttMax(value);
+		addHurt(value);
+		System.err.println("中毒技能，照成伤害 ==="+value);
+		PoisonSkill skill;
+		BattleCard bCard;
+		for(int i=0;i<aim.size();i++)
+		{
+			skill=(PoisonSkill)Sample.factory.newSample(attCard.getSkill()
+				.getSid());
+			skill.decrHp=decrHp;
+			bCard=aimList[aim.get(i)];
+			if(bCard.getDeSkill()==null) bCard.setDeSkill(skill);
+		}
+		return getHurtList();
+	}
+
+	@Override
+	public int buffValue(BattleCard aimCard,BattleRecord record)
+	{
+		if(round>0)
+		{
+//			decrHp=10000;
+			aimCard.decrHp(decrHp);
+			round--;
+			if(round==0) aimCard.setDeSkill(null);
+			System.err.println("中毒Debuffer，照成伤害对象==="+aimCard.getName()
+				+", 血量损失 ==="+decrHp+", 剩余血量 ==="+aimCard.getCurHp()
+				+"， 剩余回合数 ==="+round);
+			return decrHp;
+		}
+		return 0;
+	}
+}

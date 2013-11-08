@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	name			名字
+	avatar			卡片头像 
+	tinyAvatar		小卡片头像
+	level			等级
+	att;			攻击力	
+	skillRate;		技能发动率
+	_1doubleSkill		连携技[前置技能SID，发动率]
+	attRange		普通攻击范围
+	maxHp;			最大血量
+	skillId;		技能ID
+	aimType			攻击目标对象，1=自身，2=敌人
+	critRate;		暴击率
+	dodgeRate;		闪避率
+	awardSid		奖励掉落sid
+	type			类型（白绿蓝紫橙，5种）
+
+	-->
+	<sample sid="30001" class="com.cambrian.dfhm.monster.Monster" name="关羽" avatar="role/guanyu" tinyAvatar="base/role2_1" level="1" att="100" skillRate="50000" _1doubleSkill="0,0" attRange="0" maxHp="900" skillId="20001" 
+	aimType="2" critRate="20000" dodgeRate="10000" awardSid="40001" type="5"/>
+	<sample sid="30002" class="com.cambrian.dfhm.monster.Monster" name="张飞" avatar="role/guanyu" tinyAvatar="base/role2_1" level="1" att="100" skillRate="20000" _1doubleSkill="0,0" attRange="0" maxHp="900" skillId="20003" aimType="2" critRate="20000" dodgeRate="10000" awardSid="40002" type="4"/>
+	<sample sid="30003" class="com.cambrian.dfhm.monster.Monster" name="魏延" avatar="role/guanyu" tinyAvatar="base/role2_1" level="1" att="100"  skillRate="20000" _1doubleSkill="0,0" attRange="0" maxHp="900" skillId="20003" aimType="2" critRate="30000" dodgeRate="20000" awardSid="40003" type="3"/>
+	<sample sid="30004" class="com.cambrian.dfhm.monster.Monster" name="赵云" avatar="role/guanyu" tinyAvatar="base/role2_1" level="1" att="100"  skillRate="20000" _1doubleSkill="0,0" attRange="0" maxHp="900" skillId="20004" aimType="2" critRate="30000" dodgeRate="20000" awardSid="40004" type="2"/>
+	<sample sid="30005" class="com.cambrian.dfhm.monster.Monster" name="刘备" avatar="role/guanyu" tinyAvatar="base/role2_1" level="1" att="100"  skillRate="20000" _1doubleSkill="0,0" attRange="0" maxHp="900" skillId="20004" aimType="2" critRate="30000" dodgeRate="20000" awardSid="40004" type="1"/>
+</objects>

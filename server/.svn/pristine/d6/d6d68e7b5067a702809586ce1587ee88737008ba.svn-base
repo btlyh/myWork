@@ -1,0 +1,90 @@
+package com.cambrian.dfhm.friend;
+
+import com.cambrian.common.net.ByteBuffer;
+import com.cambrian.common.object.DBSerializable;
+import com.cambrian.common.object.Serializable;
+
+/**
+ * 类说明：好友
+ * @author：Sebastian
+ *
+ */
+public class Friend implements Serializable,DBSerializable{
+	
+	/* static fields */
+
+	/* static methods */
+
+	/* fields */
+	private int uid;
+	private String name;
+	/** VIP等级 */
+	private int vip;
+	/** 登录时间 */
+	private int loginTime;
+
+	/* constructors */
+	public Friend(int uid, String name, int vip, int loginTime)
+	{
+		this.uid = uid;
+		this.name = name;
+		this.vip = vip;
+		this.loginTime = loginTime;
+	}
+
+	/* properties */
+	public int getUId() {
+		return uid;
+	}
+	public void setUId(int id) {
+		this.uid = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getVip() {
+		return vip;
+	}
+	public void setVip(int vip) {
+		this.vip = vip;
+	}
+	public int getLoginTime() {
+		return loginTime;
+	}
+	public void setLoginTime(int loginTime) {
+		this.loginTime = loginTime;
+	}
+
+	/* init start */
+
+	/* methods */
+	/** 序列化(和dc通信) */
+	public void dbBytesWrite(ByteBuffer data) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/** 反序列化(和dc通信) */
+	public void dbBytesRead(ByteBuffer data) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/** 序列化(前台登陆时获取的数据) */
+	public void bytesWrite(ByteBuffer data) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void bytesRead(ByteBuffer data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* common methods */
+
+	/* inner class */
+
+}

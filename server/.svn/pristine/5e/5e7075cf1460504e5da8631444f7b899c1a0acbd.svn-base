@@ -1,0 +1,66 @@
+package com.cambrian.dfhm.skill;
+
+import java.util.ArrayList;
+
+import com.cambrian.dfhm.battle.BattleCard;
+import com.cambrian.dfhm.battle.BattleRecord;
+
+/**
+ * 类说明：加攻
+ * 
+ * @author：Sebastian
+ */
+public class IncrHurtSkill extends Skill
+{
+
+	/* static fields */
+
+	/* static methods */
+
+	/* fields */
+	/** 增加攻击百分比 */
+	private int hurt;
+	/** 回合数 */
+	private int round;
+
+	/* constructors */
+
+	/* properties */
+
+	/* init start */
+
+	/* methods */
+	private int addHurt(BattleCard attCard)
+	{
+		System.err.println("减少伤害技能使用 -----------------");
+		int hp=0;
+		if(round>0)
+		{
+			hp=attCard.getAtt()+attCard.getAtt()*hurt/100;
+			System.err.println("玩家攻击力 ==="+attCard.getAtt());
+			System.err.println("增加后的总攻击力 ==="+hp);
+			hp=super.getSkillHurt(hp);
+			System.err.println("实际照成伤害 ==="+hp);
+		}
+		return hp;
+	}
+
+	@Override
+	public ArrayList<Integer> skillValue(BattleCard attCard,
+		ArrayList<Integer> aim,BattleCard[] aimList,BattleRecord record)
+	{
+		clearHurt();
+		int value=addHurt(attCard);
+		record.setAttMax(value);
+		addHurt(value);
+		System.err.println("加攻技能，照成伤害 ==="+value);
+		return getHurtList();
+	}
+
+	@Override
+	public int buffValue(BattleCard aimCard,BattleRecord record)
+	{
+		if(round>0) round--;
+		return 0;
+	}
+}

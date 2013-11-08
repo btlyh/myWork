@@ -1,0 +1,459 @@
+package com.cambrian.dfhm.mail.logic;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.cambrian.common.field.Field;
+import com.cambrian.common.field.FieldKit;
+import com.cambrian.common.field.Fields;
+import com.cambrian.common.field.IntField;
+import com.cambrian.common.net.DataAccessException;
+import com.cambrian.common.sql.ConnectionManager;
+import com.cambrian.common.sql.DBKit;
+import com.cambrian.common.sql.SqlKit;
+import com.cambrian.common.util.TimeKit;
+import com.cambrian.dfhm.Lang;
+import com.cambrian.dfhm.common.Player;
+import com.cambrian.dfhm.mail.entity.Mail;
+import com.cambrian.dfhm.mail.notice.MailSendNotice;
+import com.cambrian.game.Session;
+import com.cambrian.game.ds.DataServer;
+
+/**
+ * 类说明：
+ * 
+ * @author：LazyBear
+ * 
+ */
+public class MailManager
+{
+
+	/* static fields */
+	private static MailManager instance = new MailManager();
+	/* static methods */
+	public static MailManager getInstance()
+	{
+		return instance;
+	}
+
+	/* fields */
+	/** 数据服务器 */
+	DataServer dataServer;
+	/** DB连接控制器 */
+	ConnectionManager cm;
+	/** 推送发送邮件消息 */
+	MailSendNotice msn;
+
+	/* constructors */
+
+	/* properties */
+
+	/* init start */
+
+	/* methods */
+	public void setDS(DataServer dataServer)
+	{
+		instance.dataServer = dataServer;
+	}
+
+	public void setConnectionManager(ConnectionManager cm)
+	{
+		instance.cm = cm;
+	}
+
+	public void setMailSendNotice(MailSendNotice msn)
+	{
+		instance.msn = msn;
+	}
+
+	/**
+	 * 删除邮件
+	 * 
+	 * @param uid
+	 *            唯一标识
+	 * @param player
+	 *            玩家对象
+	 */
+	public void deleteMail(int uid, Player player)
+	{
+		Map<String, Object> resultMap = checkMail(uid, player);
+		String error = (String) resultMap.get("error");
+		if (error != null)
+		{
+			throw new DataAccessException(601, error);
+		}
+		Mail mail = (Mail) resultMap.get(String.valueOf(uid));
+		player.getMailList().remove(mail);
+		DBKit.delete("t_mail",cm,FieldKit.create("mailId", uid));
+	}
+
+	/**
+	 * 浏览邮件
+	 * 
+	 * @param uid
+	 *            唯一标识
+	 * @param player
+	 *            玩家对象
+	 */
+	public void browseMail(int uid, Player player)
+	{
+		Map<String, Object> resultMap = checkMail(uid, player);
+		String error = (String) resultMap.get("error");
+		if (error != null)
+		{
+			throw new DataAccessException(601, error);
+		}
+		Mail mail = (Mail) resultMap.get(String.valueOf(uid));
+		mail.setState(Mail.MAILSTATE_READ_UNGET);
+		Field[] fields = new Field[1];
+		fields[0] = FieldKit.create("state", mail.getState());
+		DBKit.set("t_mail",cm,FieldKit.create("mailId", uid),new Fields(fields));
+		
+	}
+
+	/**
+	 * 检查要浏览的邮件
+	 * 
+	 * @param uid
+	 *            唯一标识
+	 * @param player
+	 *            玩家对象
+	 * @return
+	 */
+	private Map<String, Object> checkMail(int uid, Player player)
+	{
+		ArrayList<Mail> mailList = player.getMailList();
+		Map<String, Object> mapInfo = new HashMap<String, Object>();
+		if (mailList.size() < 1)
+		{
+			mapInfo.put("error", Lang.F1304);
+			return mapInfo;
+		}
+		Mail mail = null;
+		for (int i = 0; i < mailList.size(); i++)
+		{
+			mail = mailList.get(i);
+			if (uid == mail.getMailId())
+			{
+				break;
+			}
+		}
+		if (mail == null)
+		{
+			mapInfo.put("error", Lang.F1306);
+			return mapInfo;
+		}
+		mapInfo.put("error", null);
+		mapInfo.put(String.valueOf(uid), mail);
+		return mapInfo;
+	}
+
+	/**
+	 * 收取邮件 (附件)
+	 * 
+	 * @param uid
+	 *            唯一标识
+	 * @param player
+	 *            玩家对象
+	 */
+	public void takeMail(int uid, Player player)
+	{
+		Map<String, Object> resultMap = checkTakeMail(uid, player);
+		String error = (String) resultMap.get("error");
+		if (error != null)
+		{
+			throw new DataAccessException(601, error);
+		}
+		Mail mail = (Mail) resultMap.get(String.valueOf(uid));
+		// 卡牌
+		if (mail.getCardList().size() >= Mail.MAIL_ANNEX_MINNUM)
+		{
+			for (int i = 0; i < mail.getCardList().size(); i++)
+			{
+				player.getCardBag().add(mail.getCardList().get(i));
+			}
+		}
+		// 软妹币
+		if (mail.getGold() >= Mail.MAIL_ANNEX_MINNUM)
+		{
+			player.incrGold(mail.getGold());
+		}
+		// 游戏币
+		if (mail.getMoney() >= Mail.MAIL_ANNEX_MINNUM)
+		{
+			player.incrMoney(mail.getMoney());
+		}
+		// 军令
+		if (mail.getToken() >= Mail.MAIL_ANNEX_MINNUM)
+		{
+			player.incrToken(mail.getToken());
+		}
+		// 武魂
+		if (mail.getSoulPoint() >= Mail.MAIL_ANNEX_MINNUM)
+		{
+			player.incrSoul(mail.getSoulPoint());
+		}
+		// 积分
+		if (mail.getNormalPoint() >= Mail.MAIL_ANNEX_MINNUM)
+		{
+			player.incrNormalPoint(mail.getNormalPoint());
+		}
+		mail.setState(Mail.MAILSTATE_READ_GET);
+		Field[] fields = new Field[1];
+		fields[0] = FieldKit.create("state", mail.getState());
+		DBKit.set("t_mail",cm,FieldKit.create("mailId", uid),new Fields(fields));
+	}
+
+	/**
+	 * 检查收取邮件 (附件)
+	 * 
+	 * @param uid
+	 *            唯一标识
+	 * @param player
+	 *            玩家对象
+	 * @return
+	 */
+	private Map<String, Object> checkTakeMail(int uid, Player player)
+	{
+		ArrayList<Mail> mailList = player.getMailList();
+		Map<String, Object> mapInfo = new HashMap<String, Object>();
+		if (mailList.size() < 1)
+		{
+			mapInfo.put("error", Lang.F1304);
+			return mapInfo;
+		}
+		Mail mail = null;
+		for (int i = 0; i < mailList.size(); i++)
+		{
+			mail = mailList.get(i);
+			if (uid == mail.getMailId())
+			{
+				break;
+			}
+		}
+		if (mail == null)
+		{
+			mapInfo.put("error", Lang.F1306);
+			return mapInfo;
+		}
+		int cardListSize = mail.getCardList().size();
+		if (mail.getCardList().size() < Mail.MAIL_ANNEX_MINNUM && mail.getGold() < Mail.MAIL_ANNEX_MINNUM && mail.getMoney() < Mail.MAIL_ANNEX_MINNUM
+				&& mail.getToken() < Mail.MAIL_ANNEX_MINNUM && mail.getSoulPoint() < Mail.MAIL_ANNEX_MINNUM && mail.getNormalPoint() < Mail.MAIL_ANNEX_MINNUM)
+		{
+			mapInfo.put("error", Lang.F1307);
+			return mapInfo;
+		}
+		if (mail.getState() == Mail.MAILSTATE_READ_GET)
+		{
+			mapInfo.put("error", Lang.F1308);
+			return mapInfo;
+		}
+		if (cardListSize >= Mail.MAIL_ANNEX_MINNUM)
+		{
+			if (cardListSize > player.getCardBag().getSurplusCapacity())
+			{
+				mapInfo.put("error", Lang.F1309);
+				return mapInfo;
+			}
+		}
+		mapInfo.put("error", null);
+		mapInfo.put(String.valueOf(uid), mail);
+		return mapInfo;
+	}
+
+	/**
+	 * 发送邮件 (玩家之间)
+	 * 
+	 * @param getPlayerName
+	 *            收件人
+	 * @param sendPlayerName
+	 *            发件人
+	 * @param mailContent
+	 *            邮件内容
+	 */
+	public void sendMail(String getPlayerName, String sendPlayerName, String mailContent)
+	{
+		Map<String, Object> resultMap = checkSendMail(getPlayerName, mailContent);
+		String error = (String) resultMap.get("error");
+		if (error != null)
+		{
+			throw new DataAccessException(601, error);
+		}
+		Session[] sessions = dataServer.getSessionMap().getSessions();
+
+		Player player = null;
+		Session session = null;
+
+		Mail mail = new Mail((int)getMailId(), Mail.MAILSTATE_UNREAD, sendPlayerName + Lang.TITLE, mailContent,sendPlayerName);
+
+		for (int i = 0; i < sessions.length; i++)
+		{
+			session = sessions[i];
+			if (session != null)
+			{
+				player = (Player) session.getSource();
+			}
+			if (player != null)
+			{
+				if (player.getNickname().equals(getPlayerName))
+				{
+					mail.setSendTime(TimeKit.nowTimeMills());
+					player.addMail(mail);
+					msn.send(session, new Object[]
+					{ player.getUnreadMailCount()});
+				}
+			}
+		}
+		int userId = (Integer) resultMap.get("userId");
+		insertMail(mail, userId);
+	}
+
+	/**
+	 * 检查发送邮件 (玩家发送邮件时)
+	 * 
+	 * @param getPlayerName
+	 *            收件人
+	 * @param mailContent
+	 *            邮件内容
+	 */
+	private Map<String, Object> checkSendMail(String getPlayerName, String mailContent)
+	{
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		if (getPlayerName.length() < 0)
+		{
+			resultMap.put("error", Lang.F1301);
+			return resultMap;
+		}
+		if (mailContent.length() < 0 || mailContent.length() > Mail.MAIL_CONTENT_CONFINE)
+		{
+			resultMap.put("error", Lang.F1302);
+			return resultMap;
+		}
+		String sql = "select userid from player where nickname = '" + getPlayerName + "'";
+		Fields fields = SqlKit.query(cm, sql);
+		if (fields == null)
+		{
+			resultMap.put("error", Lang.F1310);
+			return resultMap;
+		}
+		resultMap.put("error", null);
+		resultMap.put("userId", ((IntField) fields.get("userid")).value);
+		return resultMap;
+	}
+
+	/**
+	 * 查看邮件
+	 * 
+	 * @param index
+	 *            查看位置（根据位置来决定发送那些邮件给客户端）
+	 * @param player
+	 *            玩家对象
+	 * @return 返回邮件列表
+	 */
+	public ArrayList<Mail> showMail(int index, Player player)
+	{
+		String error = checkShowMail(index, player);
+		if (error != null)
+		{
+			throw new DataAccessException(601, error);
+		}
+		return getListFromAnotherList(index, Mail.MAIL_SIZE_CONFINE, player.getMailList());
+	}
+
+	/**
+	 * 检测查看邮件
+	 * 
+	 * @param index
+	 *            查看位置
+	 * @param player
+	 *            玩家對象
+	 */
+	private String checkShowMail(int index, Player player)
+	{
+		if (index < 0)
+		{
+			return Lang.F1303;
+		}
+		int mailListSize = player.getMailList().size();
+		if (mailListSize < index + 1)
+		{
+			return Lang.F1305;
+		}
+		return null;
+	}
+
+	/**
+	 * 从一个邮件集合中取出另一个邮件集合
+	 * 
+	 * @param index
+	 *            下标位置
+	 * @param size
+	 *            大小
+	 * @param list
+	 *            另一个集合
+	 * @return
+	 */
+	private ArrayList<Mail> getListFromAnotherList(int index, int size, ArrayList<Mail> list)
+	{
+		if (index < 0 || size < 1 || list.size() < 1 || list.size() < index + 1)
+		{
+			return null;
+		}
+		int temp = index + size;
+		int loopTimes = 0;
+
+		if (temp > list.size())
+		{
+			loopTimes = list.size();
+		} else
+		{
+			loopTimes = temp;
+		}
+		ArrayList<Mail> copyList = new ArrayList<Mail>();
+
+		for (int i = index; i < loopTimes; i++)
+		{
+			copyList.add(list.get(i));
+		}
+		return copyList;
+	}
+
+	/** 获得邮件ID */
+	private synchronized long getMailId()
+	{
+		long i = getMaxMailId();
+		i++;
+		return i;
+	}
+
+	/** 获得邮件最大ID */
+	private int getMaxMailId()
+	{
+		String sql = "select max(mailId) num from t_mail";
+		Fields fields = SqlKit.query(cm, sql);
+		return ((IntField) fields.get("num")).value;
+	}
+
+	/** 向数据库插入数据 */
+	private void insertMail(Mail mail, int userId)
+	{
+		Field[] array = new Field[13];
+		array[0] = FieldKit.create("mailId", mail.getMailId());
+		array[1] = FieldKit.create("state", mail.getState());
+		array[2] = FieldKit.create("sendTime", mail.getSendTime());
+		array[3] = FieldKit.create("title", mail.getTitle());
+		array[4] = FieldKit.create("content", mail.getContent());
+		array[5] = FieldKit.create("cardList", 0);
+		array[6] = FieldKit.create("gold", mail.getGold());
+		array[7] = FieldKit.create("money", mail.getMoney());
+		array[8] = FieldKit.create("token", mail.getToken());
+		array[9] = FieldKit.create("soulPoint", mail.getSoulPoint());
+		array[10] = FieldKit.create("normalPoint", mail.getNormalPoint());
+		array[11] = FieldKit.create("userId", userId);
+		array[12] = FieldKit.create("sendPlayerName", mail.getSendPalyerName());
+
+		DBKit.set("t_mail", cm, FieldKit.create("mailId", mail.getMailId()), new Fields(array));
+	}
+
+}

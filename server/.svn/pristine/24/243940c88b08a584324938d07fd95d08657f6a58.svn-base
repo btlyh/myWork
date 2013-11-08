@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	狂怒技能
+	sid			唯一标签
+	class		程序使用
+	name		名字
+	description	介绍
+	att			伤害系数
+	attRange	攻击范围类型
+	level		等级
+	aim			攻击对象，1=自己，2=敌人
+	hurt		每次增加的攻击力百分比	[填1-100，程序自己转换]
+	hp			下降血量度百分比	[填1-100，程序自己转换]
+	skillRate			技能发动率（最大值为100000）
+	
+	-->
+	<sample sid="20001" class="com.cambrian.dfhm.skill.AngerSkill" name="狂怒技能" description="狂怒" att="50000" attRange="0" level="1" aim="2" hurt="5" hp="5" skillRate="100"/>
+</objects>
