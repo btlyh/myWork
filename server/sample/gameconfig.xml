@@ -45,8 +45,12 @@
 			<ints>33018,100000</ints>
 		</method>
 	</obj>
-<<<<<<< .mine
-	
+	<!-- 设置VIP等级对应配置表的SID -->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setVipCfgXml">
+			<ints>64001,64002,64003,64004,64005,64006</ints>
+		</method>
+	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setGlobalBossList">
 			<ints>50001</ints>
@@ -54,30 +58,4 @@
 	</obj>
 
 
-=======
-	<!-- 设置VIP等级对应配置表的SID -->
-	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setVipCfgXml">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
-		</method>
-	</obj>
-	<!-- 设置排位赛挑战胜利获得的积分 -->
-	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setDuelWinPoint">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
-		</method>
-	</obj>
-	<!-- 设置排位赛挑战失败获得的积分 -->
-	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setDuelLosePoint">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
-		</method>
-	</obj>
-	<!-- 设置相应排位赛等级每日领取的积分 -->
-	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setDayPoint">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
-		</method>
-	</obj>
->>>>>>> .r825
 </objects>

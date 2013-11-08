@@ -256,7 +256,7 @@ public final class Lang
 	
 	/* 当壕*/
 	/** 20001; 马仔身份不能获取攻击对象列表*/
-	public static final String F2001="2001";
+	public static final String F2101="2001";
 
 
 	/* 商城 */

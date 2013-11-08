@@ -58,7 +58,7 @@ public class SlaveManager
 		if(player.getIdentity().getGrade()!=Identity.OWNER
 			&&player.getIdentity().getGrade()!=Identity.FREEMAN)
 		{
-			return Lang.F2001;
+			return Lang.F2101;
 		}
 		return null;
 	}
