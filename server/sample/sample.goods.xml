@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	sid	唯一标签
+	class	程序使用
+	name	名字
+	description	介绍
+	img	显示图片
+	moneyType 消耗的货币类型 
+	money   银币
+	soul    武魂
+	token   军令
+	cardSid 卡牌组合，数组形式
+	price	价格
+	rate	价格折率
+	-->
+	<sample sid="61001" class="com.cambrian.dfhm.shop.entity.Goods" name="小堆金币" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" moneyType="1" gold="100" money="0" soul="0" token="0" _1cardSid="" price="10" rate="0"/>
+	<sample sid="61002" class="com.cambrian.dfhm.shop.entity.Goods" name="武魂" description="购买后立即获得50个武魂" img="img/tubiao/bag/gold/1" animation="0" moneyType="1" gold="0" money="0" soul="50" token="0" _1cardSid="" price="10" rate="0"/>
+	<sample sid="61003" class="com.cambrian.dfhm.shop.entity.Goods" name="军令" description="购买后立即获得50个军令" img="img/tubiao/bag/gold/1" animation="0" moneyType="1" gold="0" money="0" soul="0" token="50" _1cardSid="" price="10" rate="0"/>
+	<sample sid="61004" class="com.cambrian.dfhm.shop.entity.Goods" name="银币武魂" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" moneyType="1" gold="0" money="10000" soul="100" token="0" _1cardSid="" price="10" rate="0"/>
+	<sample sid="61005" class="com.cambrian.dfhm.shop.entity.Goods" name="2张卡牌" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" moneyType="1" gold="0" money="0" soul="0" token="0" _1cardSid="10025,10026" price="1000000" rate="0"/>
+	<sample sid="61006" class="com.cambrian.dfhm.shop.entity.Goods" name="5张卡牌" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" moneyType="1" gold="0" money="0" soul="0" token="0" _1cardSid="10027,10028,10029,10030,10031" price="10000000" rate="0"/>
+
+</objects>

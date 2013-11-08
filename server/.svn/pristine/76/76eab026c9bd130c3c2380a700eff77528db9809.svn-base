@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	sid	唯一标签
+	class	程序使用
+	getToken	每日免费领取军令数量
+	buyToken    每日可购买军令数量
+	luckyBoxFreeTimes   每日武魂抽奖免费次数
+	flushSkillFreeTimes 每日刷新技能免费次数
+	privateSeat  军帐中私人座位个数
+	publicSeat   军帐中公共座位个数
+	cardGoldForsterFreeTimes 每日免费金币培养次数
+	功能：0表示没有，1表示有
+	cardGoldForster 卡牌金币培养功能
+	battleSkip    跳过战斗功能
+	payForAwake   付费醒酒功能
+	autoDrink     自动喝酒功能
+	autoBossFight 世界BOSS自动战斗
+	autoBossSign  世界BOSS自动报名
+	-->
+	<sample sid="64001" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="2" buyToken="5" luckBoxFreeTimes="1" skillFlushFreeTimes="0" privateSeat="3" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="0" battleSkip="0" payForAwake="0" autoDrink="0" autoBossFight="0" autoBossSign="0"/>
+	<sample sid="64002" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="4" buyToken="10" luckBoxFreeTimes="2" skillFlushFreeTimes="1" privateSeat="4" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0" autoBossFight="0" autoBossSign="0"/>
+	<sample sid="64003" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="20" luckBoxFreeTimes="3" skillFlushFreeTimes="2" privateSeat="5" publicSeat="1" cardGoldForsterFreeTimes="1" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0" autoBossFight="0" autoBossSign="0"/>
+	<sample sid="64004" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="40" luckBoxFreeTimes="4" skillFlushFreeTimes="3" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="1" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="0" autoBossFight="0" autoBossSign="0"/>
+	<sample sid="64005" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="40" luckBoxFreeTimes="5" skillFlushFreeTimes="3" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="2" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1" autoBossFight="1" autoBossSign="1"/>
+	<sample sid="64006" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="40" luckBoxFreeTimes="6" skillFlushFreeTimes="4" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="3" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1" autoBossFight="1" autoBossSign="1"/>
+</objects>

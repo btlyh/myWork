@@ -595,7 +595,7 @@ public class Player extends Sample implements Actor
 		friendInfo.dbBytesWrite(data);
 		if(armyCamp==null) armyCamp=new ArmyCamp();
 		armyCamp.dbBytesWrite(data);
-//		identity.dbBytesWrite(data);
+		identity.dbBytesWrite(data);
 	}
 
 	/** 反序列化(和dc通信) */
@@ -647,7 +647,7 @@ public class Player extends Sample implements Actor
 		if(armyCamp==null) armyCamp=new ArmyCamp();
 		armyCamp.dbBytesRead(data);
 		if(identity==null) identity=new Identity();
-//		identity.dbBytesRead(data);
+		identity.dbBytesRead(data);
 	}
 
 	@Override
@@ -681,9 +681,7 @@ public class Player extends Sample implements Actor
 	{
 		/** 检测是否有世界BOSS活动 */
 		int bossSid=BossManager.getInstance().getActiveBossSid();
-		data.writeInt(bossSid);//BOSSSID
-		long readyTime=BossManager.getInstance().getActiveBossTime(bossSid);
-		data.writeLong(readyTime);//剩余准备时间
+		data.writeInt(bossSid);
 		/** 登录时遍历军帐 */
 		if (nickname != null)
 			ArmyCampManager.getInstance().enterArmyCamp(this, nickname); 

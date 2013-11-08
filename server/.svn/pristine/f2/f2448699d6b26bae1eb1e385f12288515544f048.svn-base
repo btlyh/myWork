@@ -216,15 +216,15 @@ public class InstancingManager
 				battleCard.setAttack(false);
 			}
 		}
-		for(BattleCard battleCard:def)
-		{
-			if(battleCard!=null)
+			for(BattleCard battleCard:def)
 			{
-				battleCard.setSide(2);
-				battleCard.setCurHp(battleCard.getMaxHp());
-				battleCard.setAttack(false);
+				if(battleCard!=null)
+				{
+					battleCard.setSide(2);
+					battleCard.setCurHp(battleCard.getMaxHp());
+					battleCard.setAttack(false);
+				}
 			}
-		}
 	}
 
 }

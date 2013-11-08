@@ -183,16 +183,17 @@ public final class GlobalConst
 	/** 副本-前台发送-进入副本 */
 	public static final int COMMAND_INSTANCING_ENTER=1903;
 	/** 副本-前台发送-获取布阵 */
-	public static int COMMAND_COPY_GETEMBATTLE=1905;
+    public static int COMMAND_COPY_GETEMBATTLE = 1905;
 
-	/* 卡牌抽奖 */
-	/** 抽奖-刷新 */
+	
+	/* 卡牌抽奖*/
+	/** 抽奖-刷新*/
 	public static final int COMMAND_LUCKBOX_FLUSH=2001;
-	/** 抽奖-抽取卡牌 */
+	/** 抽奖-抽取卡牌*/
 	public static final int COMMAND_LUCKBOX_TAKE=2002;
-	/** 抽奖-卡牌购买 */
+	/** 抽奖-卡牌购买*/
 	public static final int COMMAND_LUCKBOX_BUY=2003;
-
+	
 	/* 军帐 */
 	/** 军帐-前台发送-醒酒汤 */
 	public static final int COMMAND_ARMYCAMP_SOUP=2101;
@@ -219,26 +220,6 @@ public final class GlobalConst
 	public static final int COMMAND_RANKINGS_ENTER=2201;
 	/** 排行榜-前台发送-加载更多 */
 	public static final int COMMAND_RANKINGS_LOAD=2202;
-
-	/* 世界BOSS */
-	/** 世界BOSS-前台发送-攻击BOSS */
-	public static final int COMMAND_GLOBALBOSS_ATT=2301;
-	/** 世界BOSS-前台发送-攻击强化 */
-	public static final int COMMAND_GLOBALBOSS_ATTUP=2302;
-	/** 世界BOSS-前台发送-开启自动战斗 */
-	public static final int COMMAND_GLOBALBOSS_AUTOON=2303;
-	/** 世界BOSS-前台发送-取消自动战斗 */
-	public static final int COMMAND_GLOBALBOSS_AUTOOFF=2304;
-	/** 世界BOSS-前台发送-进入世界BOSS活动 */
-	public static final int COMMAND_GLOBALBOSS_MAIN=2305;
-	/** 世界BOSS-前台发送-春哥附体 */
-	public static final int COMMAND_GLOBALBOSS_RELIVE=2306;
-	/** 世界BOSS-后台发送-自动战斗数据推送 */
-	public static final int COMMAND_GLOBALBOSS_BACK_AUTOATT=2307;
-	/** 世界BOSS-后台发送-活动开始推送 */
-	public static final int COMMAND_GLOBALBOSS_BACK_START=2308;
-	/** 世界BOSS-后台发送-活动结束推送 */
-	public static final int COMMAND_GLOBALBOSS_BACK_END=2309;
 	/* 商城 */
 	/** 商城-前台发送-购买商品 */
 	public static final int COMMAND_SHOP_BUY=2301;
@@ -261,8 +242,9 @@ public final class GlobalConst
 	/* 功能处理器-商城 */
 	/* 功能处理器-任务 */
 	/* 功能处理器-卡片图鉴 */
-
-	/* 外部WEB数据修改端口 */
+	
+	
+	/*外部WEB数据修改端口*/
 	public static final int UPDATE_BASE=10001;
 	public static final int UPDATE_PRO=10002;
 	public static final int UPDATE_CARD=10003;

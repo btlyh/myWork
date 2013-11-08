@@ -45,16 +45,6 @@
 			<ints>33018,100000</ints>
 		</method>
 	</obj>
-<<<<<<< .mine
-	
-	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setGlobalBossList">
-			<ints>50001</ints>
-		</method>
-	</obj>
-
-
-=======
 	<!-- 设置VIP等级对应配置表的SID -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setVipCfgXml">
@@ -79,5 +69,4 @@
 			<ints>64001,64002,64003,64004,64005,64006</ints>
 		</method>
 	</obj>
->>>>>>> .r825
 </objects>

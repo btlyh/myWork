@@ -242,6 +242,9 @@
 		<obj class="com.cambrian.dfhm.instancing.command.EnterActiveNPCCommand"></obj>
 	</method>-->
 	
+	
+	
+	
 	<!-- ########################################## -->
 	<!--  卡片图鉴-前台发送-获取卡片列表
 	<method name="setPort" ref="service">
@@ -543,68 +546,7 @@
 	<obj class="com.cambrian.dfhm.shop.logic.ShopManager" id="SM">
 			<method name="setMailFactory"><ref id="MF"/></method>
 	</obj>
-		<!-- 世界BOSS-->
-	<!-- ########################################## -->
-	
-	
-	<!-- 世界BOSS-后台发送-攻击BOSS-->
-	<obj class="com.cambrian.dfhm.globalboss.notice.BossAutoAttNotice" id="baan">
-		<method name="setPort">2307</method>
-	</obj>
-	<!-- 世界BOSS-后台发送-攻击BOSS-->
-	<obj class="com.cambrian.dfhm.globalboss.notice.BossEndNotice" id="ben">
-		<method name="setPort">2309</method>
-	</obj>
-	<!-- 世界BOSS-后台发送-攻击BOSS-->
-	<obj class="com.cambrian.dfhm.globalboss.notice.BossStartNotice" id="bsn">
-		<method name="setPort">2308</method>
-	</obj>
-	
-	<!-- 世界BOSS-开启逻辑管理器 -->
-	<obj class="com.cambrian.dfhm.globalboss.logic.BossManager" id="BM">
-		<method name="setBen"><ref id="ben"/></method>
-		<method name="setDS"><ref id="DS"/></method>
-		<method name="setMailFactory"><ref id="MF"/></method>
-	</obj>
-	
-	<!-- 世界BOSS-开启定时器 -->
-	<obj class="com.cambrian.dfhm.globalboss.timer.GlobalBossTimer" id="GlobalBossTimer">
-		<method name="setDS"><ref id="DS"/></method>
-		<method name="setBsn"><ref id="bsn"/></method>
-		<method name="setBaan"><ref id="baan"/></method>
-		<method name="timerStart"/>
-	</obj>
-	
-	<!-- 世界BOSS-前台发送-攻击BOSS-->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_GLOBALBOSS_ATT"/>
-		<obj class="com.cambrian.dfhm.globalboss.command.AttBossCommand"></obj>
-	</method>
-	<!-- 世界BOSS-前台发送-攻击强化-->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_GLOBALBOSS_ATTUP"/>
-		<obj class="com.cambrian.dfhm.globalboss.command.AttUpCommand"></obj>
-	</method>
-	<!-- 世界BOSS-前台发送-开启自动战斗-->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_GLOBALBOSS_AUTOON"/>
-		<obj class="com.cambrian.dfhm.globalboss.command.AutoAttCommand"></obj>
-	</method>
-	<!-- 世界BOSS-前台发送-取消自动战斗-->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_GLOBALBOSS_AUTOOFF"/>
-		<obj class="com.cambrian.dfhm.globalboss.command.AutoAttOffCommand"></obj>
-	</method>
-	<!-- 世界BOSS-前台发送-进入世界BOSS活动-->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_GLOBALBOSS_MAIN"/>
-		<obj class="com.cambrian.dfhm.globalboss.command.BossMainCommand"></obj>
-	</method>
-	<!-- 世界BOSS-前台发送-春哥附体-->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_GLOBALBOSS_RELIVE"/>
-		<obj class="com.cambrian.dfhm.globalboss.command.ReliveCommand"></obj>
-	</method>
+
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SHOP_BUY"/>
 		<obj class="com.cambrian.dfhm.shop.command.BuyGoodsCommand"></obj>

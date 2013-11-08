@@ -39,9 +39,6 @@ public class GameCFG
 	/**普通培养消耗的银币数*/
 	private static int normalFosterNum;
 	//
-	/** 世界BOSS集合*/
-	private static int[] globalBossList;
-
 	public static int getPayForAwakeMinutes()
 	{
 		return payForAwakeMinutes;
@@ -153,15 +150,6 @@ public class GameCFG
 		DoubleSkill=doubleSkill;
 		System.err.println("length ===="+DoubleSkill.length);
 	}
-	
-	/**
-	 * 获得所有BOSS集合
-	 * @return 
-	 */
-	public static int[] getGlobalBossList()
-	{
-		return globalBossList;
-	}
 
 	/**
 	 * 通过技能ID，获得对应连携技
@@ -228,14 +216,5 @@ public class GameCFG
 		}
 		return -1;
 	}
-	/**
-	 * 设置BOSS集合
-	 * @param globalBossList bossSid集合列表
-	 */
-	public static void setGlobalBossList(int[] globalBossList)
-	{
-		GameCFG.globalBossList = globalBossList;
-	}
-
 
 }

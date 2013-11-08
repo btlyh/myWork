@@ -14,38 +14,29 @@
 			<ints>100,200,300,400,500</ints>
 		</method>
 	</obj>
-	
-	<!-- 军帐:付费醒酒按多少分钟为一个点来计算 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setPayForAwakeMinutes">5</method>
 	</obj>
-	<!-- 军帐:付费醒酒没个点扣多少金币 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setPayForAwakeGold">5</method>
 	</obj>
-	<!-- 军帐:使用醒酒汤后对方军帐中卡牌冷却时间减少百分之多少 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setAwakeSoupTarCdTime">30</method>
 	</obj>
-	<!-- 军帐:使用醒酒汤后自己军帐中卡牌冷却时间减少百分之多少 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setAwakeSoupOwnCdTime">15</method>
 	</obj>
-	<!-- 军帐:喝酒CD时间（分钟） -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setDrinkCd">30</method>
 	</obj>
-	<!-- 军帐:醒酒汤CD时间（分钟） -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setAwakeSoupCd">30</method>
 	</obj>
-
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setDoubleSkill">
 			<ints>33018,100000</ints>
 		</method>
 	</obj>
-<<<<<<< .mine
 	
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setGlobalBossList">
@@ -54,30 +45,4 @@
 	</obj>
 
 
-=======
-	<!-- 设置VIP等级对应配置表的SID -->
-	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setVipCfgXml">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
-		</method>
-	</obj>
-	<!-- 设置排位赛挑战胜利获得的积分 -->
-	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setDuelWinPoint">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
-		</method>
-	</obj>
-	<!-- 设置排位赛挑战失败获得的积分 -->
-	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setDuelLosePoint">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
-		</method>
-	</obj>
-	<!-- 设置相应排位赛等级每日领取的积分 -->
-	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setDayPoint">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
-		</method>
-	</obj>
->>>>>>> .r825
 </objects>

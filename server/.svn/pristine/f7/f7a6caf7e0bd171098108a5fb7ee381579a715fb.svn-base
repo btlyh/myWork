@@ -141,7 +141,7 @@ public final class Lang
 	public static final String F1408="1408";
 	/** 1409; 副本类型错误 */
 	public static final String F1409="1409";
-	/** 1410; 没有上阵卡牌 */
+	/** 1410; 没有上阵卡牌*/
 	public static final String F1410="1410";
 
 	/* 好友 */
@@ -225,40 +225,13 @@ public final class Lang
 	public static final String F1715="1715";
 	/** 1716：座位号错误 */
 	public static final String F1716="1716";
-
-	/* 世界BOSS */
-	/** 1801; 世界BOSS尚未开启 */
-	public static final String F1801="1801";
-	/** 1802; 挑战资格未达标 */
-	public static final String F1802="1802";
-	/** 1803; 非法操作，现在没有世界BOSS活动 */
-	public static final String F1803="1803";
-	/** 1804; 强化攻击所需RMB不足 */
-	public static final String F1804="1804";
-	/** 1805; BOSS不存在 */
-	public static final String F1805="1805";
-	/** 1806; 复活冷却时间未到 */
-	public static final String F1806="1806";
-	/** 1807; 世界BOSS已被击杀 */
-	public static final String F1807="1807";
-	/** 1808; 世界BOSS活动结束，BOSS未被击杀 */
-	public static final String F1808="1808";
-	/** 1809; 世界BOSS自动战斗VIP等级不足 */
-	public static final String F1809="1809";
-	/** 1810; 世界BOSS活动时间未到*/
-	public static final String F1810="1810";
-
+	
 	/* 排行榜 */
-	/** 1901： 排行榜类型错误 */
+	/** 1801： 排行榜类型错误*/
 	public static final String F1901="1901";
-	/** 1902： 下标超出范围 */
+	/** 1802： 下标超出范围 */
 	public static final String F1902="1902";
 	
-	/* 当壕*/
-	/** 20001; 马仔身份不能获取攻击对象列表*/
-	public static final String F2001="2001";
-
-
 	/* 商城 */
 	/** 1901：商品序号不存在 */
 	public static final String F2001="2001";
@@ -276,13 +249,5 @@ public final class Lang
 	public static final String SYSTEM_MAIL_TITLE="系统邮件";
 	/** 系统邮件内容 */
 	public static final String SYSTEM_MAIL_CONTENT="物品补发";
-
-	/* 当壕功能身份名称 */
-	/** 奴隶主名称 */
-	public static final String OWNER="土豪";
-	/** 自由人名称 */
-	public static final String FREEMAN="侠客";
-	/** 奴隶名称 */
-	public static final String SLAVE="马仔";
 
 }
