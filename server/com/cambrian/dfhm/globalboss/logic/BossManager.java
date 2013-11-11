@@ -400,7 +400,7 @@ public class BossManager
 		long surplusTime=0;
 		if(lastAttTime>0)
 		{
-			long nextAttTime=lastAttTime+TimeKit.timeOf(0,gbc.getAttCD());
+			long nextAttTime=lastAttTime+gbc.getAttCD()*TimeKit.MIN_MILLS;
 			surplusTime=nextAttTime-TimeKit.nowTimeMills();
 		}
 
