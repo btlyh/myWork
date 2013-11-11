@@ -18,7 +18,7 @@
 	type			类型（白绿蓝紫橙，5种）
 
 	-->
-	<sample sid="14001" class="com.cambrian.dfhm.monster.Monster" name="诸葛亮" avatar="role/zhugeliang" tinyAvatar="role/zhugeliang" level="1" att="52" skillRate="6000" _1doubleSkill="33001" attRange="0" maxHp="50000" skillId="33001" aimType="2" critRate="10000" dodgeRate="10000" awardSid="29001" type="5"/>
+	<sample sid="14001" class="com.cambrian.dfhm.monster.Monster" name="诸葛亮" avatar="role/zhugeliang" tinyAvatar="role/zhugeliang" level="1" att="52000" skillRate="6000" _1doubleSkill="33001" attRange="4" maxHp="50000" skillId="33001" aimType="2" critRate="10000" dodgeRate="10000" awardSid="29001" type="5"/>
 	<sample sid="14002" class="com.cambrian.dfhm.monster.Monster" name="张曼成" avatar="role/zhangmancheng" tinyAvatar="role/zhangmancheng" level="1" att="57" skillRate="6600" _1doubleSkill="33002,20000" attRange="0" maxHp="178" skillId="33002" aimType="2" critRate="10000" dodgeRate="10000" awardSid="29002" type="2"/>
 	<sample sid="14003" class="com.cambrian.dfhm.monster.Monster" name="张梁" avatar="role/zhangliang2" tinyAvatar="role/zhangliang2" level="1" att="52" skillRate="6000" _1doubleSkill="33003,20000" attRange="0" maxHp="162" skillId="33003" aimType="2" critRate="10000" dodgeRate="10000" awardSid="29003" type="2"/>
 	<sample sid="14004" class="com.cambrian.dfhm.monster.Monster" name="黄巾哨卫" avatar="role/huangjinshaowei" tinyAvatar="role/huangjinshaowei" level="1" att="57" skillRate="6600" _1doubleSkill="33004,20000" attRange="0" maxHp="178" skillId="33004" aimType="2" critRate="10000" dodgeRate="10000" awardSid="29004" type="1"/>

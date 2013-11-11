@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.dfhm.Lang;
-import com.cambrian.dfhm.common.entity.TakeCardRecord;
 
 /**
  * 类说明：身份对象-用于当壕功能

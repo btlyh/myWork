@@ -448,7 +448,7 @@ public class BattleScene
 			}
 			System.err.println(bCard.getName()+",被照成伤害，血量损失 ==="+hurt
 				+", 剩余血量 ==="+bCard.getCurHp());
-			if(isDamage&&attCard.getAwardSid()==1) record.countDamage(hurt);
+			if(isDamage&&attCard.getAwardSid()==1 && isDamage) record.countDamage(hurt);
 			// 计算被攻击者，身上的debuff
 			deSkill=bCard.getDeSkill();
 			record.addRecord(deSkill.size());

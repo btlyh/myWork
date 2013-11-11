@@ -15,8 +15,8 @@ public class NormalSkill extends Skill{
 	/* static fields */
 
 	/* static methods */
-
 	/* fields */
+	
 
 	/* constructors */
 

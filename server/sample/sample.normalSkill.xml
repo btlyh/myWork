@@ -12,7 +12,7 @@
 	aim			攻击对象，1=自己，2=敌人
 	
 	-->
-	<sample sid="33001" class="com.cambrian.dfhm.skill.NormalSkill" name="百冰" description="百冰" att="130000000" attRange="5" level="1" aim="2" skillRate="0"/>
+	<sample sid="33001" class="com.cambrian.dfhm.skill.NormalSkill" name="百冰" description="百冰" att="1300" attRange="5" level="1" aim="2" skillRate="0"/>
 	<sample sid="33002" class="com.cambrian.dfhm.skill.NormalSkill" name="包天" description="包天" att="1500" attRange="0" level="1" aim="2" skillRate="22000"/>
 	<sample sid="33003" class="com.cambrian.dfhm.skill.NormalSkill" name="颤人" description="颤人" att="1700" attRange="0" level="1" aim="2" skillRate="24000"/>
 	<sample sid="33004" class="com.cambrian.dfhm.skill.NormalSkill" name="穿云" description="穿云" att="1300" attRange="0" level="1" aim="2" skillRate="20000"/>

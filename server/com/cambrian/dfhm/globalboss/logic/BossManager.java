@@ -175,14 +175,13 @@ public class BossManager
 
 	/**
 	 * ¹¥»÷BOSS
-	 * 
 	 * @param player
 	 * @param bossSid
 	 */
 	public ArrayList<Integer> attBoss(Player player,int bossSid)
 	{
 		Map<String,Object> resultMap=checkAttBoss(player,bossSid);
-		String error=resultMap.get("error").toString();
+		String error=(String)resultMap.get("error");
 		if(error!=null)
 		{
 			throw new DataAccessException(601,error);

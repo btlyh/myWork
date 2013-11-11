@@ -241,7 +241,7 @@ public final class GlobalConst
 	public static final int COMMAND_GLOBALBOSS_BACK_END=2309;
 	/* 商城 */
 	/** 商城-前台发送-购买商品 */
-	public static final int COMMAND_SHOP_BUY=2301;
+	public static final int COMMAND_SHOP_BUY=2401;
 	/**/
 	/* 功能处理器 */
 	/** 空功能处理器 */

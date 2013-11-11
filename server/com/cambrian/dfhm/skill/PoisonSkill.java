@@ -50,10 +50,10 @@ public class PoisonSkill extends Skill
 			// 技能照成伤害：向下取整(卡牌攻击力*技能系数/1000)
 			int value=super.getSkillHurt(attCard.getAtt());
 			// 每回合中毒扣血数：向下取整(（卡牌攻击力*技能系数/1000）*毒效果伤害倍数/1000*回合数)
-			double a=value/1000;
-			double b=hurt/1000;
-			decrHp=(int)a*(int)b*round;
+			double a=(double)value/1000;
+			double b=(double)hurt/1000;
 			value/=1000;
+			decrHp=(int)((double)a*(double)b*round);
 			value=super.buffValue(attCard,value,aimCard,record);
 			record.setAttMax(value);
 			addHurt(value);
