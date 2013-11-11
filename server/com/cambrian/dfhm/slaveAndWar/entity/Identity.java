@@ -15,7 +15,10 @@ public class Identity
 {
 
 	/* static fields */
+	/** 身份状态 */
 	public static final int SLAVE=1,FREEMAN=2,OWNER=3;
+	/** 随机抽取战力误差值 */
+	public static final int ERRORVLAUE=5;
 	/* static methods */
 
 	/* fields */

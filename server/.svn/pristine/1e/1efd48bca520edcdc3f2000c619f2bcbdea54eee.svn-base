@@ -2,6 +2,7 @@ package com.cambrian.dfhm.common.entity;
 
 import java.util.ArrayList;
 
+
 import com.cambrian.common.actor.Actor;
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.object.Sample;
@@ -15,12 +16,9 @@ import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.Formation;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.friend.entity.FriendInfo;
-import com.cambrian.dfhm.globalboss.entity.BossFightRecord;
-import com.cambrian.dfhm.globalboss.logic.BossManager;
 import com.cambrian.dfhm.instancing.entity.AttRecord;
 import com.cambrian.dfhm.mail.entity.Mail;
 import com.cambrian.dfhm.message.MessageContainer;
-import com.cambrian.dfhm.slaveAndWar.entity.Identity;
 import com.cambrian.dfhm.timer.TokenTimer;
 
 /**
@@ -86,12 +84,6 @@ public class Player extends Sample implements Actor
 	private int curIndexForCorssNPC;
 	/** 玩家攻击记录列表 */
 	private ArrayList<AttRecord> attRecords=new ArrayList<AttRecord>();
-	/** 玩家BOSS战记录 */
-	private BossFightRecord bfr;
-	/** 身份对象(当土豪功能用) */
-	private Identity identity;
-	/** 玩家战斗力 */
-	private int fightPoint;
 
 	/** 设置玩家id */
 	public void setUserId(long uid)
@@ -268,43 +260,6 @@ public class Player extends Sample implements Actor
 	{
 		this.attRecords=attRecords;
 	}
-	public Identity getIdentity()
-	{
-		return identity;
-	}
-
-	public void setIdentity(Identity identity)
-	{
-		this.identity=identity;
-	}
-
-	public BossFightRecord getBfr()
-	{
-		return bfr;
-	}
-	public void setBfr(BossFightRecord bfr)
-	{
-		this.bfr=bfr;
-	}
-
-	public int getFightPoint()
-	{
-		return fightPoint;
-	}
-
-	public void setFightPoint(int fightPoint)
-	{
-		this.fightPoint=fightPoint;
-	}
-	
-	/**
-	 * 计算战斗力
-	 */
-	public void countFightPoint()
-	{
-	
-	}
-
 	/** 更新消息 */
 	public void update()
 	{
@@ -492,21 +447,22 @@ public class Player extends Sample implements Actor
 	{
 		attRecords.add(attRecord);
 	}
-
+	
 	/** 提升VIP等级 */
 	public void vipLevelUp()
 	{
-		if(playerInfo.getPayRMB()>GameCFG.getVipLevelGold(vipLevel))
+		if (playerInfo.getPayRMB() > GameCFG.getVipLevelGold(vipLevel))
 			++vipLevel;
 		setVipCfg();
 	}
-
+	
 	/** 设置VIP */
 	public void setVipCfg()
 	{
-		int vipSid=GameCFG.getVipCfg(vipLevel);
-		VipCfg vip=(VipCfg)Sample.factory.getSample(vipSid);
-		if(vip==null) vip=(VipCfg)Sample.factory.newSample(vipSid);
+		int vipSid = GameCFG.getVipCfg(vipLevel);
+		VipCfg vip = (VipCfg)Sample.factory.getSample(vipSid);
+		if (vip == null)
+			vip = (VipCfg)Sample.factory.newSample(vipSid);
 		playerInfo.setGetToken(vip.getToken);
 		playerInfo.setBuyToken(vip.buyToken);
 		playerInfo.setSkillFlushFreeTimes(vip.skillFlushFreeTimes);
@@ -521,7 +477,7 @@ public class Player extends Sample implements Actor
 		playerInfo.setAutoBossFight(vip.autoBossFight);
 		playerInfo.setAutoBossSign(vip.autoBossSign);
 	}
-
+	
 	/** 序列化(前台登陆时获取的数据) */
 	@Override
 	public void bytesWrite(ByteBuffer data)
@@ -612,7 +568,7 @@ public class Player extends Sample implements Actor
 		friendInfo.dbBytesWrite(data);
 		if(armyCamp==null) armyCamp=new ArmyCamp();
 		armyCamp.dbBytesWrite(data);
-		// identity.dbBytesWrite(data);
+
 	}
 
 	/** 反序列化(和dc通信) */
@@ -663,8 +619,6 @@ public class Player extends Sample implements Actor
 		friendInfo.dbBytesRead(data);
 		if(armyCamp==null) armyCamp=new ArmyCamp();
 		armyCamp.dbBytesRead(data);
-		if(identity==null) identity=new Identity();
-		// identity.dbBytesRead(data);
 	}
 
 	@Override
@@ -692,19 +646,16 @@ public class Player extends Sample implements Actor
 
 	/**
 	 * 初始化角色后 下行的一些其他信息
-	 * 
 	 * @param data
 	 */
 	public void initLogin(ByteBuffer data)
 	{
 		/** 检测是否有世界BOSS活动 */
-		int bossSid=BossManager.getInstance().getActiveBossSid();
-		data.writeInt(bossSid);// BOSSSID
-		long readyTime=BossManager.getInstance().getActiveBossTime(bossSid);
-		data.writeLong(readyTime);// 剩余准备时间
+		//int bossSid=BossManager.getInstance().getActiveBossSid();
+		//data.writeInt(bossSid);
 		/** 登录时遍历军帐 */
-		if(nickname!=null)
-			ArmyCampManager.getInstance().enterArmyCamp(this,nickname);
+		if (nickname != null)
+			ArmyCampManager.getInstance().enterArmyCamp(this, nickname); 
 	}
 	/* inner class */
 }

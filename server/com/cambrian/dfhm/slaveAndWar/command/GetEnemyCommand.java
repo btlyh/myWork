@@ -9,11 +9,11 @@ import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.game.Session;
 
 /**
- * 类说明：进入当壕主菜单
+ * 类说明：获取敌人列表命令
  * 
  * @author：LazyBear
  */
-public class EnterMainCommand extends Command
+public class GetEnemyCommand extends Command
 {
 
 	/* static fields */

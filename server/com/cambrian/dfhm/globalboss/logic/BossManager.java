@@ -283,7 +283,7 @@ public class BossManager
 	public void relive(Player player,int bossSid)
 	{
 		Map<String,Object> resultMap=checkRelive(player,bossSid);
-		String error=resultMap.get("error").toString();
+		String error=(String)resultMap.get("error");
 		if(error!=null)
 		{
 			throw new DataAccessException(601,error);
@@ -292,7 +292,6 @@ public class BossManager
 		player.decrGold(needGold);
 		player.getBfr().setLastAttTime(0);
 	}
-
 	/**
 	 * 检查复活功能
 	 * 
