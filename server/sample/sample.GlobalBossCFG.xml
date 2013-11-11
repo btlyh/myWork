@@ -26,6 +26,6 @@
 	挑战BOSS所需的主线关卡 normalNPCIndex
 	排名限制(用于限制排名前的获奖人员) orderConfine
 	-->
-	<sample sid="50001" class="com.cambrian.dfhm.globalboss.entity.GlobalBossCFG" bossName="山新大王" activeTime="15" readyTime="5" timeConfine="30" _1battleCardList="14001" _finitMonsters="1" autoRegGold="20" vipConfine="1" attUpGold="100" attCD="5" reliveGold="100" orderMoney="100" orderSoul="100" _1orderCardList="10218" normalMoney="100" normalSoul="100" _1normalCardList="10218" specialMoney="100" specialSoul="100" _1specialCardList="10218" normalNPCIndex="11001" orderConfine="3"/>
+	<sample sid="50001" class="com.cambrian.dfhm.globalboss.entity.GlobalBossCFG" bossName="山新大王" activeTime="15" readyTime="5" timeConfine="1440" _1battleCardList="14001" _finitMonsters="1" autoRegGold="20" vipConfine="1" attUpGold="100" attCD="5" reliveGold="100" orderMoney="100" orderSoul="100" _1orderCardList="10218" normalMoney="100" normalSoul="100" _1normalCardList="10218" specialMoney="100" specialSoul="100" _1specialCardList="10218" normalNPCIndex="11001" orderConfine="3"/>
 	
 </objects>

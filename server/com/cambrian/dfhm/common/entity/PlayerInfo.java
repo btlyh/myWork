@@ -45,7 +45,7 @@ public class PlayerInfo
 	private int autoBossSign;
 	
 	/** 抽奖SID */
-	private int luckBoxSid=39051;
+	private int luckBoxSid=41551;
 	/** 上次抽奖时间 */
 	private long lastTime;
 	/** 卡牌抽取记录集合 */

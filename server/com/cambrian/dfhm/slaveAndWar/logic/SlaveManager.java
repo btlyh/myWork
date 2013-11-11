@@ -30,7 +30,6 @@ public class SlaveManager
 
 	/* fields */
 	private DataServer ds;
-
 	/* constructors */
 
 	/* properties */
@@ -77,11 +76,11 @@ public class SlaveManager
 	}
 	
 	/**
-	 * 从内存中随机获取一个玩家身份
+	 * 从内存中尽量获取最多的敌人
 	 * @param sessionList
 	 * @return
 	 */
-	private Identity getIdentityForRandom(List<Session> sessionList,Identity myIdentity)
+	private List<Identity> getIdentityForRandom(List<Session> sessionList,Identity myIdentity)
 	{
 		return null;
 	}

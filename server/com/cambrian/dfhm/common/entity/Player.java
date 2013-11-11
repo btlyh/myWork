@@ -90,8 +90,6 @@ public class Player extends Sample implements Actor
 	private BossFightRecord bfr;
 	/** 身份对象(当土豪功能用) */
 	private Identity identity;
-	/** 玩家战斗力 */
-	private int fightPoint;
 
 	/** 设置玩家id */
 	public void setUserId(long uid)
@@ -287,24 +285,23 @@ public class Player extends Sample implements Actor
 		this.bfr=bfr;
 	}
 
-	public int getFightPoint()
-	{
-		return fightPoint;
-	}
-
-	public void setFightPoint(int fightPoint)
-	{
-		this.fightPoint=fightPoint;
-	}
-	
 	/**
 	 * 计算战斗力
 	 */
-	public void countFightPoint()
+	public int getFightPoint()
 	{
-	
+		int fightPoint=0;
+		BattleCard[] cards=formation.getFormation();
+		for(BattleCard battleCard:cards)
+		{
+			if(battleCard!=null)
+			{
+				Card card=cardBag.getById(battleCard.getId());
+				fightPoint+=card.getZhandouli();
+			}
+		}
+		return fightPoint;
 	}
-
 	/** 更新消息 */
 	public void update()
 	{
