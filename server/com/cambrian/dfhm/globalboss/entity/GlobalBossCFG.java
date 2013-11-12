@@ -26,55 +26,55 @@ public class GlobalBossCFG extends Sample
 	/* static methods */
 
 	/* fields */
-	/** BOSS名称  -XML*/
+	/** BOSS名称 -XML */
 	private String bossName;
-	/** 活动开始时间(小时) -XML*/
+	/** 活动开始时间(小时) -XML */
 	private int activeTime;
-	/** 准备时间 (分钟) -XML*/
+	/** 准备时间 (分钟) -XML */
 	private int readyTime;
-	/** 活动时间限制 -XML*/
+	/** 活动时间限制 -XML */
 	private int timeConfine;
-	/** Boss中的怪物卡牌 -XML*/
+	/** Boss中的怪物卡牌 -XML */
 	private int[] battleCardList;
-	/** 自动报名费用(RMB) -XML*/
+	/** 自动报名费用(RMB) -XML */
 	private int autoRegGold;
-	/** 自动报名VIP等级限制 -XML*/
+	/** 自动报名VIP等级限制 -XML */
 	private int vipConfine;
-	/** 攻击强化费用 -XML*/
+	/** 攻击强化费用 -XML */
 	private int attUpGold;
-	/** 攻击冷却时间(分钟) -XML*/
+	/** 攻击冷却时间(分钟) -XML */
 	private int attCD;
-	/** 立即复活费用 -XML*/
+	/** 立即复活费用 -XML */
 	private int reliveGold;
-	/** 排名奖励银币 -XML*/
+	/** 排名奖励银币 -XML */
 	private int orderMoney;
-	/** 排名武魂奖励 -XML*/
+	/** 排名武魂奖励 -XML */
 	private int orderSoul;
-	/** 排名卡牌奖励 -XML*/
+	/** 排名卡牌奖励 -XML */
 	private int[] orderCardList;
-	/** 普通奖励银币 -XML*/
+	/** 普通奖励银币 -XML */
 	private int normalMoney;
-	/** 普通奖励武魂 -XML*/
+	/** 普通奖励武魂 -XML */
 	private int normalSoul;
-	/** 普通奖励卡牌集合 -XML*/
+	/** 普通奖励卡牌集合 -XML */
 	private int[] normalCardList;
-	/** 特殊奖励银币 -XML*/
+	/** 特殊奖励银币 -XML */
 	private int specialMoney;
-	/** 特殊奖励武魂 -XML*/
+	/** 特殊奖励武魂 -XML */
 	private int specialSoul;
-	/** 特殊奖励卡牌集合 -XML*/
+	/** 特殊奖励卡牌集合 -XML */
 	private int[] specialCardList;
 	/** BOSS是否开启 */
 	private boolean isOpen;
-	/** 挑战BOSS所需的主线关卡 -XML*/
+	/** 挑战BOSS所需的主线关卡 -XML */
 	private int normalNPCIndex;
 	/** BOSS伤害排行榜 键为排名，值为玩家记录 */
 	public Map<Integer,BossFightRecord> rankMap=new HashMap<Integer,BossFightRecord>();
 	/** 出战卡牌列表 */
 	protected BattleCard[] monsters=new BattleCard[5];
-	/** 排名限制(用于限制排名前的获奖人员) -XML*/
+	/** 排名限制(用于限制排名前的获奖人员) -XML */
 	private int orderConfine;
-	/** 回合限制 -XML*/
+	/** 回合限制 -XML */
 	private int roundConfine;
 	/** 自动战斗玩家列表 */
 	public List<Player> autoList=new ArrayList<Player>();
@@ -324,9 +324,9 @@ public class GlobalBossCFG extends Sample
 			BattleCard battleCard=new BattleCard(card.getId(),
 				card.getName(),card.getAvatar(),card.getTinyAvatar(),
 				card.getLevel(),card.getAtt(),card.getSkillRate(),
-				card.getDoubleSkill(),card.getAttRange(),card.getSkillId(),
-				card.getMaxHp(),card.getMaxHp(),i,card.getAimType(),
-				card.getCritRate(),card.getDodgeRate(),card.getAwardSid(),i);
+				card.getAttRange(),card.getSkillId(),card.getMaxHp(),
+				card.getMaxHp(),i,card.getAimType(),card.getCritRate(),
+				card.getDodgeRate(),card.getAwardSid(),i);
 			monsters[i]=battleCard;
 		}
 	}
@@ -339,7 +339,7 @@ public class GlobalBossCFG extends Sample
 	public int getMaxHp()
 	{
 		int temp=0;
-		for(BattleCard bCard:monsters)	
+		for(BattleCard bCard:monsters)
 		{
 			temp+=bCard.getMaxHp();
 		}

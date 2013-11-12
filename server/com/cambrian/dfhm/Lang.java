@@ -255,8 +255,16 @@ public final class Lang
 	public static final String F1902="1902";
 	
 	/* 当壕*/
-	/** 20001; 马仔身份不能获取攻击对象列表*/
-	public static final String F2101="2001";
+	/** 2101; 马仔身份不能获取攻击对象列表*/
+	public static final String F2101="2101";
+	/** 2102; 不能直接攻击马仔*/
+	public static final String F2102="2102";
+	/** 2103; 你的阵上没有战斗卡牌*/
+	public static final String F2103="2103";
+	/** 2104; 无效的身份,非法操作*/
+	public static final String F2104="2104";
+	/** 2105; 对方无效身份,非法操作*/
+	public static final String F2105="2105";
 
 
 	/* 商城 */

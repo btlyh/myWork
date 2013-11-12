@@ -51,11 +51,28 @@
 			<ints>64001,64002,64003,64004,64005,64006</ints>
 		</method>
 	</obj>
+	<!-- 设置世界BOSS的SID-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setGlobalBossList">
 			<ints>50001</ints>
 		</method>
 	</obj>
-
+	
+	<!-- 设置当壕功能随机抽取敌人战力的误差值-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setErrorValue">100</method>
+	</obj>
+	<!-- 设置当壕功能敌人列表上限-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setEnemySize">20</method>
+	</obj>
+	<!-- 设置当壕功能随机匹配敌人的次数-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setMatchTimes">5</method>
+	</obj>
+	<!-- 设置当壕功能的马仔人数上限-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setSlaveConfine">6</method>
+	</obj>
 
 </objects>

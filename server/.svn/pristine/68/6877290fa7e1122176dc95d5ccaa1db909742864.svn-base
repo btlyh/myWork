@@ -38,18 +38,7 @@ public class GameCFG
 	private static int moneyFosterNum;
 	/**普通培养消耗的银币数*/
 	private static int normalFosterNum;
-	/**当壕功能随机抽取战力误差值*/
-	private static int errorValue;
-	/**当壕功能获取敌人列表上限*/
-	private static int enemySize;
-	/**当壕功能递归匹配次数*/
-	private static int matchTimes;
-	/**当壕功能马仔上限*/
-	private static int slaveConfine;
 	//
-	/** 世界BOSS集合*/
-	private static int[] globalBossList;
-
 	public static int getPayForAwakeMinutes()
 	{
 		return payForAwakeMinutes;
@@ -161,15 +150,6 @@ public class GameCFG
 		DoubleSkill=doubleSkill;
 		System.err.println("length ===="+DoubleSkill.length);
 	}
-	
-	/**
-	 * 获得所有BOSS集合
-	 * @return 
-	 */
-	public static int[] getGlobalBossList()
-	{
-		return globalBossList;
-	}
 
 	/**
 	 * 通过技能ID，获得对应连携技ID
@@ -235,67 +215,5 @@ public class GameCFG
 		}
 		return -1;
 	}
-	/**
-	 * 设置BOSS集合
-	 * @param globalBossList bossSid集合列表
-	 */
-	public static void setGlobalBossList(int[] globalBossList)
-	{
-		GameCFG.globalBossList = globalBossList;
-	}
-	
-	/**
-	 * 获取随机抽取战力误差值(当壕)
-	 * @return
-	 */
-	public static int getErrorValue()
-	{
-		return errorValue;
-	}
-	
-	public static void setErrorValue(int errorValue)
-	{
-		GameCFG.errorValue = errorValue;
-	}
-	/**
-	 * 获取敌人列表上限(当壕)
-	 * @return
-	 */
-	public static int getEnemySize()
-	{
-		return enemySize;
-	}
 
-	public static void setEnemySize(int enemySize)
-	{
-		GameCFG.enemySize = enemySize;
-	}
-	
-	/**
-	 * 获取递归匹配次数(当壕)
-	 * @return
-	 */
-	public static int getMatchTimes()
-	{
-		return matchTimes;
-	}
-
-	public static void setMatchTimes(int matchTimes)
-	{
-		GameCFG.matchTimes = matchTimes;
-	}
-
-	/**
-	 * 获取马仔上限
-	 * @return
-	 */
-	public static int getSlaveConfine()
-	{
-		return slaveConfine;
-	}
-
-	public static void setSlaveConfine(int slaveConfine)
-	{
-		GameCFG.slaveConfine = slaveConfine;
-	}
 }

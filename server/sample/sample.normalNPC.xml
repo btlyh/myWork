@@ -14,7 +14,7 @@
 	round				回合数
 	-->
 	
-	<sample sid="11001" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="14001,14001,14001,14001,14001" needToken="1" type="39001" isBoss="0" nextSid="11002" _finitMonsters="1" round="30" hardIndex="12001" crossIndex="0"/>
+	<sample sid="11001" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="14002,14002,14002,14002,14002" needToken="1" type="39001" isBoss="0" nextSid="11002" _finitMonsters="1" round="30" hardIndex="12001" crossIndex="0"/>
 	<sample sid="11002" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="14002,14002,14002,14002,14002" needToken="1" type="39001" isBoss="0" nextSid="11003" _finitMonsters="2" round="30" hardIndex="12002" crossIndex="0"/>
 	<sample sid="11003" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="14003,14003,14003,14003,14003" needToken="1" type="39001" isBoss="1" nextSid="11004" _finitMonsters="3" round="30" hardIndex="12003" crossIndex="0"/>
 	<sample sid="11004" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="14004,14004,14004,14004,14004" needToken="1" type="39001" isBoss="0" nextSid="11005" _finitMonsters="4" round="30" hardIndex="12004" crossIndex="0"/>

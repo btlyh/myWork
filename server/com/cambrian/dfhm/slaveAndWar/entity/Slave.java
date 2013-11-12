@@ -1,13 +1,14 @@
 package com.cambrian.dfhm.slaveAndWar.entity;
 
 import com.cambrian.common.net.ByteBuffer;
+import com.cambrian.common.util.TimeKit;
 
 /**
  * 类说明：马仔类-，-
  * 
  * @author:LazyBear
  */
-public class Slave
+public class Slave implements Comparable<Slave>
 {
 
 	/* static fields */
@@ -29,7 +30,23 @@ public class Slave
 	private boolean isManaged;
 
 	/* constructors */
+	/**
+	 * 马仔构造方法（创建新的马仔）
+	 * 
+	 * @param name 马仔姓名
+	 * @param fightPoint 战斗力
+	 */
+	public Slave(String name,int fightPoint)
+	{
+		this.name=name;
+		this.fightPoint=fightPoint;
+		this.takeTime=TimeKit.nowTimeMills();
+	}
 
+	public Slave()
+	{
+
+	}
 	/* properties */
 	public String getName()
 	{
@@ -112,5 +129,15 @@ public class Slave
 		startWorkTime=data.readLong();
 		takeTime=data.readLong();
 		isManaged=data.readBoolean();
+	}
+
+	/**
+	 * 重写比较方法(按照战力降序)
+	 */
+	public int compareTo(Slave slave)
+	{
+		int i=this.fightPoint;
+		int j=slave.getFightPoint();
+		return ((i==j)?0:(i>j)?-1:1);
 	}
 }

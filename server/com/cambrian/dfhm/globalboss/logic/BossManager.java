@@ -163,11 +163,11 @@ public class BossManager
 			mapInfo.put("error",Lang.F1410);
 			return mapInfo;
 		}
-		if(player.getVipLevel()<gbc.getVipConfine())
-		{
-			mapInfo.put("error",Lang.F1809);
-			return mapInfo;
-		}
+		// if(player.getVipLevel()<gbc.getVipConfine())
+		// {
+		// mapInfo.put("error",Lang.F1809);
+		// return mapInfo;
+		// }
 		mapInfo.put("error",null);
 		mapInfo.put("gbc",gbc);
 		return mapInfo;
@@ -175,6 +175,7 @@ public class BossManager
 
 	/**
 	 * ¹¥»÷BOSS
+	 * 
 	 * @param player
 	 * @param bossSid
 	 */
@@ -265,8 +266,8 @@ public class BossManager
 		}
 		if(player.getBfr().getLastAttTime()>0)
 		{
-			if(player.getBfr().getLastAttTime()
-				+TimeKit.timeOf(0,gbc.getAttCD())>TimeKit.nowTime())
+			if(player.getBfr().getLastAttTime()+TimeKit.MIN_MILLS
+				*gbc.getAttCD()>TimeKit.nowTime())
 			{
 				mapInfo.put("error",Lang.F1806);
 				return mapInfo;
@@ -402,6 +403,10 @@ public class BossManager
 		{
 			long nextAttTime=lastAttTime+gbc.getAttCD()*TimeKit.MIN_MILLS;
 			surplusTime=nextAttTime-TimeKit.nowTimeMills();
+			if(surplusTime<0)
+			{
+				surplusTime=0;
+			}
 		}
 
 		Map<String,Object> dataMap=new HashMap<String,Object>();
@@ -433,11 +438,11 @@ public class BossManager
 			mapInfo.put("error",Lang.F1801);
 			return mapInfo;
 		}
-		if(player.getCurIndexForNormalNPC()<gbc.getNormalNPCIndex())
-		{
-			mapInfo.put("error",Lang.F1802);
-			return mapInfo;
-		}
+//		if(player.getCurIndexForNormalNPC()<gbc.getNormalNPCIndex())
+//		{
+//			mapInfo.put("error",Lang.F1802);
+//			return mapInfo;
+//		}
 		mapInfo.put("error",null);
 		mapInfo.put("gbc",gbc);
 		return mapInfo;

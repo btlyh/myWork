@@ -1,10 +1,12 @@
 package com.cambrian.dfhm.slaveAndWar.entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.dfhm.Lang;
+import com.cambrian.dfhm.back.GameCFG;
 
 /**
  * 类说明：身份对象-用于当壕功能
@@ -17,8 +19,6 @@ public class Identity
 	/* static fields */
 	/** 身份状态 */
 	public static final int SLAVE=1,FREEMAN=2,OWNER=3;
-	/** 随机抽取战力误差值 */
-	public static final int ERRORVLAUE=5;
 	/* static methods */
 
 	/* fields */
@@ -92,15 +92,21 @@ public class Identity
 		}
 	}
 
+	/** 序列化 和前台通信 写 */
+	public void BytesWrite(ByteBuffer data)
+	{
+		data.writeUTF(gradeName);
+	}
+
 	/** 序列化 和DC通信 存 */
 	public void dbBytesWrite(ByteBuffer data)
 	{
 		data.writeInt(grade);
 		data.writeUTF(gradeName);
 		data.writeInt(slaveList.size());
-		for(Slave slave:slaveList)
 		{
-			slave.dbBytesWrite(data);
+			for(Slave slave:slaveList)
+				slave.dbBytesWrite(data);
 		}
 		data.writeInt(ownerId);
 	}
@@ -118,4 +124,50 @@ public class Identity
 		}
 		ownerId=data.readInt();
 	}
+
+	/**
+	 * 增加奴隶 身份发生变化
+	 * 
+	 * @param slave
+	 */
+	public void addSlave(Slave slave)
+	{
+		if(slaveList.size()==0)
+		{
+			setGrade(OWNER);
+		}
+		if(slaveList.size()==GameCFG.getSlaveConfine())
+		{
+			Collections.sort(slaveList);
+			slaveList.remove((slaveList.size()-1));
+		}
+		slaveList.add(slave);
+	}
+
+	/**
+	 * 减少奴隶 身份发生变化
+	 * 
+	 * @param slave
+	 */
+	public void cutSlave(Slave slave)
+	{
+		for(int i=0;i<slaveList.size();i++)
+		{
+			if(slaveList.get(i).getName().equals(slave.getName()))
+			{
+				slaveList.remove(i);
+				break;
+			}
+		}
+		if(slaveList.size()==0)
+		{
+			setGrade(FREEMAN);
+		}
+	}
+
+//	public Slave becomeSlave()
+//	{
+//		Slave slave = new Slave();
+//		slave.setFightPoint(fightPoint)
+//	}
 }

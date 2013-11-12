@@ -1,24 +1,20 @@
 package com.cambrian.dfhm.slaveAndWar.command;
 
-import java.util.List;
-
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.net.Command;
 import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.net.NioTcpConnect;
 import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.common.entity.Player;
-import com.cambrian.dfhm.slaveAndWar.logic.SlaveManager;
 import com.cambrian.game.Session;
 
 /**
- * 类说明：获取敌人列表命令
- * 
+ * 类说明：攻击敌人命令
  * @author：LazyBear
+ * 
  */
-public class GetEnemyCommand extends Command
+public class AttEnemyCommand extends Command
 {
-
 	/* static fields */
 
 	/* static methods */
@@ -49,14 +45,6 @@ public class GetEnemyCommand extends Command
 		{
 			throw new DataAccessException(601,Lang.F9000_SDE);
 		}
-		List<Player> players=SlaveManager.getInstance().getEnemy(player);
-		data.writeInt(player.getFightPoint());// 自身战斗力
-		data.writeInt(players.size());
-		for(Player tarPlayer:players)
-		{
-			data.writeInt(tarPlayer.getFightPoint());// 目标战斗力
-			data.writeInt((int)tarPlayer.getUserId());// 目标userID
-			tarPlayer.getIdentity().BytesWrite(data);// 目标名称
-		}
+		
 	}
 }

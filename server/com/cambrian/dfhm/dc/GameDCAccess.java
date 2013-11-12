@@ -379,11 +379,12 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		}
 
 		// // -----加载玩家信息----
-		array=new Field[4];
+		array=new Field[5];
 		array[0]=FieldKit.create("cardBag",(byte[])null);
 		array[1]=FieldKit.create("friendInfo",(byte[])null);
 		array[2]=FieldKit.create("armyCamp",(byte[])null);
 		array[3]=FieldKit.create("playerInfo", (byte[])null);
+		array[4]=FieldKit.create("identity",(byte[])null);
 		fields=new Fields(array);
 		int i=DBKit.get("player_info",cm,
 			FieldKit.create("userId",(int)p.getUserId()),fields);
@@ -398,6 +399,8 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		p.getArmyCamp().dbBytesRead(new ByteBuffer(bytes));
 		bytes=((ByteArrayField)array[3]).value;
 		p.getPlayerInfo().dbBytesRead(new ByteBuffer(bytes));
+		bytes=((ByteArrayField)array[4]).value;
+		p.getIdentity().dbBytesRead(new ByteBuffer(bytes));
 	}
 
 	private void loadPlayerLog(Player p)
@@ -439,7 +442,7 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 	/** 玩家信息字段映射 */
 	private Fields playerInfoMapping(Player p)
 	{
-		Field[] array=new Field[5];
+		Field[] array=new Field[6];
 		ByteBuffer data=new ByteBuffer();
 		p.getCardBag().dbBytesWrite(data);
 		array[0]=FieldKit.create("userid",(int)p.getUserId());
@@ -453,7 +456,11 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		data=new ByteBuffer();
 		p.getPlayerInfo().dbBytesWrite(data);
 		array[4]=FieldKit.create("playerInfo", data.toArray());
+		data=new ByteBuffer();
+		p.getIdentity().dbBytesWrite(data);
+		array[5]=FieldKit.create("identity", data.toArray());
 		return new Fields(array);
+		
 	}
 
 	/** 玩家字段映射 */
