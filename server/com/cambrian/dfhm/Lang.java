@@ -267,6 +267,12 @@ public final class Lang
 	public static final String F2105="2105";
 	/** 2106; 到达攻击次数限制,不能再次攻击*/
 	public static final String F2106="2106";
+	/** 2107; 现在不是奴隶了*/
+	public static final String F2107="2107";
+	/** 2108; 到达反抗次数限制,不能再次反抗*/
+	public static final String F2108="2108";
+	/** 2109; 金币不足,不能赎身*/
+	public static final String F2109="2109";
 
 
 	/* 商城 */

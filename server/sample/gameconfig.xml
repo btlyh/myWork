@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <objects>
 	<!--
 	全局配置表
@@ -74,5 +74,16 @@
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setSlaveConfine">6</method>
 	</obj>
-
+	<!-- 当壕功能信息数量上限-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setInformationSize">5</method>
+	</obj>
+	<!-- 设置当壕功能攻击次数上限-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setAttConfine">5</method>
+	</obj>
+	<!-- 设置当壕功能反抗次数上限-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setReactConfine">5</method>
+	</obj>
 </objects>

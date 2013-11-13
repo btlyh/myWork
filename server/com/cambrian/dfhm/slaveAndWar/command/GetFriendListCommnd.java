@@ -12,11 +12,11 @@ import com.cambrian.dfhm.slaveAndWar.logic.SlaveManager;
 import com.cambrian.game.Session;
 
 /**
- * 类说明：获取敌人列表命令
+ * 类说明:获取好友列表
+ * @author:LazyBear
  * 
- * @author：LazyBear
  */
-public class GetEnemyCommand extends Command {
+public class GetFriendListCommnd extends Command{
 
 	/* static fields */
 
@@ -44,10 +44,9 @@ public class GetEnemyCommand extends Command {
 		if (player == null) {
 			throw new DataAccessException(601, Lang.F9000_SDE);
 		}
-		boolean isSave = data.readBoolean();// 是否是拔刀相助
-		List<Player> players = SlaveManager.getInstance().getEnemy(player,isSave);
-		data.writeInt(players.size());
-		for (Player tarPlayer : players) {
+		List<Player> friends = SlaveManager.getInstance().getFriendList(player);
+		data.writeInt(friends.size());
+		for (Player tarPlayer : friends) {
 			data.writeInt(tarPlayer.getFightPoint());// 目标战斗力
 			data.writeInt((int) tarPlayer.getUserId());// 目标userID
 			data.writeUTF(tarPlayer.getNickname());// 目标名称

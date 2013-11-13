@@ -6,8 +6,7 @@ package com.cambrian.dfhm.back;
  * @version 2013-5-14
  * @author HYZ (huangyz1988@qq.com)
  */
-public class GameCFG
-{
+public class GameCFG {
 
 	/** 卡牌升级经验[每级经验] */
 	private static int[] levelExp;
@@ -51,119 +50,104 @@ public class GameCFG
 	private static int informationSize;
 	/** 当壕功能攻击次数限制 */
 	private static int attConfine;
+	/** 当壕功能反抗次数限制 */
+	private static int reactConfine;
+	/** 当壕功能所需银币数量*/
+	private static int getFreeGold;
 	/** 世界BOSS集合 */
 	private static int[] globalBossList;
 
-	public static int getPayForAwakeMinutes()
-	{
+	public static int getPayForAwakeMinutes() {
 		return payForAwakeMinutes;
 	}
 
-	public static void setPayForAwakeMinutes(int payForAwakeMinutes)
-	{
-		GameCFG.payForAwakeMinutes=payForAwakeMinutes;
+	public static void setPayForAwakeMinutes(int payForAwakeMinutes) {
+		GameCFG.payForAwakeMinutes = payForAwakeMinutes;
 	}
 
-	public static int getPayForAwakeGold()
-	{
+	public static int getPayForAwakeGold() {
 		return payForAwakeGold;
 	}
 
-	public static void setPayForAwakeGold(int payForAwakeGold)
-	{
-		GameCFG.payForAwakeGold=payForAwakeGold;
+	public static void setPayForAwakeGold(int payForAwakeGold) {
+		GameCFG.payForAwakeGold = payForAwakeGold;
 	}
 
-	public void setLevelExp(int[] levelExp)
-	{
-		GameCFG.levelExp=levelExp;
+	public void setLevelExp(int[] levelExp) {
+		GameCFG.levelExp = levelExp;
 	}
 
-	public void setSkillLevel(int[] skillLevel)
-	{
-		GameCFG.skillLevel=skillLevel;
+	public void setSkillLevel(int[] skillLevel) {
+		GameCFG.skillLevel = skillLevel;
 	}
 
-	public void setSoulLottery(int[] soulLottery)
-	{
-		GameCFG.soulLottery=soulLottery;
+	public void setSoulLottery(int[] soulLottery) {
+		GameCFG.soulLottery = soulLottery;
 	}
 
-	public void setVipCfgXml(int[] vipCfgXml)
-	{
-		GameCFG.vipCfgXml=vipCfgXml;
+	public void setVipCfgXml(int[] vipCfgXml) {
+		GameCFG.vipCfgXml = vipCfgXml;
 	}
 
 	/** 获得指定等级，卡牌升级的经验 */
-	public static int getExp(int level)
-	{
-		return levelExp[level-1];
+	public static int getExp(int level) {
+		return levelExp[level - 1];
 	}
 
 	/** 获得指定等级，技能升级的吞噬卡片数量 */
-	public static int getSkillLevel(int level)
-	{
-		return skillLevel[level*2+1];
+	public static int getSkillLevel(int level) {
+		return skillLevel[level * 2 + 1];
 	}
 
-	public static float getAwakeSoupTarCdTime()
-	{
-		return awakeSoupTarCdTime/100f;
+	public static float getAwakeSoupTarCdTime() {
+		return awakeSoupTarCdTime / 100f;
 	}
 
-	public static void setAwakeSoupTarCdTime(int awakeSoupTarCdTime)
-	{
-		GameCFG.awakeSoupTarCdTime=awakeSoupTarCdTime;
+	public static void setAwakeSoupTarCdTime(int awakeSoupTarCdTime) {
+		GameCFG.awakeSoupTarCdTime = awakeSoupTarCdTime;
 	}
 
-	public static float getAwakeSoupOwnCdTime()
-	{
-		return awakeSoupOwnCdTime/100f;
+	public static float getAwakeSoupOwnCdTime() {
+		return awakeSoupOwnCdTime / 100f;
 	}
 
-	public static void setAwakeSoupOwnCdTime(int awakeSoupOwnCdTime)
-	{
-		GameCFG.awakeSoupOwnCdTime=awakeSoupOwnCdTime;
+	public static void setAwakeSoupOwnCdTime(int awakeSoupOwnCdTime) {
+		GameCFG.awakeSoupOwnCdTime = awakeSoupOwnCdTime;
 	}
 
-	public static int getDrinkCd()
-	{
+	public static int getDrinkCd() {
 		return drinkCd;
 	}
 
-	public static void setDrinkCd(int drinkCd)
-	{
-		GameCFG.drinkCd=drinkCd;
+	public static void setDrinkCd(int drinkCd) {
+		GameCFG.drinkCd = drinkCd;
 	}
 
-	public static int getAwakeSoupCd()
-	{
+	public static int getAwakeSoupCd() {
 		return awakeSoupCd;
 	}
 
-	public static void setAwakeSoupCd(int awakeSoupCd)
-	{
-		GameCFG.awakeSoupCd=awakeSoupCd;
-	}
-	/** 获得指定等级升级VIP需要的金额 */
-	public static int getVipLevelGold(int level)
-	{
-		return vipLevelGold[level-1];
+	public static void setAwakeSoupCd(int awakeSoupCd) {
+		GameCFG.awakeSoupCd = awakeSoupCd;
 	}
 
-	public void setVipLevelGold(int[] vipLevelGold)
-	{
-		GameCFG.vipLevelGold=vipLevelGold;
+	/** 获得指定等级升级VIP需要的金额 */
+	public static int getVipLevelGold(int level) {
+		return vipLevelGold[level - 1];
 	}
+
+	public void setVipLevelGold(int[] vipLevelGold) {
+		GameCFG.vipLevelGold = vipLevelGold;
+	}
+
 	/** 获得指定VIP等级对应的配置表SID */
-	public static int getVipCfg(int level)
-	{
+	public static int getVipCfg(int level) {
 		return vipCfgXml[level];
 	}
-	public static void setDoubleSkill(int[] doubleSkill)
-	{
-		DoubleSkill=doubleSkill;
-		System.err.println("length ===="+DoubleSkill.length);
+
+	public static void setDoubleSkill(int[] doubleSkill) {
+		DoubleSkill = doubleSkill;
+		System.err.println("length ====" + DoubleSkill.length);
 	}
 
 	/**
@@ -171,8 +155,7 @@ public class GameCFG
 	 * 
 	 * @return
 	 */
-	public static int[] getGlobalBossList()
-	{
+	public static int[] getGlobalBossList() {
 		return globalBossList;
 	}
 
@@ -182,52 +165,43 @@ public class GameCFG
 	 * @param skillId
 	 * @return
 	 */
-	public static int[] getDSkillById(int skillId)
-	{
+	public static int[] getDSkillById(int skillId) {
 		int id;
-		for(int i=0;i<DoubleSkill.length;i+=3)
-		{
-			id=DoubleSkill[i];
-			if(skillId==id)
-			{
-				int[] dSkill=new int[3];
-				dSkill[0]=id;
-				dSkill[1]=DoubleSkill[i+1];
-				dSkill[2]=DoubleSkill[i+2];
+		for (int i = 0; i < DoubleSkill.length; i += 3) {
+			id = DoubleSkill[i];
+			if (skillId == id) {
+				int[] dSkill = new int[3];
+				dSkill[0] = id;
+				dSkill[1] = DoubleSkill[i + 1];
+				dSkill[2] = DoubleSkill[i + 2];
 				return dSkill;
 			}
 		}
 		return null;
 	}
 
-	public static int getGoldFosterNum()
-	{
+	public static int getGoldFosterNum() {
 		return goldFosterNum;
 	}
 
-	public static void setGoldFosterNum(int goldFosterNum)
-	{
-		GameCFG.goldFosterNum=goldFosterNum;
+	public static void setGoldFosterNum(int goldFosterNum) {
+		GameCFG.goldFosterNum = goldFosterNum;
 	}
 
-	public static int getMoneyFosterNum()
-	{
+	public static int getMoneyFosterNum() {
 		return moneyFosterNum;
 	}
 
-	public static void setMoneyFosterNum(int moneyFosterNum)
-	{
-		GameCFG.moneyFosterNum=moneyFosterNum;
+	public static void setMoneyFosterNum(int moneyFosterNum) {
+		GameCFG.moneyFosterNum = moneyFosterNum;
 	}
 
-	public static int getNormalFosterNum()
-	{
+	public static int getNormalFosterNum() {
 		return normalFosterNum;
 	}
 
-	public static void setNormalFosterNum(int normalFosterNum)
-	{
-		GameCFG.normalFosterNum=normalFosterNum;
+	public static void setNormalFosterNum(int normalFosterNum) {
+		GameCFG.normalFosterNum = normalFosterNum;
 	}
 
 	/**
@@ -236,22 +210,22 @@ public class GameCFG
 	 * @param skillId
 	 * @return
 	 */
-	public static int getDsSkillRateById(int skillId)
-	{
-		for(int i=0;i<DoubleSkill.length;i+=2)
-		{
-			if(skillId==DoubleSkill[i]) return DoubleSkill[i+2];
+	public static int getDsSkillRateById(int skillId) {
+		for (int i = 0; i < DoubleSkill.length; i += 2) {
+			if (skillId == DoubleSkill[i])
+				return DoubleSkill[i + 2];
 		}
 		return -1;
 	}
+
 	/**
 	 * 设置BOSS集合
 	 * 
-	 * @param globalBossList bossSid集合列表
+	 * @param globalBossList
+	 *            bossSid集合列表
 	 */
-	public static void setGlobalBossList(int[] globalBossList)
-	{
-		GameCFG.globalBossList=globalBossList;
+	public static void setGlobalBossList(int[] globalBossList) {
+		GameCFG.globalBossList = globalBossList;
 	}
 
 	/**
@@ -259,28 +233,25 @@ public class GameCFG
 	 * 
 	 * @return
 	 */
-	public static int getErrorValue()
-	{
+	public static int getErrorValue() {
 		return errorValue;
 	}
 
-	public static void setErrorValue(int errorValue)
-	{
-		GameCFG.errorValue=errorValue;
+	public static void setErrorValue(int errorValue) {
+		GameCFG.errorValue = errorValue;
 	}
+
 	/**
 	 * 获取敌人列表上限(当壕)
 	 * 
 	 * @return
 	 */
-	public static int getEnemySize()
-	{
+	public static int getEnemySize() {
 		return enemySize;
 	}
 
-	public static void setEnemySize(int enemySize)
-	{
-		GameCFG.enemySize=enemySize;
+	public static void setEnemySize(int enemySize) {
+		GameCFG.enemySize = enemySize;
 	}
 
 	/**
@@ -288,14 +259,12 @@ public class GameCFG
 	 * 
 	 * @return
 	 */
-	public static int getMatchTimes()
-	{
+	public static int getMatchTimes() {
 		return matchTimes;
 	}
 
-	public static void setMatchTimes(int matchTimes)
-	{
-		GameCFG.matchTimes=matchTimes;
+	public static void setMatchTimes(int matchTimes) {
+		GameCFG.matchTimes = matchTimes;
 	}
 
 	/**
@@ -303,40 +272,60 @@ public class GameCFG
 	 * 
 	 * @return
 	 */
-	public static int getSlaveConfine()
-	{
+	public static int getSlaveConfine() {
 		return slaveConfine;
 	}
 
-	public static void setSlaveConfine(int slaveConfine)
-	{
-		GameCFG.slaveConfine=slaveConfine;
+	public static void setSlaveConfine(int slaveConfine) {
+		GameCFG.slaveConfine = slaveConfine;
 	}
+
 	/**
 	 * 获取信息数量是上限
+	 * 
 	 * @return
 	 */
-	public static int getInformationSize()
-	{
+	public static int getInformationSize() {
 		return informationSize;
 	}
 
-	public static void setInformationSize(int informationSize)
-	{
-		GameCFG.informationSize=informationSize;
+	public static void setInformationSize(int informationSize) {
+		GameCFG.informationSize = informationSize;
 	}
-	
+
 	/**
 	 * 获取攻击次数限制
+	 * 
 	 * @return
 	 */
-	public static int getAttConfine()
-	{
+	public static int getAttConfine() {
 		return attConfine;
 	}
 
-	public static void setAttConfine(int attConfine)
-	{
+	public static void setAttConfine(int attConfine) {
 		GameCFG.attConfine = attConfine;
+	}
+	/**
+	 * 获取反抗次数限制
+	 * @return
+	 */
+	public static int getReactConfine() {
+		return reactConfine;
+	}
+
+	public static void setReactConfine(int reactConfine) {
+		GameCFG.reactConfine = reactConfine;
+	}
+	
+	/**
+	 * 获取赎身的价格
+	 * @return
+	 */
+	public static int getGetFreeGold() {
+		return getFreeGold;
+	}
+
+	public static void setGetFreeGold(int getFreeGold) {
+		GameCFG.getFreeGold = getFreeGold;
 	}
 }

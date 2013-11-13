@@ -12,10 +12,10 @@ public class Information implements Comparable<Information>
 {
 
 	/* static fields */
-	/** 事件类型：1 战斗打自由人 2 战斗打土豪 3战斗救陌生人 4战斗救朋友 5办事 */
+	/** 事件类型：1 战斗打自由人 2 战斗打土豪 3战斗救陌生人 4战斗救朋友 5办事 6 赎身*/
 	public static final int EVENT_FIGHT_FREE=1,EVENT_FIGHT_OWNER=2,
 					EVENT_FIGHT_SAVENOR=3,EVENT_FIGHT_SAVEFRI=4,
-					EVENT_FIGHT_WORK=5;
+					EVENT_FIGHT_WORK=5,EVENT_GETFREE=6;
 	/* static methods */
 
 	/* fields */
