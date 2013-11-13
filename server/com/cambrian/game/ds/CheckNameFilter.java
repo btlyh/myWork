@@ -84,7 +84,7 @@ public class CheckNameFilter
 	public String getRandomName()
 	{
 		if(nameList.size()<=0) return null;
-		int index=MathKit.randomValue(0,nameList.size());
+		int index=MathKit.randomValue(0,nameList.size()-1);
 		String name=nameList.get(index).toString();
 		return name;
 	}

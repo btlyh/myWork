@@ -265,6 +265,8 @@ public final class Lang
 	public static final String F2104="2104";
 	/** 2105; 对方无效身份,非法操作*/
 	public static final String F2105="2105";
+	/** 2106; 到达攻击次数限制,不能再次攻击*/
+	public static final String F2106="2106";
 
 
 	/* 商城 */

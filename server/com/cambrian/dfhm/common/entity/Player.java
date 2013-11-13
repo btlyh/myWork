@@ -21,6 +21,7 @@ import com.cambrian.dfhm.instancing.entity.AttRecord;
 import com.cambrian.dfhm.mail.entity.Mail;
 import com.cambrian.dfhm.message.MessageContainer;
 import com.cambrian.dfhm.slaveAndWar.entity.Identity;
+import com.cambrian.dfhm.slaveAndWar.entity.Slave;
 import com.cambrian.dfhm.timer.TokenTimer;
 
 /**
@@ -699,7 +700,22 @@ public class Player extends Sample implements Actor
 		if(nickname!=null)
 			ArmyCampManager.getInstance().enterArmyCamp(this,nickname);
 	}
-	
+
+	/**
+	 * 变成奴隶
+	 * 
+	 * @param ownerId 主人ID
+	 * @return
+	 */
+	public Slave becomeSlave(int ownerId)
+	{
+		Slave slave=new Slave(nickname,getFightPoint(),ownerId,
+			(int)this.userid);
+		this.identity.setGrade(Identity.SLAVE);
+		this.identity.setOwnerId(ownerId);
+		return slave;
+	}
+
 	/**
 	 * 重写equals方法用于合并比较内存和数据库的PLAYER集合
 	 */

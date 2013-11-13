@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.cambrian.common.net.ByteBuffer;
+import com.cambrian.common.util.MathKit;
 import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.back.GameCFG;
 
@@ -30,6 +31,12 @@ public class Identity
 	private List<Slave> slaveList=new ArrayList<Slave>();
 	/** 主人ID(此属性为0表示不是奴隶) */
 	private int ownerId;
+	/** 办事次数 */
+	private int workTimes;
+	/** 信息列表 */
+	private List<Information> informations=new ArrayList<Information>();
+	/** 今日攻击次数 */
+	private int attTimes;
 
 	/* constructors */
 
@@ -69,6 +76,39 @@ public class Identity
 	{
 		this.ownerId=ownerId;
 	}
+	public int getWorkTimes()
+	{
+		return workTimes;
+	}
+
+	public void setWorkTimes(int workTimes)
+	{
+		this.workTimes=workTimes;
+	}
+
+	public List<Information> getInformations()
+	{
+		return informations;
+	}
+
+	public void setInformations(List<Information> informations)
+	{
+		this.informations=informations;
+	}
+	public int getAttTimes()
+	{
+		return attTimes;
+	}
+
+	public void setAttTimes(int attTime)
+	{
+		this.attTimes=attTime;
+	}
+
+	public void inAttTimes()
+	{
+		attTimes++;
+	}
 	/* init start */
 
 	/* methods */
@@ -92,12 +132,6 @@ public class Identity
 		}
 	}
 
-	/** 序列化 和前台通信 写 */
-	public void BytesWrite(ByteBuffer data)
-	{
-		data.writeUTF(gradeName);
-	}
-
 	/** 序列化 和DC通信 存 */
 	public void dbBytesWrite(ByteBuffer data)
 	{
@@ -109,6 +143,13 @@ public class Identity
 				slave.dbBytesWrite(data);
 		}
 		data.writeInt(ownerId);
+		data.writeInt(workTimes);
+		data.writeInt(informations.size());
+		for(Information information:informations)
+		{
+			information.dbBytesWrite(data);
+		}
+		data.writeInt(attTimes);
 	}
 	/** 序列化 和DC通信 取 */
 	public void dbBytesRead(ByteBuffer data)
@@ -123,6 +164,15 @@ public class Identity
 			slaveList.add(slave);
 		}
 		ownerId=data.readInt();
+		workTimes=data.readInt();
+		len=data.readInt();
+		for(int i=0;i<len;i++)
+		{
+			Information information=new Information();
+			information.dbBytesRead(data);
+			informations.add(information);
+		}
+		attTimes=data.readInt();
 	}
 
 	/**
@@ -149,25 +199,30 @@ public class Identity
 	 * 
 	 * @param slave
 	 */
-	public void cutSlave(Slave slave)
+	public Slave cutSlave()
 	{
-		for(int i=0;i<slaveList.size();i++)
-		{
-			if(slaveList.get(i).getName().equals(slave.getName()))
-			{
-				slaveList.remove(i);
-				break;
-			}
-		}
+		int index=MathKit.randomValue(0,(slaveList.size()-1));
+		Slave slave=slaveList.get(index);
+		slaveList.remove(index);
 		if(slaveList.size()==0)
 		{
 			setGrade(FREEMAN);
 		}
+		return slave;
 	}
 
-//	public Slave becomeSlave()
-//	{
-//		Slave slave = new Slave();
-//		slave.setFightPoint(fightPoint)
-//	}
+	/**
+	 * 添加信息对象
+	 * 
+	 * @param information
+	 */
+	public void addInformation(Information information)
+	{
+		if(informations.size()>=GameCFG.getInformationSize())
+		{
+			Collections.sort(informations);
+			informations.remove((informations.size()-1));
+		}
+		informations.add(information);
+	}
 }

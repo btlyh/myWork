@@ -86,4 +86,15 @@ public class SlaveAndWarDao
 
 		return player;
 	}
+
+	/** ´æ´¢Íæ¼ÒÐÅÏ¢ */
+	public void savePlayerVar(Player player)
+	{
+		Field[] array=new Field[1];
+		ByteBuffer data=new ByteBuffer();
+		player.getIdentity().dbBytesWrite(data);
+		array[0]=FieldKit.create("identity",data.toArray());
+		DBKit.set("player_info",cm,FieldKit.create("userid",
+			(int)player.getUserId()),new Fields(array));
+	}
 }

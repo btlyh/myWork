@@ -16,6 +16,8 @@ public class Slave implements Comparable<Slave>
 	/* static methods */
 
 	/* fields */
+	/** 马仔ID */
+	private int userId;
 	/** 马仔名字 */
 	private String name;
 	/** 马仔状态 */
@@ -28,6 +30,8 @@ public class Slave implements Comparable<Slave>
 	private long takeTime;
 	/** 是否被托管 */
 	private boolean isManaged;
+	/** 老大ID */
+	private int bossId;
 
 	/* constructors */
 	/**
@@ -36,11 +40,13 @@ public class Slave implements Comparable<Slave>
 	 * @param name 马仔姓名
 	 * @param fightPoint 战斗力
 	 */
-	public Slave(String name,int fightPoint)
+	public Slave(String name,int fightPoint,int bossId,int userId)
 	{
+		this.userId=userId;
 		this.name=name;
 		this.fightPoint=fightPoint;
 		this.takeTime=TimeKit.nowTimeMills();
+		this.bossId=bossId;
 	}
 
 	public Slave()
@@ -107,12 +113,32 @@ public class Slave implements Comparable<Slave>
 	{
 		this.isManaged=isManaged;
 	}
+	public int getBossId()
+	{
+		return bossId;
+	}
+
+	public void setBossId(int bossId)
+	{
+		this.bossId=bossId;
+	}
+	public int getUserId()
+	{
+		return userId;
+	}
+
+	public void setUserId(int userId)
+	{
+		this.userId=userId;
+	}
+
 	/* init start */
 
 	/* methods */
 	/** 序列化 和DC通信 存 */
 	public void dbBytesWrite(ByteBuffer data)
 	{
+		data.writeInt(userId);
 		data.writeUTF(name);
 		data.writeInt(status);
 		data.writeInt(fightPoint);
@@ -123,6 +149,7 @@ public class Slave implements Comparable<Slave>
 	/** 序列化 和DC通信 取 */
 	public void dbBytesRead(ByteBuffer data)
 	{
+		userId=data.readInt();
 		name=data.readUTF();
 		status=data.readInt();
 		fightPoint=data.readInt();

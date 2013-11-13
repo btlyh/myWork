@@ -56,7 +56,8 @@ public class GetEnemyCommand extends Command
 		{
 			data.writeInt(tarPlayer.getFightPoint());// 目标战斗力
 			data.writeInt((int)tarPlayer.getUserId());// 目标userID
-			tarPlayer.getIdentity().BytesWrite(data);// 目标名称
+			data.writeUTF(tarPlayer.getNickname());// 目标名称
+			data.writeUTF(tarPlayer.getIdentity().getGradeName());// 目标身份名称
 		}
 	}
 }
