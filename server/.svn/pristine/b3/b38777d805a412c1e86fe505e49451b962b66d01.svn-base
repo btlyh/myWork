@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	扫荡副本
+	 sid
+	 class
+	 goldmax //最大金币数
+	 goldmin //最小金币数
+	 moneymax //最大银币
+	 moneymin //最小银币
+	 soulmax //最大武魂
+	 soulmin//最小武魂	 
+	 _1card //(card   依次是卡牌的SID  掉落几率 和 掉落最大张数)
+	-->
+	
+	<sample sid="21001" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="30" goldmin="1" moneymax="30"  moneymin="1"  soulmax="50" soulmin="1" _1card="10001,50000,1,10002,10000,1,10005,50000,1,10004,10000,2"/>	
+</objects>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objects>
+	<!--
+	在线领奖
+	sid	      唯一标签
+	class	  程序使用
+	time      领奖的冷却时间（秒为单位）
+	money     金币数量
+	_2card    卡片奖励（格式card[sid][len]）
+	soul      武魂数量
+	tired     军令数量	 
+       
+    
+	-->
+	<sample sid="65011" class="com.cambrian.dfhm.reward.Reward" time="30" money="0" _2card="10001,2|10001,2" soul="20" tired="0"/>
+	<sample sid="65012" class="com.cambrian.dfhm.reward.Reward" time="60" money="0" _2card="10005,5|10002,2" soul="80" tired="50"/>
+	<sample sid="65013" class="com.cambrian.dfhm.reward.Reward" time="90" money="30" _2card="10002,4|10001,2" soul="0" tired="50"/>
+	<sample sid="65014" class="com.cambrian.dfhm.reward.Reward" time="120" money="50" _2card="10003,1|10001,3" soul="40" tired="0"/>
+</objects>

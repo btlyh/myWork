@@ -774,10 +774,4 @@
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_WORK"/>
 		<obj class="com.cambrian.dfhm.slaveAndWar.command.WorkCommand"></obj>
 	</method>
-	
-	<!-- 当壕-前台发送-办事  -->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_GETID"/>
-		<obj class="com.cambrian.dfhm.slaveAndWar.command.GetIdentityCommand"></obj>
-	</method>
 </objects>

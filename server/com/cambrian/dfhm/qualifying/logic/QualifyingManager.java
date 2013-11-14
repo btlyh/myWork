@@ -264,7 +264,7 @@ public class QualifyingManager
 				i++;
 		}
 		if (i >= 5)
-			return Lang.F2202; //没有卡牌在阵上
+			return Lang.F2102; //没有卡牌在阵上
 		return null;
 	}
 
@@ -344,7 +344,7 @@ public class QualifyingManager
 		if (useGold != 5 * (int) Math.pow(2, player.getPlayerInfo()
 				.getDuelBuyTimes()))
 		{
-			return Lang.F2201; // 金钱错误
+			return Lang.F2101; // 金钱错误
 		}
 		return null;
 	}

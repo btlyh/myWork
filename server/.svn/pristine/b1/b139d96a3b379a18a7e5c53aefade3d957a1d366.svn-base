@@ -281,10 +281,9 @@ public final class GlobalConst
 	public static final int COMMAND_SLAVE_SAVEFRI=2611;
 	/** 当壕-前台发送-办事 */
 	public static final int COMMAND_SLAVE_WORK=2612;
-	/** 当壕-后台发送-信息推送 */
-	public static final int COMMAND_SLAVE_BACK_MESSAGE=2613;
-	/** 当壕-前台发送-获取身份信息 */
-	public static final int COMMAND_SLAVE_GETID=2614;
+	/** 当壕-后台发送-信息推送*/
+	public static final int COMMAND_SLAVE_BACK_MESSAGE=2602;
+
 	/**/
 	/* 功能处理器 */
 	/** 空功能处理器 */
