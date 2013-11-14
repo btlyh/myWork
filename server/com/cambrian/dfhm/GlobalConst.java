@@ -150,9 +150,9 @@ public final class GlobalConst
 	public static final int COMMAND_CARD_RESETFORSTER=1607;
 	/** 卡牌-前台发送-出售 */
 	public static final int COMMAND_CARD_SELL=1608;
-	/**卡牌 培养保存*/
+	/** 卡牌 培养保存 */
 	public static final int COMMAND_CARD_FORSTER_SAVE=1609;
-	
+
 	/* 通信命令号-金币消耗 */
 	/** 金币消耗-前台发送-购买军令 */
 	public static final int COMMAND_USEGOLD_TOKEN=1701;
@@ -239,9 +239,52 @@ public final class GlobalConst
 	public static final int COMMAND_GLOBALBOSS_BACK_START=2308;
 	/** 世界BOSS-后台发送-活动结束推送 */
 	public static final int COMMAND_GLOBALBOSS_BACK_END=2309;
+
+	/* 排位赛 */
+	/** 排位赛-前台发送-进入排位赛 */
+	public static final int COMMAND_QUALIFYING_ENTER=2401;
+	/** 排位赛-前台发送-挑战对手 */
+	public static final int COMMAND_QUALIFYING_DUEL=2402;
+	/** 排位赛-前台发送-购买挑战次数 */
+	public static final int COMMAND_QUALIFYING_BUY=2403;
+	/** 排位赛-前台发送-领取奖励 */
+	public static final int COMMAND_QUALIFYING_GIFT=2404;
+	/** 排位赛-前台发送-获取记录 */
+	public static final int COMMAND_QUALIFYING_LOG=2405;
+
 	/* 商城 */
 	/** 商城-前台发送-购买商品 */
-	public static final int COMMAND_SHOP_BUY=2401;
+	public static final int COMMAND_SHOP_BUY=2501;
+
+	/* 当壕 */
+	/** 当壕-前台发送-攻击敌人命令 */
+	public static final int COMMAND_SLAVE_ATTENE=2601;
+	/** 当壕-前台发送-速去速回 */
+	public static final int COMMAND_SLAVE_FASTWORK=2602;
+	/** 当壕-前台发送-获取敌人列表 */
+	public static final int COMMAND_SLAVE_GETENE=2603;
+	/** 当壕-前台发送-赎身 */
+	public static final int COMMAND_SLAVE_GETFREE=2604;
+	/** 当壕-前台发送-获取好友列表 */
+	public static final int COMMAND_SLAVE_GETFRI=2605;
+	/** 当壕-前台发送-获取求助列表 */
+	public static final int COMMAND_SLAVE_GETHELP=2606;
+	/** 当壕-前台发送-获取奴隶列表 */
+	public static final int COMMAND_SLAVE_GETSLAVE=2607;
+	/** 当壕-前台发送-求助好友 */
+	public static final int COMMAND_SLAVE_FORHELP=2608;
+	/** 当壕-前台发送-托管 */
+	public static final int COMMAND_SLAVE_MANAGED=2609;
+	/** 当壕-前台发送-反抗 */
+	public static final int COMMAND_SLAVE_REACT=2610;
+	/** 当壕-前台发送-救朋友 */
+	public static final int COMMAND_SLAVE_SAVEFRI=2611;
+	/** 当壕-前台发送-办事 */
+	public static final int COMMAND_SLAVE_WORK=2612;
+	/** 当壕-后台发送-信息推送 */
+	public static final int COMMAND_SLAVE_BACK_MESSAGE=2613;
+	/** 当壕-前台发送-获取身份信息 */
+	public static final int COMMAND_SLAVE_GETID=2614;
 	/**/
 	/* 功能处理器 */
 	/** 空功能处理器 */
@@ -252,12 +295,12 @@ public final class GlobalConst
 	/* 功能处理器-好友 */
 	/** 好友-功能处理器-添加好友请求结果消息 */
 	public static final int PROCESS_FRIEND_HANDLEAPPLYFRIEND=3201;
-	
-	/**军令  功能处理器 离线军令补发*/
-	public static final int OUTLINE_TOKEN_REISSUE_PORT = 3301;
-	
+
+	/** 军令 功能处理器 离线军令补发 */
+	public static final int OUTLINE_TOKEN_REISSUE_PORT=3301;
+
 	/* 功能处理器-消息 */
-	
+
 	/* 功能处理器-商城 */
 	/* 功能处理器-任务 */
 	/* 功能处理器-卡片图鉴 */

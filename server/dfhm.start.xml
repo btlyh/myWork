@@ -419,16 +419,16 @@
 	<!-- ########################################## -->
 	<!--  任务-初始化所有任务列表
 	<method class="com.cambrian.dfhm.task.TaskContainer" name="init"/> -->
-	<!--  任务-前台发送-获取任务列表
+	<!--  任务-前台发送-获取任务列表 -->
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_TASK_TASKLIST"/>
 		<obj class="com.cambrian.dfhm.task.command.TaskListCommand"></obj>
 	</method> -->
-	<!--  任务-前台发送-完成任务
+	<!--  任务-前台发送-完成任务 -->
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_TASK_FINISHTASK"/>
 		<obj class="com.cambrian.dfhm.task.command.FinishTaskCommand"></obj>
-	</method> -->
+	</method>
 
 	<obj class="com.cambrian.dfhm.common.UidFile">
 		<method name="setCardFile">
@@ -609,6 +609,139 @@
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SHOP_BUY"/>
 		<obj class="com.cambrian.dfhm.shop.command.BuyGoodsCommand"></obj>
 	</method>
-		
+<!-- ########################################## -->
+	<!-- 开启排位赛DAO -->
+	<obj class="com.cambrian.dfhm.qualifying.dao.QualifyingDao" id="QD">
+		<method name="setConnectionManager"><ref id="cm"/></method>
+	</obj>
+	<!-- 开启排位赛管理器 -->
+	<obj class="com.cambrian.dfhm.qualifying.logic.QualifyingManager" id="QFM">
+		<method name="setDS"><ref id="DS"/></method>
+		<method name="setQualifyingDao"><ref id="QD"/></method>
+		<method name="timerStart"/>
+	</obj>
+	<!-- 排位赛-前台发送-进入排位赛 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_QUALIFYING_ENTER"/>
+		<obj class="com.cambrian.dfhm.qualifying.command.EnterQualifyingCommand"></obj>
+	</method>
+	<!-- 排位赛-前台发送-挑战对手 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_QUALIFYING_DUEL"/>
+		<obj class="com.cambrian.dfhm.qualifying.command.DuelCommand"></obj>
+	</method>
+	<!-- 排位赛-前台发送-购买挑战次数 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_QUALIFYING_BUY"/>
+		<obj class="com.cambrian.dfhm.qualifying.command.BuyDuelTimesCommand"></obj>
+	</method>
+	<!-- 排位赛-前台发送-领取奖励 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_QUALIFYING_GIFT"/>
+		<obj class="com.cambrian.dfhm.qualifying.command.GetPointGiftCommand"></obj>
+	</method>
+	<!-- 排位赛-前台发送-获取记录 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_QUALIFYING_LOG"/>
+		<obj class="com.cambrian.dfhm.qualifying.command.GetHistoryLogCommand"></obj>
+	</method>
 	
+	
+	
+	<!-- ########################################## -->
+	<!-- 开启当壕DAO -->
+	<obj class="com.cambrian.dfhm.slaveAndWar.dao.SlaveAndWarDao" id="SAWD">
+		<method name="setConnectionManager"><ref id="cm"/></method>
+	</obj>
+	
+	<!-- 当壕-后台发送-信息推送-->
+	<obj class="com.cambrian.dfhm.slaveAndWar.notice.EventMessageNotice" id="EMN">
+		<method name="setPort">2602</method>
+	</obj>
+	
+	<!-- 开启当壕管理器 -->
+	<obj class="com.cambrian.dfhm.slaveAndWar.logic.SlaveManager" id="SLM">
+		<method name="setDS"><ref id="DS"/></method>
+		<method name="setSawd"><ref id="SAWD"/></method>
+		<method name="setEMN"><ref id="EMN"/></method>
+		<method name="timerStart"/>
+	</obj>
+	
+	<!-- 当壕-前台发送-攻击敌人命令 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_ATTENE"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.AttEnemyCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-速去速回 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_FASTWORK"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.FastWorkCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-获取敌人列表 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_GETENE"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.GetEnemyCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-赎身  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_GETFREE"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.GetFreeCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-获取好友列表  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_GETFRI"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.GetFriendListCommnd"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-获取求助列表  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_GETHELP"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.getHelpListCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-获取奴隶列表  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_GETSLAVE"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.getSlaveListCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-求助好友  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_FORHELP"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.ForHelpCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-托管  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_MANAGED"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.ManagedCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-反抗  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_REACT"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.ReactCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-救朋友  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_SAVEFRI"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.SaveFriendCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-办事  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_WORK"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.WorkCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-办事  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_GETID"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.GetIdentityCommand"></obj>
+	</method>
 </objects>

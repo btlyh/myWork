@@ -527,7 +527,6 @@ public class CardManager
 
 	/**
 	 * 境界突破
-	 * 
 	 * @param player
 	 * @param cardId 需要突破的卡牌ID
 	 * @param list 吞噬卡牌ID
