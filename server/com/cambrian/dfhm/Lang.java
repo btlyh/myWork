@@ -254,6 +254,13 @@ public final class Lang
 	public static final String F1809="1809";
 	/** 1810; 世界BOSS活动时间未到 */
 	public static final String F1810="1810";
+	/** 1811; 你已经自动报名，不能再次报名*/
+	public static final String F1811="1811";
+	/** 1812; 自动报名金币不足*/
+	public static final String F1812="1812";
+	/** 1813; 活动已经开始不能自动报名了*/
+	public static final String F1813="1813";
+	
 
 	/* 排行榜 */
 	/** 1901： 排行榜类型错误 */

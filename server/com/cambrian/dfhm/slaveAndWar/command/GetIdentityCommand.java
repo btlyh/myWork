@@ -47,5 +47,6 @@ public class GetIdentityCommand extends Command
 			throw new DataAccessException(601,Lang.F9000_SDE);
 		}
 		player.getIdentity().BytesWrite(data);
+		data.writeInt(player.getFightPoint());
 	}
 }

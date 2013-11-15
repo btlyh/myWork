@@ -1,12 +1,14 @@
 package com.cambrian.dfhm.slaveAndWar.command;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.net.Command;
 import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.net.NioTcpConnect;
 import com.cambrian.dfhm.Lang;
+import com.cambrian.dfhm.battle.Formation;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.slaveAndWar.logic.SlaveManager;
 import com.cambrian.game.Session;
@@ -50,8 +52,12 @@ public class SaveFriendCommand extends Command
 			throw new DataAccessException(601,Lang.F9000_SDE);
 		}
 		int friendId=data.readInt();
-		List<Integer> record=SlaveManager.getInstance().saveFriend(player,
-			friendId);
+		Map<String,Object> result=SlaveManager.getInstance().saveFriend(
+			player,friendId);
+		@SuppressWarnings("unchecked")
+		List<Integer> record=(List<Integer>)result.get("resultList");
+		Formation formation=(Formation)result.get("resultList");
+		formation.bytesWrite(data);
 		data.writeInt(record.size());
 		for(Integer integer:record)
 		{

@@ -64,6 +64,12 @@ public class GlobalBossCFG extends Sample
 	private int specialSoul;
 	/** 特殊奖励卡牌集合 -XML */
 	private int[] specialCardList;
+	/** 自动报名奖励银币 -XML */
+	private int autoMoney;
+	/** 自动报名奖励武魂 -XML */
+	private int autoSoul;
+	/** 自动报名奖励卡牌集合 -XML */
+	private int[] autoCardList;
 	/** BOSS是否开启 */
 	private boolean isOpen;
 	/** 挑战BOSS所需的主线关卡 -XML */
@@ -308,6 +314,35 @@ public class GlobalBossCFG extends Sample
 	{
 		this.timeConfine=timeConfine;
 	}
+	public int getAutoMoney()
+	{
+		return autoMoney;
+	}
+
+	public void setAutoMoney(int autoMoney)
+	{
+		this.autoMoney=autoMoney;
+	}
+
+	public int getAutoSoul()
+	{
+		return autoSoul;
+	}
+
+	public void setAutoSoul(int autoSoul)
+	{
+		this.autoSoul=autoSoul;
+	}
+
+	public int[] getAutoCardList()
+	{
+		return autoCardList;
+	}
+
+	public void setAutoCardList(int[] autoCardList)
+	{
+		this.autoCardList=autoCardList;
+	}
 	/* init start */
 
 	/* methods */
@@ -391,8 +426,22 @@ public class GlobalBossCFG extends Sample
 			damageReward.add(Arrays.asList(normalCardList));
 			damageReward.add(normalSoul*bfr.getTotalDamage());
 			damageReward.add(normalMoney*bfr.getTotalDamage());
+			rewardMap.put("rankReward",damageReward);
 		}
 		return rewardMap;
+	}
+	
+	/**
+	 * 获取自动报名奖励
+	 * @return
+	 */
+	public ArrayList<Object> countReward()
+	{
+		ArrayList<Object> autoReward=new ArrayList<Object>();
+		autoReward.add(Arrays.asList(autoCardList));
+		autoReward.add(autoSoul);
+		autoReward.add(autoMoney);
+		return autoReward;
 	}
 	/***
 	 * 计算排名

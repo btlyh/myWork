@@ -70,6 +70,61 @@ public class MailManager
 	}
 
 	/**
+	 * 一键收取邮件
+	 * 
+	 * @param player
+	 * @return
+	 */
+	public ArrayList<Integer> oneKeyTakeMail(Player player)
+	{
+		Map<String,Object> resultMap=checkOneKeyTakeMail(player);
+		String error=(String)resultMap.get("error");
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		return null;
+	}
+
+	/**
+	 * 检查一键收取
+	 * 
+	 * @param player
+	 * @return
+	 */
+	private Map<String,Object> checkOneKeyTakeMail(Player player)
+	{
+		Map<String,Object> mapInfo=new HashMap<String,Object>();
+		ArrayList<Mail> mailList=player.getMailList();
+		if(mailList.size()<1)
+		{
+			mapInfo.put("error",Lang.F1304);
+			return mapInfo;
+		}
+		ArrayList<Mail> canTakeMails=new ArrayList<Mail>();
+		for(Mail mail:mailList)
+		{
+			if(mail.getState()==Mail.MAILSTATE_READ_UNGET
+				||mail.getState()==Mail.MAILSTATE_UNREAD)
+			{
+				if(mail.getCardList().size()>=Mail.MAIL_ANNEX_MINNUM
+					||mail.getGold()>=Mail.MAIL_ANNEX_MINNUM
+					||mail.getMoney()>=Mail.MAIL_ANNEX_MINNUM
+					||mail.getToken()>=Mail.MAIL_ANNEX_MINNUM
+					||mail.getSoulPoint()>=Mail.MAIL_ANNEX_MINNUM
+					||mail.getNormalPoint()>=Mail.MAIL_ANNEX_MINNUM)
+				{
+					canTakeMails.add(mail);
+				}
+			}
+		}
+		if(canTakeMails.size()<1)
+		{
+
+		}
+		return null;
+	}
+	/**
 	 * 删除邮件
 	 * 
 	 * @param uid 唯一标识

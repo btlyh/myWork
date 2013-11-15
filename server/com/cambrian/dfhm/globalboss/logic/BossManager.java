@@ -9,12 +9,16 @@ import java.util.Map;
 import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.util.TimeKit;
 import com.cambrian.dfhm.Lang;
+import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
 import com.cambrian.dfhm.common.entity.Player;
+import com.cambrian.dfhm.globalboss.dao.GlobalBossDao;
 import com.cambrian.dfhm.globalboss.entity.BossFightRecord;
 import com.cambrian.dfhm.globalboss.entity.GlobalBossCFG;
 import com.cambrian.dfhm.globalboss.notice.BossEndNotice;
+import com.cambrian.dfhm.mail.entity.Mail;
+import com.cambrian.dfhm.mail.notice.MailSendNotice;
 import com.cambrian.dfhm.mail.util.MailFactory;
 import com.cambrian.game.Session;
 import com.cambrian.game.ds.DataServer;
@@ -45,6 +49,10 @@ public class BossManager
 	private DataServer ds;
 	/** 邮件工厂类 */
 	MailFactory mf;
+	/** 推送发送邮件消息 */
+	MailSendNotice msn;
+	/** 世界BOSS数据访问对象 */
+	GlobalBossDao dao;
 
 	/* constructors */
 
@@ -64,9 +72,70 @@ public class BossManager
 		instance.mf=mf;
 	}
 
+	public void setMailSendNotice(MailSendNotice msn)
+	{
+		instance.msn=msn;
+	}
+
+	public void setGlobalBossDao(GlobalBossDao dao)
+	{
+		instance.dao=dao;
+	}
+
 	/* init start */
 
 	/* methods */
+
+	/**
+	 * 自动报名
+	 * 
+	 * @param player 玩家对象
+	 */
+	public void autoSign(Player player)
+	{
+		String error=checkAutoSign(player);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		player.decrGold(GameCFG.getBossAutoSignGold());
+		player.getPlayerInfo().setAutoSignBoss(true);
+	}
+
+	/**
+	 * 检查自动报名
+	 * 
+	 * @param player 玩家对象
+	 * @return
+	 */
+	private String checkAutoSign(Player player)
+	{
+		if(player.getPlayerInfo().isAutoSignBoss())
+		{
+			return Lang.F1811;
+		}
+		if(player.getGold()<GameCFG.getBossAutoSignGold())
+		{
+			return Lang.F1812;
+		}
+		boolean isOpen=false;
+		int[] bossSid=GameCFG.getGlobalBossList();
+		for(Integer integer:bossSid)
+		{
+			GlobalBossCFG gbc=bossMap.get(integer);
+			if(gbc.isOpen())
+			{
+				isOpen=true;
+				break;
+			}
+		}
+		if(isOpen)
+		{
+			return Lang.F1813;
+		}
+		return null;
+	}
+
 	/**
 	 * 关闭自动战斗
 	 * 
@@ -438,11 +507,11 @@ public class BossManager
 			mapInfo.put("error",Lang.F1801);
 			return mapInfo;
 		}
-//		if(player.getCurIndexForNormalNPC()<gbc.getNormalNPCIndex())
-//		{
-//			mapInfo.put("error",Lang.F1802);
-//			return mapInfo;
-//		}
+		// if(player.getCurIndexForNormalNPC()<gbc.getNormalNPCIndex())
+		// {
+		// mapInfo.put("error",Lang.F1802);
+		// return mapInfo;
+		// }
 		mapInfo.put("error",null);
 		mapInfo.put("gbc",gbc);
 		return mapInfo;
@@ -484,6 +553,7 @@ public class BossManager
 	{
 		Iterator<Integer> iterator=gbc.rankMap.keySet().iterator();
 		BossFightRecord bfr;
+		Mail mail=null;
 		while(iterator.hasNext())
 		{
 			int key=iterator.next();
@@ -494,22 +564,25 @@ public class BossManager
 			ArrayList<Object> damageReward=rewardMap.get("damageReward");
 			if(finishReward!=null)
 			{
-				mf.createSystemMail((ArrayList<Integer>)finishReward.get(0),
-					0,Integer.parseInt(finishReward.get(2).toString()),0,
+				mail=mf.createSystemMail(
+					(ArrayList<Integer>)finishReward.get(0),0,
+					Integer.parseInt(finishReward.get(2).toString()),0,
 					Integer.parseInt(finishReward.get(1).toString()),0,
 					bfr.getPlayerId());
 			}
 			if(rankReward!=null)
 			{
-				mf.createSystemMail((ArrayList<Integer>)rankReward.get(0),0,
+				mail=mf.createSystemMail(
+					(ArrayList<Integer>)rankReward.get(0),0,
 					Integer.parseInt(rankReward.get(2).toString()),0,
 					Integer.parseInt(rankReward.get(1).toString()),0,
 					bfr.getPlayerId());
 			}
 			if(damageReward!=null)
 			{
-				mf.createSystemMail((ArrayList<Integer>)damageReward.get(0),
-					0,Integer.parseInt(damageReward.get(2).toString()),0,
+				mail=mf.createSystemMail(
+					(ArrayList<Integer>)damageReward.get(0),0,
+					Integer.parseInt(damageReward.get(2).toString()),0,
 					Integer.parseInt(damageReward.get(1).toString()),0,
 					bfr.getPlayerId());
 			}
@@ -518,17 +591,48 @@ public class BossManager
 			{
 				Player player=(Player)session.getSource();
 				player.setBfr(null);
+				player.addMail(mail);
+				msn.send(session,new Object[]{player.getUnreadMailCount()});
 			}
 		}
-		Session[] sessions=ds.getSessionMap().getSessions();
-		for(Session session:sessions)
+		ArrayList<Object> autoReward=gbc.countReward();
+		List<Integer> idList=dao.getAllPlayerId();
+		for(Integer integer:idList)
 		{
+			Session session=ds.getSession(integer);
 			if(session!=null)
 			{
 				if(isDeath)
 					ben.send(session,new Object[]{Lang.F1807});
 				else
 					ben.send(session,new Object[]{Lang.F1808});
+				Player player=(Player)session.getSource();
+				if(player.getPlayerInfo().isAutoSignBoss())
+				{
+					mail=mf.createSystemMail(
+						(ArrayList<Integer>)autoReward.get(0),0,
+						Integer.parseInt(autoReward.get(2).toString()),0,
+						Integer.parseInt(autoReward.get(1).toString()),0,
+						(int)player.getUserId());
+					msn.send(session,
+						new Object[]{player.getUnreadMailCount()});
+					player.getPlayerInfo().setAutoSignBoss(false);
+					player.addMail(mail);
+				}
+			}
+			else
+			{
+				Player player=dao.getPlayer(integer);
+				if(player.getPlayerInfo().isAutoSignBoss())
+				{
+					mf.createSystemMail(
+						(ArrayList<Integer>)autoReward.get(0),0,
+						Integer.parseInt(autoReward.get(2).toString()),0,
+						Integer.parseInt(autoReward.get(1).toString()),0,
+						(int)player.getUserId());
+					player.getPlayerInfo().setAutoSignBoss(false);
+					dao.savePlayerVar(player);
+				}
 			}
 		}
 	}

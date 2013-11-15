@@ -59,6 +59,7 @@ public class GetEnemyCommand extends Command
 			data.writeInt((int)tarPlayer.getUserId());// 目标userID
 			data.writeUTF(tarPlayer.getNickname());// 目标名称
 			data.writeUTF(tarPlayer.getIdentity().getGradeName());// 目标身份名称
+			data.writeInt(tarPlayer.getIdentity().getSlaveList().size());// 马仔数量
 		}
 	}
 }

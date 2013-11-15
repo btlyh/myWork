@@ -239,6 +239,8 @@ public final class GlobalConst
 	public static final int COMMAND_GLOBALBOSS_BACK_START=2308;
 	/** 世界BOSS-后台发送-活动结束推送 */
 	public static final int COMMAND_GLOBALBOSS_BACK_END=2309;
+	/** 世界BOSS-前台发送-自动报名*/
+	public static final int COMMAND_GLOBALBOSS_AUTOSIGN=2310;
 
 	/* 排位赛 */
 	/** 排位赛-前台发送-进入排位赛 */

@@ -1,24 +1,20 @@
-package com.cambrian.dfhm.slaveAndWar.command;
-
-import java.util.List;
-import java.util.Map;
+package com.cambrian.dfhm.globalboss.command;
 
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.net.Command;
 import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.net.NioTcpConnect;
 import com.cambrian.dfhm.Lang;
-import com.cambrian.dfhm.battle.Formation;
 import com.cambrian.dfhm.common.entity.Player;
-import com.cambrian.dfhm.slaveAndWar.logic.SlaveManager;
+import com.cambrian.dfhm.globalboss.logic.BossManager;
 import com.cambrian.game.Session;
 
 /**
- * 类说明：反抗命令
+ * 类说明：自动报名
  * 
  * @author：LazyBear
  */
-public class ReactCommand extends Command
+public class AutoSignCommand extends Command
 {
 
 	/* static fields */
@@ -51,15 +47,6 @@ public class ReactCommand extends Command
 		{
 			throw new DataAccessException(601,Lang.F9000_SDE);
 		}
-		Map<String,Object> result=SlaveManager.getInstance().react(player);
-		@SuppressWarnings("unchecked")
-		List<Integer> record=(List<Integer>)result.get("resultList");
-		Formation formation=(Formation)result.get("resultList");
-		formation.bytesWrite(data);
-		data.writeInt(record.size());
-		for(Integer integer:record)
-		{
-			data.writeInt(integer);
-		}
+		BossManager.getInstance().autoSign(player);
 	}
 }

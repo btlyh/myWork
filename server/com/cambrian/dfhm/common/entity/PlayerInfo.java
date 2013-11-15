@@ -35,7 +35,7 @@ public class PlayerInfo
 	private int cardGoldForster;
 	/** 战斗中使用跳过功能 */
 	private int battleSkip;
-	/** 付费醒酒功能 */
+	/** 付 费醒酒功能 */
 	private int payForAwake;
 	/** 自动喝酒功能 */
 	private int autoDrink;
@@ -43,7 +43,10 @@ public class PlayerInfo
 	private int autoBossFight;
 	/** 自动报名 */
 	private int autoBossSign;
-	
+
+	/** 是否已经自动报名 */
+	private boolean isAutoSignBoss;
+
 	/** 抽奖SID */
 	private int luckBoxSid=39051;
 	/** 上次抽奖时间 */
@@ -56,37 +59,35 @@ public class PlayerInfo
 	private int bestCardSid;
 	/** 积分 */
 	private int normalPoint;
-	/** 是否第一次抽取*/
+	/** 是否第一次抽取 */
 	private boolean isFirst;
 	/** 总充值金额 */
-	private int payRMB = 0;
+	private int payRMB=0;
 	/** 故事模式副本时间 */
-	private int normalNPCTime = 0;
+	private int normalNPCTime=0;
 	/** 挑战模式副本时间 */
-	private int hardNPCTime = 0;
+	private int hardNPCTime=0;
 
 	/** 下一次可领奖的ID */
 	private int rewardId;
-	
-	/** 下一次领奖时间*/
-	private long nextRewardTime;
-	
-	/**当天已经领奖次数 初始化为0  */
-	private int rewardNum =0;
-	
 
-	
+	/** 下一次领奖时间 */
+	private long nextRewardTime;
+
+	/** 当天已经领奖次数 初始化为0 */
+	private int rewardNum=0;
+
 	/** 免费挑战次数 */
-	private int duelFreeTimes = 10;
+	private int duelFreeTimes=10;
 	/** 已经购买的挑战次数 */
-	private int duelBuyTimes = 0;
+	private int duelBuyTimes=0;
 	/** 是否可以领取排位赛奖励 */
-	private int canTakePoint = 0;
+	private int canTakePoint=0;
 	/** 排位赛挑战历史记录 */
-	private List<String> qualifyingLog = new ArrayList<String>();
+	private List<String> qualifyingLog=new ArrayList<String>();
 	/** 仇人列表 */
-	private List<String> enemyList = new ArrayList<String>();
-	
+	private List<String> enemyList=new ArrayList<String>();
+
 	/** 副本次数 */
 	private int instancingCount;
 	/** 排位赛次数 */
@@ -95,9 +96,6 @@ public class PlayerInfo
 	private int qualifyingWin;
 
 	/* constructors */
-	
-	
-
 
 	/* properties */
 	public int getSkillFlushFreeTimes()
@@ -178,13 +176,13 @@ public class PlayerInfo
 		this.normalPoint=normalPoint;
 	}
 	public boolean isFirst()
-	
+
 	{
 		return isFirst;
 	}
 	public void setFirst(boolean isFirst)
 	{
-		this.isFirst = isFirst;
+		this.isFirst=isFirst;
 	}
 	public int getPayRMB()
 	{
@@ -193,7 +191,7 @@ public class PlayerInfo
 
 	public void setPayRMB(int payRMB)
 	{
-		this.payRMB = payRMB;
+		this.payRMB=payRMB;
 	}
 
 	public int getNormalNPCTime()
@@ -203,7 +201,7 @@ public class PlayerInfo
 
 	public void setNormalNPCTime(int normalNPCTime)
 	{
-		this.normalNPCTime = normalNPCTime;
+		this.normalNPCTime=normalNPCTime;
 	}
 
 	public int getHardNPCTime()
@@ -213,7 +211,7 @@ public class PlayerInfo
 
 	public void setHardNPCTime(int hardNPCTime)
 	{
-		this.hardNPCTime = hardNPCTime;
+		this.hardNPCTime=hardNPCTime;
 	}
 	/* init start */
 
@@ -226,7 +224,7 @@ public class PlayerInfo
 
 	public void setGetToken(int getToken)
 	{
-		this.getToken = getToken;
+		this.getToken=getToken;
 	}
 
 	public int getBuyToken()
@@ -236,7 +234,7 @@ public class PlayerInfo
 
 	public void setBuyToken(int buyToken)
 	{
-		this.buyToken = buyToken;
+		this.buyToken=buyToken;
 	}
 
 	public int getCardGoldForsterFreeTimes()
@@ -246,7 +244,7 @@ public class PlayerInfo
 
 	public void setCardGoldForsterFreeTimes(int cardGoldForsterFreeTimes)
 	{
-		this.cardGoldForsterFreeTimes = cardGoldForsterFreeTimes;
+		this.cardGoldForsterFreeTimes=cardGoldForsterFreeTimes;
 	}
 
 	public int getCardGoldForster()
@@ -256,7 +254,7 @@ public class PlayerInfo
 
 	public void setCardGoldForster(int cardGoldForster)
 	{
-		this.cardGoldForster = cardGoldForster;
+		this.cardGoldForster=cardGoldForster;
 	}
 
 	public int getBattleSkip()
@@ -266,7 +264,7 @@ public class PlayerInfo
 
 	public void setBattleSkip(int battleSkip)
 	{
-		this.battleSkip = battleSkip;
+		this.battleSkip=battleSkip;
 	}
 
 	public int getPayForAwake()
@@ -276,7 +274,7 @@ public class PlayerInfo
 
 	public void setPayForAwake(int payForAwake)
 	{
-		this.payForAwake = payForAwake;
+		this.payForAwake=payForAwake;
 	}
 
 	public int getAutoDrink()
@@ -286,7 +284,7 @@ public class PlayerInfo
 
 	public void setAutoDrink(int autoDrink)
 	{
-		this.autoDrink = autoDrink;
+		this.autoDrink=autoDrink;
 	}
 
 	public int getDuelFreeTimes()
@@ -296,7 +294,7 @@ public class PlayerInfo
 
 	public void setDuelFreeTimes(int duelFreeTimes)
 	{
-		this.duelFreeTimes = duelFreeTimes;
+		this.duelFreeTimes=duelFreeTimes;
 	}
 
 	public int getDuelBuyTimes()
@@ -306,7 +304,7 @@ public class PlayerInfo
 
 	public void setDuelBuyTimes(int duelBuyTimes)
 	{
-		this.duelBuyTimes = duelBuyTimes;
+		this.duelBuyTimes=duelBuyTimes;
 	}
 
 	public int getCanTakePoint()
@@ -316,7 +314,7 @@ public class PlayerInfo
 
 	public void setCanTakePoint(int canTakePoint)
 	{
-		this.canTakePoint = canTakePoint;
+		this.canTakePoint=canTakePoint;
 	}
 
 	public List<String> getQualifyingLog()
@@ -326,9 +324,9 @@ public class PlayerInfo
 
 	public void setQualifyingLog(List<String> qualifyingLog)
 	{
-		this.qualifyingLog = qualifyingLog;
+		this.qualifyingLog=qualifyingLog;
 	}
-	
+
 	public List<String> getEnemyList()
 	{
 		return enemyList;
@@ -336,7 +334,7 @@ public class PlayerInfo
 
 	public void setEnemyList(List<String> enemyList)
 	{
-		this.enemyList = enemyList;
+		this.enemyList=enemyList;
 	}
 
 	public int getAutoBossFight()
@@ -346,7 +344,7 @@ public class PlayerInfo
 
 	public void setAutoBossFight(int autoBossFight)
 	{
-		this.autoBossFight = autoBossFight;
+		this.autoBossFight=autoBossFight;
 	}
 
 	public int getAutoBossSign()
@@ -356,36 +354,38 @@ public class PlayerInfo
 
 	public void setAutoBossSign(int autoBossSign)
 	{
-		this.autoBossSign = autoBossSign;
+		this.autoBossSign=autoBossSign;
 	}
 
-	
-	public int getRewardId() {
+	public int getRewardId()
+	{
 		return rewardId;
 	}
 
-	public void setRewardId(int rewardId) {
-		this.rewardId = rewardId;
+	public void setRewardId(int rewardId)
+	{
+		this.rewardId=rewardId;
 	}
 
-	public long getNextRewardTime() {
+	public long getNextRewardTime()
+	{
 		return nextRewardTime;
 	}
 
-	public void setNextRewardTime(long nextRewardTime) {
-		this.nextRewardTime = nextRewardTime;
+	public void setNextRewardTime(long nextRewardTime)
+	{
+		this.nextRewardTime=nextRewardTime;
 	}
 
-	public int getRewardNum() {
+	public int getRewardNum()
+	{
 		return rewardNum;
 	}
 
-	public void setRewardNum(int rewardNum) {
-		this.rewardNum = rewardNum;
+	public void setRewardNum(int rewardNum)
+	{
+		this.rewardNum=rewardNum;
 	}
-
-	
-
 
 	public int getInstancingCount()
 	{
@@ -394,7 +394,7 @@ public class PlayerInfo
 
 	public void setInstancingCount(int instancingCount)
 	{
-		this.instancingCount = instancingCount;
+		this.instancingCount=instancingCount;
 	}
 
 	public int getQualifyingCount()
@@ -404,7 +404,7 @@ public class PlayerInfo
 
 	public void setQualifyingCount(int qualifyingCount)
 	{
-		this.qualifyingCount = qualifyingCount;
+		this.qualifyingCount=qualifyingCount;
 	}
 
 	public int getQualifyingWin()
@@ -414,10 +414,18 @@ public class PlayerInfo
 
 	public void setQualifyingWin(int qualifyingWin)
 	{
-		this.qualifyingWin = qualifyingWin;
+		this.qualifyingWin=qualifyingWin;
 	}
 
+	public boolean isAutoSignBoss()
+	{
+		return isAutoSignBoss;
+	}
 
+	public void setAutoSignBoss(boolean isAutoSignBoss)
+	{
+		this.isAutoSignBoss=isAutoSignBoss;
+	}
 	/** 序列化 和前台通信 */
 	public void bytesWrite(ByteBuffer data)
 	{
@@ -474,12 +482,12 @@ public class PlayerInfo
 		data.writeInt(duelBuyTimes);
 		data.writeInt(canTakePoint);
 		data.writeInt(qualifyingLog.size());
-		for (String str : qualifyingLog)
+		for(String str:qualifyingLog)
 		{
 			data.writeUTF(str);
 		}
 		data.writeInt(enemyList.size());
-		for (String str : enemyList)
+		for(String str:enemyList)
 		{
 			data.writeUTF(str);
 		}
@@ -519,23 +527,23 @@ public class PlayerInfo
 		autoBossFight=data.readInt();
 		autoBossSign=data.readInt();
 
-		rewardId =data.readInt();
-		nextRewardTime =data.readLong();
-		rewardNum = data.readInt();		
+		rewardId=data.readInt();
+		nextRewardTime=data.readLong();
+		rewardNum=data.readInt();
 
 		duelFreeTimes=data.readInt();
 		duelBuyTimes=data.readInt();
 		canTakePoint=data.readInt();
 		len=data.readInt();
-		for (int i = 0; i < len; i++)
+		for(int i=0;i<len;i++)
 		{
-			String str = data.readUTF();
+			String str=data.readUTF();
 			qualifyingLog.add(str);
 		}
 		len=data.readInt();
-		for (int i = 0; i < len; i++)
+		for(int i=0;i<len;i++)
 		{
-			String str = data.readUTF();
+			String str=data.readUTF();
 			enemyList.add(str);
 		}
 		instancingCount=data.readInt();
@@ -559,49 +567,48 @@ public class PlayerInfo
 		this.normalPoint+=normalPoint;
 
 	}
-	
+
 	public void decrDuelFreeTimes(int times)
 	{
 		duelFreeTimes-=times;
 	}
-	
+
 	public void incrDuelFreeTimes(int times)
 	{
 		duelFreeTimes+=times;
 	}
-	
+
 	public void incrDuelBuyTimes(int times)
 	{
 		duelBuyTimes+=times;
 	}
-	
+
 	public void incrInstancingCount(int times)
 	{
-		instancingCount += times;
+		instancingCount+=times;
 	}
-	
+
 	public void incrQualifyingCount(int times)
 	{
-		qualifyingCount += times;
+		qualifyingCount+=times;
 	}
-	
+
 	public void incrQualifyingWin(int times)
 	{
-		qualifyingCount += times;
+		qualifyingCount+=times;
 	}
-	
+
 	/** 添加排位赛记录 */
 	public void addQualifyingLog(String log)
 	{
-		if (qualifyingLog.size() > 5)
-			qualifyingLog.remove(0);
+		if(qualifyingLog.size()>5) qualifyingLog.remove(0);
 		qualifyingLog.add(log);
 	}
-	
+
 	/** 添加仇人 */
 	public void addEnemy(String playerName)
 	{
-		if (enemyList.size() > 5)
+		if(enemyList.size()>5)
 		{
 			enemyList.remove(0);
 		}

@@ -91,6 +91,8 @@ public class GameCFG
 	private static int fastWorkGold;
 	/** 世界BOSS集合 */
 	private static int[] globalBossList;
+	/** 世界BOSS自动报名所需金币*/
+	private static int bossAutoSignGold;
 
 	public static int getPayForAwakeMinutes()
 	{
@@ -634,5 +636,19 @@ public class GameCFG
 	public static void setFastWorkGold(int fastWorkGold)
 	{
 		GameCFG.fastWorkGold = fastWorkGold;
+	}
+	
+	/**
+	 * 获取自动报名所需费用
+	 * @return
+	 */
+	public static int getBossAutoSignGold()
+	{
+		return bossAutoSignGold;
+	}
+
+	public static void setBossAutoSignGold(int bossAutoSignGold)
+	{
+		GameCFG.bossAutoSignGold = bossAutoSignGold;
 	}
 }

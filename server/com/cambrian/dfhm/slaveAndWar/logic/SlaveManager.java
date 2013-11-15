@@ -299,7 +299,7 @@ public class SlaveManager
 	 * @param friendId 好友ID
 	 * @return 返回战斗数据
 	 */
-	public List<Integer> saveFriend(Player player,int friendId)
+	public Map<String,Object> saveFriend(Player player,int friendId)
 	{
 		Map<String,Object> resultMap=checkSaveFriend(player,friendId);
 		String error=(String)resultMap.get("error");
@@ -313,23 +313,18 @@ public class SlaveManager
 		List<Integer> resultList=new ArrayList<Integer>();
 		boolean isWin=false;
 		player.getIdentity().inSaveTimes();
-		if(tarPlayer.formation.isEmpty())
+		resultList=pvpFight(player.formation.getFormation(),
+			tarPlayer.formation.getFormation());
+		int win=resultList.get(resultList.size()-1);
+		if(win==1)
 		{
-			resultList.add(-1);// 对方无上阵卡牌。战斗数据第一位为-1表示战斗直接胜利
 			isWin=true;
 		}
-		else
-		{
-			resultList=pvpFight(player.formation.getFormation(),
-				tarPlayer.formation.getFormation());
-			int win=resultList.get(resultList.size()-1);
-			if(win==1)
-			{
-				isWin=true;
-			}
-		}
 		fightEndSaveFriend(player,tarPlayer,friendPlayer,isWin);
-		return resultList;
+		Map<String,Object> result=new HashMap<String,Object>();
+		result.put("resultList",resultList);
+		result.put("formation",tarPlayer.formation.getFormation());
+		return result;
 	}
 
 	/**
@@ -513,7 +508,7 @@ public class SlaveManager
 	 * @param player 玩家对象
 	 * @return 返回战斗数据
 	 */
-	public List<Integer> react(Player player)
+	public Map<String,Object> react(Player player)
 	{
 		String error=checkReact(player);
 		if(error!=null)
@@ -524,23 +519,18 @@ public class SlaveManager
 		List<Integer> resultList=new ArrayList<Integer>();
 		boolean isWin=false;
 		player.getIdentity().inAttTimes();
-		if(tarPlayer.formation.isEmpty())
+		resultList=pvpFight(player.formation.getFormation(),
+			tarPlayer.formation.getFormation());
+		int win=resultList.get(resultList.size()-1);
+		if(win==1)
 		{
-			resultList.add(-1);// 对方无上阵卡牌。战斗数据第一位为-1表示战斗直接胜利
 			isWin=true;
 		}
-		else
-		{
-			resultList=pvpFight(player.formation.getFormation(),
-				tarPlayer.formation.getFormation());
-			int win=resultList.get(resultList.size()-1);
-			if(win==1)
-			{
-				isWin=true;
-			}
-		}
 		fighEndHandleReact(player,tarPlayer,isWin);
-		return resultList;
+		Map<String,Object> result=new HashMap<String,Object>();
+		result.put("resultList",resultList);
+		result.put("formation",tarPlayer.formation.getFormation());
+		return result;
 	}
 
 	/**
@@ -591,7 +581,7 @@ public class SlaveManager
 	 * @param isSave 是否救人
 	 * @return 返回战斗数据
 	 */
-	public List<Integer> attEnemy(Player player,int tarPlayerId,
+	public Map<String,Object> attEnemy(Player player,int tarPlayerId,
 		boolean isSave)
 	{
 		Map<String,Object> mapResult=checkAttEnemy(player,tarPlayerId,isSave);
@@ -608,25 +598,19 @@ public class SlaveManager
 		{
 			player.getIdentity().inSaveNorTimes();
 		}
-		if(tarPlayer.formation.isEmpty())
+		resultList=pvpFight(player.formation.getFormation(),
+			tarPlayer.formation.getFormation());
+		int win=resultList.get(resultList.size()-1);
+		if(win==1)
 		{
-			resultList.add(-1);// 对方无上阵卡牌。战斗数据第一位为-1表示战斗直接胜利
 			isWin=true;
 		}
-		else
-		{
-			resultList=pvpFight(player.formation.getFormation(),
-				tarPlayer.formation.getFormation());
-			int win=resultList.get(resultList.size()-1);
-			if(win==1)
-			{
-				isWin=true;
-			}
-		}
 		fightEndHandleNormal(player,tarPlayer,isWin,isSave);
-		return resultList;
+		Map<String,Object> result=new HashMap<String,Object>();
+		result.put("resultList",resultList);
+		result.put("formation",tarPlayer.formation.getFormation());
+		return result;
 	}
-
 	/**
 	 * 玩家赎身处理
 	 * 

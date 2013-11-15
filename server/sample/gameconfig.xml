@@ -173,9 +173,13 @@
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setManagedGold">100</method>
 	</obj>
-		<!-- 设置当壕功能速去速回所需金币数量-->
+	<!-- 设置当壕功能速去速回所需金币数量-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setFastWorkGold">500</method>
 	</obj>
 
+	<!-- 设置世界BOSS自动报名所需金币-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setBossAutoSignGold">1000</method>
+	</obj>
 </objects>

@@ -571,11 +571,18 @@
 		<method name="setPort">2308</method>
 	</obj>
 	
+	<!-- 开启排位赛DAO -->
+	<obj class="com.cambrian.dfhm.globalboss.dao.GlobalBossDao" id="GBD">
+		<method name="setConnectionManager"><ref id="cm"/></method>
+	</obj>
+	
 	<!-- 世界BOSS-开启逻辑管理器 -->
 	<obj class="com.cambrian.dfhm.globalboss.logic.BossManager" id="BM">
 		<method name="setBen"><ref id="ben"/></method>
 		<method name="setDS"><ref id="DS"/></method>
 		<method name="setMailFactory"><ref id="MF"/></method>
+		<method name="setMailSendNotice"><ref id="MSN"/></method>
+		<method name="setGlobalBossDao"><ref id="GBD"/></method>
 	</obj>
 	
 	<!-- 世界BOSS-开启定时器 -->
@@ -617,6 +624,14 @@
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_GLOBALBOSS_RELIVE"/>
 		<obj class="com.cambrian.dfhm.globalboss.command.ReliveCommand"></obj>
 	</method>
+	<!-- 世界BOSS-前台发送-自动报名-->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_GLOBALBOSS_AUTOSIGN"/>
+		<obj class="com.cambrian.dfhm.globalboss.command.AutoSignCommand"></obj>
+	</method>
+
+		
+	<!-- 在线领奖 -->
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_ONLINE_AWARD"/>
 		<obj class="com.cambrian.dfhm.reward.command.OnlineAwardCommand"></obj>
@@ -625,9 +640,6 @@
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SHOP_BUY"/>
 		<obj class="com.cambrian.dfhm.shop.command.BuyGoodsCommand"></obj>
 	</method>
-		
-	<!-- 在线领奖 -->
-	
 
 <!-- ########################################## -->
 	<!-- 开启排位赛DAO -->
