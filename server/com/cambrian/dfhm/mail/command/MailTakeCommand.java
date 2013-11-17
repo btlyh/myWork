@@ -1,6 +1,6 @@
 package com.cambrian.dfhm.mail.command;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.net.Command;
@@ -38,7 +38,7 @@ public class MailTakeCommand extends Command
 		}
 		int uid=data.readInt();
 		data.clear();
-		ArrayList<Integer> dataList=MailManager.getInstance().takeMail(uid,
+		List<Integer> dataList=MailManager.getInstance().takeMail(uid,
 			player);
 		data.writeInt(dataList.size());
 		for(Integer integer:dataList)
