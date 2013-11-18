@@ -578,8 +578,6 @@ public class Player extends Sample implements Actor
 		}
 		playerInfo.bytesWrite(data);
 		armyCamp.bytesWrite(data);
-		data.writeInt(curIndexForNormalNPC);
-		data.writeInt(curIndexForCorssNPC);
 	}
 
 	/** 序列化(和dc通信) */
