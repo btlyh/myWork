@@ -62,9 +62,9 @@ public class BattleCard
 
 	/* constructors */
 	public BattleCard(int id,String name,String avatar,String tinyAvatar,
-		int level,int att,int skillRate,int attRange,
-		int skillId,int maxHp,int curHp,int index,int aimType,int critRate,
-		int dodgeRate,int awardSid,int type)
+		int level,int att,int skillRate,int attRange,int skillId,int maxHp,
+		int curHp,int index,int aimType,int critRate,int dodgeRate,
+		int awardSid,int type)
 	{
 		this.id=id;
 		this.name=name;
@@ -281,6 +281,11 @@ public class BattleCard
 	/* init start */
 
 	/* methods */
+	public void attUp(int ratio)
+	{
+		att+=(int)(att*ratio*0.01f);
+	}
+
 	/**
 	 * 扣血
 	 * 
@@ -313,9 +318,10 @@ public class BattleCard
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 是否拥有免伤技能
+	 * 
 	 * @return
 	 */
 	public boolean hadNoHurtSkill()
@@ -437,7 +443,7 @@ public class BattleCard
 		tinyAvatar=data.readUTF();
 		level=data.readInt();
 		att=data.readInt();
-		skillRate=data.readInt();			
+		skillRate=data.readInt();
 		attRange=data.readInt();
 		int skillId=data.readInt();
 		skill=(Skill)Sample.factory.getSample(skillId);

@@ -145,7 +145,7 @@ public class BossManager
 	public void turnOffAuto(Player player,int bossSid)
 	{
 		Map<String,Object> resultMap=checkturnOffAuto(player,bossSid);
-		String error=resultMap.get("error").toString();
+		String error=(String)resultMap.get("error");
 		if(error!=null)
 		{
 			throw new DataAccessException(601,error);
@@ -188,7 +188,7 @@ public class BossManager
 	public void turnOnAuto(Player player,int bossSid)
 	{
 		Map<String,Object> resultMap=checkturnOnAuto(player,bossSid);
-		String error=resultMap.get("error").toString();
+		String error=(String)resultMap.get("error");
 		if(error!=null)
 		{
 			throw new DataAccessException(601,error);
@@ -261,8 +261,7 @@ public class BossManager
 		{
 			for(BattleCard battleCard:att)
 			{
-				battleCard.setAtt(battleCard.getAtt()
-					*player.getBfr().getAttUp());
+				battleCard.attUp(player.getBfr().getAttUp());
 			}
 		}
 		GlobalBossCFG gbc=(GlobalBossCFG)resultMap.get("gbc");
@@ -336,7 +335,7 @@ public class BossManager
 		if(player.getBfr().getLastAttTime()>0)
 		{
 			if(player.getBfr().getLastAttTime()+TimeKit.MIN_MILLS
-				*gbc.getAttCD()>TimeKit.nowTime())
+				*gbc.getAttCD()>TimeKit.nowTimeMills())
 			{
 				mapInfo.put("error",Lang.F1806);
 				return mapInfo;
@@ -684,9 +683,10 @@ public class BossManager
 		}
 		return surplusTime;
 	}
-	
+
 	/**
 	 * 获取BOSS活动的剩余时间
+	 * 
 	 * @param bossSid
 	 * @return
 	 */

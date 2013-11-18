@@ -53,8 +53,8 @@ public class AutoAttTimeTask extends TimerTask
 		{
 			for(Player player:gbc.autoList)
 			{
-				if(player.getBfr().getLastAttTime()
-					+TimeKit.timeOf(0,gbc.getAttCD())<TimeKit.nowTimeMills())
+				if(player.getBfr().getLastAttTime()+TimeKit.MIN_MILLS
+					*gbc.getAttCD()<TimeKit.nowTimeMills())
 				{
 					synchronized(gbc)
 					{
@@ -64,8 +64,8 @@ public class AutoAttTimeTask extends TimerTask
 						{
 							for(BattleCard battleCard:att)
 							{
-								battleCard.setAtt(battleCard.getAtt()
-									*player.getBfr().getAttUp());
+								battleCard.attUp(player
+									.getBfr().getAttUp());
 							}
 						}
 						BattleCard[] def=gbc.getMonsters();
