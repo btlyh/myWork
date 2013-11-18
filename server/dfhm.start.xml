@@ -175,6 +175,18 @@
 		<obj class="com.cambrian.dfhm.mail.command.MailTakeCommand"></obj>
 	</method>
 	
+	<!-- 消息-前台发送-一键收取邮件（附件）-->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MAIL_ONEKEYTAKE"/>
+		<obj class="com.cambrian.dfhm.mail.command.OneKeyMailTakeCommand"></obj>
+	</method>
+	
+	<!-- 消息-前台发送-一键删除邮件-->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MAIL_ONEKEYDELETE"/>
+		<obj class="com.cambrian.dfhm.mail.command.OneKeyMailDeleteCommand"></obj>
+	</method>
+	
 	<!-- ########################################## -->
 	<!-- 创建战斗管理器 -->
 	<obj class="com.cambrian.dfhm.battle.BattleManager" id="battleManger">
@@ -194,6 +206,11 @@
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_BAG_PROPLIST"/>
 		<obj class="com.cambrian.dfhm.bag.command.PropListCommand"></obj>
+	</method>
+	<!-- 背包-前台发送-打开背包 -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="PROCESS_BAG_OPENBAG"/>
+		<obj class="com.cambrian.dfhm.bag.command.OpenCardBagCommand"></obj>
 	</method>
 	<!-- 背包-前台发送-出售道具
 	<method name="setPort" ref="service">

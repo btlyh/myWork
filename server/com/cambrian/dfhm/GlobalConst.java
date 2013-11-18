@@ -174,6 +174,10 @@ public final class GlobalConst
 	public static final int COMMAND_MAIL_DELETE=1805;
 	/** 邮件-前台发送-收取邮件（附件） */
 	public static final int COMMAND_MAIL_TAKE=1806;
+	/** 邮件-前台发送-一键收取邮件（附件） */
+	public static final int COMMAND_MAIL_ONEKEYTAKE=1807;
+	/** 邮件-前台发送-一键删除邮件 */
+	public static final int COMMAND_MAIL_ONEKEYDELETE=1808;
 
 	/* 通信命令号-副本 */
 	/** 副本-前台发送-攻击NPC */
@@ -239,7 +243,7 @@ public final class GlobalConst
 	public static final int COMMAND_GLOBALBOSS_BACK_START=2308;
 	/** 世界BOSS-后台发送-活动结束推送 */
 	public static final int COMMAND_GLOBALBOSS_BACK_END=2309;
-	/** 世界BOSS-前台发送-自动报名*/
+	/** 世界BOSS-前台发送-自动报名 */
 	public static final int COMMAND_GLOBALBOSS_AUTOSIGN=2310;
 
 	/* 排位赛 */
@@ -294,6 +298,8 @@ public final class GlobalConst
 	/* 功能处理器-背包 */
 	/** 背包-功能处理器-出售道具 */
 	public static final int PROCESS_BAG_SELLPROP=3101;
+	/** 背包-功能处理器-打开背包 */
+	public static final int PROCESS_BAG_OPENBAG=3102;
 	/* 功能处理器-好友 */
 	/** 好友-功能处理器-添加好友请求结果消息 */
 	public static final int PROCESS_FRIEND_HANDLEAPPLYFRIEND=3201;
@@ -301,14 +307,13 @@ public final class GlobalConst
 	/** 军令 功能处理器 离线军令补发 */
 	public static final int OUTLINE_TOKEN_REISSUE_PORT=3301;
 
-	
-	/**在线领奖通信*/
-	public static final int COMMAND_ONLINE_AWARD = 3401;
-	/**获取下次领奖时间 通信*/
-	public static final int COMMAND_ONLINE_REAWARD_TIME = 3402;
-	
-	/**扫荡副本通信*/	
-	public static final int COMMAND_SWEEP_MAP = 3501;
+	/** 在线领奖通信 */
+	public static final int COMMAND_ONLINE_AWARD=3401;
+	/** 获取下次领奖时间 通信 */
+	public static final int COMMAND_ONLINE_REAWARD_TIME=3402;
+
+	/** 扫荡副本通信 */
+	public static final int COMMAND_SWEEP_MAP=3501;
 	/* 功能处理器-消息 */
 
 	/* 功能处理器-商城 */
