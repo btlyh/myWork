@@ -75,7 +75,7 @@ public class Player extends Sample implements Actor
 	/** 玩家邮件列表 */
 	private ArrayList<Mail> mailList=new ArrayList<Mail>();
 	/** 玩家任务容器 */
-	private TaskContainer tasks = new TaskContainer();
+	private TaskContainer tasks=new TaskContainer();
 
 	/** 获得玩家id */
 	public long getUserId()
@@ -96,10 +96,6 @@ public class Player extends Sample implements Actor
 	/** 身份对象(当土豪功能用) */
 	private Identity identity=new Identity();
 
-
-
-	
-	
 	/** 设置玩家id */
 	public void setUserId(long uid)
 	{
@@ -276,7 +272,6 @@ public class Player extends Sample implements Actor
 		this.attRecords=attRecords;
 	}
 
-
 	public TaskContainer getTasks()
 	{
 		return tasks;
@@ -284,9 +279,8 @@ public class Player extends Sample implements Actor
 
 	public void setTasks(TaskContainer tasks)
 	{
-		this.tasks = tasks;
+		this.tasks=tasks;
 	}
-
 
 	public Identity getIdentity()
 	{
@@ -713,12 +707,13 @@ public class Player extends Sample implements Actor
 				return;
 			}
 			incrToken((int)times*TokenTimer.TOKENADDNUM);
-			
+
 		}
 	}
-  
+
 	/**
 	 * 初始化角色后 下行的一些其他信息
+	 * 
 	 * @param data
 	 */
 	public void initLogin(ByteBuffer data)
@@ -729,10 +724,13 @@ public class Player extends Sample implements Actor
 		data.writeInt(bossSid);// BOSSSID
 		long readyTime=BossManager.getInstance().getActiveBossTime(bossSid);
 		data.writeLong(readyTime);// 剩余准备时间
+		long surplusTime=BossManager.getInstance().getSurplusBossTime(
+			bossSid);
+		data.writeLong(surplusTime);// 活动剩余时间
 		/** 登录时遍历军帐 */
-		if (nickname != null)
+		if(nickname!=null)
 		{
-			ArmyCampManager.getInstance().enterArmyCamp(this, nickname);
+			ArmyCampManager.getInstance().enterArmyCamp(this,nickname);
 			QualifyingManager.getInstance().addPlayer(nickname);
 		}
 

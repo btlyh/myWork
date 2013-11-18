@@ -662,7 +662,7 @@ public class BossManager
 	}
 
 	/**
-	 * 获取BOSS活动的剩余时间
+	 * 获取BOSS活动准备的剩余时间
 	 * 
 	 * @return
 	 */
@@ -675,6 +675,31 @@ public class BossManager
 			if(gbc.isOpen())
 			{
 				long time=TimeKit.timeOf(gbc.getActiveTime());
+				surplusTime=time-TimeKit.nowTimeMills();
+				if(surplusTime<0)
+				{
+					surplusTime=0;
+				}
+			}
+		}
+		return surplusTime;
+	}
+	
+	/**
+	 * 获取BOSS活动的剩余时间
+	 * @param bossSid
+	 * @return
+	 */
+	public long getSurplusBossTime(int bossSid)
+	{
+		long surplusTime=0;
+		if(bossSid!=0)
+		{
+			GlobalBossCFG gbc=bossMap.get(bossSid);
+			if(gbc.isOpen())
+			{
+				long time=TimeKit.timeOf(gbc.getActiveTime())
+					+(TimeKit.MIN_MILLS*gbc.getTimeConfine());
 				surplusTime=time-TimeKit.nowTimeMills();
 				if(surplusTime<0)
 				{

@@ -53,7 +53,7 @@ public class BossStartTimeTask extends TimerTask
 	{
 		BossManager.getInstance().bossMap.get(gbc.getSid()).setOpen(true);// ¿ªÆôBOSS
 		Session[] sessions=ds.getSessionMap().getSessions();
-		
+
 		Timer bossEndTimer=new Timer();
 		bossEndTimer.schedule(new BossEndTimeTask(gbc),
 			TimeKit.timeOf(0,gbc.getTimeConfine()));
@@ -61,13 +61,17 @@ public class BossStartTimeTask extends TimerTask
 		Timer autoAttBossTimer=new Timer();
 		autoAttBossTimer.schedule(new AutoAttTimeTask(gbc,ds,baan),
 			TimeKit.SEC_MILLS,TimeKit.SEC_MILLS);
-		
+
 		for(Session session:sessions)
 		{
 			if(session!=null)
 			{
 				long time=TimeKit.timeOf(gbc.getActiveTime());
 				long surplusTime=time-TimeKit.nowTimeMills();
+				if(surplusTime<0)
+				{
+					surplusTime=0;
+				}
 				bsn.send(session,new Object[]{surplusTime,gbc.getSid()});
 			}
 		}

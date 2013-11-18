@@ -144,6 +144,7 @@ public class Slave implements Comparable<Slave>
 		data.writeInt(status);
 		data.writeInt(fightPoint);
 		data.writeLong(getHowLongForWork());
+		data.writeBoolean(isManaged);
 	}
 
 	/** 序列化 和DC通信 存 */
