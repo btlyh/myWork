@@ -24,9 +24,9 @@ public class Identity
 
 	/* fields */
 	/** 级别 */
-	private int grade;
+	private int grade=FREEMAN;
 	/** 级别名称 */
-	private String gradeName;
+	private String gradeName=Lang.FREEMAN;
 	/** 马仔列表 */
 	private List<Slave> slaveList=new ArrayList<Slave>();
 	/** 主人ID(此属性为0表示不是奴隶) */

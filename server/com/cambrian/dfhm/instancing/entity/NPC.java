@@ -17,7 +17,7 @@ public abstract class NPC extends Sample
 
 	/* static fields */
 	/** 副本类型 1主线 2挑战 3穿越（日常） 4活动 */
-	public static final int NORMAL=39001,HARD=39002,CROSS=39003,ACTIVITY=39004;
+	public static final int NORMAL=19901,HARD=19902,CROSS=19903;
 	/** NPC是BOSS */
 	public static final int BOSS=1;
 	/* static methods */

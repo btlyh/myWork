@@ -86,9 +86,6 @@ public class InstancingManager
 			case NPC.CROSS:
 				npc=(CrossNPC)resultMap.get("npc");
 				break;
-			case NPC.ACTIVITY:
-				npc=(ActiveNPC)resultMap.get("npc");
-				break;
 			default:
 				break;
 		}
@@ -137,7 +134,7 @@ public class InstancingManager
 		int npcType)
 	{
 		System.err.println("npcType ==="+npcType);
-		if(npcType>NPC.ACTIVITY||npcType<NPC.NORMAL)
+		if(npcType>NPC.CROSS||npcType<NPC.NORMAL)
 		{
 			throw new DataAccessException(601,Lang.F1409);
 		}
@@ -163,9 +160,6 @@ public class InstancingManager
 				break;
 			case NPC.CROSS:
 				npc=(CrossNPC)Sample.getFactory().getSample(sid);
-				break;
-			case NPC.ACTIVITY:
-				npc=(ActiveNPC)Sample.getFactory().getSample(sid);
 				break;
 			default:
 				break;

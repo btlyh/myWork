@@ -236,7 +236,7 @@ public class GameCFG
 	public static int[] getDSkillById(int skillId)
 	{
 		int id;
-		String[] doubleStrings=DoubleSkill.split("|");
+		String[] doubleStrings=DoubleSkill.split(";");
 		for(int i=0;i<doubleStrings.length;i++)
 		{
 			String[] oneSkill=doubleStrings[i].split(",");
