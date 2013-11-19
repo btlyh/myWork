@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <objects>
 	<!--
-	moneyRate		游戏币掉率
-	money			游戏币数量
-	soulRate		武魂掉率
-	soul			武魂数量
-	goldRate		RMB掉率
-	gold			RMB数量
-	integralRate	积分掉率
-	integral		积分数量
-	cardRate		卡片掉率
-	card			卡片概率[卡片，概率，卡片，概率，...]
+	sid	唯一标签
+	class	程序使用
+	name	名字
+	description	介绍
+	img	显示图片
+	type    类型(前台显示用)
+	
+	money   银币
+	soul    武魂
+	token   军令
+	cardSid 卡牌组合，数组形式
+	price	价格
 
 	-->
-	<sample sid="40005" class="com.cambrian.dfhm.common.entity.Gift" moneyRate="80000" _1money="5000,80000,10000,10000,100000,9000,1000000,100" soulRate="10000" soul="100" goldRate="1000" gold="10" integralRate="0" integral="0" cardRate="9000" _1card="50004,50000,50005,50000"/>
+	<sample sid="40001" class="com.cambrian.dfhm.common.entity.Gift" name="小堆金币" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="100" money="0" soul="0" token="0" price="10"/>
+	<sample sid="40002" class="com.cambrian.dfhm.common.entity.Gift" name="武魂" description="购买后立即获得50个武魂" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="0" money="0" soul="50" token="0" price="10"/>
+	<sample sid="40003" class="com.cambrian.dfhm.common.entity.Gift" name="军令" description="购买后立即获得50个军令" img="img/tubiao/bag/gold/1" animation="0" type="2" gold="0" money="0" soul="0" token="50" price="10"/>
+	<sample sid="40004" class="com.cambrian.dfhm.common.entity.Gift" name="银币武魂" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="0" money="10000" soul="100" token="0" price="10"/>
+	<sample sid="40005" class="com.cambrian.dfhm.common.entity.Gift" name="1张卡牌" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10001" price="1000000"/>
+	<sample sid="40006" class="com.cambrian.dfhm.common.entity.Gift" name="5张卡牌" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10007,10008,10009,10006,10010" price="10000000"/>
+
 </objects>

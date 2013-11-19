@@ -13,5 +13,8 @@
 	 _1card //(card   依次是卡牌的SID  掉落几率 和 掉落最大张数)
 	-->
 	
-	<sample sid="21001" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="30" goldmin="1" moneymax="30"  moneymin="1"  soulmax="50" soulmin="1" _1card="10001,50000,1,10002,10000,1,10005,50000,1,10004,10000,2"/>	
+	<sample sid="21001" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="30" goldmin="1" moneymax="30" moneymin="1" soulmax="50" soulmin="1" _1card="10001,50000,1,10002,10000,1,10005,50000,1,10004,10000,2"/>
+
+	<sample sid="21001" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="30" goldmin="1" moneymax="30" moneymin="1" soulmax="50" soulmin="1" _1card="10001,50000,1,10002,10000,1,10005,50000,1,10004,10000,2"/>
+
 </objects>

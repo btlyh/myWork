@@ -94,7 +94,8 @@ public class PlayerInfo
 	private int qualifyingCount;
 	/** 排位赛胜利次数 */
 	private int qualifyingWin;
-
+	
+	private int nextRewardId =65011;//下一次的领奖ID 用于前台初始化领奖信息
 	/* constructors */
 
 	/* properties */
@@ -422,6 +423,14 @@ public class PlayerInfo
 		return isAutoSignBoss;
 	}
 
+	public int getNextRewardId() {
+		return nextRewardId;
+	}
+
+	public void setNextRewardId(int nextRewardId) {
+		this.nextRewardId = nextRewardId;
+	}
+
 	public void setAutoSignBoss(boolean isAutoSignBoss)
 	{
 		this.isAutoSignBoss=isAutoSignBoss;
@@ -444,6 +453,7 @@ public class PlayerInfo
 		data.writeInt(autoBossSign);
 		data.writeInt(duelFreeTimes);
 		data.writeInt(duelBuyTimes);
+		data.writeInt(nextRewardId); 
 	}
 
 	/** 序列化 和DC通信 存 */
@@ -494,6 +504,7 @@ public class PlayerInfo
 		data.writeInt(instancingCount);
 		data.writeInt(qualifyingCount);
 		data.writeInt(qualifyingWin);
+		data.writeInt(nextRewardId);
 
 	}
 	/** 序列化 和DC通信 取 */
@@ -549,6 +560,7 @@ public class PlayerInfo
 		instancingCount=data.readInt();
 		qualifyingCount=data.readInt();
 		qualifyingWin=data.readInt();
+		nextRewardId = data.readInt();
 
 	}
 

@@ -32,7 +32,7 @@ public class GameCFG
 	/** 醒酒汤CD分钟数 */
 	private static int awakeSoupCd;
 	/** 连携技[ID，发动概率] */
-	private static int[] DoubleSkill;
+	private static String DoubleSkill;
 	/** 土豪培养 消耗的金币数 */
 	private static int goldFosterNum;
 	/** 金币培养凶耗的金币数 */
@@ -40,18 +40,17 @@ public class GameCFG
 	/** 普通培养消耗的银币数 */
 	private static int normalFosterNum;
 
-	
-	/**领奖的间隔时间  秒*/
-	private static int []rewardIntervalTime;
-	
-	/**每天领奖的次数*/
+	/** 领奖的间隔时间 秒 */
+	private static int[] rewardIntervalTime;
+
+	/** 每天领奖的次数 */
 	private static int everyDayRewardNum;
-	
-	/**每天领奖的实例的ID*/
-	private static int []rewardSampleId;
-	
-	/**卡牌突破奖励的属性提升次数 */
-	private static int []cardBeyongNum;
+
+	/** 每天领奖的实例的ID */
+	private static int[] rewardSampleId;
+
+	/** 卡牌突破奖励的属性提升次数 */
+	private static int[] cardBeyongNum;
 	//
 
 	/** 排位赛胜利获得积分 */
@@ -91,7 +90,7 @@ public class GameCFG
 	private static int fastWorkGold;
 	/** 世界BOSS集合 */
 	private static int[] globalBossList;
-	/** 世界BOSS自动报名所需金币*/
+	/** 世界BOSS自动报名所需金币 */
 	private static int bossAutoSignGold;
 
 	public static int getPayForAwakeMinutes()
@@ -118,9 +117,9 @@ public class GameCFG
 	{
 		GameCFG.levelExp=levelExp;
 	}
-    
 
-	public static int[] getLevelExp() {
+	public static int[] getLevelExp()
+	{
 		return levelExp;
 	}
 
@@ -203,21 +202,20 @@ public class GameCFG
 	}
 
 	/** 获得指定VIP等级对应的配置表SID */
-	public static int getVipCfg(int level) 
+	public static int getVipCfg(int level)
 	{
 		return vipCfgXml[level];
 	}
-	public static void setRewardSampleId(int[] rewardSampleId) {
-		GameCFG.rewardSampleId = rewardSampleId;
+	public static void setRewardSampleId(int[] rewardSampleId)
+	{
+		GameCFG.rewardSampleId=rewardSampleId;
 	}
 
-	public static void setDoubleSkill(int[] doubleSkill)
+	public static void setDoubleSkill(String doubleSkill)
 	{
 		DoubleSkill=doubleSkill;
-		System.err.println("length ===="+DoubleSkill.length);
+		System.err.println("length ===="+DoubleSkill);
 	}
-
-
 
 	/**
 	 * 获得所有BOSS集合
@@ -237,19 +235,18 @@ public class GameCFG
 	 */
 	public static int[] getDSkillById(int skillId)
 	{
-		int id;
-		for(int i=0;i<DoubleSkill.length;i+=3)
-		{
-			id=DoubleSkill[i];
-			if(skillId==id)
-			{
-				int[] dSkill=new int[3];
-				dSkill[0]=id;
-				dSkill[1]=DoubleSkill[i+1];
-				dSkill[2]=DoubleSkill[i+2];
-				return dSkill;
-			}
-		}
+//		int id;
+//		for(int i=0;i<DoubleSkill.length;i++)
+//		{
+//			id=DoubleSkill[i][0];
+//			if(skillId==id)
+//			{
+//				int[] ds=new int[DoubleSkill[i].length-1];
+//				for(int j=0;j<ds.length;j++)
+//					ds[j]=DoubleSkill[i][j+1];
+//				return ds;
+//			}
+//		}
 		return null;
 	}
 
@@ -283,98 +280,82 @@ public class GameCFG
 		GameCFG.normalFosterNum=normalFosterNum;
 	}
 
-	public static void setRewardIntervalTime(int[] rewardIntervalTime) {
-		GameCFG.rewardIntervalTime = rewardIntervalTime;
+	public static void setRewardIntervalTime(int[] rewardIntervalTime)
+	{
+		GameCFG.rewardIntervalTime=rewardIntervalTime;
 	}
-	
-	public static int getEveryDayRewardNum() {
+
+	public static int getEveryDayRewardNum()
+	{
 		return everyDayRewardNum;
 	}
 
-	public static void setEveryDayRewardNum(int everyDayRewardNum) {
-		GameCFG.everyDayRewardNum = everyDayRewardNum;
+	public static void setEveryDayRewardNum(int everyDayRewardNum)
+	{
+		GameCFG.everyDayRewardNum=everyDayRewardNum;
 	}
 
-	
-	public static int[] getCardBeyongNum() {
+	public static int[] getCardBeyongNum()
+	{
 		return cardBeyongNum;
 	}
 
-	public static void setCardBeyongNum(int[] cardBeyongNum) {
-		GameCFG.cardBeyongNum = cardBeyongNum;
-	} 
+	public static void setCardBeyongNum(int[] cardBeyongNum)
+	{
+		GameCFG.cardBeyongNum=cardBeyongNum;
+	}
 
-	public static int[] getRewardSampleId() {
+	public static int[] getRewardSampleId()
+	{
 		return rewardSampleId;
 	}
 
-	/**
-	 * 通过技能ID，获得对应连携技概率
-	 * 
-	 * @param skillId
-	 * @return
-	 */
-	public static int getDsSkillRateById(int skillId)
-	{
-		for(int i=0;i<DoubleSkill.length;i+=2)
-		{
-			if(skillId==DoubleSkill[i]) return DoubleSkill[i+2];
-		}
-		return -1;
-	}
-	
 	/***
-	 * 
-	 * @param rewardNum  当前领奖次数
+	 * @param rewardNum 当前领奖次数
 	 * @return 下一次的领奖间隔时间
 	 */
 	public static int getRewardIntervalTimeByIndex(int rewardNum)
 	{
-		 for (int i = 0; i < rewardIntervalTime.length; i++)
-		 {
-			 if(i==rewardNum)
-			 {
-				 return rewardIntervalTime[i];
-			 }	 
-		 }		 
-		 return -1;
+		for(int i=0;i<rewardIntervalTime.length;i++)
+		{
+			if(i==rewardNum)
+			{
+				return rewardIntervalTime[i];
+			}
+		}
+		return -1;
 	}
 
-
 	/***
-	 * 
-	 * @param rewardNum  当前领奖次数
+	 * @param rewardNum 当前领奖次数
 	 * @return 下一次的领奖的UID
 	 */
 	public static int getRewardSampleIdByNum(int rewardNum)
 	{
-		 for (int i = 0; i < rewardSampleId.length; i++)
-		 {
-			 if(i==rewardNum)
-			 {
-				 return rewardSampleId[i];
-			 }	 
-		 }		 
-		 return -1;
+		for(int i=0;i<rewardSampleId.length;i++)
+		{
+			if(i==rewardNum)
+			{
+				return rewardSampleId[i];
+			}
+		}
+		return -1;
 	}
-	
-/***
- * 
- * 根据卡牌等级 返回突破奖励的属性提升比率
- * 
- * 
- */
-	
+
+	/***
+	 * 根据卡牌等级 返回突破奖励的属性提升比率
+	 */
+
 	public static int getAwardByLevel(int level)
 	{
-		 for (int i = 0; i < cardBeyongNum.length; i++)
-		 {
-			 if(cardBeyongNum[i]==level)
-			 {
-				 return cardBeyongNum[i+1];
-			 }	 
-		 }		 
-		 return -1;
+		for(int i=0;i<cardBeyongNum.length;i++)
+		{
+			if(cardBeyongNum[i]==level)
+			{
+				return cardBeyongNum[i+1];
+			}
+		}
+		return -1;
 	}
 
 	public static int getDuelWinPoint(int rank)
@@ -384,7 +365,7 @@ public class GameCFG
 
 	public static void setDuelWinPoint(int[] duelWinPoint)
 	{
-		GameCFG.duelWinPoint = duelWinPoint;
+		GameCFG.duelWinPoint=duelWinPoint;
 	}
 
 	public static int getDuelLosePoint(int rank)
@@ -394,7 +375,7 @@ public class GameCFG
 
 	public static void setDuelLosePoint(int[] duelLosePoint)
 	{
-		GameCFG.duelLosePoint = duelLosePoint;
+		GameCFG.duelLosePoint=duelLosePoint;
 	}
 
 	public static int getDayPoint(int rank)
@@ -404,7 +385,7 @@ public class GameCFG
 
 	public static void setDayPoint(int[] dayPoint)
 	{
-		GameCFG.dayPoint = dayPoint;
+		GameCFG.dayPoint=dayPoint;
 	}
 
 	public static int[] getDuelWinPoint()
@@ -623,9 +604,10 @@ public class GameCFG
 	{
 		GameCFG.managedGold=managedGold;
 	}
-	
+
 	/**
 	 * 获取速去速回所需金币
+	 * 
 	 * @return
 	 */
 	public static int getFastWorkGold()
@@ -635,11 +617,12 @@ public class GameCFG
 
 	public static void setFastWorkGold(int fastWorkGold)
 	{
-		GameCFG.fastWorkGold = fastWorkGold;
+		GameCFG.fastWorkGold=fastWorkGold;
 	}
-	
+
 	/**
 	 * 获取自动报名所需费用
+	 * 
 	 * @return
 	 */
 	public static int getBossAutoSignGold()
@@ -649,6 +632,6 @@ public class GameCFG
 
 	public static void setBossAutoSignGold(int bossAutoSignGold)
 	{
-		GameCFG.bossAutoSignGold = bossAutoSignGold;
+		GameCFG.bossAutoSignGold=bossAutoSignGold;
 	}
 }

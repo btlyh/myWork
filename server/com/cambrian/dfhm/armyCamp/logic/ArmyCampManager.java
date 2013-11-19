@@ -503,8 +503,7 @@ public class ArmyCampManager
 				setArmyCamp(armyCamp, userName);
 				String s = "亲爱的玩家您好，在您" + seatCard.getOwnerName() + "军帐中的"
 						+ card.getName() + "卡牌冷却时间已到，系统已自动移除。祝您游戏愉快！";
-				Mail mail = mf.createSystemMailForStr(null, 0, 0, 0, 0, 0,
-						(int) player.getUserId(), s);
+				Mail mail = mf.createSystemMailNothing(s);
 				tarPlayer.addMail(mail);
 				// Session noticeSession =
 				// ds.getSession(seatCard.getOwnerName());
@@ -529,8 +528,7 @@ public class ArmyCampManager
 				setArmyCamp(armyCamp, userName);
 				String s = "亲爱的玩家您好，在您自己军帐中的" + card.getName()
 						+ "卡牌冷却时间已到，系统已自动移除。祝您游戏愉快！";
-				Mail mail = mf.createSystemMailForStr(null, 0, 0, 0, 0, 0,
-						(int) player.getUserId(), s);
+				Mail mail = mf.createSystemMailNothing(s);
 				player.addMail(mail);
 				// Session noticeSession =
 				// ds.getSession(seatCard.getOwnerName());

@@ -112,8 +112,15 @@ public class RewardManager {
 			if(rewardNum==GameCFG.getRewardSampleId().length-1)
 			{
 				data.writeInt(-1); // 下一次领奖
+				player.getPlayerInfo().setNextRewardId(-1);
 			}else
 			{
+				
+				Reward reward1 = new Reward();
+
+				reward1 = (Reward) Sample.getFactory().getSample(
+						GameCFG.getRewardSampleIdByNum(rewardNum+1));
+				player.getPlayerInfo().setNextRewardId(reward1.getSid());
 				data.writeInt(GameCFG.getRewardSampleIdByNum(rewardNum + 1)); // 下一次领奖
 				if(isemail)
 				{
@@ -155,7 +162,11 @@ public class RewardManager {
 		int rewardNum = player.getPlayerInfo().getRewardNum();
 		if(rewardNum==GameCFG.getRewardSampleId().length)//如果领奖次数满了
 		{
-			throw new DataAccessException(601,Lang.F2103);
+			//throw new DataAccessException(601,Lang.F2103);
+			data.writeInt(0);
+			data.writeInt(0);
+			
+			return;
 		}	
 		
 		if (player.getPlayerInfo().getNextRewardTime() == 0) {

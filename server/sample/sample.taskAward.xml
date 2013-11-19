@@ -11,4 +11,9 @@
 	-->
 	<sample sid="44001" class="com.cambrian.dfhm.task.entity.TaskAward" gold="100" money="1000000" soul="50" token="2" point="1000" _1card="10064,40000,10063,60000"/>
 
+	<sample sid="44001" class="com.cambrian.dfhm.task.entity.TaskAward" gold="100" money="1000000" soul="50" token="2" point="1000" _1card="10064,40000,10063,60000"/>
+
+	<sample sid="44001" class="com.cambrian.dfhm.task.entity.TaskAward" gold="100" money="1000000" soul="50" token="2" point="1000" _1card="10064,40000,10063,60000"/>
+
+
 </objects>

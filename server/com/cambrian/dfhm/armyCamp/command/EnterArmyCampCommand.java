@@ -12,7 +12,6 @@ import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.armyCamp.entity.ArmyCamp;
 import com.cambrian.dfhm.armyCamp.entity.SeatCard;
 import com.cambrian.dfhm.armyCamp.logic.ArmyCampManager;
-import com.cambrian.dfhm.bag.CardBag;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.game.Session;
@@ -38,6 +37,7 @@ public class EnterArmyCampCommand extends Command
 	/* init start */
 
 	/* methods */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void handle(NioTcpConnect connect, ByteBuffer data)
 	{
@@ -58,13 +58,12 @@ public class EnterArmyCampCommand extends Command
 		String userName = data.readUTF();
 		Map<String, Object> resultMap = ArmyCampManager.getInstance().enterArmyCamp(player, userName);
 		ArmyCamp armyCamp = (ArmyCamp)resultMap.get("armyCamp");
-		CardBag cardBag = (CardBag)resultMap.get("cardBag");
-		List<SeatCard> publicList = armyCamp.getPublicList();
-		data.writeInt(publicList.size());
-		for (int i = 0; i < publicList.size();i++)
+		List<Card> cardList = (List<Card>)resultMap.get("cardList");
+		data.writeInt(cardList.size());
+		for (int i = 0; i < cardList.size();i++)
 		{
-			SeatCard seatCard = publicList.get(i);
-			Card card = cardBag.getById(seatCard.getCardUid());
+			Card card = cardList.get(i);
+			SeatCard seatCard = armyCamp.getSeatCardById(card.getId());
 			data.writeInt(seatCard.getSeatId());
 			data.writeLong(TimeKit.nowTimeMills() - card.getLastDrinkTime());
 		}

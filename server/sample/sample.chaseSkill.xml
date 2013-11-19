@@ -14,43 +14,7 @@
 	hp			下降血量度百分比	[填1-100，程序自己转换]
 	
 	-->
-	<sample sid="36001" class="com.cambrian.dfhm.skill.ChaseSkill" name="白·追命箭" description="追杀" att="1300" attRange="0" level="1" aim="2" hurt="5" hp="5" skillRate="10000"/>
-	<sample sid="36002" class="com.cambrian.dfhm.skill.ChaseSkill" name="白·追命箭" description="追杀" att="1450" attRange="0" level="2" aim="2" hurt="6" hp="5" skillRate="12000"/>
-	<sample sid="36003" class="com.cambrian.dfhm.skill.ChaseSkill" name="白·追命箭" description="追杀" att="1600" attRange="0" level="3" aim="2" hurt="7" hp="5" skillRate="14000"/>
-	<sample sid="36004" class="com.cambrian.dfhm.skill.ChaseSkill" name="白·追命箭" description="追杀" att="1750" attRange="0" level="4" aim="2" hurt="8" hp="5" skillRate="16000"/>
-	<sample sid="36005" class="com.cambrian.dfhm.skill.ChaseSkill" name="白·追命箭" description="追杀" att="1900" attRange="0" level="5" aim="2" hurt="9" hp="5" skillRate="18000"/>
-	<sample sid="36006" class="com.cambrian.dfhm.skill.ChaseSkill" name="白·追命箭" description="追杀" att="2100" attRange="0" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36007" class="com.cambrian.dfhm.skill.ChaseSkill" name="绿·追命箭" description="追杀" att="1430" attRange="0" level="1" aim="2" hurt="5" hp="5" skillRate="10000"/>
-	<sample sid="36008" class="com.cambrian.dfhm.skill.ChaseSkill" name="绿·追命箭" description="追杀" att="1595" attRange="0" level="2" aim="2" hurt="6" hp="5" skillRate="12000"/>
-	<sample sid="36009" class="com.cambrian.dfhm.skill.ChaseSkill" name="绿·追命箭" description="追杀" att="1760" attRange="0" level="3" aim="2" hurt="7" hp="5" skillRate="14000"/>
-	<sample sid="36010" class="com.cambrian.dfhm.skill.ChaseSkill" name="绿·追命箭" description="追杀" att="1925" attRange="0" level="4" aim="2" hurt="8" hp="5" skillRate="16000"/>
-	<sample sid="36011" class="com.cambrian.dfhm.skill.ChaseSkill" name="绿·追命箭" description="追杀" att="2090" attRange="0" level="5" aim="2" hurt="9" hp="5" skillRate="18000"/>
-	<sample sid="36012" class="com.cambrian.dfhm.skill.ChaseSkill" name="绿·追命箭" description="追杀" att="2310" attRange="0" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36013" class="com.cambrian.dfhm.skill.ChaseSkill" name="蓝·追命箭" description="追杀" att="1560" attRange="0" level="1" aim="2" hurt="5" hp="5" skillRate="10000"/>
-	<sample sid="36014" class="com.cambrian.dfhm.skill.ChaseSkill" name="蓝·追命箭" description="追杀" att="1740" attRange="0" level="2" aim="2" hurt="6" hp="5" skillRate="12000"/>
-	<sample sid="36015" class="com.cambrian.dfhm.skill.ChaseSkill" name="蓝·追命箭" description="追杀" att="1920" attRange="0" level="3" aim="2" hurt="7" hp="5" skillRate="14000"/>
-	<sample sid="36016" class="com.cambrian.dfhm.skill.ChaseSkill" name="蓝·追命箭" description="追杀" att="2100" attRange="0" level="4" aim="2" hurt="8" hp="5" skillRate="16000"/>
-	<sample sid="36017" class="com.cambrian.dfhm.skill.ChaseSkill" name="蓝·追命箭" description="追杀" att="2280" attRange="0" level="5" aim="2" hurt="9" hp="5" skillRate="18000"/>
-	<sample sid="36018" class="com.cambrian.dfhm.skill.ChaseSkill" name="蓝·追命箭" description="追杀" att="2520" attRange="0" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36019" class="com.cambrian.dfhm.skill.ChaseSkill" name="紫·追命箭" description="追杀" att="1690" attRange="0" level="1" aim="2" hurt="5" hp="5" skillRate="10000"/>
-	<sample sid="36020" class="com.cambrian.dfhm.skill.ChaseSkill" name="紫·追命箭" description="追杀" att="1885" attRange="0" level="2" aim="2" hurt="6" hp="5" skillRate="12000"/>
-	<sample sid="36021" class="com.cambrian.dfhm.skill.ChaseSkill" name="紫·追命箭" description="追杀" att="2080" attRange="0" level="3" aim="2" hurt="7" hp="5" skillRate="14000"/>
-	<sample sid="36022" class="com.cambrian.dfhm.skill.ChaseSkill" name="紫·追命箭" description="追杀" att="2275" attRange="0" level="4" aim="2" hurt="8" hp="5" skillRate="16000"/>
-	<sample sid="36023" class="com.cambrian.dfhm.skill.ChaseSkill" name="紫·追命箭" description="追杀" att="2470" attRange="0" level="5" aim="2" hurt="9" hp="5" skillRate="18000"/>
-	<sample sid="36024" class="com.cambrian.dfhm.skill.ChaseSkill" name="紫·追命箭" description="追杀" att="2730" attRange="0" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36025" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="1820" attRange="0" level="1" aim="2" hurt="5" hp="5" skillRate="10000"/>
-	<sample sid="36026" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2030" attRange="0" level="2" aim="2" hurt="6" hp="5" skillRate="12000"/>
-	<sample sid="36027" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2240" attRange="0" level="3" aim="2" hurt="7" hp="5" skillRate="14000"/>
-	<sample sid="36028" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2450" attRange="0" level="4" aim="2" hurt="8" hp="5" skillRate="16000"/>
-	<sample sid="36029" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2660" attRange="0" level="5" aim="2" hurt="9" hp="5" skillRate="18000"/>
-	<sample sid="36030" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2940" attRange="0" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36031" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2940" attRange="1" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36032" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2940" attRange="2" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36033" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2940" attRange="3" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36034" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2940" attRange="4" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36035" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2940" attRange="6" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36036" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2940" attRange="7" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36037" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2940" attRange="8" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
-	<sample sid="36038" class="com.cambrian.dfhm.skill.ChaseSkill" name="橙·追命箭" description="追杀" att="2940" attRange="10" level="6" aim="2" hurt="10" hp="5" skillRate="20000"/>
+	<sample sid="19651" class="com.cambrian.dfhm.skill.ChaseSkill" name="镇山河" description="追杀" att="1690" attRange="8" level="1" aim="2" hurt="5" hp="5" skillRate="0"/>
+	<sample sid="19652" class="com.cambrian.dfhm.skill.ChaseSkill" name="追命箭" description="追杀" att="1560" attRange="10" level="1" aim="2" hurt="5" hp="5" skillRate="0"/>
 
 </objects>

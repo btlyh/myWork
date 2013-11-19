@@ -11,54 +11,8 @@
 	needGold		付费抽取所需RMB
 	buyGold			卡牌直接购买所需RMB
 	-->
-	<sample sid="39051" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10001" endCardSid="10020" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39052" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10005" endCardSid="10024" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39053" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10009" endCardSid="10028" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39054" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10013" endCardSid="10032" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39055" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10017" endCardSid="10036" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39056" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10021" endCardSid="10040" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39057" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10025" endCardSid="10044" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39058" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10029" endCardSid="10048" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39059" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10033" endCardSid="10052" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39060" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10037" endCardSid="10056" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39061" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10041" endCardSid="10060" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39062" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10045" endCardSid="10064" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39063" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10049" endCardSid="10068" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39064" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10053" endCardSid="10072" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39065" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10057" endCardSid="10076" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39066" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10061" endCardSid="10080" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39067" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10065" endCardSid="10084" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39068" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10069" endCardSid="10088" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39069" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10073" endCardSid="10092" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39070" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10077" endCardSid="10096" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39071" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10081" endCardSid="10100" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39072" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10085" endCardSid="10104" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39073" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10089" endCardSid="10108" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39074" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10093" endCardSid="10112" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39075" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10097" endCardSid="10116" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39076" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10101" endCardSid="10120" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39077" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10105" endCardSid="10124" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39078" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10109" endCardSid="10128" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39079" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10113" endCardSid="10132" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39080" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10117" endCardSid="10136" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39081" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10121" endCardSid="10140" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39082" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10125" endCardSid="10144" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39083" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10129" endCardSid="10148" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39084" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10133" endCardSid="10152" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39085" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10137" endCardSid="10156" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39086" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10141" endCardSid="10160" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39087" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10145" endCardSid="10164" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39088" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10149" endCardSid="10168" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39089" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10153" endCardSid="10172" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39090" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10157" endCardSid="10176" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39091" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10161" endCardSid="10180" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39092" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10165" endCardSid="10184" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39093" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10169" endCardSid="10188" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39094" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10173" endCardSid="10192" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39095" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10177" endCardSid="10196" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39096" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10181" endCardSid="10200" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39097" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10185" endCardSid="10204" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39098" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10189" endCardSid="10208" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
-	<sample sid="39099" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10193" endCardSid="10216" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
+	<sample sid="19921" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10001" endCardSid="10020" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
+	<sample sid="19922" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10021" endCardSid="10050" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
+	<sample sid="19923" class="com.cambrian.dfhm.common.entity.LuckBoxCfg" startCardSid="10056" endCardSid="10070" needSoul="10" tNeedSoul="100" maxTakeSize="9" needGold="10" buyGold="300"/>
 
 </objects>

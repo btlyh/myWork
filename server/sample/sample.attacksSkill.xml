@@ -14,31 +14,8 @@
 	hurt		每次攻击伤害数
 	
 	-->
-	<sample sid="33601" class="com.cambrian.dfhm.skill.AttacksSkill" name="疾风箭E" description="连续攻击2次" att="1200" attRange="0" level="1" aim="2" count="0" hurt="1" skillRate="500"/>
-	<sample sid="33602" class="com.cambrian.dfhm.skill.AttacksSkill" name="疾风箭D" description="连续攻击2次" att="1440" attRange="0" level="2" aim="2" count="0" hurt="1" skillRate="500"/>
-	<sample sid="33603" class="com.cambrian.dfhm.skill.AttacksSkill" name="疾风箭C" description="连续攻击2次" att="1680" attRange="0" level="3" aim="2" count="0" hurt="1" skillRate="500"/>
-	<sample sid="33604" class="com.cambrian.dfhm.skill.AttacksSkill" name="疾风箭B" description="连续攻击2次" att="1920" attRange="0" level="4" aim="2" count="0" hurt="1" skillRate="500"/>
-	<sample sid="33605" class="com.cambrian.dfhm.skill.AttacksSkill" name="疾风箭A" description="连续攻击2次" att="2160" attRange="0" level="5" aim="2" count="0" hurt="1" skillRate="500"/>
-	<sample sid="33606" class="com.cambrian.dfhm.skill.AttacksSkill" name="疾风箭S" description="连续攻击2次" att="2400" attRange="0" level="6" aim="2" count="0" hurt="1" skillRate="500"/>
-	<sample sid="33607" class="com.cambrian.dfhm.skill.AttacksSkill" name="火神矢E" description="连续攻击3次" att="1300" attRange="0" level="1" aim="2" count="0" hurt="2" skillRate="500"/>
-	<sample sid="33608" class="com.cambrian.dfhm.skill.AttacksSkill" name="火神矢D" description="连续攻击3次" att="1560" attRange="0" level="2" aim="2" count="0" hurt="2" skillRate="500"/>
-	<sample sid="33609" class="com.cambrian.dfhm.skill.AttacksSkill" name="火神矢C" description="连续攻击3次" att="1820" attRange="0" level="3" aim="2" count="0" hurt="2" skillRate="500"/>
-	<sample sid="33610" class="com.cambrian.dfhm.skill.AttacksSkill" name="火神矢B" description="连续攻击3次" att="2080" attRange="0" level="4" aim="2" count="0" hurt="2" skillRate="500"/>
-	<sample sid="33611" class="com.cambrian.dfhm.skill.AttacksSkill" name="火神矢A" description="连续攻击3次" att="2340" attRange="0" level="5" aim="2" count="0" hurt="2" skillRate="500"/>
-	<sample sid="33612" class="com.cambrian.dfhm.skill.AttacksSkill" name="火神矢S" description="连续攻击3次" att="2600" attRange="0" level="6" aim="2" count="0" hurt="2" skillRate="500"/>
-	<sample sid="33613" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭E" description="连续攻击4次" att="1400" attRange="3" level="1" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33614" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭D" description="连续攻击4次" att="1680" attRange="3" level="2" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33615" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭C" description="连续攻击4次" att="1960" attRange="3" level="3" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33616" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭B" description="连续攻击4次" att="2240" attRange="3" level="4" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33617" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭A" description="连续攻击4次" att="2520" attRange="3" level="5" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33618" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭S" description="连续攻击4次" att="2800" attRange="0" level="6" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33619" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭S" description="连续攻击4次" att="2800" attRange="1" level="6" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33620" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭S" description="连续攻击4次" att="2800" attRange="2" level="6" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33621" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭S" description="连续攻击4次" att="2800" attRange="3" level="6" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33622" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭S" description="连续攻击4次" att="2800" attRange="4" level="6" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33623" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭S" description="连续攻击4次" att="2800" attRange="6" level="6" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33624" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭S" description="连续攻击4次" att="2800" attRange="7" level="6" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33625" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭S" description="连续攻击4次" att="2800" attRange="8" level="6" aim="2" count="0" hurt="3" skillRate="500"/>
-	<sample sid="33626" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭S" description="连续攻击4次" att="2800" attRange="10" level="6" aim="2" count="0" hurt="3" skillRate="500"/>
+	<sample sid="19451" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭" description="连击1次" att="1200" attRange="0" level="1" aim="2" count="0" hurt="1" skillRate="500"/>
+	<sample sid="19452" class="com.cambrian.dfhm.skill.AttacksSkill" name="风神矢" description="连击2次" att="1300" attRange="0" level="1" aim="2" count="0" hurt="2" skillRate="500"/>
+	<sample sid="19453" class="com.cambrian.dfhm.skill.AttacksSkill" name="抱天揽月" description="连击3次" att="1400" attRange="4" level="1" aim="2" count="0" hurt="3" skillRate="500"/>
 
 </objects>

@@ -13,43 +13,6 @@
 	number		免伤次数
 	
 	-->
-	<sample sid="37801" class="com.cambrian.dfhm.skill.NoHurtSkill" name="白·伤害免疫" description="免伤" att="1300" attRange="0" level="1" aim="2" number="1" skillRate="5000"/>
-	<sample sid="37802" class="com.cambrian.dfhm.skill.NoHurtSkill" name="白·伤害免疫" description="免伤" att="1500" attRange="0" level="2" aim="2" number="1" skillRate="6000"/>
-	<sample sid="37803" class="com.cambrian.dfhm.skill.NoHurtSkill" name="白·伤害免疫" description="免伤" att="1700" attRange="0" level="3" aim="2" number="1" skillRate="7000"/>
-	<sample sid="37804" class="com.cambrian.dfhm.skill.NoHurtSkill" name="白·伤害免疫" description="免伤" att="1900" attRange="0" level="4" aim="2" number="1" skillRate="8000"/>
-	<sample sid="37805" class="com.cambrian.dfhm.skill.NoHurtSkill" name="白·伤害免疫" description="免伤" att="2100" attRange="0" level="5" aim="2" number="2" skillRate="9000"/>
-	<sample sid="37806" class="com.cambrian.dfhm.skill.NoHurtSkill" name="白·伤害免疫" description="免伤" att="2300" attRange="0" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37807" class="com.cambrian.dfhm.skill.NoHurtSkill" name="绿·伤害免疫" description="免伤" att="1430" attRange="0" level="1" aim="2" number="1" skillRate="5000"/>
-	<sample sid="37808" class="com.cambrian.dfhm.skill.NoHurtSkill" name="绿·伤害免疫" description="免伤" att="1650" attRange="0" level="2" aim="2" number="1" skillRate="6000"/>
-	<sample sid="37809" class="com.cambrian.dfhm.skill.NoHurtSkill" name="绿·伤害免疫" description="免伤" att="1870" attRange="0" level="3" aim="2" number="1" skillRate="7000"/>
-	<sample sid="37810" class="com.cambrian.dfhm.skill.NoHurtSkill" name="绿·伤害免疫" description="免伤" att="2090" attRange="0" level="4" aim="2" number="1" skillRate="8000"/>
-	<sample sid="37811" class="com.cambrian.dfhm.skill.NoHurtSkill" name="绿·伤害免疫" description="免伤" att="2310" attRange="0" level="5" aim="2" number="2" skillRate="9000"/>
-	<sample sid="37812" class="com.cambrian.dfhm.skill.NoHurtSkill" name="绿·伤害免疫" description="免伤" att="2530" attRange="0" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37813" class="com.cambrian.dfhm.skill.NoHurtSkill" name="蓝·伤害免疫" description="免伤" att="1560" attRange="0" level="1" aim="2" number="1" skillRate="5000"/>
-	<sample sid="37814" class="com.cambrian.dfhm.skill.NoHurtSkill" name="蓝·伤害免疫" description="免伤" att="1800" attRange="0" level="2" aim="2" number="1" skillRate="6000"/>
-	<sample sid="37815" class="com.cambrian.dfhm.skill.NoHurtSkill" name="蓝·伤害免疫" description="免伤" att="2040" attRange="0" level="3" aim="2" number="1" skillRate="7000"/>
-	<sample sid="37816" class="com.cambrian.dfhm.skill.NoHurtSkill" name="蓝·伤害免疫" description="免伤" att="2280" attRange="0" level="4" aim="2" number="1" skillRate="8000"/>
-	<sample sid="37817" class="com.cambrian.dfhm.skill.NoHurtSkill" name="蓝·伤害免疫" description="免伤" att="2520" attRange="0" level="5" aim="2" number="2" skillRate="9000"/>
-	<sample sid="37818" class="com.cambrian.dfhm.skill.NoHurtSkill" name="蓝·伤害免疫" description="免伤" att="2760" attRange="0" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37819" class="com.cambrian.dfhm.skill.NoHurtSkill" name="紫·伤害免疫" description="免伤" att="1690" attRange="0" level="1" aim="2" number="1" skillRate="5000"/>
-	<sample sid="37820" class="com.cambrian.dfhm.skill.NoHurtSkill" name="紫·伤害免疫" description="免伤" att="1950" attRange="0" level="2" aim="2" number="1" skillRate="6000"/>
-	<sample sid="37821" class="com.cambrian.dfhm.skill.NoHurtSkill" name="紫·伤害免疫" description="免伤" att="2210" attRange="0" level="3" aim="2" number="1" skillRate="7000"/>
-	<sample sid="37822" class="com.cambrian.dfhm.skill.NoHurtSkill" name="紫·伤害免疫" description="免伤" att="2470" attRange="0" level="4" aim="2" number="1" skillRate="8000"/>
-	<sample sid="37823" class="com.cambrian.dfhm.skill.NoHurtSkill" name="紫·伤害免疫" description="免伤" att="2730" attRange="0" level="5" aim="2" number="2" skillRate="9000"/>
-	<sample sid="37824" class="com.cambrian.dfhm.skill.NoHurtSkill" name="紫·伤害免疫" description="免伤" att="2990" attRange="0" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37825" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="1820" attRange="0" level="1" aim="2" number="1" skillRate="5000"/>
-	<sample sid="37826" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="2100" attRange="0" level="2" aim="2" number="1" skillRate="6000"/>
-	<sample sid="37827" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="2380" attRange="0" level="3" aim="2" number="1" skillRate="7000"/>
-	<sample sid="37828" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="2660" attRange="0" level="4" aim="2" number="1" skillRate="8000"/>
-	<sample sid="37829" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="2940" attRange="0" level="5" aim="2" number="2" skillRate="9000"/>
-	<sample sid="37830" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="3220" attRange="0" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37831" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="3220" attRange="1" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37832" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="3220" attRange="2" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37833" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="3220" attRange="3" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37834" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="3220" attRange="4" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37835" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="3220" attRange="6" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37836" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="3220" attRange="7" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37837" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="3220" attRange="8" level="6" aim="2" number="2" skillRate="10000"/>
-	<sample sid="37838" class="com.cambrian.dfhm.skill.NoHurtSkill" name="橙·伤害免疫" description="免伤" att="3220" attRange="10" level="6" aim="2" number="2" skillRate="10000"/>
+	<sample sid="19801" class="com.cambrian.dfhm.skill.NoHurtSkill" name="盾墙" description="免伤" att="0" attRange="11" level="1" aim="1" number="1" skillRate="0"/>
 
 </objects>

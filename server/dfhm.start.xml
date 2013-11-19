@@ -499,6 +499,7 @@
 			<method name="setDS"><ref id="DS"/></method>
 			<method name="setArmyCampDao"><ref id="ACD"/></method>
 			<method name="setRemoveMyCardNotice"><ref id="RMCN"/></method>
+			<method name="setMf"><ref id="MF"/></method>
 		</obj>	
 	<!-- 军帐-前台发送-使用醒酒汤 -->
 	<method name="setPort" ref="service">
