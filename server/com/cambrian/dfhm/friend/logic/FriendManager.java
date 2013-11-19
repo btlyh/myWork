@@ -25,7 +25,7 @@ public class FriendManager
 {
 
 	/* static fields */
-	private static  FriendManager instance=new FriendManager();
+	private static FriendManager instance=new FriendManager();
 
 	/* static methods */
 	public static FriendManager getInstance()

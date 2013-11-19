@@ -152,6 +152,7 @@ public class BossManager
 		}
 		GlobalBossCFG gbc=(GlobalBossCFG)resultMap.get("gbc");
 		gbc.autoList.remove(player);
+		player.getBfr().setAuto(false);
 	}
 
 	/**
@@ -195,6 +196,7 @@ public class BossManager
 		}
 		GlobalBossCFG gbc=(GlobalBossCFG)resultMap.get("gbc");
 		gbc.autoList.add(player);
+		player.getBfr().setAuto(true);
 	}
 	/**
 	 * 检查开启自动战斗

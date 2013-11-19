@@ -21,7 +21,7 @@ public class PlayerWriter implements BytesRW
 	{
 		Player p=(Player)obj;
 		p.bytesWrite(data);
-		p.initLogin(data);
+		p.initLogin(data,p);
 	}
 
 }

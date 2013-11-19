@@ -1,5 +1,6 @@
 package com.cambrian.dfhm.instancing.logic;
 
+import java.awt.List;
 import java.util.ArrayList;
 
 import com.cambrian.common.net.ByteBuffer;
@@ -7,6 +8,7 @@ import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.object.Sample;
 import com.cambrian.common.util.MathKit;
 import com.cambrian.dfhm.Lang;
+import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.instancing.entity.Sweep;
 import com.cambrian.dfhm.mail.entity.Mail;
@@ -38,6 +40,8 @@ public class SweepManager {
 		Sweep sweep = new Sweep();
 		//由于MAP ID和 sweepID  客户端一样 而服务器实现成2个部分 所以  SWEEP ID需要  从MAPID 加10000dedao
 		sweep = (Sweep) Sample.getFactory().getSample(mapId+10000);
+		ArrayList<Integer> cards = new ArrayList<Integer>();//
+		
 		for (int i = 0; i < sweepNum; i++) // 进行多少次扫荡
 		{
 			int money = MathKit.randomValue(sweep.getMoneymin(),
@@ -52,11 +56,10 @@ public class SweepManager {
 			data.writeInt(gold);
 			data.writeInt(money); 
 			data.writeInt(soul);
-
 			int[] awardCard = sweep.getCard();
-			ArrayList<Integer> cards = new ArrayList<Integer>();//
-		//	data.writeInt(awardCard.length);
+		
 			ArrayList<Integer>recard = new ArrayList<Integer>();
+		
 			for (int j = 0; j < awardCard.length / 3; j++) // 根据卡牌概率随机
 			{
 				int cardid = awardCard[j * 3];// 卡牌ID
@@ -74,42 +77,56 @@ public class SweepManager {
 
 				if (cardnum != 0)// 将随机到的卡牌以及张数取出来
 				{
-					recard.add(cardid);
-					recard.add(cardnum);
+					
+					for (int k = 0; k < cardnum; k++) {
+						recard.add(cardid);
+					}
 				}
-
+ 
 			}
-
-			data.writeInt(recard.size()/2);
 
 			if (recard.size() != 0) {
-				for (int j = 0; j < recard.size()/2; j++)// 往前台返回获得的卡牌的种类和数量
-				{
-
-					if (player.getCardBag().getSurplusCapacity() < recard.get(j*2+1))// 背包容量不足
+				
+				ArrayList<Card> tmepList = new ArrayList<Card>();	
+				if (player.getCardBag().getSurplusCapacity() < recard.size())// 背包容量不足
+				{	
+					data.writeInt(recard.size());
+				
+					for (int j = 0; j < recard.size(); j++)
+					{							
+						cards.add( recard.get(j));	
+						data.writeInt(0);
+						data.writeInt(cards.get(j));
+						data.writeInt(0);
+					}					
+				} else
+				{		
+					data.writeInt(recard.size());
+					for (int j = 0; j < recard.size(); j++)// 往前台返回获得的卡牌的数量
 					{
-
-						for (int j2 = 0; j2 <  recard.get(j*2+1); j2++)// 多张卡牌的时候
-																	// 需要发邮件多次
-						{
-							cards.add( recard.get(j*2));
-						}
-
-						Mail mail = mf.createSystemMail(cards, 0, 0, 0, 0, 0,
-								(int) player.getUserId());
-						player.addMail(mail);
-					} else {
-						for (int j2 = 0; j2 <  recard.get(j*2+1); j2++)// 多张卡牌的时候
-																	// 玩家需要多次获取卡牌
-						{
-							player.getCardBag().add( recard.get(j*2));
-						}
+						tmepList.add(player.getCardBag().add(recard.get(j)));	
 					}
-					data.writeInt( recard.get(j*2));
-					data.writeInt( recard.get(j*2+1));
-				}
+						
+					for (int k = 0; k <tmepList.size(); k++)
+					{
+						data.writeInt(tmepList.get(k).getId());
+						data.writeInt(tmepList.get(k).getSid());
+						data.writeInt(tmepList.get(k).getSkillId());
+					}
+				}																	
+			}else//本次扫荡没得到卡牌
+			{
+				data.writeInt(0);
 			}
 		}
+		if(cards.size()>0)
+		{
+			Mail mail = mf.createSystemMail(cards, 0, 0, 0, 0, 0,
+					(int) player.getUserId());
+			player.addMail(mail);
+			System.out.println("card length ="+cards.size());
+			
+		}	
 	}
 
 	private String checkSweep(Player player, int mapId, int sweepNum,

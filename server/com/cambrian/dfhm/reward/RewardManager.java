@@ -1,11 +1,14 @@
 package com.cambrian.dfhm.reward;
 
 import java.util.ArrayList;
+
 import com.cambrian.common.net.ByteBuffer;
+import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.object.Sample;
 import com.cambrian.common.util.TimeKit;
 import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.back.GameCFG;
+import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.mail.entity.Mail;
 import com.cambrian.dfhm.mail.util.MailFactory;
@@ -23,32 +26,38 @@ public class RewardManager {
 		instance.mf = mf;
 	}
 
-	public void onlineReward(Player player, boolean isReward, ByteBuffer data) {
+	public void onlineReward(Player player,ByteBuffer data) {
 		String error = checkReward(player);
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}	
 		int rewardNum = player.getPlayerInfo().getRewardNum();
-		if(!isReward)//第一次进入 无论是否可以领奖 都返回第一次可领奖的ID
+/*		if(!isReward)//第一次进入 无论是否可以领奖 都返回第一次可领奖的ID
 		{
 			data.writeInt(GameCFG.getRewardSampleIdByNum(rewardNum)); 
+			data.writeInt(0);
 			return;
-		}
+		}*/
 		
-		if (error == Lang.F2103) {
+	/*	if (error == Lang.F2103) {
 			data.writeInt(-1);
 			return;
-		}
+		}*/
 
-		if (error == Lang.F2104) {
+		/*if (error == Lang.F2104) {
 			if (rewardNum == 0) {
 				data.writeInt(GameCFG.getRewardSampleIdByNum(rewardNum)); // 下一次领奖
+				data.writeInt(0);
 				return;
 			} else {
 				return;
 			}
 
-			// throw new DataAccessException(601,error);
-		}
+			 throw new DataAccessException(601,error);
+		}*/
 
-		if (isReward) {
+	//	if (isReward) {
 			Reward reward = new Reward();
 
 			reward = (Reward) Sample.getFactory().getSample(
@@ -71,7 +80,9 @@ public class RewardManager {
 			for (int i = 0; i < card.length; i++) {
 				totalnum += card[i][1];
 			}
+			boolean isemail = false;
 			int num = player.getCardBag().getSurplusCapacity();
+			ArrayList<Card> templist = new ArrayList<Card>();
 			if (num < totalnum)// 如果卡牌背包容量不够发发邮件
 			{
 				ArrayList<Integer> cards = new ArrayList<Integer>();
@@ -85,13 +96,15 @@ public class RewardManager {
 				Mail mail = mf.createSystemMail(cards, 0, 0, 0, 0, 0,
 						(int) player.getUserId());
 				player.addMail(mail);
+				isemail = true;
 			} else 
 			{
+				
 				for (int i = 0; i < card.length; i++)
 				{
 					for (int j = 0; j < card[i][1]; j++)
 					{
-						player.getCardBag().add(card[i][0]);
+						templist.add(player.getCardBag().add(card[i][0]));
 					}
 				}
 				
@@ -102,9 +115,23 @@ public class RewardManager {
 			}else
 			{
 				data.writeInt(GameCFG.getRewardSampleIdByNum(rewardNum + 1)); // 下一次领奖
+				if(isemail)
+				{
+					data.writeInt(0);
+				}else {
+					data.writeInt(totalnum);
+				}	
+				
+				for (int i = 0; i < templist.size(); i++)
+				{
+					data.writeInt(templist.get(i).getId());
+					data.writeInt(templist.get(i).getSid());
+					data.writeInt(templist.get(i).getSkillId());
+				}		
+				
 			}	
 			
-		}
+	//	}
 
 	}
 
@@ -128,9 +155,7 @@ public class RewardManager {
 		int rewardNum = player.getPlayerInfo().getRewardNum();
 		if(rewardNum==GameCFG.getRewardSampleId().length)//如果领奖次数满了
 		{
-			data.writeInt(0);
-			data.writeInt(0);
-			return;
+			throw new DataAccessException(601,Lang.F2103);
 		}	
 		
 		if (player.getPlayerInfo().getNextRewardTime() == 0) {

@@ -291,6 +291,8 @@ public final class GlobalConst
 	public static final int COMMAND_SLAVE_BACK_MESSAGE=2613;
 	/** 当壕-前台发送-获取身份信息 */
 	public static final int COMMAND_SLAVE_GETID=2614;
+	/** 当壕-前台发送-释放奴隶 */
+	public static final int COMMAND_SLAVE_RELEASE=2615;
 	/**/
 	/* 功能处理器 */
 	/** 空功能处理器 */

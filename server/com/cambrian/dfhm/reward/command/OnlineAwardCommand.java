@@ -28,8 +28,8 @@ public class OnlineAwardCommand extends Command
 		{
 			throw new DataAccessException(601,Lang.F9000_SDE);
 		}		
-		boolean isReward = data.readBoolean();		
+	//	boolean isReward = data.readBoolean();		
 		data.clear();
-		RewardManager.getInstance().onlineReward(player, isReward,data);
+		RewardManager.getInstance().onlineReward(player,data);
 	}		
 }

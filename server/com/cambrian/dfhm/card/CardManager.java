@@ -86,6 +86,7 @@ public class CardManager
 				card.setDodgeRate(card.getDodgeRate()+beyongDodge);
 				card.setCurHp(card.getCurHp()+beyongHp);
 				
+				
 				data.writeInt(-1);//表示境界提升成功
 				data.writeInt(0);//刚突破的时候卡牌经验为0
 				data.writeInt(card.getLevel());
@@ -671,6 +672,19 @@ public class CardManager
 	{
 		Card card_;
 		int id;
+		
+		
+		for (int i = 0; i < cardList.size(); i++)
+		{
+			for (int j =  cardList.size()-1; j >i; j--)
+			{
+				if (player.getCardBag().getById(cardList.get(i)).getSid()==player.getCardBag().getById(cardList.get(j)).getSid()) 
+				{
+					 return Lang.F1229;
+				}
+			}
+		}
+		
 		for(int i=0;i<cardList.size();i++)
 		{
 			  id=cardList.get(i);

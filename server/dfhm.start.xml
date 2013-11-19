@@ -804,9 +804,15 @@
 		<obj class="com.cambrian.dfhm.slaveAndWar.command.WorkCommand"></obj>
 	</method>
 	
-	<!-- 当壕-前台发送-办事  -->
+	<!-- 当壕-前台发送-获取身份  -->
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_GETID"/>
 		<obj class="com.cambrian.dfhm.slaveAndWar.command.GetIdentityCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-释放奴隶  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_RELEASE"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.ReleaseSlaveCommand"></obj>
 	</method>
 </objects>

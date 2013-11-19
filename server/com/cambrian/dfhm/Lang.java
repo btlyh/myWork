@@ -103,6 +103,8 @@ public final class Lang
 	public static final String F1227 = "1227";	
 	/**1228 卡牌已经满级不能升级*/
 	public static final String F1228 = "1228";
+	/**1229  境界突破的时候 重复吞噬*/
+	public static final String F1229 = "1229";
 	/* 邮件 */
 	/** 1301; 发送邮件的玩家姓名不正确 */
 	public static final String F1301="1301";
@@ -303,6 +305,8 @@ public final class Lang
 	public static final String F2216="2216";
 	/** 2117; 速去速回金币不够 */
 	public static final String F2217="2217";
+	/** 2118; 奴隶正在办事中，不能释放*/
+	public static final String F2218="2218";
 
 	/* 商城 */
 	/** 1901：商品序号不存在 */

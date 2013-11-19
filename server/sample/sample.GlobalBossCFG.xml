@@ -23,9 +23,12 @@
 	特殊奖励银币 specialMoney
 	特殊奖励武魂 specialSoul
 	特殊奖励卡牌集合 specialCardList
+	自动报名奖励银币 autoMoney
+	自动报名奖励武魂 autoSoul
+	自动报名奖励卡牌集合 autoCardList
 	挑战BOSS所需的主线关卡 normalNPCIndex
 	排名限制(用于限制排名前的获奖人员) orderConfine
 	-->
-	<sample sid="50001" class="com.cambrian.dfhm.globalboss.entity.GlobalBossCFG" bossName="山新大王" activeTime="15" readyTime="1" timeConfine="1440" _1battleCardList="14001" _finitMonsters="1" autoRegGold="20" vipConfine="1" attUpGold="100" attCD="1" reliveGold="100" orderMoney="100" orderSoul="100" _1orderCardList="10218" normalMoney="100" normalSoul="100" _1normalCardList="10218" specialMoney="100" specialSoul="100" _1specialCardList="10218" normalNPCIndex="11001" orderConfine="3"/>
+	<sample sid="50001" class="com.cambrian.dfhm.globalboss.entity.GlobalBossCFG" bossName="山新大王" activeTime="15" readyTime="1" timeConfine="1440" _1battleCardList="14001" _finitMonsters="1" autoRegGold="20" vipConfine="1" attUpGold="100" attCD="1" reliveGold="100" orderMoney="100" orderSoul="100" _1orderCardList="10218" normalMoney="100" normalSoul="100" _1normalCardList="10218" specialMoney="100" specialSoul="100" _1specialCardList="10218"  autoMoney="100" autoSoul="100" _1autoCardList="10218" normalNPCIndex="11001" orderConfine="3"/>
 	
 </objects>

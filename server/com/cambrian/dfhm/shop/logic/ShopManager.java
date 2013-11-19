@@ -75,25 +75,39 @@ public class ShopManager
 				continue;
 			cardsList.add(cardSid);
 		}
-		for (int i = 0; i < cardsList.size(); i++)
-		{
-			int sid = cardsList.get(i);
-			if (player.getCardBag().getSurplusCapacity() > 0)
-			{
-				Card card = player.getCardBag().add(sid);
-				cardsList.remove(i);
-				--i;
-				uidList.add(card.getId());
-				uidList.add(card.getSkillId());
-			} else
-				break;
-		}
-		if (cardsList.size() > 0)
+		if (player.getCardBag().getSurplusCapacity() < cardsList.size())
 		{
 			Mail mail = mf.createSystemMail(cardsList, 0, 0, 0, 0, 0,
 					(int) player.getUserId());
 			player.addMail(mail);
+		}else
+		{
+			for (Integer integer : cardsList)
+			{
+				Card card = player.getCardBag().add(integer);
+				uidList.add(card.getId());
+				uidList.add(card.getSkillId());
+			}
 		}
+		// for (int i = 0; i < cardsList.size(); i++)
+		// {
+		// int sid = cardsList.get(i);
+		// if (player.getCardBag().getSurplusCapacity() > 0)
+		// {
+		// Card card = player.getCardBag().add(sid);
+		// cardsList.remove(i);
+		// --i;
+		// uidList.add(card.getId());
+		// uidList.add(card.getSkillId());
+		// } else
+		// break;
+		// }
+		// if (cardsList.size() > 0)
+		// {
+		// Mail mail = mf.createSystemMail(cardsList, 0, 0, 0, 0, 0,
+		// (int) player.getUserId());
+		// player.addMail(mail);
+		// }
 		player.decrGold(useGold);
 		return uidList;
 	}

@@ -714,7 +714,7 @@ public class Player extends Sample implements Actor
 	 * 
 	 * @param data
 	 */
-	public void initLogin(ByteBuffer data)
+	public void initLogin(ByteBuffer data,Player player)
 	{
 		/** 检测是否有世界BOSS活动 */
 
@@ -725,6 +725,15 @@ public class Player extends Sample implements Actor
 		long surplusTime=BossManager.getInstance().getSurplusBossTime(
 			bossSid);
 		data.writeLong(surplusTime);// 活动剩余时间
+		if(player.getBfr()!=null)// 是否有BOSS战斗数据
+		{
+			data.writeBoolean(true);
+			data.writeBoolean(player.getBfr().isAuto());// 是否有自动战斗,如果没有BOSS战斗数据是不接受此数据
+		}
+		else
+		{
+			data.writeBoolean(false);
+		}
 		/** 登录时遍历军帐 */
 		if(nickname!=null)
 		{

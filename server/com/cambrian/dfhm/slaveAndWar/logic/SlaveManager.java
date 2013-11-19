@@ -83,6 +83,54 @@ public class SlaveManager
 	}
 
 	/**
+	 * 释放奴隶
+	 * 
+	 * @param player 玩家对象
+	 * @param slaveId 奴隶ID
+	 */
+	public void releaseSlave(Player player,int slaveId)
+	{
+		Map<String,Object> resultMap=checkReleaseSlave(player,slaveId);
+		String error=(String)resultMap.get("error");
+		if(error!=null)
+		{
+			throw new DataAccessException(601,error);
+		}
+		Slave slave=(Slave)resultMap.get("slave");
+		player.getIdentity().getSlaveList().remove(slave);
+	}
+	/**
+	 * 检查释放奴隶
+	 * 
+	 * @param player 玩家对象
+	 * @param slaveId 奴隶ID
+	 * @return
+	 */
+	private Map<String,Object> checkReleaseSlave(Player player,int slaveId)
+	{
+		Map<String,Object> mapInfo=new HashMap<String,Object>();
+		if(player.getIdentity().getGrade()!=Identity.OWNER)
+		{
+			mapInfo.put("error",Lang.F2204);
+			return mapInfo;
+		}
+		Slave slave=player.getIdentity().getSlave(slaveId);
+		if(slave==null)
+		{
+			mapInfo.put("error",Lang.F2213);
+			return mapInfo;
+		}
+		if(slave.getStatus()==Slave.STATUS_WORK)
+		{
+			mapInfo.put("error",Lang.F2218);
+			return mapInfo;
+		}
+		mapInfo.put("error",null);
+		mapInfo.put("slave",slave);
+		return mapInfo;
+	}
+
+	/**
 	 * 速去速回
 	 * 
 	 * @param player

@@ -31,6 +31,8 @@ public class BossFightRecord implements Comparable<BossFightRecord>
 	private long lastAttTime;
 	/** 是否终结BOSS */
 	private boolean isFinished;
+	/** 是否自动战斗 */
+	private boolean isAuto;
 
 	/* constructors */
 	/** 初始化BOSS战斗记录 */
@@ -113,6 +115,15 @@ public class BossFightRecord implements Comparable<BossFightRecord>
 	public void setCurBossSid(int curBossSid)
 	{
 		this.curBossSid=curBossSid;
+	}
+	public boolean isAuto()
+	{
+		return isAuto;
+	}
+
+	public void setAuto(boolean isAuto)
+	{
+		this.isAuto=isAuto;
 	}
 	/* init start */
 
