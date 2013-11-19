@@ -235,18 +235,33 @@ public class GameCFG
 	 */
 	public static int[] getDSkillById(int skillId)
 	{
-//		int id;
-//		for(int i=0;i<DoubleSkill.length;i++)
-//		{
-//			id=DoubleSkill[i][0];
-//			if(skillId==id)
-//			{
-//				int[] ds=new int[DoubleSkill[i].length-1];
-//				for(int j=0;j<ds.length;j++)
-//					ds[j]=DoubleSkill[i][j+1];
-//				return ds;
-//			}
-//		}
+		int id;
+		String[] doubleStrings=DoubleSkill.split("|");
+		for(int i=0;i<doubleStrings.length;i++)
+		{
+			String[] oneSkill=doubleStrings[i].split(",");
+			id=Integer.parseInt(oneSkill[0]);
+			if(skillId==id)
+			{
+				int[] ds=new int[oneSkill.length];
+				for(int j=0;j<ds.length;j++)
+				{
+					ds[j]=Integer.parseInt(oneSkill[j]);
+				}
+				return ds;
+			}
+		}
+		// for(int i=0;i<DoubleSkill.length;i++)
+		// {
+		// id=DoubleSkill[i][0];
+		// if(skillId==id)
+		// {
+		// int[] ds=new int[DoubleSkill[i].length-1];
+		// for(int j=0;j<ds.length;j++)
+		// ds[j]=DoubleSkill[i][j+1];
+		// return ds;
+		// }
+		// }
 		return null;
 	}
 

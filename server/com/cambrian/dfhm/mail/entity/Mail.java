@@ -21,8 +21,8 @@ public class Mail
 	/** 一次性取出的邮件数量上限 */
 	public static final int MAIL_SIZE_CONFINE = 20;
 	/** 邮件附件最小数量 */
-	public static final int MAIL_ANNEX_MINNUM = 1;
 	/** 邮件内容上限 */
+	public static final int MAIL_ANNEX_MINNUM = 1;
 	public static final int MAIL_CONTENT_CONFINE = 120;
 	/* static methods */
 

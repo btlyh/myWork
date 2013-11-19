@@ -320,9 +320,9 @@ public class Player extends Sample implements Actor
 		// card.setForsterNumber(100);
 		bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
-			card.getSkillRate(),card.getAttRange(),34801,card.getMaxHp(),
-			card.getCurHp(),0,card.getAimType(),card.getCritRate(),
-			card.getDodgeRate(),0,card.getType());
+			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
+			card.getMaxHp(),card.getCurHp(),0,card.getAimType(),
+			card.getCritRate(),card.getDodgeRate(),0,card.getType());
 		formation.changeFormation(0,bCard);
 
 		card=cardBag.add(10012);
@@ -331,9 +331,9 @@ public class Player extends Sample implements Actor
 		System.err.println("id !!!======="+card.getId());
 		bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
-			card.getSkillRate(),card.getAttRange(),34201,card.getMaxHp(),
-			card.getCurHp(),1,card.getAimType(),card.getCritRate(),
-			card.getDodgeRate(),0,card.getType());
+			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
+			card.getMaxHp(),card.getCurHp(),1,card.getAimType(),
+			card.getCritRate(),card.getDodgeRate(),0,card.getType());
 		formation.changeFormation(1,bCard);
 
 		card=cardBag.add(10013);

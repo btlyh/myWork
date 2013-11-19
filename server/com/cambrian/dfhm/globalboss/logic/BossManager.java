@@ -113,7 +113,7 @@ public class BossManager
 		if(player.getPlayerInfo().isAutoSignBoss())
 		{
 			return Lang.F1811;
-		}
+		} 
 		if(player.getGold()<GameCFG.getBossAutoSignGold())
 		{
 			return Lang.F1812;
