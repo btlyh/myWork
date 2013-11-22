@@ -48,7 +48,7 @@ public class PlayerInfo
 	private boolean isAutoSignBoss;
 
 	/** 抽奖SID */
-	private int luckBoxSid=39051;
+	private int luckBoxSid=19921;
 	/** 上次抽奖时间 */
 	private long lastTime;
 	/** 卡牌抽取记录集合 */
@@ -65,6 +65,8 @@ public class PlayerInfo
 	private int payRMB=0;
 	/** 故事模式副本时间 */
 	private int normalNPCTime=0;
+	/** 挑战了的NPC */
+	private int hardNPCIndex=-1;
 	/** 挑战模式副本时间 */
 	private int hardNPCTime=0;
 
@@ -94,8 +96,11 @@ public class PlayerInfo
 	private int qualifyingCount;
 	/** 排位赛胜利次数 */
 	private int qualifyingWin;
-	
-	private int nextRewardId =65011;//下一次的领奖ID 用于前台初始化领奖信息
+	/** 是否已经购买过最好卡牌 */
+	private boolean isBuyed;
+
+	private int nextRewardId=21657;// 下一次的领奖ID 用于前台初始化领奖信息
+
 	/* constructors */
 
 	/* properties */
@@ -423,17 +428,39 @@ public class PlayerInfo
 		return isAutoSignBoss;
 	}
 
-	public int getNextRewardId() {
+	public int getNextRewardId()
+	{
 		return nextRewardId;
 	}
 
-	public void setNextRewardId(int nextRewardId) {
-		this.nextRewardId = nextRewardId;
+	public void setNextRewardId(int nextRewardId)
+	{
+		this.nextRewardId=nextRewardId;
+	}
+
+	public int getHardNPCIndex()
+	{
+		return hardNPCIndex;
+	}
+
+	public void setHardNPCIndex(int hardNPCIndex)
+	{
+		if (hardNPCIndex > this.hardNPCIndex)
+			this.hardNPCIndex = hardNPCIndex;
 	}
 
 	public void setAutoSignBoss(boolean isAutoSignBoss)
 	{
 		this.isAutoSignBoss=isAutoSignBoss;
+	}
+	public boolean isBuyed()
+	{
+		return isBuyed;
+	}
+
+	public void setBuyed(boolean isBuyed)
+	{
+		this.isBuyed=isBuyed;
 	}
 	/** 序列化 和前台通信 */
 	public void bytesWrite(ByteBuffer data)
@@ -453,7 +480,7 @@ public class PlayerInfo
 		data.writeInt(autoBossSign);
 		data.writeInt(duelFreeTimes);
 		data.writeInt(duelBuyTimes);
-		data.writeInt(nextRewardId); 
+		data.writeInt(nextRewardId);
 	}
 
 	/** 序列化 和DC通信 存 */
@@ -505,7 +532,7 @@ public class PlayerInfo
 		data.writeInt(qualifyingCount);
 		data.writeInt(qualifyingWin);
 		data.writeInt(nextRewardId);
-
+		data.writeInt(hardNPCIndex);
 	}
 	/** 序列化 和DC通信 取 */
 	public void dbBytesRead(ByteBuffer data)
@@ -560,8 +587,8 @@ public class PlayerInfo
 		instancingCount=data.readInt();
 		qualifyingCount=data.readInt();
 		qualifyingWin=data.readInt();
-		nextRewardId = data.readInt();
-
+		nextRewardId=data.readInt();
+		hardNPCIndex = data.readInt();
 	}
 
 	public void decrLuckBoxFreeTimes(int times)
@@ -668,5 +695,6 @@ public class PlayerInfo
 			}
 		}
 		bestCardSid=bestCard;
+		isBuyed=false;
 	}
 }

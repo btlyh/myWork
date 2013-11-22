@@ -114,7 +114,7 @@ public class ActiveNPC extends NPC
 	}
 
 	@Override
-	public void winCondition(BattleScene scene,BattleCard[] attList)
+	public void winCondition(BattleScene scene,BattleCard[] attList,Player player)
 	{
 		// TODO Auto-generated method stub
 

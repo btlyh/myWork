@@ -113,7 +113,7 @@ public class BossManager
 		if(player.getPlayerInfo().isAutoSignBoss())
 		{
 			return Lang.F1811;
-		} 
+		}
 		if(player.getGold()<GameCFG.getBossAutoSignGold())
 		{
 			return Lang.F1812;
@@ -224,11 +224,11 @@ public class BossManager
 			mapInfo.put("error",Lang.F1807);
 			return mapInfo;
 		}
-		if(TimeKit.nowTimeMills()<TimeKit.timeOf(gbc.getActiveTime()))
-		{
-			mapInfo.put("error",Lang.F1810);
-			return mapInfo;
-		}
+//		if(TimeKit.nowTimeMills()<TimeKit.timeOf(gbc.getActiveTime()))
+//		{
+//			mapInfo.put("error",Lang.F1810);
+//			return mapInfo;
+//		}
 		if(player.formation.isEmpty())
 		{
 			mapInfo.put("error",Lang.F1410);
@@ -263,7 +263,8 @@ public class BossManager
 		{
 			for(BattleCard battleCard:att)
 			{
-				battleCard.attUp(player.getBfr().getAttUp());
+				if(battleCard!=null)
+					battleCard.attUp(player.getBfr().getAttUp());
 			}
 		}
 		GlobalBossCFG gbc=(GlobalBossCFG)resultMap.get("gbc");
@@ -319,11 +320,11 @@ public class BossManager
 			mapInfo.put("error",Lang.F1803);
 			return mapInfo;
 		}
-		if(TimeKit.nowTimeMills()<TimeKit.timeOf(gbc.getActiveTime()))
-		{
-			mapInfo.put("error",Lang.F1810);
-			return mapInfo;
-		}
+		// if(TimeKit.nowTimeMills()<TimeKit.timeOf(gbc.getActiveTime()))
+		// {
+		// mapInfo.put("error",Lang.F1810);
+		// return mapInfo;
+		// }
 		if(!gbc.isOpen())
 		{
 			mapInfo.put("error",Lang.F1807);

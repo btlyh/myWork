@@ -15,11 +15,11 @@
 	price	价格
 
 	-->
-	<sample sid="40001" class="com.cambrian.dfhm.common.entity.Gift" name="小堆金币" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="100" money="0" soul="0" token="0" price="10"/>
-	<sample sid="40002" class="com.cambrian.dfhm.common.entity.Gift" name="武魂" description="购买后立即获得50个武魂" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="0" money="0" soul="50" token="0" price="10"/>
-	<sample sid="40003" class="com.cambrian.dfhm.common.entity.Gift" name="军令" description="购买后立即获得50个军令" img="img/tubiao/bag/gold/1" animation="0" type="2" gold="0" money="0" soul="0" token="50" price="10"/>
-	<sample sid="40004" class="com.cambrian.dfhm.common.entity.Gift" name="银币武魂" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="0" money="10000" soul="100" token="0" price="10"/>
-	<sample sid="40005" class="com.cambrian.dfhm.common.entity.Gift" name="1张卡牌" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10001" price="1000000"/>
-	<sample sid="40006" class="com.cambrian.dfhm.common.entity.Gift" name="5张卡牌" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10007,10008,10009,10006,10010" price="10000000"/>
+	<sample sid="20121" class="com.cambrian.dfhm.common.entity.Gift" name="小堆金币" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="100" money="0" soul="0" token="0" price="10"/>
+	<sample sid="20122" class="com.cambrian.dfhm.common.entity.Gift" name="武魂" description="购买后立即获得50个武魂" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="0" money="0" soul="50" token="0" price="10"/>
+	<sample sid="20123" class="com.cambrian.dfhm.common.entity.Gift" name="军令" description="购买后立即获得50个军令" img="img/tubiao/bag/gold/1" animation="0" type="2" gold="0" money="0" soul="0" token="50" price="10"/>
+	<sample sid="20124" class="com.cambrian.dfhm.common.entity.Gift" name="银币武魂" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="0" money="10000" soul="100" token="0" price="10"/>
+	<sample sid="20125" class="com.cambrian.dfhm.common.entity.Gift" name="1张卡牌" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10001" price="1000000"/>
+	<sample sid="20126" class="com.cambrian.dfhm.common.entity.Gift" name="5张卡牌" description="购买后立即获得50个金币" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10007,10008,10009,10006,10010" price="10000000"/>
 
 </objects>

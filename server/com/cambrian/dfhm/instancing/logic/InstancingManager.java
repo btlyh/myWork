@@ -93,10 +93,11 @@ public class InstancingManager
 		BattleScene scene=new BattleScene();
 		BattleCard[] att=player.formation.getFormation();
 		BattleCard[] def=npc.getMonsters();
-		for(int i=0;i<def.length;i++)
-		{
-			System.err.println("技能ID==="+def[i].getSkill().getId());
-		}
+//		for(int i=0;i<def.length;i++)
+//		{
+//			if()
+//			System.err.println("技能ID==="+def[i].getSkill().getId());
+//		}
 		battleInit(att,def);
 		if(attType==1)
 		{
@@ -109,7 +110,7 @@ public class InstancingManager
 			// 扫荡
 		}
 		player.decrToken(npc.getNeedToken());
-		npc.winCondition(scene,att);
+		npc.winCondition(scene,att,player);
 		int win=scene.getRecord().get(scene.getRecord().size()-1);
 		if(win==1)// 胜利
 		{

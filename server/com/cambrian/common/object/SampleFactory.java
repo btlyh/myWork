@@ -46,7 +46,7 @@ public class SampleFactory
 	{
 		Sample sample=getSample(sid);
 		if(sample==null) return null;
-		return ((Sample)sample.clone());
+		return (Sample)sample.clone();
 	}
 
 	/** 获得模板数组 */

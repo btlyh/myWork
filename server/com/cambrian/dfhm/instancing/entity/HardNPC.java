@@ -8,6 +8,7 @@ import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleRecord;
 import com.cambrian.dfhm.battle.BattleScene;
+import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.monster.Monster;
 
@@ -119,6 +120,7 @@ public class HardNPC extends NPC
 			player.getPlayerInfo().setHardNPCTime(
 				(int)TimeKit.nowTimeMills());
 			player.getPlayerInfo().incrInstancingCount(1);
+			player.getPlayerInfo().setHardNPCIndex(getSid());
 		}
 		else
 		{
@@ -137,8 +139,8 @@ public class HardNPC extends NPC
 	@Override
 	public void initMonsters(String str)
 	{
-		monsters=new BattleCard[battleCardList.length];
-		for(int i=0;i<monsters.length;i++)
+		monsters=new BattleCard[5];
+		for(int i=0;i<battleCardList.length;i++)
 		{
 			Monster card=(Monster)Sample.factory
 				.getSample(battleCardList[i]);
@@ -153,7 +155,7 @@ public class HardNPC extends NPC
 	}
 
 	/** 检测指定卡牌 */
-	public boolean checkAssignCard(BattleCard[] battleCards)
+	public boolean checkAssignCard(BattleCard[] battleCards,Player player)
 	{
 		if(assignCardId>0)// 指定卡牌
 		{
@@ -161,7 +163,8 @@ public class HardNPC extends NPC
 			{
 				if(battleCards[i]!=null)
 				{
-					if(battleCards[i].getId()==assignCardId)
+					Card card = player.getCardBag().getById(battleCards[i].getId());
+					if(card.getSid()==assignCardId)
 					{
 						return true;
 					}
@@ -211,10 +214,10 @@ public class HardNPC extends NPC
 	}
 
 	@Override
-	public void winCondition(BattleScene scene,BattleCard[] attList)
+	public void winCondition(BattleScene scene,BattleCard[] attList,Player player)
 	{
 		boolean results[]={true,true,true,true,true};
-		results[0]=checkAssignCard(attList);
+		results[0]=checkAssignCard(attList,player);
 		BattleRecord record=scene.getBattleRecord();
 		results[1]=checkIsAllLive(record);
 		results[2]=checkAssignRound(scene.getCurRound());

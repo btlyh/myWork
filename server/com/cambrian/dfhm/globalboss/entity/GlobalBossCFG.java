@@ -351,8 +351,8 @@ public class GlobalBossCFG extends Sample
 	 */
 	public void initMonsters(String str)
 	{
-		monsters=new BattleCard[battleCardList.length];
-		for(int i=0;i<monsters.length;i++)
+		monsters=new BattleCard[5];
+		for(int i=0;i<battleCardList.length;i++)
 		{
 			Monster card=(Monster)Sample.factory
 				.getSample(battleCardList[i]);
@@ -376,7 +376,7 @@ public class GlobalBossCFG extends Sample
 		int temp=0;
 		for(BattleCard bCard:monsters)
 		{
-			temp+=bCard.getMaxHp();
+			if(bCard!=null) temp+=bCard.getMaxHp();
 		}
 		return temp;
 	}
@@ -391,7 +391,7 @@ public class GlobalBossCFG extends Sample
 		int temp=0;
 		for(BattleCard bCard:monsters)
 		{
-			temp+=bCard.getCurHp();
+			if(bCard!=null) temp+=bCard.getCurHp();
 		}
 		return temp;
 	}
@@ -430,9 +430,10 @@ public class GlobalBossCFG extends Sample
 		}
 		return rewardMap;
 	}
-	
+
 	/**
 	 * 获取自动报名奖励
+	 * 
 	 * @return
 	 */
 	public ArrayList<Object> countReward()

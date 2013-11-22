@@ -38,7 +38,7 @@ public class RankingsManager
 	/** 排行信息保存的上限 */
 	private static final int SIZE=200;
 	/** 计时器：更新排行信息 */
-	private static long TIME=TimeKit.MIN_MILLS*30;
+	private static long TIME=TimeKit.MIN_MILLS;
 
 	/* static methods */
 	public static RankingsManager getInstance()
@@ -198,7 +198,7 @@ public class RankingsManager
 
 			rankInfo=new RankInfo();
 			rankInfo.setPlayerName(player.getNickname());
-			rankInfo.setInfo(player.getCurIndexForHardNPC()-1);
+			rankInfo.setInfo(player.getPlayerInfo().getHardNPCIndex());
 			rankInfo.setTime(player.getPlayerInfo().getHardNPCTime());
 			ranking.getChallengeRankings().add(rankInfo);
 

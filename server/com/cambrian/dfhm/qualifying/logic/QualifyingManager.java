@@ -14,6 +14,7 @@ import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
+import com.cambrian.dfhm.battle.Formation;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.qualifying.dao.QualifyingDao;
@@ -161,28 +162,10 @@ public class QualifyingManager
 	/** 获得在阵卡牌中最强的卡牌 */
 	private int getBestCardSid(Player player)
 	{
-		BattleCard[] bCards = player.formation.getFormation();
-		List<BattleCard> battleCards = new ArrayList<BattleCard>();
-		for (BattleCard battleCard : bCards)
-		{
-			if (battleCard != null)
-				battleCards.add(battleCard);
-		}
-		Card card = new Card();
-		for (BattleCard battleCard : battleCards)
-		{
-			if (battleCard != null)
-				card = player.getCardBag().getById(battleCard.getId());
-			break;
-		}
-		for (BattleCard battleCard : battleCards)
-		{
-			if (battleCard == null)
-				continue;
-			Card c = player.getCardBag().getById(battleCard.getId());
-			if (c.getZhandouli() > card.getZhandouli())
-				card = c;
-		}
+		int uid = player.formation.getBestCardUid();
+		Card card = player.getCardBag().getById(uid);
+		if (card == null)
+			return 10001;
 		return card.getSid();
 	}
 
@@ -256,6 +239,10 @@ public class QualifyingManager
 	/** 检查挑战 */
 	private String checkDuel(Player player)
 	{
+		if (player.getPlayerInfo().getDuelFreeTimes() < 1)
+		{
+			return Lang.F2105; //没有挑战次数
+		}
 		BattleCard[] playerBattleCards = player.formation.getFormation();
 		int i = 0;
 		for (BattleCard battleCard : playerBattleCards)

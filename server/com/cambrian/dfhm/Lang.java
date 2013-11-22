@@ -35,7 +35,7 @@ public final class Lang
 	public static final String F706="706";
 	/** 707；购买背包的金币和服务端价格不符合 */
 	public static final String F707="707";
-	/** 708；积分兑换所需积分和服务端不符合 */
+	/** 708；错误的商品id */
 	public static final String F708="708";
 	/** 709；积分不足 */
 	public static final String F709="709";
@@ -192,7 +192,7 @@ public final class Lang
 	public static final String F1606="1606";
 	/** 1607; 直接购买卡牌的RMB不正确 */
 	public static final String F1607="1607";
-	/** 1608; 直接购买的卡牌不正确 */
+	/** 1608; 已经购买过了 */
 	public static final String F1608="1608";
 	/** 1609; 直接购买的卡牌不存在 */
 	public static final String F1609="1609";
@@ -330,6 +330,8 @@ public final class Lang
 	public static final String F2101="2101";
 	/** 没有卡牌在阵上 */
 	public static final String F2102="2102";
+	/** 挑战次数不足 */
+	public static final String F2105="2103";
 
 	/** 9000；网络错误,请重新登录 */
 	public static final String F9000_SDE="9000";

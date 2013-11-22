@@ -9,8 +9,8 @@
 	shopType	类型,前台显示位置
 	setGoods	商品(当前页卡中包涵的商品SID)
 	-->
-	<sample sid="60001" class="com.cambrian.dfhm.shop.entity.Category" shopType="0" _1goods="61001"/>
-	<sample sid="60002" class="com.cambrian.dfhm.shop.entity.Category" shopType="1" _1goods="61002,61003,61004"/>
-	<sample sid="60003" class="com.cambrian.dfhm.shop.entity.Category" shopType="2" _1goods="61005,61006"/>
+	<sample sid="21437" class="com.cambrian.dfhm.shop.entity.Category" shopType="0" _1goods="21457"/>
+	<sample sid="21438" class="com.cambrian.dfhm.shop.entity.Category" shopType="1" _1goods="21458,21459,21460"/>
+	<sample sid="21439" class="com.cambrian.dfhm.shop.entity.Category" shopType="2" _1goods="21461,21462"/>
 
 </objects>

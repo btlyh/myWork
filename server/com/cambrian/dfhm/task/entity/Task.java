@@ -88,12 +88,15 @@ public class Task extends Sample
 	/**  */
 	private boolean finishIsAchieve(Player player)
 	{
-		for (Integer integer : getCard)
+		if (getCard != null)
 		{
-			if (integer != 0)
+			for (Integer integer : getCard)
 			{
-				if (!player.getCardBag().isContain(integer))
-					return false;
+				if (integer != 0)
+				{
+					if (!player.getCardBag().isContain(integer))
+						return false;
+				}
 			}
 		}
 		if (player.getSoul() < getSoul)
@@ -201,7 +204,7 @@ public class Task extends Sample
 	 * @return */
 	private Card dispenseCard(Player player, TaskAward award)
 	{
-		if (award.card.length > 0)
+		if (award.card != null && award.card.length > 0)
 		{
 			int random = MathKit.randomValue(0, award.card[award.card.length-1]);
 			for (int i = 0; i < award.card.length; i+=2)

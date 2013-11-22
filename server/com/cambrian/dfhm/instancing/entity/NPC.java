@@ -122,7 +122,7 @@ public abstract class NPC extends Sample
 	/** 攻击之后的处理 */
 	public abstract void handleForAtt(Player player);
 	/** 胜利条件判定 */
-	public abstract void winCondition(BattleScene scene,BattleCard[] attList);
+	public abstract void winCondition(BattleScene scene,BattleCard[] attList,Player player);
 	/** 派发奖励 */
 	public void addAward(BattleScene scene,Player player)
 	{

@@ -52,11 +52,11 @@ public class FlushCardCommand extends Command
 		}
 		int type=data.readInt();
 		data.clear();
-		long surplusTime=LuckBoxManager.getInstance(
-			).flushCardList(player,
+		long surplusTime=LuckBoxManager.getInstance().flushCardList(player,
 			type);
 		data.writeLong(surplusTime);
 		data.writeInt(player.getPlayerInfo().getBestCardSid());
+		data.writeBoolean(player.getPlayerInfo().isBuyed());
 		ArrayList<TakeCardRecord> cardRecords=player.getPlayerInfo()
 			.getTakeCardRecords();
 		data.writeInt(cardRecords.size());

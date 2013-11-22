@@ -62,10 +62,11 @@ public class CardBag implements Serializable,DBSerializable
 	public synchronized Card add(int sid)
 	{
 		Card card=(Card)Sample.factory.newSample(sid);
-		card.init();
-		card.uid = UidFile.getCardFile().getPlusUid();
-		list.add(card);
-		return card;
+		Card card_ = new Card();
+		card_.init(card);
+		card_.uid = UidFile.getCardFile().getPlusUid();
+		list.add(card_);
+		return card_;
 	}
 
 	/** ÒÆ³ý¿¨Æ¬ */

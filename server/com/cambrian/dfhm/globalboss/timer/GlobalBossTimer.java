@@ -86,8 +86,10 @@ public class GlobalBossTimer
 			startTime=activeTime-(gbc.getReadyTime()*60*1000)
 				-TimeKit.nowTimeMills();
 			Timer bossTimer=new Timer();
+//			bossTimer.schedule(new BossStartTimeTask(gbc,ds,bsn,baan),
+//				Math.abs(startTime),TimeKit.DAY_MILLS); // 先关闭正规BOSS开启
 			bossTimer.schedule(new BossStartTimeTask(gbc,ds,bsn,baan),
-				Math.abs(startTime),TimeKit.DAY_MILLS);
+				0,TimeKit.DAY_MILLS);
 		}
 	}
 }

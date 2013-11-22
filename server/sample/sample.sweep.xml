@@ -13,8 +13,18 @@
 	 _1card //(card   依次是卡牌的SID  掉落几率 和 掉落最大张数)
 	-->
 	
-	<sample sid="21001" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="30" goldmin="1" moneymax="30" moneymin="1" soulmax="50" soulmin="1" _1card="10001,50000,1,10002,10000,1,10005,50000,1,10004,10000,2"/>
-
-	<sample sid="21002" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="30" goldmin="1" moneymax="30" moneymin="1" soulmax="50" soulmin="1" _1card="10001,50000,1,10002,10000,1,10005,50000,1,10004,10000,2"/>
+	<sample sid="21001" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="100" moneymin="10" soulmax="10" soulmin="0" _1card="10001,40000,1,10002,30000,1,10003,2000,1,10004,20000,1,10005,8000,1"/>
+	<sample sid="21002" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="100" moneymin="10" soulmax="10" soulmin="0" _1card="10006,40000,1,10007,30000,1,10008,2000,1,10009,20000,1,10010,8000,1"/>
+	<sample sid="21003" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="100" moneymin="10" soulmax="10" soulmin="0" _1card="10011,40000,1,10012,30000,1,10013,2000,1,10014,20000,1,10015,8000,1"/>
+	<sample sid="21004" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="100" moneymin="10" soulmax="10" soulmin="0" _1card="10016,40000,1,10017,30000,1,10018,2000,1,10019,20000,1,10020,8000,1"/>
+	<sample sid="21005" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="100" moneymin="10" soulmax="10" soulmin="0" _1card="10021,40000,1,10000,30000,1,10023,2000,1,10024,20000,1,10025,8000,1"/>
+	<sample sid="21006" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="100" moneymin="10" soulmax="10" soulmin="0" _1card="10026,40000,1,10027,30000,1,10028,2000,1,10029,20000,1,10030,8000,1"/>
+	<sample sid="21007" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="100" moneymin="10" soulmax="10" soulmin="0" _1card="10031,40000,1,10032,30000,1,10033,2000,1,10034,20000,1,10035,8000,1"/>
+	<sample sid="21008" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="100" moneymin="10" soulmax="10" soulmin="0" _1card="10036,40000,1,10037,30000,1,10038,2000,1,10039,20000,1,10040,8000,1"/>
+	<sample sid="21009" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="100" moneymin="10" soulmax="10" soulmin="0" _1card="10041,40000,1,10042,30000,1,10043,2000,1,10044,20000,1,10045,8000,1"/>
+	<sample sid="21010" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="100" moneymin="10" soulmax="10" soulmin="0" _1card="10046,40000,1,10047,30000,1,10048,2000,1,10049,20000,1,10050,8000,1"/>
+	<sample sid="22001" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10001,40000,1,10002,30000,1,10003,2000,1,10004,20000,1,10005,8000,1"/>
+	<sample sid="22002" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10006,40000,1,10007,30000,1,10008,2000,1,10009,20000,1,10010,8000,1"/>
+	<sample sid="22003" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="10" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10011,40000,1,10012,30000,1,10013,2000,1,10014,20000,1,10015,8000,1"/>
 
 </objects>

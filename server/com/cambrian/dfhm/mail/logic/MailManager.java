@@ -134,6 +134,7 @@ public class MailManager
 		for(Mail mail:canTakeMails)
 		{
 			dataList.addAll(takeAnnex(mail,player));
+			mail.setState(Mail.MAILSTATE_READ_GET);
 		}
 		return dataList;
 	}

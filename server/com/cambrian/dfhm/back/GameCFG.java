@@ -13,6 +13,8 @@ public class GameCFG
 	private static int[] levelExp;
 	/** 技能升级[每级经验，吞噬卡牌数量] */
 	private static int[] skillLevel;
+	/** 技能刷新所需金币*/
+	private static int skillFlushNeedGold;
 	/** VIP等级所需要充值的金币 */
 	private static int[] vipLevelGold;
 	/** VIP等级对应的配置表 */
@@ -648,5 +650,19 @@ public class GameCFG
 	public static void setBossAutoSignGold(int bossAutoSignGold)
 	{
 		GameCFG.bossAutoSignGold=bossAutoSignGold;
+	}
+	
+	/**
+	 * 获取技能刷新所需要的金币
+	 * @return
+	 */
+	public static int getSkillFlushNeedGold()
+	{
+		return skillFlushNeedGold;
+	}
+
+	public static void setSkillFlushNeedGold(int skillFlushNeedGold)
+	{
+		GameCFG.skillFlushNeedGold = skillFlushNeedGold;
 	}
 }

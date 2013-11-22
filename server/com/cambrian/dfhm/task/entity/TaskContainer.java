@@ -78,18 +78,6 @@ public class TaskContainer
 	/** 刷新普通任务容器 */
 	public void refreshList(Player player)
 	{
-		for (int i = 0; i < taskList.size(); i++)
-		{
-			Task task = taskList.get(i);
-			if (task.status == Task.FINISHED)
-			{
-				finishedTaskList.add(task);
-				taskList.remove(i);
-				i--;
-				continue;
-			}
-			task.checkFinish(player);
-		}
 		Sample[] samples = Sample.getFactory().getSamples();
 		for (Sample sample : samples)
 		{
@@ -104,11 +92,7 @@ public class TaskContainer
 				}
 			}
 		}
-	}
-	/** 刷新日常任务 */
-	public void refreshDaly(Player player)
-	{
-		for (int i = 0; i < daylyTaskList.size(); i++)
+		for (int i = 0; i < taskList.size(); i++)
 		{
 			Task task = taskList.get(i);
 			if (task.status == Task.FINISHED)
@@ -120,6 +104,10 @@ public class TaskContainer
 			}
 			task.checkFinish(player);
 		}
+	}
+	/** 刷新日常任务 */
+	public void refreshDaly(Player player)
+	{
 		Sample[] samples = Sample.getFactory().getSamples();
 		for (Sample sample : samples)
 		{
@@ -133,6 +121,18 @@ public class TaskContainer
 						daylyTaskList.add(task);
 				}
 			}
+		}
+		for (int i = 0; i < daylyTaskList.size(); i++)
+		{
+			Task task = taskList.get(i);
+			if (task.status == Task.FINISHED)
+			{
+				finishedTaskList.add(task);
+				taskList.remove(i);
+				i--;
+				continue;
+			}
+			task.checkFinish(player);
 		}
 	}
 	

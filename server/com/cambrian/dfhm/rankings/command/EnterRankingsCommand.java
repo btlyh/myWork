@@ -70,6 +70,7 @@ public class EnterRankingsCommand extends Command
 			Card card = (Card) resultMap.get("card");
 			data.writeInt(rankings.getCardRankInfo(card));
 			data.writeInt(card.getId());
+			data.writeInt(card.getZhandouli());
 		}
 	}
 }

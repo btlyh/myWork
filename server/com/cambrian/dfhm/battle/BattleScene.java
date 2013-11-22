@@ -12,6 +12,7 @@ import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.instancing.entity.HardNPC;
 import com.cambrian.dfhm.instancing.entity.NPC;
 import com.cambrian.dfhm.instancing.logic.InstancingManager;
+import com.cambrian.dfhm.skill.DecrHurtSkill;
 import com.cambrian.dfhm.skill.DizzySkill;
 import com.cambrian.dfhm.skill.PoisonSkill;
 import com.cambrian.dfhm.skill.Skill;
@@ -35,8 +36,8 @@ public class BattleScene
 	public static final int DEFAULTATT=1,SKILLATT=2;
 	/** 最大卡牌参战数 */
 	public static final int MAXBATTLECOUNT=5;
-	/** DEBUFF常量：0=正常，1=中毒，2=晕眩 */
-	public static final int NORMAL=0,POISON=1,DIZZY=2;
+	/** DEBUFF常量：0=正常，1=中毒，2=晕眩,3=减伤 */
+	public static final int NORMAL=0,POISON=1,DIZZY=2,DEHURT=3;
 	/** 战斗类型（ 1普通PVE战斗 2世界BOSS战斗 3普通PVP战斗） */
 	public static final int FIGHT_NORMAL=1,FIGHT_GLOBALBOSS=2,FIGHT_PVP=3;
 
@@ -159,7 +160,7 @@ public class BattleScene
 			for(int i=0;i<MAXBATTLECOUNT;i++)
 			{
 				System.err.println("------攻方攻击-------");
-				die=attackLogic(attList,defList);// 攻方攻击
+				die=attackLogic(attList,defList,type);// 攻方攻击
 				if(die)
 				{
 					result=getResult(attList);
@@ -169,7 +170,7 @@ public class BattleScene
 				}
 
 				System.err.println("------守方攻击-------");
-				die=attackLogic(defList,attList);// 守方攻击
+				die=attackLogic(defList,attList,type);// 守方攻击
 				if(die)
 				{
 					result=getResult(attList);
@@ -214,19 +215,31 @@ public class BattleScene
 	 * @param side 进攻or防守
 	 * @return 战斗结束
 	 */
-	private boolean attackLogic(BattleCard[] attList,BattleCard[] defList)
+	private boolean attackLogic(BattleCard[] attList,BattleCard[] defList,
+		int type)
 	{
 		ArrayList<Integer> aim=new ArrayList<Integer>();
 		BattleCard attCard=getAttackCard(attList);
 		if(attCard!=null)
 		{
+			record.addRecord(-99999);
 			record.addRecord(curRound);
 			step++;
+			record.addRecord(attCard.getSide());
 			record.addRecord(attCard.getIndex());
 			System.err.println("出手人员 ==="+attCard.getName()+", 出手者位置 ==="
 				+attCard.getIndex());
 			System.err.println("side ==="+attCard.getSide());
-			int status=deBuffer(attCard,attList);
+			int status=deBuffer(attCard,attList,type);
+			if(attCard.getCurHp()<0)
+			{
+				if(die)
+				{
+					record.addRecord(1);
+				}
+				record.addRecord(-1);
+				return die;
+			}
 			deSkill=attCard.getDeSkill();
 			if(deSkill.size()>0)// 通知前端，攻击者自身还剩debuff
 			{
@@ -237,12 +250,15 @@ public class BattleScene
 			if(status==NORMAL&&!die)
 			{
 				int attType=2; // getAttType(attCard);
-
+				// if(type==FIGHT_GLOBALBOSS)
+				// {
+				// attType=0;
 				// if(attList[0].getAwardSid()==2&&curRound>=roundConfine)
 				// {
 				// attType=2;
 				// }
-				if(attCard.getAimType()==OWN)
+				// }
+				if(attCard.getSkill().getAim()==OWN)
 				{
 					record.addRecord(attCard.getSide());
 					record.addRecord(attType);
@@ -258,10 +274,21 @@ public class BattleScene
 				}
 				else
 				{
-					if(attCard.getSide()==1)
-						record.addRecord(2);
+					if(attCard.getSkill().getAim()==1)
+					{
+						record.addRecord(attCard.getSide());
+					}
 					else
-						record.addRecord(1);
+					{
+						if(attCard.getSide()==1)
+						{
+							record.addRecord(2);
+						}
+						else
+						{
+							record.addRecord(1);
+						}
+					}
 					record.addRecord(attType);
 					System.err.println("------攻击目标是对手-------");
 					aim=getAttRange(attCard,defList,attType);
@@ -304,7 +331,6 @@ public class BattleScene
 		}
 		return die;
 	}
-
 	/** 获得攻击类型，1=普通，2=技能 */
 	private int getAttType(BattleCard attCard)
 	{
@@ -501,14 +527,14 @@ public class BattleScene
 				for(int i=0;i<aimList.length;i++)
 				{
 					aimCard=aimList[i];
-					aim.add(aimCard.getIndex());
+					if(aimCard!=null) aim.add(aimCard.getIndex());
 				}
 				break;
 			case BattleAct.OWNALL:// 5=己全体
 				for(int i=0;i<aimList.length;i++)
 				{
 					aimCard=aimList[i];
-					aim.add(aimCard.getIndex());
+					if(aimCard!=null) aim.add(aimCard.getIndex());
 				}
 				break;
 			case BattleAct.LEFTINCLINED:// 6=左斜
@@ -543,9 +569,13 @@ public class BattleScene
 	 * @param attList 攻方链表
 	 * @return 0=正常，1=中毒，2=晕眩
 	 */
-	private int deBuffer(BattleCard attCard,BattleCard[] attList)
+	private int deBuffer(BattleCard attCard,BattleCard[] attList,int type)
 	{
 		deSkill=attCard.getDeSkill();
+		if(type==FIGHT_GLOBALBOSS)
+		{
+			deSkill.clear();
+		}
 		record.addRecord(deSkill.size());
 		int status=0;
 		ArrayList<Skill> skillList=new ArrayList<Skill>(deSkill.size());
@@ -560,12 +590,24 @@ public class BattleScene
 				System.err.println("出手人员拥有debuffer状态，debuff ==="
 					+skill.getName());
 				skill.buffValue(attCard,0,attCard,record);
-				if(attCard.getCurHp()<=0) return POISON;
+				if(attCard.getCurHp()<0)
+				{
+					drop(attCard);
+					die=isEndNoRecord(attList);
+					attCard.setAttack(true);
+					status=POISON;
+				}
 			}
 			else if(skill instanceof DizzySkill)
 			{
 				skill.buffValue(attCard,0,attCard,record);
 				status=DIZZY;
+			}
+			else if(skill instanceof DecrHurtSkill)
+			{
+				record.addRecord(skill.getSid());
+				record.addRecord(DEHURT);
+				status=0;
 			}
 		}
 		return status;
@@ -613,6 +655,29 @@ public class BattleScene
 	}
 
 	/**
+	 * 比赛是否结束
+	 * 
+	 * @param aim
+	 * @return
+	 */
+	private boolean isEndNoRecord(BattleCard[] aim)
+	{
+		BattleCard bCard;
+		for(int i=0;i<aim.length;i++)
+		{
+			bCard=aim[i];
+			if(bCard!=null)
+			{
+				System.err.println("判断战斗是否结束，血量剩余情况===="+bCard.getCurHp());
+			}
+			if(bCard!=null&&bCard.getCurHp()>0)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
 	 * 掉落计算
 	 * 
 	 * @param dieCard
@@ -633,6 +698,8 @@ public class BattleScene
 			System.err.println("掉落物品类型 ==="+type+", 掉落物品数量 ==="+award[1]);
 			record.addRecord(1);// 掉东西
 			record.addRecord(type);
+			System.err.println("=========================="+type
+				+"==========================");
 			return true;
 		}
 		else

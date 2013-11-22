@@ -65,7 +65,7 @@ public class RewardManager {
 			// 设置下一次的领奖时间
 			player.getPlayerInfo().setNextRewardTime(
 					TimeKit.nowTimeMills()
-							+ GameCFG.getRewardIntervalTimeByIndex(rewardNum)
+							+ GameCFG.getRewardIntervalTimeByIndex(rewardNum+1)
 							* 1000);
 			// 设置已领次数
 			player.getPlayerInfo().setRewardNum(rewardNum + 1);
@@ -169,14 +169,14 @@ public class RewardManager {
 			return;
 		}	
 		
-		if (player.getPlayerInfo().getNextRewardTime() == 0) {
+/*		if (player.getPlayerInfo().getNextRewardTime() == 0) {
 			player.getPlayerInfo().setNextRewardTime(
 					TimeKit.nowTimeMills()
 							+ GameCFG.getRewardIntervalTimeByIndex(rewardNum)
 							* 1000);
 			data.writeInt(GameCFG.getRewardIntervalTimeByIndex(rewardNum));
 			data.writeInt(GameCFG.getRewardSampleId().length-rewardNum);
-		} else {
+		} else {*/
 			if (player.getPlayerInfo().getNextRewardTime()
 					- TimeKit.nowTimeMills() <= 0) {
 				data.writeInt(0);
@@ -186,7 +186,7 @@ public class RewardManager {
 						.nowTimeMills()) / 1000);
 				data.writeInt(GameCFG.getRewardSampleId().length-rewardNum);
 			}
-		}
+//		}
 	}
 
 }

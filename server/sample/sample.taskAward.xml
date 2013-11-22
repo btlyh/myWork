@@ -9,11 +9,13 @@
 	point     积分
 	_1card    卡牌，格式为SID,概率，SID，概率（按照概率从小到大排）
 	-->
-	<sample sid="44001" class="com.cambrian.dfhm.task.entity.TaskAward" gold="100" money="1000000" soul="50" token="2" point="1000" _1card="10064,40000,10063,60000"/>
+	<sample sid="21732" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="10064,40000,10063,60000"/>
 
-	<sample sid="44002" class="com.cambrian.dfhm.task.entity.TaskAward" gold="100" money="1000000" soul="50" token="2" point="1000" _1card="10064,40000,10063,60000"/>
+	<sample sid="22782" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="10064,40000,10063,60000"/>
+	<sample sid="22783" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="10064,40000,10063,60000"/>
 
-	<sample sid="44003" class="com.cambrian.dfhm.task.entity.TaskAward" gold="100" money="1000000" soul="50" token="2" point="1000" _1card="10064,40000,10063,60000"/>
+	<sample sid="23082" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="50" token="0" point="0" _1card="10064,40000,10063,60000"/>
+	<sample sid="23083" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="50" token="0" point="0" _1card="10064,40000,10063,60000"/>
 
 
 </objects>

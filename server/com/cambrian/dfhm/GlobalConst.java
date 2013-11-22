@@ -218,6 +218,8 @@ public final class GlobalConst
 	public static final int COMMAND_ARMYCAMP_REMOVE_BACK=2109;
 	/** 军帐-前台发送-自动喝酒 */
 	public static final int COMMAND_ARMYCAMP_AUTO=2110;
+	/** 军帐-后台发送-醒酒汤 */
+	public static final int COMMAND_ARMYCAMP_SOUP_BACK=2111;
 	/* 排行榜 */
 	/** 排行榜-前台发送-进入排行榜 */
 	public static final int COMMAND_RANKINGS_ENTER=2201;

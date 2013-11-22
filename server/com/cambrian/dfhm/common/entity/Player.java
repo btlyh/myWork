@@ -314,7 +314,7 @@ public class Player extends Sample implements Actor
 		Card card;
 		BattleCard bCard;
 		// for (int i = 0; i < 1; i++) {
-		card=cardBag.add(10011);
+		card=cardBag.add(10051);
 		card.setStatus(Card.ATTACK);
 		System.err.println("id !!!======="+card.getId());
 		// card.setForsterNumber(100);
@@ -325,7 +325,7 @@ public class Player extends Sample implements Actor
 			card.getCritRate(),card.getDodgeRate(),0,card.getType());
 		formation.changeFormation(0,bCard);
 
-		card=cardBag.add(10012);
+		card=cardBag.add(10052);
 		card.setStatus(Card.ATTACK);
 		// card.setForsterNumber(100);
 		System.err.println("id !!!======="+card.getId());
@@ -336,7 +336,7 @@ public class Player extends Sample implements Actor
 			card.getCritRate(),card.getDodgeRate(),0,card.getType());
 		formation.changeFormation(1,bCard);
 
-		card=cardBag.add(10013);
+		card=cardBag.add(10053);
 		card.setStatus(Card.ATTACK);
 		bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
@@ -345,7 +345,7 @@ public class Player extends Sample implements Actor
 			card.getCritRate(),card.getDodgeRate(),0,card.getType());
 		formation.changeFormation(2,bCard);
 
-		card=cardBag.add(10014);
+		card=cardBag.add(10054);
 		card.setStatus(Card.ATTACK);
 		bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
@@ -354,7 +354,7 @@ public class Player extends Sample implements Actor
 			card.getCritRate(),card.getDodgeRate(),0,card.getType());
 		formation.changeFormation(3,bCard);
 
-		card=cardBag.add(10015);
+		card=cardBag.add(10055);
 		card.setStatus(Card.ATTACK);
 		bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
@@ -740,6 +740,15 @@ public class Player extends Sample implements Actor
 			ArmyCampManager.getInstance().enterArmyCamp(this,nickname);
 			QualifyingManager.getInstance().addPlayer(nickname);
 		}
+		
+		if(GameCFG.getRewardSampleId().length>player.getPlayerInfo().getRewardNum())
+		{
+			player.getPlayerInfo().setNextRewardTime(TimeKit.nowTimeMills()+1000*GameCFG.getRewardIntervalTimeByIndex(player.getPlayerInfo().getRewardNum()));
+		}else
+		{
+			player.getPlayerInfo().setNextRewardTime(0);
+		}	
+		formation.refreshBestCard(this);
 
 	}
 

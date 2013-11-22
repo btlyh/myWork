@@ -1,6 +1,8 @@
 package com.cambrian.dfhm.battle;
 
 import com.cambrian.common.net.ByteBuffer;
+import com.cambrian.dfhm.card.Card;
+import com.cambrian.dfhm.common.entity.Player;
 
 /**
  * 类说明：
@@ -16,6 +18,8 @@ public class Formation
 
 	/* fields */
 	BattleCard[] battleCrad;
+	
+	int bestCardUid;
 
 	/* constructors */
 	public Formation()
@@ -83,6 +87,7 @@ public class Formation
 				bCard.dbBytesWrite(data);
 			}
 		}
+		data.writeInt(bestCardUid);
 	}
 
 	/** 反序列化(和dc通信) */
@@ -102,8 +107,39 @@ public class Formation
 				battleCrad[i]=bCard;
 			}
 		}
+		bestCardUid = data.readInt();
 	}
 
+	/** 刷新最强卡牌 */
+	public void refreshBestCard(Player player)
+	{
+		if (isEmpty()) return;
+		Card bestCard = null;
+		for (BattleCard bCard : battleCrad)
+		{
+			if (bCard == null)
+				continue;
+			if (bestCard == null)
+			{
+				bestCard = player.getCardBag().getById(bCard.getId());
+				continue;
+			}
+			Card c = player.getCardBag().getById(bCard.getId());
+			if (c.getZhandouli() > bestCard.getZhandouli())
+			{
+				bestCard = c;
+			}
+		}
+		if (bestCard == null) bestCard = player.getCardBag().getById(bestCardUid);
+		bestCardUid = bestCard.getId();
+	}
+	
+	/** 获得最强阵上卡牌 */
+	public int getBestCardUid()
+	{
+		return bestCardUid;
+	}
+	
 	/**
 	 * 判断是否没有卡牌上阵
 	 * 

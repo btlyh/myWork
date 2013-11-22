@@ -494,11 +494,16 @@
 	<obj class="com.cambrian.dfhm.armyCamp.notice.RemoveMyCardNotice" id="RMCN">
 		<method name="setPort">2109</method>
 	</obj>
+	<!-- 军帐-后台发送-醒酒汤 -->
+	<obj class="com.cambrian.dfhm.armyCamp.notice.UseAwakeSoupNotice" id="UASN">
+		<method name="setPort">2111</method>
+	</obj>
 	<!-- 开启军帐管理器 -->
 		<obj class="com.cambrian.dfhm.armyCamp.logic.ArmyCampManager" id="ACM">
 			<method name="setDS"><ref id="DS"/></method>
 			<method name="setArmyCampDao"><ref id="ACD"/></method>
 			<method name="setRemoveMyCardNotice"><ref id="RMCN"/></method>
+			<method name="setUseAwakeSoupNotice"><ref id="UASN"/></method>
 			<method name="setMf"><ref id="MF"/></method>
 		</obj>	
 	<!-- 军帐-前台发送-使用醒酒汤 -->

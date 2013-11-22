@@ -69,14 +69,15 @@ public class LuckBoxManager
 		{
 			ArrayList<Integer> cards=new ArrayList<Integer>();
 			cards.add(cardSid);
-			Mail mail=mf.createSystemMail(cards,0,0,0,0,0,(int)player.getUserId());
+			Mail mail=mf.createSystemMail(cards,0,0,0,0,0,
+				(int)player.getUserId());
 			player.addMail(mail);
 		}
 		else
 		{
 			card=player.getCardBag().add(cardSid);
 		}
-		player.getPlayerInfo().setBestCardSid(0);
+		player.getPlayerInfo().setBuyed(true);
 		return card;
 	}
 
@@ -113,7 +114,7 @@ public class LuckBoxManager
 			resultMap.put("error",Lang.F1607);
 			return resultMap;
 		}
-		if(cardSid!=player.getPlayerInfo().getBestCardSid())
+		if(player.getPlayerInfo().isBuyed())
 		{
 			resultMap.put("error",Lang.F1608);
 			return resultMap;
@@ -178,7 +179,8 @@ public class LuckBoxManager
 		{
 			ArrayList<Integer> cards=new ArrayList<Integer>();
 			cards.add(cardRecord.getSid());
-			Mail mail=mf.createSystemMail(cards,0,0,0,0,0,(int)player.getUserId());
+			Mail mail=mf.createSystemMail(cards,0,0,0,0,0,
+				(int)player.getUserId());
 			player.addMail(mail);
 		}
 		else

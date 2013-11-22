@@ -69,11 +69,14 @@ public class ShopManager
 		player.incrToken(goods.token);
 		ArrayList<Integer> cardsList = new ArrayList<Integer>();
 		ArrayList<Integer> uidList = new ArrayList<Integer>();
-		for (int cardSid : goods.cardSid)
+		if (goods.cardSid != null)
 		{
-			if (cardSid == 0)
-				continue;
-			cardsList.add(cardSid);
+			for (int cardSid : goods.cardSid)
+			{
+				if (cardSid == 0)
+					continue;
+				cardsList.add(cardSid);
+			}
 		}
 		if (player.getCardBag().getSurplusCapacity() < cardsList.size())
 		{

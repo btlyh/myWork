@@ -125,7 +125,7 @@ public class Sample implements Cloneable, Serializable, DBSerializable {
 		}
 	}
 
-	public String toString() {
-		return "Sample: sid=\"" + sid + "\" uid=\"" + getId() + "\"";
-	}
+//	public String toString() {
+//		return "Sample: sid=\"" + sid + "\" uid=\"" + getId() + "\"";
+//	}
 }

@@ -79,9 +79,10 @@ public class RankingsComparator implements Comparator<Object>
 				return -1;
 			}else
 			{
-				return ((java.text.RuleBasedCollator) java.text.Collator
-						.getInstance(java.util.Locale.CHINA)).compare(
-						o1.getName(), o2.getName());
+				return (int)o1.getAttLastChangeTime() - (int)o2.getAttLastChangeTime();
+//				return ((java.text.RuleBasedCollator) java.text.Collator
+//						.getInstance(java.util.Locale.CHINA)).compare(
+//						o1.getName(), o2.getName());
 			}
 		}
 	}

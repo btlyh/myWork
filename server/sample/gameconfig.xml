@@ -6,7 +6,7 @@
 	-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setLevelExp">
-			<ints>45,45,45,45,45,45,45,45,45,45</ints>
+			<ints>37,42,49,60,74,93,118,147,185,227,279,340,409,487,576,679,790,917,1050,1210,1370,1550,1760,1970,2200,2450,2720,3000,3310,3640,3990,4360,4750,5180,5610,6080,6570,7090,7630,8200,8810,9430,10120,10820,11520,12220,13020,13820,14720,15520,16520,17420,18420,19420,20520,21620,22720,23920,25120,26420,27720,29020,30420,31820,33320,34820,36420,38020,39620,41420,43120,44920,46820,48720,50620,52620,54720,56820,58920,61120,63420,65820,68120,70620,73120,75620,78220,80920,83620</ints>
 		</method>
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
@@ -33,18 +33,18 @@
 		</method>
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setGoldFosterNum">30</method>
+		<method name="setGoldFosterNum">50</method>
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setVipCfgXml">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
+			<ints>21372,21373,21374,21375,21376,21377</ints>
 		</method>
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setMoneyFosterNum">30</method>
+		<method name="setMoneyFosterNum">20</method>
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setNormalFosterNum">30</method>
+		<method name="setNormalFosterNum">10</method>
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setRewardIntervalTime">
@@ -53,7 +53,7 @@
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setRewardSampleId">
-			<ints>65011,65012,65013,65014</ints>
+			<ints>21657,21658,21659,21660</ints>
 		</method>
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
@@ -81,7 +81,7 @@
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setGlobalBossList">
-			<ints>50001</ints>
+			<ints>20422</ints>
 		</method>
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
@@ -128,6 +128,9 @@
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setBossAutoSignGold">1000</method>
+	</obj>
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setSkillFlushNeedGold">20</method>
 	</obj>
 
 </objects>

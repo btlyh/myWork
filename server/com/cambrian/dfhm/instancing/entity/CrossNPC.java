@@ -88,8 +88,8 @@ public class CrossNPC extends NPC
 	@Override
 	public void initMonsters(String str)
 	{
-		monsters=new BattleCard[battleCardList.length];
-		for(int i=0;i<monsters.length;i++)
+		monsters=new BattleCard[5];
+		for(int i=0;i<battleCardList.length;i++)
 		{
 			Monster card=(Monster)Sample.factory
 				.getSample(battleCardList[i]);
@@ -104,7 +104,7 @@ public class CrossNPC extends NPC
 	}
 
 	@Override
-	public void winCondition(BattleScene scene,BattleCard[] attList)
+	public void winCondition(BattleScene scene,BattleCard[] attList,Player player)
 	{
 		// TODO Auto-generated method stub
 

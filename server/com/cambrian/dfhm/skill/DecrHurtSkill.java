@@ -61,10 +61,10 @@ public class DecrHurtSkill extends Skill
 		BattleRecord record)
 	{
 		clearHurt();
-		int value=att*(1+hurt);
+		double value=att*(1-hurt/100d);
 		round--;
 		if(round==0) aimCard.delDeBuff(this.getSid());
 		System.err.println("ºı…Ÿ…À∫¶ººƒ‹£¨ºı√‚…À∫¶ ==="+value);
-		return value;
+		return (int)value;
 	}
 }

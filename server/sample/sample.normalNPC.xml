@@ -14,15 +14,15 @@
 	round				回合数
 	-->
 	
-	<sample sid="11001" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12201,12202,12203,12204,12205" needToken="1" type="19901" isBoss="0" nextSid="11002" _finitMonsters="1" round="30" hardIndex="12001" crossIndex="0"/>
-	<sample sid="11002" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12206,12207,12208,12209,12210" needToken="1" type="19901" isBoss="0" nextSid="11003" _finitMonsters="1" round="30" hardIndex="12002" crossIndex="0"/>
-	<sample sid="11003" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12211,12212,12213,12214,12215" needToken="1" type="19901" isBoss="0" nextSid="11004" _finitMonsters="1" round="30" hardIndex="12003" crossIndex="12001"/>
-	<sample sid="11004" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12216,12217,12218,12219,12220" needToken="1" type="19901" isBoss="0" nextSid="11005" _finitMonsters="1" round="30" hardIndex="12004" crossIndex="0"/>
-	<sample sid="11005" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12221,12222,12223,12224,12225" needToken="1" type="19901" isBoss="0" nextSid="11006" _finitMonsters="1" round="30" hardIndex="12005" crossIndex="0"/>
-	<sample sid="11006" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12226,12227,12228,12229,12230" needToken="1" type="19901" isBoss="0" nextSid="11007" _finitMonsters="1" round="30" hardIndex="12006" crossIndex="12002"/>
-	<sample sid="11007" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12231,12232,12233,12234,12235" needToken="1" type="19901" isBoss="0" nextSid="11008" _finitMonsters="1" round="30" hardIndex="12007" crossIndex="0"/>
-	<sample sid="11008" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12236,12237,12238,12239,12240" needToken="1" type="19901" isBoss="0" nextSid="11009" _finitMonsters="1" round="30" hardIndex="12008" crossIndex="0"/>
-	<sample sid="11009" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12241,12242,12243,12244,12245" needToken="1" type="19901" isBoss="0" nextSid="11010" _finitMonsters="1" round="30" hardIndex="12009" crossIndex="12003"/>
-	<sample sid="11010" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12246,12247,12248,12249,12250" needToken="1" type="19901" isBoss="0" nextSid="0" _finitMonsters="1" round="30" hardIndex="12010" crossIndex="0"/>
+	<sample sid="11001" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12201,12202,12203,12204,12205" needToken="1" type="19901" isBoss="1" nextSid="11002" _finitMonsters="1" round="30" hardIndex="11501" crossIndex="0"/>
+	<sample sid="11002" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12206,12207,12208,12209,12210" needToken="1" type="19901" isBoss="1" nextSid="11003" _finitMonsters="1" round="30" hardIndex="11502" crossIndex="0"/>
+	<sample sid="11003" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12211,12212,12213,12214,12215" needToken="1" type="19901" isBoss="1" nextSid="11004" _finitMonsters="1" round="30" hardIndex="11503" crossIndex="12001"/>
+	<sample sid="11004" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12216,12217,12218,12219,12220" needToken="1" type="19901" isBoss="1" nextSid="11005" _finitMonsters="1" round="30" hardIndex="11504" crossIndex="0"/>
+	<sample sid="11005" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12221,12222,12223,12224,12225" needToken="1" type="19901" isBoss="1" nextSid="11006" _finitMonsters="1" round="30" hardIndex="11505" crossIndex="0"/>
+	<sample sid="11006" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12226,12227,12228,12229,12230" needToken="1" type="19901" isBoss="1" nextSid="11007" _finitMonsters="1" round="30" hardIndex="11506" crossIndex="12002"/>
+	<sample sid="11007" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12231,12232,12233,12234,12235" needToken="1" type="19901" isBoss="1" nextSid="11008" _finitMonsters="1" round="30" hardIndex="11507" crossIndex="0"/>
+	<sample sid="11008" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12236,12237,12238,12239,12240" needToken="1" type="19901" isBoss="1" nextSid="11009" _finitMonsters="1" round="30" hardIndex="11508" crossIndex="0"/>
+	<sample sid="11009" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12241,12242,12243,12244,12245" needToken="1" type="19901" isBoss="1" nextSid="11010" _finitMonsters="1" round="30" hardIndex="11509" crossIndex="12003"/>
+	<sample sid="11010" class="com.cambrian.dfhm.instancing.entity.NormalNPC" _1battleCardList="12246,12247,12248,12249,12250" needToken="1" type="19901" isBoss="1" nextSid="0" _finitMonsters="1" round="30" hardIndex="11510" crossIndex="0"/>
 
 </objects>

@@ -16,6 +16,7 @@ import com.cambrian.dfhm.armyCamp.dao.ArmyCampDao;
 import com.cambrian.dfhm.armyCamp.entity.ArmyCamp;
 import com.cambrian.dfhm.armyCamp.entity.SeatCard;
 import com.cambrian.dfhm.armyCamp.notice.RemoveMyCardNotice;
+import com.cambrian.dfhm.armyCamp.notice.UseAwakeSoupNotice;
 import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.bag.CardBag;
 import com.cambrian.dfhm.card.Card;
@@ -50,6 +51,8 @@ public class ArmyCampManager
 	DataServer ds;
 	/** 自动移除卡牌推送 */
 	RemoveMyCardNotice rmcn;
+	/** 醒酒汤推送 */
+	UseAwakeSoupNotice uasn;
 	/** 邮件工厂 */
 	MailFactory mf;
 	/** 时间格式 */
@@ -77,6 +80,11 @@ public class ArmyCampManager
 		instance.rmcn = rmcn;
 	}
 
+	public void setUseAwakeSoupNotice(UseAwakeSoupNotice uasn)
+	{
+		instance.uasn = uasn;
+	}
+	
 	public void setMf(MailFactory mf)
 	{
 		instance.mf = mf;
@@ -406,11 +414,17 @@ public class ArmyCampManager
 		decrDrinkCd(tarArmyCamp, GameCFG.getAwakeSoupTarCdTime());
 		Date nowTime = new Date();
 		String date = dateFormat.format(nowTime);
-		tarArmyCamp.addHistoryLog(date +" (" + player.getNickname()
+		tarArmyCamp.addHistoryLog(date + " (" + player.getNickname()
 				+ ") 和你共享了醒酒汤，你军帐中武将的喝酒冷却时间减少了30%");
 		tarArmyCamp.setLastUseAwakeSoupTime(TimeKit.nowTimeMills());
 		setArmyCamp(armyCamp, player.getNickname());
 		setArmyCamp(tarArmyCamp, userName);
+		Session noticeSession = ds.getSession(userName);
+		if (noticeSession != null)
+		{
+			Player tarPlayer = (Player)noticeSession.getSource();
+			uasn.send(noticeSession, new Object[] { tarPlayer });
+		}
 	}
 
 	/** 减少卡牌冷却时间 */
@@ -489,7 +503,7 @@ public class ArmyCampManager
 			Player tarPlayer;
 			Session session = ds.getSession(seatCard.getOwnerName());
 			if (session != null)
-				tarPlayer = (Player)session.getSource();
+				tarPlayer = (Player) session.getSource();
 			else
 				tarPlayer = dao.getPlayer(seatCard.getOwnerName(), session);
 			cardList.add(card);

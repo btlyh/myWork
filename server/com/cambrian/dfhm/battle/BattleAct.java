@@ -114,19 +114,30 @@ public class BattleAct
 		if(aimCard.getIndex()==0||aimCard.getIndex()==3)
 		{
 			if(aimList[0]!=null&&aimList[0].getCurHp()>0) list.add(0);
-			if(aimList[0]!=null&&aimList[0].getCurHp()>0) list.add(3);
+			if(aimList[3]!=null&&aimList[3].getCurHp()>0) list.add(3);
 		}
+		// else if(aimCard.getIndex()==2)
+		// if(aimList[2]!=null&&aimList[2].getCurHp()>0)
+		// list.add(2);
+		// else
+		// {
+		// if(aimList[1]!=null&&aimList[1].getCurHp()>0) list.add(1);
+		// if(aimList[4]!=null&&aimList[4].getCurHp()>0) list.add(4);
+		// }// 错误代码和以前做对比
 		else if(aimCard.getIndex()==2)
+		{
 			if(aimList[2]!=null&&aimList[2].getCurHp()>0)
-				list.add(2);
-			else
 			{
-				if(aimList[1]!=null&&aimList[1].getCurHp()>0) list.add(1);
-				if(aimList[4]!=null&&aimList[4].getCurHp()>0) list.add(4);
+				list.add(2);
 			}
+		}
+		else if(aimCard.getIndex()==1||aimCard.getIndex()==4)
+		{
+			if(aimList[1]!=null&&aimList[1].getCurHp()>0) list.add(1);
+			if(aimList[4]!=null&&aimList[4].getCurHp()>0) list.add(4);
+		}
 		return list;
 	}
-
 	/**
 	 * 横向——攻击范围
 	 * 
@@ -288,21 +299,21 @@ public class BattleAct
 	 * 获取伤害值
 	 * 
 	 * @param battleCard
-	 * @param att	伤害系数
-	 * @param attType	攻击类型
+	 * @param att 伤害系数
+	 * @param attType 攻击类型
 	 * @return
 	 */
-	public static int getAttValue(BattleCard attCard, int att, int attType)
+	public static int getAttValue(BattleCard attCard,int att,int attType)
 	{
-		double a =attCard.getDodgeRate()/100000;//闪避率
+		double a=attCard.getDodgeRate()/100000;// 闪避率
 		double a1=MathKit.randomValue(-1,1)+1;
 		int sanbi=(int)Math.ceil(a-a1);
-		double b = attCard.getCritRate()/100000;//暴击率
-		double b1 =MathKit.randomValue(-1,1)+1;
-		int baoji=(int)(Math.ceil(b-b1) *0.5+1);
-		double c=((MathKit.randomInt()%6)/100);//5%的上下浮动值
+		double b=attCard.getCritRate()/100000;// 暴击率
+		double b1=MathKit.randomValue(-1,1)+1;
+		int baoji=(int)(Math.ceil(b-b1)*0.5+1);
+		double c=((MathKit.randomInt()%6)/100);// 5%的上下浮动值
 		int hurt=(int)c*sanbi*baoji;
-		if(attType ==1)//普通攻击			
+		if(attType==1)// 普通攻击
 			hurt*=att*attCard.getAtt();
 		else
 			hurt*=att;
@@ -321,7 +332,7 @@ public class BattleAct
 		int index=attCard.getIndex();
 		BattleCard aimCard=null,aimCard_1=null;
 		for(int i=0;i<aimList.length;i++)
-		{
+		{	
 			aimCard=aimList[i];
 			if(aimCard!=null&&aimCard.getCurHp()>0)
 			{
