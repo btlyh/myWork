@@ -28,7 +28,7 @@ public class RewardManager {
 
 	public void onlineReward(Player player,ByteBuffer data) {
 		String error = checkReward(player);
-		if(error!=null)
+ 		if(error!=null)
 		{
 			throw new DataAccessException(601,error);
 		}	
@@ -122,20 +122,21 @@ public class RewardManager {
 						GameCFG.getRewardSampleIdByNum(rewardNum+1));
 				player.getPlayerInfo().setNextRewardId(reward1.getSid());
 				data.writeInt(GameCFG.getRewardSampleIdByNum(rewardNum + 1)); // 下一次领奖
-				if(isemail)
-				{
-					data.writeInt(0);
-				}else {
-					data.writeInt(totalnum);
-				}	
-				
-				for (int i = 0; i < templist.size(); i++)
-				{
-					data.writeInt(templist.get(i).getId());
-					data.writeInt(templist.get(i).getSid());
-					data.writeInt(templist.get(i).getSkillId());
-				}		
-				
+											
+			}	
+			
+			if(isemail)
+			{
+				data.writeInt(0);
+			}else {
+				data.writeInt(totalnum);
+			}	
+			
+			for (int i = 0; i < templist.size(); i++)
+			{
+				data.writeInt(templist.get(i).getId());
+				data.writeInt(templist.get(i).getSid());
+				data.writeInt(templist.get(i).getSkillId());
 			}	
 			
 	//	}

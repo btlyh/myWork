@@ -38,7 +38,10 @@ public class TreatSkill extends Skill
 			aimCard=aimList[aim.get(i)];
 			value=getSkillHurt(attCard.getAtt())/1000;
 //			value=buffValue(attCard,value,aimCard,record);
-			addHurt(value);
+			int byAttValue = aimCard.getMaxHp()- aimCard.getCurHp();
+			if(value > byAttValue )
+				value=byAttValue;
+			addHurt(-value);
 			System.err.println("治疗技能，血量增加 ==="+value);
 		}
 		return getHurtList();

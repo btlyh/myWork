@@ -14,7 +14,6 @@ import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
-import com.cambrian.dfhm.battle.Formation;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.qualifying.dao.QualifyingDao;
@@ -122,14 +121,14 @@ public class QualifyingManager
 				}
 				QualifyingInfo qualifyingInfo = getInfo(i);
 				duelList.add(qualifyingInfo);
-				if (duelList.size() >= 4)
+				if (duelList.size() >= 6)
 					break;
 				i++;
 				continue;
 			}
 			QualifyingInfo qualifyingInfo = getInfo(i);
 			duelList.add(qualifyingInfo);
-			if (duelList.size() >= 4)
+			if (duelList.size() >= 6)
 				break;
 		}
 		return duelList;
@@ -162,19 +161,50 @@ public class QualifyingManager
 	/** 获得在阵卡牌中最强的卡牌 */
 	private int getBestCardSid(Player player)
 	{
-		int uid = player.formation.getBestCardUid();
-		Card card = player.getCardBag().getById(uid);
-		if (card == null)
-			return 10001;
-		return card.getSid();
+		if (!player.formation.isEmpty())
+		{
+			Card bestCard = null;
+			for (BattleCard bCard : player.formation.getFormation())
+			{
+				if (bCard == null)
+					continue;
+				if (bestCard == null)
+				{
+					bestCard = player.getCardBag().getById(bCard.getId());
+					continue;
+				}
+				Card c = player.getCardBag().getById(bCard.getId());
+				if (c.getZhandouli() > bestCard.getZhandouli())
+				{
+					bestCard = c;
+				}
+			}
+			return bestCard.getSid();
+		}else
+		{
+			return player.getCardBag().getBestCardSid();
+		}
+		
+		
+//		int uid = player.formation.getBestCardUid();
+//		Card card = player.getCardBag().getById(uid);
+//		if (card == null)
+//			return 10001;
+//		return card.getSid();
 	}
 
 	/** 挑战对手 */
-	public Map<String, Object> duel(Player player, String tarName)
+	public Map<String, Object> duel(Player player, String tarName, int useGold)
 	{
-		String error = checkDuel(player);
+		String error = checkDuel(player, useGold);
 		if (error != null)
 			throw new DataAccessException(601, error);
+		if (useGold != 0)
+		{
+			player.decrGold(useGold);
+			player.getPlayerInfo().incrDuelFreeTimes(1);
+			player.getPlayerInfo().incrDuelBuyTimes(1);
+		}
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Player tarPlayer = getPlayer(tarName);
 		BattleCard[] playerBattleCards = player.formation.getFormation();
@@ -194,13 +224,14 @@ public class QualifyingManager
 				rank = GameCFG.getDuelWinPoint().length - 1;
 			point = GameCFG.getDuelWinPoint(rank);
 			player.getPlayerInfo().incrNormalPoint(point);
+			player.getPlayerInfo().incrQualifyingWin(1);
 			changeRanking(player.getNickname(), tarName);
 			log = "失败";
 		} else
 		{
 			BattleScene scene = new BattleScene();
 			battleInit(playerBattleCards, tarBattleCards);
-			scene.setMaxRound(5);
+			scene.setMaxRound(30);
 			scene.start(playerBattleCards, tarBattleCards,
 					BattleScene.FIGHT_NORMAL);
 			scene.getRecord().set(0, scene.getStep());
@@ -237,11 +268,18 @@ public class QualifyingManager
 		return resultMap;
 	}
 	/** 检查挑战 */
-	private String checkDuel(Player player)
+	private String checkDuel(Player player, int useGold)
 	{
 		if (player.getPlayerInfo().getDuelFreeTimes() < 1)
 		{
-			return Lang.F2105; //没有挑战次数
+			if (useGold != 10 * (player.getPlayerInfo().getDuelBuyTimes()+1))
+			{
+				return Lang.F2101; // 金钱错误
+			}
+			if (player.getGold() < useGold)
+			{
+				return Lang.F2003; // 金钱不足
+			}
 		}
 		BattleCard[] playerBattleCards = player.formation.getFormation();
 		int i = 0;
@@ -328,10 +366,16 @@ public class QualifyingManager
 		// {
 		// return Lang.F1100; // 次数已满，不能购买
 		// }
-		if (useGold != 5 * (int) Math.pow(2, player.getPlayerInfo()
-				.getDuelBuyTimes()))
+		
+//		if (useGold != 5 * (int) Math.pow(2, player.getPlayerInfo()
+//				.getDuelBuyTimes()))
+		if (useGold != 10 * (player.getPlayerInfo().getDuelBuyTimes()+1))
 		{
 			return Lang.F2101; // 金钱错误
+		}
+		if (player.getGold() < useGold)
+		{
+			return Lang.F2003; // 金钱不足
 		}
 		return null;
 	}
@@ -339,13 +383,27 @@ public class QualifyingManager
 	/** 领取每日积分奖励 */
 	public int getPointGift(Player player)
 	{
+		String error = checkGetPointGift(player);
+		if (error != null)
+		{
+			throw new DataAccessException(601, error);
+		}
 		int rank = qualifying.getPlayerRank(player.getNickname());
 		if (rank > GameCFG.getDayPoint().length - 1)
 			rank = GameCFG.getDayPoint().length - 1;
 		int point = GameCFG.getDayPoint(rank);
 		player.getPlayerInfo().incrNormalPoint(point);
-		player.getPlayerInfo().setCanTakePoint(0);
+		player.getPlayerInfo().setCanTakePoint(1);
 		return point;
+	}
+	/** 检查领取积分 */
+	private String checkGetPointGift(Player player)
+	{
+		if (player.getPlayerInfo().getCanTakePoint() == 1)
+		{
+			return Lang.F2406;//已经领取过了
+		}
+		return null;
 	}
 
 	/** 添加玩家 */

@@ -2,8 +2,6 @@ package com.cambrian.dfhm.task.entity;
 
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.object.Sample;
-import com.cambrian.common.util.MathKit;
-import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.instancing.entity.CrossNPC;
 import com.cambrian.dfhm.instancing.entity.HardNPC;
@@ -80,12 +78,12 @@ public class Task extends Sample
 	/** 检查任务是否完成 */
 	public boolean checkFinish(Player player)
 	{
-		if (status == UNTAKE || status == FINISHED) return false;
+		if (status != TAKED) return false;
 		if (!finishIsAchieve(player)) return false;
 		this.status = FINISH;
 		return true;
 	}
-	/**  */
+	/** 是否满足任务完成条件 */
 	private boolean finishIsAchieve(Player player)
 	{
 		if (getCard != null)
@@ -140,7 +138,6 @@ public class Task extends Sample
 		if (this.status == FINISHED	) return false;
 		if (!checkFinish(player)) return false;
 		this.status = FINISHED;
-		this.dispense(player);
 		return true;
 	}
 
@@ -188,38 +185,6 @@ public class Task extends Sample
 		return true;
 	}
 
-	/** 分配奖励 
-	 * @return */
-	public Card dispense(Player player)
-	{
-		TaskAward award = (TaskAward)Sample.getFactory().getSample(awardSid);
-		player.incrGold(award.gold);
-		player.incrMoney(award.money);
-		player.incrSoul(award.soul);
-		player.incrToken(award.token);
-		player.getPlayerInfo().incrNormalPoint(award.point);
-		return dispenseCard(player, award);
-	}
-	/** 分配卡牌 
-	 * @return */
-	private Card dispenseCard(Player player, TaskAward award)
-	{
-		if (award.card != null && award.card.length > 0)
-		{
-			int random = MathKit.randomValue(0, award.card[award.card.length-1]);
-			for (int i = 0; i < award.card.length; i+=2)
-			{
-				if (random < award.card[i+1])
-				{
-					Card card = player.getCardBag().add(award.card[i]);
-					return card;
-				}	
-			}
-		}
-		return null;
-	}
-	/** 设置完成条件 */
-
 	@Override
 	public void bytesWrite(ByteBuffer data)
 	{
@@ -231,14 +196,13 @@ public class Task extends Sample
 	@Override
 	public void dbBytesWrite(ByteBuffer data)
 	{
-		super.dbBytesWrite(data);
+		data.writeInt(getSid());
 		data.writeInt(status);
 	}
 
 	@Override
 	public void dbBytesRead(ByteBuffer data)
 	{
-		super.dbBytesRead(data);
 		this.status = data.readInt();
 	}
 

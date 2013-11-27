@@ -6,49 +6,60 @@
 	-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setLevelExp">
-			<ints>37,42,49,60,74,93,118,147,185,227,279,340,409,487,576,679,790,917,1050,1210,1370,1550,1760,1970,2200,2450,2720,3000,3310,3640,3990,4360,4750,5180,5610,6080,6570,7090,7630,8200,8810,9430,10120,10820,11520,12220,13020,13820,14720,15520,16520,17420,18420,19420,20520,21620,22720,23920,25120,26420,27720,29020,30420,31820,33320,34820,36420,38020,39620,41420,43120,44920,46820,48720,50620,52620,54720,56820,58920,61120,63420,65820,68120,70620,73120,75620,78220,80920,83620</ints>
+			<ints>118,149,190,244,308,386,474,576,691,817,958,1110,1280,1460,1660,1870,2090,2330,2580,2850,3130,3430,3740,4070,4410,4770,5140,5530,5940,6360,6800,7250,7720,8200,8710,9230,9760,10300,10900,11500,12100,12700,13300,14000,14700,15300,16000,16800,17500,18300,19000,19800,20600,21500,22300,23200,24100,25000,25900,26800,27800,28700,29700,30700,31800,32800,33900,35000,36100,37200,38300,39500,40700,41900,43100,44300,45600,46800,48100,49400,50800,52100,53500,54900,56300,57700,59100,60600,62100</ints>
 		</method>
 	</obj>
+	<!-- 军帐:付费醒酒按多少分钟为一个点来计算 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setPayForAwakeMinutes">5</method>
 	</obj>
+	<!-- 军帐:付费醒酒没个点扣多少金币 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setPayForAwakeGold">5</method>
 	</obj>
+	<!-- 军帐:使用醒酒汤后对方军帐中卡牌冷却时间减少百分之多少 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setAwakeSoupTarCdTime">30</method>
 	</obj>
+	<!-- 军帐:使用醒酒汤后自己军帐中卡牌冷却时间减少百分之多少 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setAwakeSoupOwnCdTime">15</method>
 	</obj>
+	<!-- 军帐:喝酒CD时间（分钟） -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setDrinkCd">30</method>
 	</obj>
+	<!-- 军帐:醒酒汤CD时间（分钟） -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setAwakeSoupCd">30</method>
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setDoubleSkill">
-			<string>19412,19552;19451,19552;19414,19601;19651,19501,19601;19452,19553;19652,19852,19553;19751,19602;19503,19554,19602;19502,19801,19554,19602;19421,19555,19603,19419,19555;19752,19420,19415,19419,19555</string>
+			<string>19412,19552,19451,19552,19414,19601,19651,19501,19601,19452,19553,19652,19852,19553,19751,19602,19503,19554,19602,19502,19801,19554,19602,19421,19555,,19603,19419,19555,19752,19420,19415,19419,19555</string>
 		</method>
 	</obj>
+	<!-- 土豪培养花费 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setGoldFosterNum">50</method>
 	</obj>
+	<!-- 设置VIP等级对应配置表的SID -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setVipCfgXml">
-			<ints>21372,21373,21374,21375,21376,21377</ints>
+			<ints>64001,64002,64003,64004,64005,64006</ints>
 		</method>
 	</obj>
+	<!-- 金币培养 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setMoneyFosterNum">20</method>
 	</obj>
+	<!-- 普通培养 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setNormalFosterNum">10</method>
 	</obj>
+	<!-- 在线领奖等待时间 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setRewardIntervalTime">
-			<ints>15,15,15,15</ints>
+			<ints>30,60,90,120</ints>
 		</method>
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
@@ -61,76 +72,103 @@
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setCardBeyongNum">
-			<ints>30,2,50,3,70,4,80,5,90,6</ints>
+			<ints>30,2,50,3,70,4,80,5</ints>
 		</method>
 	</obj>
+	<!-- 设置排位赛挑战胜利获得的积分 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setDuelWinPoint">
 			<ints>64001,64002,64003,64004,64005,64006</ints>
 		</method>
 	</obj>
+	<!-- 设置排位赛挑战失败获得的积分 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setDuelLosePoint">
 			<ints>64001,64002,64003,64004,64005,64006</ints>
 		</method>
 	</obj>
+	<!-- 设置相应排位赛等级每日领取的积分 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setDayPoint">
 			<ints>64001,64002,64003,64004,64005,64006</ints>
 		</method>
 	</obj>
+	<!-- 设置世界BOSS的SID-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setGlobalBossList">
 			<ints>20422</ints>
 		</method>
 	</obj>
+	<!-- 设置当壕功能随机抽取敌人战力的误差值-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setErrorValue">100</method>
 	</obj>
+	<!-- 设置当壕功能敌人列表上限-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setEnemySize">20</method>
 	</obj>
+	<!-- 设置当壕功能随机匹配敌人的次数-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setMatchTimes">5</method>
 	</obj>
+	<!-- 设置当壕功能的马仔人数上限-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setSlaveConfine">6</method>
 	</obj>
+	<!-- 当壕功能信息数量上限-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setInformationSize">5</method>
 	</obj>
+	<!-- 设置当壕功能攻击次数上限-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setAttConfine">5</method>
 	</obj>
+	<!-- 设置当壕功能反抗次数上限-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setReactConfine">5</method>
 	</obj>
+	<!-- 设置当壕功能赎身价格-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setGetFreeGold">100</method>
 	</obj>
+	<!-- 设置当壕功能救人次数限制-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setSaveConfine">5</method>
 	</obj>
+	<!-- 设置当壕功能救陌生人人次数限制-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setSaveNorConfine">5</method>
 	</obj>
+	<!-- 设置当壕功能办事所需时间(分钟)-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setWorkTime">60</method>
 	</obj>
+	<!-- 设置当壕功能办事次数上限-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setWorkConfine">50</method>
 	</obj>
+	<!-- 设置当壕功能托管所需金币数量-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setManagedGold">100</method>
 	</obj>
+	<!-- 设置当壕功能速去速回所需金币数量-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setFastWorkGold">500</method>
 	</obj>
+	<!-- 设置当壕功能求救次数-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setHelpConfine">5</method>
+	</obj>
+	<!-- 设置世界BOSS自动报名所需金币-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setBossAutoSignGold">1000</method>
 	</obj>
+	<!-- 设置技能刷新所需金币数量-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setSkillFlushNeedGold">20</method>
 	</obj>
-
+	<!-- 设置玩家初始化可挑战副本SID-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setIndexForNormalNPC">11001</method>
+	</obj>
 </objects>

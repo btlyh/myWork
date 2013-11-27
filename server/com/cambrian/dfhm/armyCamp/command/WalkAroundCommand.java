@@ -59,6 +59,7 @@ public class WalkAroundCommand extends Command
 		if (anyOneOnline != 0)
 		{
 			data.writeUTF(tarPlayer.getNickname());
+			data.writeInt(tarPlayer.getVipLevel());
 			tarPlayer.getArmyCamp().bytesWrite(data);
 		}
 	}

@@ -96,15 +96,19 @@ public final class Lang
 	/** 1224; 培养类型不存在 */
 	public static final String F1224="1224";
 	/** 1225; 锁定个数错误最多为2 */
-	public static final String F1225 = "1225";	
-	/** 1226;  培养已经保存过了  */
-	public static final String F1226 = "1226";	
-	/** 1227; 增加值为0的时候不能锁定  */
-	public static final String F1227 = "1227";	
-	/**1228 卡牌已经满级不能升级*/
-	public static final String F1228 = "1228";
-	/**1229  境界突破的时候 重复吞噬*/
-	public static final String F1229 = "1229";
+	public static final String F1225="1225";
+	/** 1226; 培养已经保存过了 */
+	public static final String F1226="1226";
+	/** 1227; 增加值为0的时候不能锁定 */
+	public static final String F1227="1227";
+	/** 1228 卡牌已经满级不能升级 */
+	public static final String F1228="1228";
+	/** 1229 境界突破的时候 重复吞噬 */
+	public static final String F1229="1229";
+	/** 1230 不能出售所有的卡牌，至少保留一张 */
+	public static final String F1230="1230";
+	/***1231 卡牌满级***/
+	public static final String F1231="1231";
 	/* 邮件 */
 	/** 1301; 发送邮件的玩家姓名不正确 */
 	public static final String F1301="1301";
@@ -146,13 +150,15 @@ public final class Lang
 	public static final String F1409="1409";
 	/** 1410; 没有上阵卡牌 */
 	public static final String F1410="1410";
-	
-	/**1411:副本未通关*/
+
+	/** 1411:副本未通关 */
 	public static final String F1411="1411";
-	/**1412:副本类型不存在*/
-	public static final String F1412="1412";	
-	/**1413:军令不足扫荡*/
-	public static final String F1413="1413";
+	/** 1412:副本类型不存在 */
+	public static final String F1412="1412";
+	/** 1413:军令不足扫荡 */
+	public static final String F1413="1413";	
+	/**1414:穿越副本挑战次数不足*/
+	public static final String F1414="1414";
 	/* 好友 */
 	/** 1501; 申请好友的名字不正确 */
 	public static final String F1501="1501";
@@ -234,6 +240,8 @@ public final class Lang
 	public static final String F1715="1715";
 	/** 1716：座位号错误 */
 	public static final String F1716="1716";
+	/** 1717：对方好友列表中已经删除了你 */
+	public static final String F1717="1717";
 
 	/* 世界BOSS */
 	/** 1801; 世界BOSS尚未开启 */
@@ -256,13 +264,16 @@ public final class Lang
 	public static final String F1809="1809";
 	/** 1810; 世界BOSS活动时间未到 */
 	public static final String F1810="1810";
-	/** 1811; 你已经自动报名，不能再次报名*/
+	/** 1811; 你已经自动报名，不能再次报名 */
 	public static final String F1811="1811";
-	/** 1812; 自动报名金币不足*/
+	/** 1812; 自动报名金币不足 */
 	public static final String F1812="1812";
-	/** 1813; 活动已经开始不能自动报名了*/
+	/** 1813; 活动已经开始不能自动报名了 */
 	public static final String F1813="1813";
-	
+	/** 1814; 复活所需RMB不足 */
+	public static final String F1814="1814";
+	/** 1815; 你已经复活了，不需要继续复活 */
+	public static final String F1815="1815";
 
 	/* 排行榜 */
 	/** 1901： 排行榜类型错误 */
@@ -305,7 +316,7 @@ public final class Lang
 	public static final String F2216="2216";
 	/** 2117; 速去速回金币不够 */
 	public static final String F2217="2217";
-	/** 2118; 奴隶正在办事中，不能释放*/
+	/** 2118; 奴隶正在办事中，不能释放 */
 	public static final String F2218="2218";
 
 	/* 商城 */
@@ -316,14 +327,18 @@ public final class Lang
 	/** 1903：玩家金币不足 */
 	public static final String F2003="2003";
 
-
-	/**2103： 玩家领奖次数不足*/
+	/** 2103： 玩家领奖次数不足 */
 	public static final String F2103="2103";
-	/**2104:未到领奖时间*/
+	/** 2104:未到领奖时间 */
 	public static final String F2104="2104";
-	
 
-	
+	/* 任务（奖励） */
+	/** 2401：任务sid错误 */
+	public static final String F2401="2401";
+	/** 2402：玩家没有这个任务 */
+	public static final String F2402="2402";
+	/** 2403: 任务未完成 */
+	public static final String F2403="2403";
 
 	/* 排位赛 */
 	/** 金钱错误 */
@@ -331,8 +346,12 @@ public final class Lang
 	/** 没有卡牌在阵上 */
 	public static final String F2102="2102";
 	/** 挑战次数不足 */
-	public static final String F2105="2103";
+	public static final String F2105="2105";
+	/** 当日已无法领取 */
+	public static final String F2406="2406";
 
+	/**充值金额错误*/
+	public static final String F2305="2305";
 	/** 9000；网络错误,请重新登录 */
 	public static final String F9000_SDE="9000";
 

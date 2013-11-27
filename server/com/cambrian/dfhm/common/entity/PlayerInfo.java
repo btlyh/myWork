@@ -101,6 +101,7 @@ public class PlayerInfo
 
 	private int nextRewardId=21657;// 下一次的领奖ID 用于前台初始化领奖信息
 
+	private int crossMapNum = 10;//当日穿越副本挑战次数
 	/* constructors */
 
 	/* properties */
@@ -462,6 +463,16 @@ public class PlayerInfo
 	{
 		this.isBuyed=isBuyed;
 	}
+	
+	
+	public int getCrossMapNum() {
+		return crossMapNum;
+	}
+
+	public void setCrossMapNum(int crossMapNum) {
+		this.crossMapNum = crossMapNum;
+	}
+
 	/** 序列化 和前台通信 */
 	public void bytesWrite(ByteBuffer data)
 	{
@@ -481,6 +492,7 @@ public class PlayerInfo
 		data.writeInt(duelFreeTimes);
 		data.writeInt(duelBuyTimes);
 		data.writeInt(nextRewardId);
+		data.writeInt(crossMapNum);
 	}
 
 	/** 序列化 和DC通信 存 */
@@ -533,6 +545,7 @@ public class PlayerInfo
 		data.writeInt(qualifyingWin);
 		data.writeInt(nextRewardId);
 		data.writeInt(hardNPCIndex);
+		data.writeInt(crossMapNum);
 	}
 	/** 序列化 和DC通信 取 */
 	public void dbBytesRead(ByteBuffer data)
@@ -589,6 +602,8 @@ public class PlayerInfo
 		qualifyingWin=data.readInt();
 		nextRewardId=data.readInt();
 		hardNPCIndex = data.readInt();
+		crossMapNum = data.readInt();
+	
 	}
 
 	public void decrLuckBoxFreeTimes(int times)
@@ -634,7 +649,7 @@ public class PlayerInfo
 
 	public void incrQualifyingWin(int times)
 	{
-		qualifyingCount+=times;
+		qualifyingWin+=times;
 	}
 
 	/** 添加排位赛记录 */

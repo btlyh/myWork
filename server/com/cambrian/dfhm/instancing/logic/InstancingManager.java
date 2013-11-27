@@ -114,6 +114,14 @@ public class InstancingManager
 		int win=scene.getRecord().get(scene.getRecord().size()-1);
 		if(win==1)// Ê¤Àû
 		{
+			if(npcType==NPC.CROSS)
+			{
+				if(player.getPlayerInfo().getCrossMapNum()>0)
+				{
+					player.getPlayerInfo().setCrossMapNum(player.getPlayerInfo().getCrossMapNum()-1);
+				}	
+				
+			}	
 			npc.handleForWin(player);
 			npc.addAward(scene,player);
 		}
@@ -150,6 +158,16 @@ public class InstancingManager
 			resultMap.put("error",Lang.F1410);
 			return resultMap;
 		}
+		
+		if(npcType==NPC.CROSS)
+		{
+			if(player.getPlayerInfo().getCrossMapNum()==0)
+			{
+				resultMap.put("error",Lang.F1414);
+				return resultMap;
+			}	
+		}	
+		
 		NPC npc=null;
 		switch(npcType)
 		{

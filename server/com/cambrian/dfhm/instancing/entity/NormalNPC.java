@@ -25,7 +25,8 @@ public class NormalNPC extends NPC
 	private int hardIndex;
 	/** 开启穿越NPC的位置 如果为0则不配置 */
 	private int crossIndex;
-
+	/**扫荡的奖励ID**/
+	private int sweepId;
 	/* constructors */
 
 	/* properties */
@@ -37,6 +38,14 @@ public class NormalNPC extends NPC
 	public void setHardIndex(int hardIndex)
 	{
 		this.hardIndex=hardIndex;
+	}
+
+	public int getSweepId() {
+		return sweepId;
+	}
+
+	public void setSweepId(int sweepId) {
+		this.sweepId = sweepId;
 	}
 
 	public int getCrossIndex()

@@ -12,6 +12,7 @@ import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
+import com.cambrian.dfhm.battle.Formation;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.globalboss.dao.GlobalBossDao;
 import com.cambrian.dfhm.globalboss.entity.BossFightRecord;
@@ -224,11 +225,11 @@ public class BossManager
 			mapInfo.put("error",Lang.F1807);
 			return mapInfo;
 		}
-//		if(TimeKit.nowTimeMills()<TimeKit.timeOf(gbc.getActiveTime()))
-//		{
-//			mapInfo.put("error",Lang.F1810);
-//			return mapInfo;
-//		}
+		// if(TimeKit.nowTimeMills()<TimeKit.timeOf(gbc.getActiveTime()))
+		// {
+		// mapInfo.put("error",Lang.F1810);
+		// return mapInfo;
+		// }
 		if(player.formation.isEmpty())
 		{
 			mapInfo.put("error",Lang.F1410);
@@ -258,7 +259,8 @@ public class BossManager
 		{
 			throw new DataAccessException(601,error);
 		}
-		BattleCard[] att=player.formation.getFormation().clone();
+		Formation formation_=(Formation)player.formation.clone();
+		BattleCard[] att=formation_.getFormation();
 		if(player.getBfr().getAttUp()>1)
 		{
 			for(BattleCard battleCard:att)
@@ -385,10 +387,16 @@ public class BossManager
 			mapInfo.put("error",Lang.F1803);
 			return mapInfo;
 		}
-		int needGold=gbc.getAttUpGold()*player.getBfr().getAttUp();
+		int needGold=gbc.getReliveGold();
 		if(player.getGold()<needGold)
 		{
-			mapInfo.put("error",Lang.F1804);
+			mapInfo.put("error",Lang.F1814);
+			return mapInfo;
+		}
+		if(player.getBfr().getLastAttTime()+TimeKit.MIN_MILLS*gbc.getAttCD()<TimeKit
+			.nowTimeMills()||player.getBfr().getLastAttTime()==0)
+		{
+			mapInfo.put("error",Lang.F1815);
 			return mapInfo;
 		}
 		mapInfo.put("error",null);
@@ -556,6 +564,7 @@ public class BossManager
 		Iterator<Integer> iterator=gbc.rankMap.keySet().iterator();
 		BossFightRecord bfr;
 		Mail mail=null;
+		ArrayList<Integer> cardList;
 		while(iterator.hasNext())
 		{
 			int key=iterator.next();
@@ -566,24 +575,27 @@ public class BossManager
 			ArrayList<Object> damageReward=rewardMap.get("damageReward");
 			if(finishReward!=null)
 			{
+				cardList =(ArrayList<Integer>)finishReward.get(0);
 				mail=mf.createSystemMail(
-					(ArrayList<Integer>)finishReward.get(0),0,
+					cardList,0,
 					Integer.parseInt(finishReward.get(2).toString()),0,
 					Integer.parseInt(finishReward.get(1).toString()),0,
 					bfr.getPlayerId());
 			}
 			if(rankReward!=null)
 			{
+				cardList =(ArrayList<Integer>)rankReward.get(0);
 				mail=mf.createSystemMail(
-					(ArrayList<Integer>)rankReward.get(0),0,
+					cardList,0,
 					Integer.parseInt(rankReward.get(2).toString()),0,
 					Integer.parseInt(rankReward.get(1).toString()),0,
 					bfr.getPlayerId());
 			}
 			if(damageReward!=null)
 			{
+				cardList =(ArrayList<Integer>)damageReward.get(0);
 				mail=mf.createSystemMail(
-					(ArrayList<Integer>)damageReward.get(0),0,
+					cardList,0,
 					Integer.parseInt(damageReward.get(2).toString()),0,
 					Integer.parseInt(damageReward.get(1).toString()),0,
 					bfr.getPlayerId());
@@ -611,8 +623,9 @@ public class BossManager
 				Player player=(Player)session.getSource();
 				if(player.getPlayerInfo().isAutoSignBoss())
 				{
+					cardList =(ArrayList<Integer>)autoReward.get(0);
 					mail=mf.createSystemMail(
-						(ArrayList<Integer>)autoReward.get(0),0,
+						cardList,0,
 						Integer.parseInt(autoReward.get(2).toString()),0,
 						Integer.parseInt(autoReward.get(1).toString()),0,
 						(int)player.getUserId());
@@ -627,8 +640,9 @@ public class BossManager
 				Player player=dao.getPlayer(integer);
 				if(player.getPlayerInfo().isAutoSignBoss())
 				{
+					cardList =(ArrayList<Integer>)autoReward.get(0);
 					mf.createSystemMail(
-						(ArrayList<Integer>)autoReward.get(0),0,
+						cardList,0,
 						Integer.parseInt(autoReward.get(2).toString()),0,
 						Integer.parseInt(autoReward.get(1).toString()),0,
 						(int)player.getUserId());

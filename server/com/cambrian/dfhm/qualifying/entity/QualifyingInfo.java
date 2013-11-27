@@ -7,7 +7,7 @@ import com.cambrian.common.net.ByteBuffer;
  * @author£ºZmk
  * 
  */
-public class QualifyingInfo
+public class QualifyingInfo implements Comparable<QualifyingInfo>
 {
 
 	/* static fields */
@@ -79,5 +79,9 @@ public class QualifyingInfo
 		data.writeInt(playerPower);
 		data.writeInt(playerCardSid);
 		data.writeInt(playerVipLevel);
+	}
+	public int compareTo(QualifyingInfo o)
+	{
+		return this.playerRanking-o.playerRanking;
 	}
 }

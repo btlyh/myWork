@@ -7,15 +7,27 @@
 	soul      武魂
 	token     军令
 	point     积分
-	_1card    卡牌，格式为SID,概率，SID，概率（按照概率从小到大排）
+	_1card    卡牌，格式为[可获得卡牌数量，SID,概率，SID，概率]
 	-->
-	<sample sid="21732" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="10064,40000,10063,60000"/>
+	<sample sid="21732" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="21733" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="21734" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="21735" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="21736" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="21737" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
 
-	<sample sid="22782" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="10064,40000,10063,60000"/>
-	<sample sid="22783" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="10064,40000,10063,60000"/>
+	<sample sid="22782" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="22783" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="22784" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="22785" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="22786" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="22787" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="0" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
 
-	<sample sid="23082" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="50" token="0" point="0" _1card="10064,40000,10063,60000"/>
-	<sample sid="23083" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="50" token="0" point="0" _1card="10064,40000,10063,60000"/>
-
+	<sample sid="23082" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="50" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="23083" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="50" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="23084" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="50" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="23085" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="50" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="23086" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="50" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
+	<sample sid="23087" class="com.cambrian.dfhm.task.entity.TaskAward" gold="0" money="100" soul="50" token="0" point="0" _1card="2,10064,40000,10063,60000"/>
 
 </objects>

@@ -117,10 +117,6 @@ public class HardNPC extends NPC
 		if(getIsBoss()!=BOSS&&getNextSid()>player.getCurIndexForHardNPC())
 		{
 			player.setCurIndexForHardNPC(getNextSid());
-			player.getPlayerInfo().setHardNPCTime(
-				(int)TimeKit.nowTimeMills());
-			player.getPlayerInfo().incrInstancingCount(1);
-			player.getPlayerInfo().setHardNPCIndex(getSid());
 		}
 		else
 		{
@@ -128,7 +124,13 @@ public class HardNPC extends NPC
 		}
 		AttRecord attRecord=new AttRecord(getSid(),KILLED,getType());
 		player.addAttRecord(attRecord);
-
+		player.getPlayerInfo().incrInstancingCount(1);
+		if (getSid() > player.getPlayerInfo().getHardNPCIndex())
+		{
+			player.getPlayerInfo().setHardNPCTime(
+				(int)TimeKit.nowTimeMills());
+			player.getPlayerInfo().setHardNPCIndex(getSid());
+		}
 	}
 	@Override
 	public void handleForAtt(Player player)

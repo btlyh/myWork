@@ -273,7 +273,7 @@ public class LuckBoxManager
 		long lastTime=player.getPlayerInfo().getLastTime();
 		if(type==FLUSH_FREE)
 		{
-			if(TimeKit.nowTimeMills()-lastTime>LuckBoxCfg.CDTime)
+			if(TimeKit.nowTimeMills()-lastTime>=LuckBoxCfg.CDTime)
 			{
 				player.getPlayerInfo().setLastTime(TimeKit.nowTimeMills());
 				player.getPlayerInfo().setTakeCardRecords(
@@ -293,7 +293,13 @@ public class LuckBoxManager
 			player.getPlayerInfo().setFirst(true);
 			player.getPlayerInfo().setPayTimes(0);
 		}
-		return LuckBoxCfg.CDTime-(TimeKit.nowTimeMills()-lastTime);
+		if(lastTime==0)
+		{
+			return LuckBoxCfg.CDTime;
+		}
+		long surplusTime=LuckBoxCfg.CDTime-(TimeKit.nowTimeMills()-lastTime);
+		return surplusTime<0?0:surplusTime;
+
 	}
 
 	/**

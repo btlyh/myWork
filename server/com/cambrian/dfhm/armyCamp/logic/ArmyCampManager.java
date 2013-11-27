@@ -198,6 +198,12 @@ public class ArmyCampManager
 			}
 		} else
 		{
+			int tarPlayerId = dao.getUserIdByName(userName, ds.getSession(userName));
+			if (!player.getFriendInfo().getFriendList().contains(tarPlayerId))
+			{
+				mapInfo.put("error", Lang.F1717);
+				return mapInfo; // 对方好友列表中已经删除了你
+			}
 			tarArmyCamp = getArmyCamp(userName);
 			if (tarArmyCamp.getPublicSeatSize()
 					- tarArmyCamp.getPublicList().size() < 1)
@@ -492,6 +498,7 @@ public class ArmyCampManager
 			throw new DataAccessException(601, error);
 		}
 		ArmyCamp armyCamp = getArmyCamp(userName);
+		Player armyPlayer = dao.getPlayer(userName, ds.getSession(userName));
 		List<SeatCard> publicList = armyCamp.getPublicList();
 		List<SeatCard> privateList = armyCamp.getPrivateList();
 		List<Card> cardList = new ArrayList<Card>();
@@ -552,6 +559,7 @@ public class ArmyCampManager
 				// }
 			}
 		}
+		resultMap.put("player", armyPlayer);
 		resultMap.put("cardList", cardList);
 		resultMap.put("armyCamp", armyCamp);
 		return resultMap;

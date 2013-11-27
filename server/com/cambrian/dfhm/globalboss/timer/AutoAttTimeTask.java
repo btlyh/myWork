@@ -5,6 +5,7 @@ import java.util.TimerTask;
 import com.cambrian.common.util.TimeKit;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
+import com.cambrian.dfhm.battle.Formation;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.globalboss.entity.GlobalBossCFG;
 import com.cambrian.dfhm.globalboss.logic.BossManager;
@@ -58,14 +59,14 @@ public class AutoAttTimeTask extends TimerTask
 				{
 					synchronized(gbc)
 					{
-						BattleCard[] att=player.formation.getFormation()
-							.clone();
+						Formation formation_=(Formation)player.formation.clone();
+						BattleCard[] att=formation_.getFormation();
 						if(player.getBfr().getAttUp()>1)
 						{
 							for(BattleCard battleCard:att)
 							{
-								battleCard.attUp(player
-									.getBfr().getAttUp());
+								if(battleCard!=null)
+									battleCard.attUp(player.getBfr().getAttUp());
 							}
 						}
 						BattleCard[] def=gbc.getMonsters();

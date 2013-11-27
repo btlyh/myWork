@@ -1,15 +1,17 @@
 package com.cambrian.dfhm.task.command;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.net.Command;
 import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.net.NioTcpConnect;
-import com.cambrian.common.object.Sample;
 import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
-import com.cambrian.dfhm.task.entity.Task;
 import com.cambrian.dfhm.task.entity.TaskAward;
+import com.cambrian.dfhm.task.logic.TaskManager;
 import com.cambrian.game.Session;
 
 /**
@@ -33,6 +35,7 @@ public class FinishTaskCommand extends Command
 	/* init start */
 
 	/* methods */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void handle(NioTcpConnect connect, ByteBuffer data)
 	{
@@ -51,23 +54,29 @@ public class FinishTaskCommand extends Command
 			throw new DataAccessException(601,Lang.F9000_SDE);
 		}
 		int sid = data.readInt();
-		Task task = player.getTasks().getTask(sid);
-		boolean b = task.finish(player);
+		Map<String, Object> resultMap = TaskManager.getInstance().finishTask(player, sid);
+		TaskAward award = (TaskAward)resultMap.get("award");
+		award.bytesWrite(data);
+		boolean b = resultMap.get("flag")==null?false:(Boolean)resultMap.get("flag");
 		data.writeBoolean(b);
 		if (b)
 		{
-			TaskAward award = (TaskAward)Sample.getFactory().getSample(task.awardSid);
-			award.bytesWrite(data);
-			Card card = task.dispense(player);
-			if (card != null)
+			ArrayList<Card> cardList = (ArrayList<Card>)resultMap.get("list");
+			data.writeInt(cardList.size());
+			for (Card card : cardList)
 			{
-				data.writeBoolean(true);
 				data.writeInt(card.getSid());
 				data.writeInt(card.getId());
 				data.writeInt(card.getSkillId());
 			}
-			else
-				data.writeBoolean(false);
+		}else
+		{
+			ArrayList<Integer> cardSidList = (ArrayList<Integer>)resultMap.get("list");
+			data.writeInt(cardSidList.size());
+			for (Integer integer : cardSidList)
+			{
+				data.writeInt(integer);
+			}
 		}
 	}
 }

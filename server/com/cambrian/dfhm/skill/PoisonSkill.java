@@ -53,7 +53,7 @@ public class PoisonSkill extends Skill
 			double a=(double)value/1000;
 			double b=(double)hurt/1000;
 			value/=1000;
-			decrHp=(int)((double)a*(double)b*round);
+			decrHp=(int)((double)a*(double)b);
 			value=super.buffValue(attCard,value,aimCard,record);
 			record.setAttMax(value);
 			addHurt(value);
@@ -62,7 +62,16 @@ public class PoisonSkill extends Skill
 				skill=(PoisonSkill)Sample.factory.newSample(attCard
 					.getSkill().getSid());
 				skill.decrHp=decrHp;
-				aimCard.addDeBuff(skill);
+				boolean isPoison=false;
+				for(Skill skill_:aimCard.getDeSkill())
+				{
+					if(skill_ instanceof PoisonSkill)
+					{
+						isPoison=true;
+						break;
+					}
+				}
+				if(!isPoison) aimCard.addDeBuff(skill);
 			}
 			System.err.println("中毒技能，照成伤害 ==="+value);
 		}
@@ -75,12 +84,12 @@ public class PoisonSkill extends Skill
 	{
 		// decrHp=10000;
 		record.addRecord(this.getSid());
-		record.addRecord(1);//中毒
+		record.addRecord(1);// 中毒
 		record.addRecord(attCard.getSide());
-		record.addRecord(hurt);
+		record.addRecord(decrHp);
 		aimCard.decrHp(decrHp);
 		if(attCard.getCurHp()<=0)// 可能中毒死亡
-			record.addRecord(1);//死亡
+			record.addRecord(1);// 死亡
 		else
 			record.addRecord(-1);// 没死
 		round--;

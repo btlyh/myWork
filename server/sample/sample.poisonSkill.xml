@@ -14,10 +14,10 @@
 	round		回合数
 	
 	-->
-	<sample sid="19551" class="com.cambrian.dfhm.skill.PoisonSkill" name="威慑" description="使目标中毒，持续掉血" att="1320" attRange="2" level="1" aim="2" hurt="396" round="3" skillRate="0"/>
-	<sample sid="19552" class="com.cambrian.dfhm.skill.PoisonSkill" name="断魂矢" description="使目标中毒，持续掉血" att="1210" attRange="0" level="1" aim="2" hurt="363" round="3" skillRate="0"/>
-	<sample sid="19553" class="com.cambrian.dfhm.skill.PoisonSkill" name="颤人心" description="使目标中毒，持续掉血" att="1320" attRange="7" level="1" aim="2" hurt="396" round="3" skillRate="0"/>
-	<sample sid="19554" class="com.cambrian.dfhm.skill.PoisonSkill" name="噬魂蛊" description="使目标中毒，持续掉血" att="1430" attRange="10" level="1" aim="2" hurt="429" round="3" skillRate="0"/>
-	<sample sid="19555" class="com.cambrian.dfhm.skill.PoisonSkill" name="摄魂夺魄" description="使目标中毒，持续掉血" att="1540" attRange="4" level="1" aim="2" hurt="462" round="3" skillRate="0"/>
+	<sample sid="19551" class="com.cambrian.dfhm.skill.PoisonSkill" name="威慑" description="使目标中毒，持续掉血" att="1320" attRange="2" level="1" aim="2" hurt="300" round="3" skillRate="0"/>
+	<sample sid="19552" class="com.cambrian.dfhm.skill.PoisonSkill" name="断魂矢" description="使目标中毒，持续掉血" att="1210" attRange="0" level="1" aim="2" hurt="300" round="3" skillRate="0"/>
+	<sample sid="19553" class="com.cambrian.dfhm.skill.PoisonSkill" name="颤人心" description="使目标中毒，持续掉血" att="1320" attRange="7" level="1" aim="2" hurt="300" round="3" skillRate="0"/>
+	<sample sid="19554" class="com.cambrian.dfhm.skill.PoisonSkill" name="噬魂蛊" description="使目标中毒，持续掉血" att="1430" attRange="10" level="1" aim="2" hurt="300" round="3" skillRate="0"/>
+	<sample sid="19555" class="com.cambrian.dfhm.skill.PoisonSkill" name="摄魂夺魄" description="使目标中毒，持续掉血" att="1540" attRange="4" level="1" aim="2" hurt="300" round="3" skillRate="0"/>
 
 </objects>

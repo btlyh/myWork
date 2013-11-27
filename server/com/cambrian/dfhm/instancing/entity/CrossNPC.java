@@ -23,7 +23,18 @@ public class CrossNPC extends NPC
 	/** 此NPC的攻击次数限制 */
 	private int attConfine;
 
+	
+	/**扫荡的奖励ID**/
+	private int sweepId;
 	/* constructors */
+
+	public int getSweepId() {
+		return sweepId;
+	}
+
+	public void setSweepId(int sweepId) {
+		this.sweepId = sweepId;
+	}
 
 	/* properties */
 	public int getAttConfine()
@@ -45,13 +56,13 @@ public class CrossNPC extends NPC
 		{
 			return Lang.F1402;
 		}
-		if(checkRecord!=null)
-		{
-			if(checkRecord.getAttacks()>=attConfine)
-			{
-				return Lang.F1407;
-			}
-		}
+//		if(checkRecord!=null)
+//		{
+//			if(checkRecord.getAttacks()>=attConfine)
+//			{
+//				return Lang.F1407;
+//			}
+//		}
 		return null;
 	}
 

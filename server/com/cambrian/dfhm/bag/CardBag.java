@@ -176,4 +176,21 @@ public class CardBag implements Serializable,DBSerializable
 		}
 	}
 	/* inner class */
+	/** 获得最强卡牌 */
+	public int getBestCardSid()
+	{
+		Card bestCard = null;
+		for (Card card : list)
+		{
+			if (card == null) continue;
+			if (bestCard == null)
+			{
+				bestCard = card;
+				continue;
+			}
+			if (card.getZhandouli() > bestCard.getZhandouli())
+				bestCard = card;
+		}
+		return bestCard.getSid();
+	}
 }

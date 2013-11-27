@@ -13,7 +13,7 @@ import com.cambrian.common.util.ChangeListenerList;
  * @version 2013-4-22
  * @author HYZ (huangyz1988@qq.com)
  */
-public class Session extends ChangeListenerList
+public class Session extends ChangeListenerList implements Cloneable
 {
 
 	/** µÇÂ¼¸Ä±ä */
@@ -256,6 +256,23 @@ public class Session extends ChangeListenerList
 	{
 		return super.toString()+"[id="+this.id+", state="+this.state
 			+", activeTime="+this.activeTime+", connect="+this.connect+"]";
+	}
+
+	@Override
+	public Object clone()
+	{
+		Session session=null;
+		try
+		{
+			session=(Session)super.clone();
+		}
+		catch(CloneNotSupportedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		session.source=source;
+		return session;
 	}
 
 }

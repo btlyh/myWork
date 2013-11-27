@@ -54,8 +54,9 @@ public class DuelCommand extends Command
 			throw new DataAccessException(601, Lang.F9000_SDE);
 		}
 		String tarName = data.readUTF();
+		int useGold = data.readInt();
 		Map<String, Object> resultMap = QualifyingManager.getInstance().duel(
-				player, tarName);
+				player, tarName, useGold);
 		int point = (Integer) resultMap.get("point");
 		BattleCard[] battleCards = (BattleCard[]) resultMap.get("battleCards");
 		if (battleCards == null)

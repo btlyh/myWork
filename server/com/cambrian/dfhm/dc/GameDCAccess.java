@@ -26,6 +26,7 @@ import com.cambrian.common.util.ArrayList;
 import com.cambrian.common.util.ChangeAdapter;
 import com.cambrian.common.util.TextKit;
 import com.cambrian.dfhm.Lang;
+import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.instancing.entity.AttRecord;
 import com.cambrian.dfhm.mail.entity.Mail;
@@ -117,7 +118,8 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 	/** ±£¥Ê√˚◊÷ */
 	private synchronized void saveName(String name) throws IOException
 	{
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./txt/mingzi_use.txt",true),"UTF-8"));
+		BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(
+			new FileOutputStream("./txt/mingzi_use.txt",true),"UTF-8"));
 		name+="\r\n";
 		bw.write(name,0,name.length());
 		bw.flush();
@@ -186,12 +188,12 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 	public boolean loadPlayer(Player p,String nickName)
 	{
 		Field[] array=new Field[13];
-		
-		/************≤‚ ‘**********/
-		p.setCurIndexForCorssNPC(99999);
-		p.setCurIndexForNormalNPC(99999);
-		/*************end**************/
-		
+
+		/************ ≤‚ ‘ **********/
+		// p.setCurIndexForCorssNPC(99999);
+		// p.setCurIndexForNormalNPC(99999);
+		/************* end **************/
+
 		array[0]=FieldKit.create("userid",(int)p.getUserId());
 		array[1]=FieldKit.create("nickname",p.getNickname());
 		array[2]=FieldKit.create("money",p.getMoney());
@@ -228,10 +230,7 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		p.setCurToken(((IntField)array[4]).value);
 		p.setMaxToken(((IntField)array[5]).value);
 		p.setSoul(((IntField)array[6]).value);
-		
-		
-	
-		
+
 		loadPlayerVar(p);
 		loadPlayerLog(p);
 		return false;
@@ -247,12 +246,13 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 				+", userid="+userid+", nickName="+p.getNickname());
 		// p.setNickname(nickName);// TODO Í«≥∆ƒ¨»œ…Ë÷√
 		p.setNickname(nickName);
-		p.setMoney(100000);
+		p.setMoney(60000000);
 		p.setGold(100000);
 		p.setMaxToken(1000);
-		p.setCurToken(1000);
+		p.setCurToken(500);
 		p.setSoul(10000);
-		p.setCurIndexForNormalNPC(11001);
+		p.setCurIndexForNormalNPC(GameCFG.getIndexForNormalNPC());
+		p.setVipLevel(5);
 		p.init();
 
 		try
@@ -394,10 +394,11 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		array[0]=FieldKit.create("cardBag",(byte[])null);
 		array[1]=FieldKit.create("friendInfo",(byte[])null);
 		array[2]=FieldKit.create("armyCamp",(byte[])null);
-		array[3]=FieldKit.create("playerInfo", (byte[])null);
-		array[4]=FieldKit.create("formation", (byte[])null);
-		array[5]=FieldKit.create("tasks", (byte[])null);
-		array[6]=FieldKit.create("identity",(byte[])null);		fields=new Fields(array);
+		array[3]=FieldKit.create("playerInfo",(byte[])null);
+		array[4]=FieldKit.create("formation",(byte[])null);
+		array[5]=FieldKit.create("tasks",(byte[])null);
+		array[6]=FieldKit.create("identity",(byte[])null);
+		fields=new Fields(array);
 		int i=DBKit.get("player_info",cm,
 			FieldKit.create("userId",(int)p.getUserId()),fields);
 		if(i==DBKit.EXCEPTION)
@@ -416,7 +417,8 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		bytes=((ByteArrayField)array[5]).value;
 		p.getTasks().dbBytesRead(new ByteBuffer(bytes));
 		bytes=((ByteArrayField)array[6]).value;
-		p.getIdentity().dbBytesRead(new ByteBuffer(bytes));	}
+		p.getIdentity().dbBytesRead(new ByteBuffer(bytes));
+	}
 
 	private void loadPlayerLog(Player p)
 	{
@@ -457,7 +459,8 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 	/** ÕÊº“–≈œ¢◊÷∂Œ”≥…‰ */
 	private Fields playerInfoMapping(Player p)
 	{
-		Field[] array=new Field[8];		ByteBuffer data=new ByteBuffer();
+		Field[] array=new Field[8];
+		ByteBuffer data=new ByteBuffer();
 		p.getCardBag().dbBytesWrite(data);
 		array[0]=FieldKit.create("userid",(int)p.getUserId());
 		array[1]=FieldKit.create("cardBag",data.toArray());
@@ -469,17 +472,18 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		array[3]=FieldKit.create("armyCamp",data.toArray());
 		data=new ByteBuffer();
 		p.getPlayerInfo().dbBytesWrite(data);
-		array[4]=FieldKit.create("playerInfo", data.toArray());
+		array[4]=FieldKit.create("playerInfo",data.toArray());
 		data=new ByteBuffer();
 		p.formation.dbBytesWrite(data);
-		array[5]=FieldKit.create("formation", data.toArray());
+		array[5]=FieldKit.create("formation",data.toArray());
 		data=new ByteBuffer();
 		p.getTasks().dbBytesWrite(data);
-		array[6]=FieldKit.create("tasks", data.toArray());
+		array[6]=FieldKit.create("tasks",data.toArray());
 		data=new ByteBuffer();
 		p.getIdentity().dbBytesWrite(data);
-		array[7]=FieldKit.create("identity", data.toArray());		return new Fields(array);
-		
+		array[7]=FieldKit.create("identity",data.toArray());
+		return new Fields(array);
+
 	}
 
 	/** ÕÊº“◊÷∂Œ”≥…‰ */

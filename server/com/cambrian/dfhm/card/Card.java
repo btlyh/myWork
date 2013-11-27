@@ -60,7 +60,7 @@ public class Card extends Sample
 	/** 等级 */
 	private int level=1;
 	/** 培养点数 */
-	private int forsterNumber=9999;
+	private int forsterNumber=0;
 	/** 暴击率 */
 	private int critRate;
 	/** 闪避率 */
@@ -981,9 +981,12 @@ public class Card extends Sample
 		// TODO 一共有99级，每级的经验配置在gameconfig里面
 		while(exp>GameCFG.getExp(level))
 		{
-			if(level<90)
+			
+			
+			if(level<90 )
 			{
 				level++;
+			//	forsterNumber++;
 				attLastChangeTime=TimeKit.nowTimeMills();
 				result=true;
 				if(getRealmByLevel()[0]>0)
@@ -992,23 +995,30 @@ public class Card extends Sample
 					break;
 				}
 			}
+			
+			
+			if(level==90)
+			{
+				break;
+			}	
 
 		}
 
 		if(level<90)
 		{
-			if(result)
+			/*if(result)
 			{
 				int temp=level;
 				forsterNumber+=--temp;
 			}
-			return result;
+			return result;*/
 		}
 		else
 		{
 			realm=false;
-			return false;
+			
 		}
+		return false;
 	}
 
 	/** 获取卡牌战斗力 */

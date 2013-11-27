@@ -1,4 +1,4 @@
-package com.cambrian.dfhm.timer;
+                     package com.cambrian.dfhm.timer;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -34,13 +34,13 @@ public class TokenTimer implements TimerListener
 	/** 恢复军令定时器事件 */
 	TimerEvent tokenTimeEvent;
 	/***/
-	TokenSendNotice tsn;
+	TokenSendNotice tsn;                                             
 	
 
 	/* constructors */
 	public TokenTimer()
 	{
-		this.tokenTimeEvent = new TimerEvent(this, "tokenTimeEvevt", (int) TOKENADDTIME);
+		this.tokenTimeEvent = new TimerEvent(this, "tokenTimeEvent", (int) TOKENADDTIME);
 	}
 
 	/* properties */
@@ -56,7 +56,7 @@ public class TokenTimer implements TimerListener
 	/* methods */
 	public void onTimer(TimerEvent e)
 	{
-		if (!e.getParameter().equals("tokenTimeEvevt"))
+		if (!e.getParameter().equals("tokenTimeEvent"))
 			return;
 		addTokenOnTime();
 	}
@@ -69,7 +69,6 @@ public class TokenTimer implements TimerListener
 		TimerCenter.getInstance();
 		TimerCenter.getMillisTimer().add(tokenTimeEvent);
 	}
-
 	/**
 	 * 开始恢复军令
 	 */

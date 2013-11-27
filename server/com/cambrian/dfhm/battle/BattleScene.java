@@ -1,6 +1,7 @@
 package com.cambrian.dfhm.battle;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.cambrian.common.log.Logger;
 import com.cambrian.common.object.Sample;
@@ -14,6 +15,7 @@ import com.cambrian.dfhm.instancing.entity.NPC;
 import com.cambrian.dfhm.instancing.logic.InstancingManager;
 import com.cambrian.dfhm.skill.DecrHurtSkill;
 import com.cambrian.dfhm.skill.DizzySkill;
+import com.cambrian.dfhm.skill.NoHurtSkill;
 import com.cambrian.dfhm.skill.PoisonSkill;
 import com.cambrian.dfhm.skill.Skill;
 
@@ -234,10 +236,9 @@ public class BattleScene
 			if(attCard.getCurHp()<0)
 			{
 				if(die)
-				{
 					record.addRecord(1);
-				}
-				record.addRecord(-1);
+				else
+					record.addRecord(-1);
 				return die;
 			}
 			deSkill=attCard.getDeSkill();
@@ -527,14 +528,16 @@ public class BattleScene
 				for(int i=0;i<aimList.length;i++)
 				{
 					aimCard=aimList[i];
-					if(aimCard!=null) aim.add(aimCard.getIndex());
+					if(aimCard!=null&&aimCard.getCurHp()>0)
+						aim.add(aimCard.getIndex());
 				}
 				break;
 			case BattleAct.OWNALL:// 5=己全体
 				for(int i=0;i<aimList.length;i++)
 				{
 					aimCard=aimList[i];
-					if(aimCard!=null) aim.add(aimCard.getIndex());
+					if(aimCard!=null&&aimCard.getCurHp()>0)
+						aim.add(aimCard.getIndex());
 				}
 				break;
 			case BattleAct.LEFTINCLINED:// 6=左斜
@@ -576,13 +579,15 @@ public class BattleScene
 		{
 			deSkill.clear();
 		}
-		record.addRecord(deSkill.size());
 		int status=0;
-		ArrayList<Skill> skillList=new ArrayList<Skill>(deSkill.size());
+		ArrayList<Skill> skillList=new ArrayList<Skill>();
 		for(int i=0;i<deSkill.size();i++)
 		{
+			if(deSkill.get(i) instanceof DecrHurtSkill
+				||deSkill.get(i) instanceof NoHurtSkill) continue;
 			skillList.add(deSkill.get(i));
 		}
+		record.addRecord(skillList.size());
 		for(Skill skill:skillList)
 		{
 			if(skill instanceof PoisonSkill)
@@ -698,8 +703,6 @@ public class BattleScene
 			System.err.println("掉落物品类型 ==="+type+", 掉落物品数量 ==="+award[1]);
 			record.addRecord(1);// 掉东西
 			record.addRecord(type);
-			System.err.println("=========================="+type
-				+"==========================");
 			return true;
 		}
 		else

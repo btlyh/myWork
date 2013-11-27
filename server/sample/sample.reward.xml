@@ -12,9 +12,9 @@
        
     
 	-->
-	<sample sid="21657" class="com.cambrian.dfhm.reward.Reward" time="30" money="0" _2card="10001,2|10001,2" soul="20" tired="0"/>
-	<sample sid="21658" class="com.cambrian.dfhm.reward.Reward" time="60" money="0" _2card="10005,5|10002,2" soul="80" tired="50"/>
-	<sample sid="21659" class="com.cambrian.dfhm.reward.Reward" time="90" money="30" _2card="10002,4|10001,2" soul="0" tired="50"/>
-	<sample sid="21660" class="com.cambrian.dfhm.reward.Reward" time="120" money="50" _2card="10003,1|10001,3" soul="40" tired="0"/>
+	<sample sid="21657" class="com.cambrian.dfhm.reward.Reward" time="30" money="0" _2card="10001,1|10002,0" soul="0" tired="0"/>
+	<sample sid="21658" class="com.cambrian.dfhm.reward.Reward" time="60" money="0" _2card="10001,1|10002,1" soul="0" tired="0"/>
+	<sample sid="21659" class="com.cambrian.dfhm.reward.Reward" time="90" money="30" _2card="10001,2|10002,1" soul="10" tired="3"/>
+	<sample sid="21660" class="com.cambrian.dfhm.reward.Reward" time="120" money="50" _2card="10001,2|10002,2" soul="20" tired="5"/>
 
 </objects>

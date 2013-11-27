@@ -54,23 +54,23 @@ public class EnterRankingsCommand extends Command
 		}
 		int version = data.readInt();
 		int rankingsVersion = RankingsManager.getInstance().getVersion();
+		Map<String, Object> resultMap = RankingsManager.getInstance()
+				.enterRankings(player);
+		Rankings rankings = (Rankings) resultMap.get("rankings");
 		data.writeInt(rankingsVersion);
 		if (version != rankingsVersion)
 		{
-			Map<String, Object> resultMap = RankingsManager.getInstance()
-					.enterRankings(player);
-			Rankings rankings = (Rankings) resultMap.get("rankings");
 			rankings.bytesWrite(data);
-			data.writeInt(rankings.getPlayerRankInfo(player,
-					rankings.getStoryRankings()));
-			data.writeInt(rankings.getPlayerRankInfo(player,
-					rankings.getChallengeRankings()));
-			data.writeInt(rankings.getPlayerRankInfo(player,
-					rankings.getPayRankings()));
-			Card card = (Card) resultMap.get("card");
-			data.writeInt(rankings.getCardRankInfo(card));
-			data.writeInt(card.getId());
-			data.writeInt(card.getZhandouli());
 		}
+		data.writeInt(rankings.getPlayerRankInfo(player,rankings.getStoryRankings()));
+		data.writeInt(player.getCurIndexForNormalNPC()-1);
+		data.writeInt(rankings.getPlayerRankInfo(player,rankings.getChallengeRankings()));
+		data.writeInt(player.getPlayerInfo().getHardNPCIndex());
+		data.writeInt(rankings.getPlayerRankInfo(player,rankings.getPayRankings()));
+		data.writeInt(player.getPlayerInfo().getPayRMB());
+		Card card = (Card) resultMap.get("card");
+		data.writeInt(rankings.getCardRankInfo(card));
+		data.writeInt(card.getId());
+		data.writeInt(card.getZhandouli());
 	}
 }

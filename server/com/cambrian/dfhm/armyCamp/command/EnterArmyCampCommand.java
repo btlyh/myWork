@@ -57,8 +57,10 @@ public class EnterArmyCampCommand extends Command
 		}
 		String userName = data.readUTF();
 		Map<String, Object> resultMap = ArmyCampManager.getInstance().enterArmyCamp(player, userName);
+		Player armyPlayer = (Player)resultMap.get("player");
 		ArmyCamp armyCamp = (ArmyCamp)resultMap.get("armyCamp");
 		List<Card> cardList = (List<Card>)resultMap.get("cardList");
+		data.writeInt(armyPlayer.getVipLevel());
 		data.writeInt(cardList.size());
 		for (int i = 0; i < cardList.size();i++)
 		{

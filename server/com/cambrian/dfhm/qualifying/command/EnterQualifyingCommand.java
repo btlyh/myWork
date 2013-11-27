@@ -1,6 +1,7 @@
 package com.cambrian.dfhm.qualifying.command;
 
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +57,7 @@ public class EnterQualifyingCommand extends Command
 		Map<String, Object> resultMap = QualifyingManager.getInstance().enterQualifying(player);
 		List<QualifyingInfo> topList = (List<QualifyingInfo>)resultMap.get("topList");
 		List<QualifyingInfo> duelList = (List<QualifyingInfo>)resultMap.get("duelList");
+		Collections.sort(duelList);
 		int index = (Integer)resultMap.get("index");
 		data.writeInt(player.getPlayerInfo().getCanTakePoint());
 		data.writeInt(player.getPlayerInfo().getDuelBuyTimes());

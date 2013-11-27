@@ -244,22 +244,22 @@ public class Identity
 				slave.dbBytesWrite(data);
 		}
 		data.writeInt(ownerId);
-		data.writeInt(workTimes);
+		data.writeInt(GameCFG.getWorkConfine()-workTimes);
 		data.writeInt(informations.size());
 		for(Information information:informations)
 		{
 			information.dbBytesWrite(data);
 		}
-		data.writeInt(attTimes);
-		data.writeInt(reactTimes);
+		data.writeInt(GameCFG.getAttConfine()-attTimes);
+		data.writeInt(GameCFG.getReactConfine()-reactTimes);
 		data.writeInt(helpList.size());
 		for(Integer integer:helpList)
 		{
 			data.writeInt(integer);
 		}
-		data.writeInt(helpTimes);
-		data.writeInt(saveNorTimes);
-		data.writeInt(saveTimes);
+		data.writeInt(GameCFG.getSaveConfine()-helpTimes);
+		data.writeInt(GameCFG.getSaveNorConfine()-saveNorTimes);
+		data.writeInt(GameCFG.getSaveConfine()-saveTimes);
 	}
 
 	/** 序列化 和DC通信 存 */

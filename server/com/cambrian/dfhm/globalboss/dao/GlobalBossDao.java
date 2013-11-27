@@ -63,9 +63,7 @@ public class GlobalBossDao
 		Player player=new Player();
 		player.setUserId(userId);
 		byte[] bytes=((ByteArrayField)array[0]).value;
-		player.getIdentity().dbBytesRead(new ByteBuffer(bytes));
-		player.formation.dbBytesRead(new ByteBuffer(bytes));
-
+		player.getPlayerInfo().dbBytesRead(new ByteBuffer(bytes));
 		return player;
 	}
 
@@ -74,8 +72,8 @@ public class GlobalBossDao
 	{
 		Field[] array=new Field[1];
 		ByteBuffer data=new ByteBuffer();
-		player.getIdentity().dbBytesWrite(data);
-		array[0]=FieldKit.create("identity",data.toArray());
+		player.getPlayerInfo().dbBytesWrite(data);
+		array[0]=FieldKit.create("playerInfo",data.toArray());
 		DBKit.set("player_info",cm,FieldKit.create("userid",
 			(int)player.getUserId()),new Fields(array));
 	}

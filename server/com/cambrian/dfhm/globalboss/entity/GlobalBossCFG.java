@@ -1,7 +1,6 @@
 package com.cambrian.dfhm.globalboss.entity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -404,10 +403,16 @@ public class GlobalBossCFG extends Sample
 	public Map<String,ArrayList<Object>> countReward(BossFightRecord bfr)
 	{
 		Map<String,ArrayList<Object>> rewardMap=new HashMap<String,ArrayList<Object>>();
+		ArrayList<Integer> cardList;
 		if(bfr.isFinished())
 		{
 			ArrayList<Object> finishReward=new ArrayList<Object>();
-			finishReward.add(Arrays.asList(specialCardList));
+			cardList=new ArrayList<Integer>(specialCardList.length);
+			for(int i=0;i<specialCardList.length;i++)
+			{
+				cardList.add(specialCardList[i]);
+			}
+			finishReward.add(cardList);
 			finishReward.add(specialSoul);
 			finishReward.add(specialMoney);
 			rewardMap.put("finishReward",finishReward);
@@ -415,7 +420,12 @@ public class GlobalBossCFG extends Sample
 		if(bfr.getRank()<orderConfine)
 		{
 			ArrayList<Object> rankReward=new ArrayList<Object>();
-			rankReward.add(Arrays.asList(orderCardList));
+			cardList=new ArrayList<Integer>(orderCardList.length);
+			for(int i=0;i<orderCardList.length;i++)
+			{
+				cardList.add(orderCardList[i]);
+			}
+			rankReward.add(cardList);
 			rankReward.add(orderSoul*(orderConfine-bfr.getRank()));
 			rankReward.add(orderMoney*(orderConfine-bfr.getRank()));
 			rewardMap.put("rankReward",rankReward);
@@ -423,7 +433,12 @@ public class GlobalBossCFG extends Sample
 		if(bfr.getTotalDamage()>0)
 		{
 			ArrayList<Object> damageReward=new ArrayList<Object>();
-			damageReward.add(Arrays.asList(normalCardList));
+			cardList=new ArrayList<Integer>(normalCardList.length);
+			for(int i=0;i<normalCardList.length;i++)
+			{
+				cardList.add(normalCardList[i]);
+			}
+			damageReward.add(cardList);
 			damageReward.add(normalSoul*bfr.getTotalDamage());
 			damageReward.add(normalMoney*bfr.getTotalDamage());
 			rewardMap.put("rankReward",damageReward);
@@ -439,7 +454,12 @@ public class GlobalBossCFG extends Sample
 	public ArrayList<Object> countReward()
 	{
 		ArrayList<Object> autoReward=new ArrayList<Object>();
-		autoReward.add(Arrays.asList(autoCardList));
+		ArrayList<Integer> cardList=new ArrayList<Integer>(autoCardList.length);
+		for(int i=0;i<autoCardList.length;i++)
+		{
+			cardList.add(autoCardList[i]);
+		}
+		autoReward.add(cardList);
 		autoReward.add(autoSoul);
 		autoReward.add(autoMoney);
 		return autoReward;

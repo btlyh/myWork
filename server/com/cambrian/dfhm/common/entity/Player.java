@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.cambrian.common.actor.Actor;
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.object.Sample;
+import com.cambrian.common.timer.TimerCenter;
+import com.cambrian.common.timer.TimerEvent;
 import com.cambrian.common.util.ChangeListener;
 import com.cambrian.common.util.TimeKit;
 import com.cambrian.dfhm.armyCamp.entity.ArmyCamp;
@@ -21,9 +23,9 @@ import com.cambrian.dfhm.instancing.entity.AttRecord;
 import com.cambrian.dfhm.mail.entity.Mail;
 import com.cambrian.dfhm.message.MessageContainer;
 import com.cambrian.dfhm.qualifying.logic.QualifyingManager;
-import com.cambrian.dfhm.task.entity.TaskContainer;
 import com.cambrian.dfhm.slaveAndWar.entity.Identity;
 import com.cambrian.dfhm.slaveAndWar.entity.Slave;
+import com.cambrian.dfhm.task.entity.TaskContainer;
 import com.cambrian.dfhm.timer.TokenTimer;
 
 /**
@@ -495,6 +497,7 @@ public class Player extends Sample implements Actor
 			++vipLevel;
 		setVipCfg();
 	}
+
 	/**
 	 * 计算战斗力
 	 */
@@ -725,7 +728,7 @@ public class Player extends Sample implements Actor
 		long surplusTime=BossManager.getInstance().getSurplusBossTime(
 			bossSid);
 		data.writeLong(surplusTime);// 活动剩余时间
-		if(player.getBfr()!=null)// 是否有BOSS战斗数据
+		if(player.getBfr()!=null&&player.getBfr().isAuto())// 是否有BOSS战斗数据
 		{
 			data.writeBoolean(true);
 			data.writeBoolean(player.getBfr().isAuto());// 是否有自动战斗,如果没有BOSS战斗数据是不接受此数据
@@ -734,21 +737,38 @@ public class Player extends Sample implements Actor
 		{
 			data.writeBoolean(false);
 		}
+		long nextTokenFullTime=0;
+		TimerEvent[] events=TimerCenter.getMillisTimer().getArray();
+		for(TimerEvent event:events)
+		{
+			if(event.getParameter().equals("tokenTimeEvent"))
+			{
+				nextTokenFullTime=event.getNextTime();
+				break;
+			}
+
+		}
+		data.writeLong(nextTokenFullTime-TimeKit.nowTimeMills());
 		/** 登录时遍历军帐 */
 		if(nickname!=null)
 		{
 			ArmyCampManager.getInstance().enterArmyCamp(this,nickname);
 			QualifyingManager.getInstance().addPlayer(nickname);
 		}
-		
-		if(GameCFG.getRewardSampleId().length>player.getPlayerInfo().getRewardNum())
+
+		if(GameCFG.getRewardSampleId().length>player.getPlayerInfo()
+			.getRewardNum())
 		{
-			player.getPlayerInfo().setNextRewardTime(TimeKit.nowTimeMills()+1000*GameCFG.getRewardIntervalTimeByIndex(player.getPlayerInfo().getRewardNum()));
-		}else
+			player.getPlayerInfo().setNextRewardTime(
+				TimeKit.nowTimeMills()
+					+1000
+					*GameCFG.getRewardIntervalTimeByIndex(player
+						.getPlayerInfo().getRewardNum()));
+		}
+		else
 		{
 			player.getPlayerInfo().setNextRewardTime(0);
-		}	
-		formation.refreshBestCard(this);
+		}
 
 	}
 

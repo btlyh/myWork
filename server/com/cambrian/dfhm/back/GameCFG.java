@@ -13,7 +13,7 @@ public class GameCFG
 	private static int[] levelExp;
 	/** 技能升级[每级经验，吞噬卡牌数量] */
 	private static int[] skillLevel;
-	/** 技能刷新所需金币*/
+	/** 技能刷新所需金币 */
 	private static int skillFlushNeedGold;
 	/** VIP等级所需要充值的金币 */
 	private static int[] vipLevelGold;
@@ -82,6 +82,8 @@ public class GameCFG
 	private static int saveConfine;
 	/** 当壕功能救陌生人次数限制 */
 	private static int saveNorConfine;
+	/** 当壕功能求救次数限制 */
+	private static int helpConfine;
 	/** 当壕功能办事时间设置(分钟) */
 	private static int workTime;
 	/** 当壕功能办事次数限制 */
@@ -94,6 +96,8 @@ public class GameCFG
 	private static int[] globalBossList;
 	/** 世界BOSS自动报名所需金币 */
 	private static int bossAutoSignGold;
+	/** 玩家初始化可挑战副本SID*/
+	private static int indexForNormalNPC;
 
 	public static int getPayForAwakeMinutes()
 	{
@@ -327,6 +331,11 @@ public class GameCFG
 		return rewardSampleId;
 	}
 
+	public static int[] getVipLevelGold()
+	{
+		return vipLevelGold;
+	}
+
 	/***
 	 * @param rewardNum 当前领奖次数
 	 * @return 下一次的领奖间隔时间
@@ -377,6 +386,7 @@ public class GameCFG
 
 	public static int getDuelWinPoint(int rank)
 	{
+		if(rank>=duelWinPoint.length-1) rank=duelWinPoint.length-1;
 		return duelWinPoint[rank];
 	}
 
@@ -387,6 +397,7 @@ public class GameCFG
 
 	public static int getDuelLosePoint(int rank)
 	{
+		if(rank>=duelLosePoint.length-1) rank=duelLosePoint.length-1;
 		return duelLosePoint[rank];
 	}
 
@@ -651,9 +662,10 @@ public class GameCFG
 	{
 		GameCFG.bossAutoSignGold=bossAutoSignGold;
 	}
-	
+
 	/**
 	 * 获取技能刷新所需要的金币
+	 * 
 	 * @return
 	 */
 	public static int getSkillFlushNeedGold()
@@ -663,6 +675,34 @@ public class GameCFG
 
 	public static void setSkillFlushNeedGold(int skillFlushNeedGold)
 	{
-		GameCFG.skillFlushNeedGold = skillFlushNeedGold;
+		GameCFG.skillFlushNeedGold=skillFlushNeedGold;
+	}
+	
+	/***
+	 * 求救次数
+	 * @return
+	 */
+	public static int getHelpConfine()
+	{
+		return helpConfine;
+	}
+
+	public static void setHelpConfine(int helpConfine)
+	{
+		GameCFG.helpConfine = helpConfine;
+	}
+	
+	/***
+	 * 获取玩家初始化可挑战副本SID
+	 * @return
+	 */
+	public static int getIndexForNormalNPC()
+	{
+		return indexForNormalNPC;
+	}
+
+	public static void setIndexForNormalNPC(int indexForNormalNPC)
+	{
+		GameCFG.indexForNormalNPC = indexForNormalNPC;
 	}
 }

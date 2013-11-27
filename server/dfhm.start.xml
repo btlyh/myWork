@@ -447,6 +447,10 @@
 	<!-- ########################################## -->
 	<!--  任务-初始化所有任务列表
 	<method class="com.cambrian.dfhm.task.TaskContainer" name="init"/> -->
+	<!-- 开启任务管理器 -->
+		<obj class="com.cambrian.dfhm.task.logic.TaskManager" id="TM">
+			<method name="setMf"><ref id="MF"/></method>
+		</obj>	
 	<!--  任务-前台发送-获取任务列表 -->
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_TASK_TASKLIST"/>

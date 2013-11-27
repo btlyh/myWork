@@ -13,12 +13,28 @@ import com.cambrian.dfhm.skill.Skill;
  * 
  * @author：Sebastian
  */
-public class BattleCard
+public class BattleCard implements Cloneable
 {
 
 	/* static fields */
 
 	/* static methods */
+
+	@Override
+	public Object clone() 
+	{
+		BattleCard battleCard=null;
+		try
+		{
+			battleCard = (BattleCard)super.clone();
+		}
+		catch(CloneNotSupportedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return battleCard;
+	}
 
 	/* fields */
 	private int id;
@@ -52,7 +68,7 @@ public class BattleCard
 	/** 闪避率 */
 	private int dodgeRate;
 	/** 被作用技能 */
-	private ArrayList<Skill> deSkill;
+	public ArrayList<Skill> deSkill;
 	/** 奖励掉落sid */
 	private int awardSid;
 	/** 战斗方位：1=攻击，2=防守 */

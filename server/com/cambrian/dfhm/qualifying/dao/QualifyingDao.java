@@ -12,6 +12,7 @@ import com.cambrian.common.sql.DBKit;
 import com.cambrian.dfhm.bag.CardBag;
 import com.cambrian.dfhm.battle.Formation;
 import com.cambrian.dfhm.common.entity.Player;
+import com.cambrian.dfhm.common.entity.PlayerInfo;
 import com.cambrian.dfhm.qualifying.entity.Qualifying;
 import com.cambrian.game.Session;
 
@@ -83,41 +84,29 @@ public class QualifyingDao
 		player.setUserId(userId);
 		player.setNickname(((StringField)array[0]).value);
 		player.setVipLevel(((IntField)array[1]).value);
-		player.setCardBag(getCardBag(userId));
-		player.formation=getFormation(userId);
-		return player;
-	}
-	
-	/**
-	 * 获取背包信息
-	 * 
-	 * @param userId 玩家UID
-	 * @return
-	 */
-	public CardBag getCardBag(int userId)
-	{
-		Field[] array=new Field[1];
-		array[0]=FieldKit.create("cardBag",(byte[])null);
-		Fields fields=new Fields(array);
-		DBKit.get("player_info",cm,FieldKit.create("userId",userId),fields);
+		
+		array = new Field[3];
+		array[0]=FieldKit.create("playerInfo", (byte[])null);
+		array[1]=FieldKit.create("cardBag", (byte[])null);
+		array[2]=FieldKit.create("formation", (byte[])null);
+		fields = new Fields(array);
+		DBKit.get("player_info", cm, FieldKit.create("userId", userId), fields);
 		byte[] bytes=((ByteArrayField)array[0]).value;
-		CardBag cardBag=new CardBag();
+		PlayerInfo playerInfo = new PlayerInfo();
+		if (bytes != null)
+			playerInfo.dbBytesRead(new ByteBuffer(bytes));
+		player.setPlayerInfo(playerInfo);
+		bytes = ((ByteArrayField)array[1]).value;
+		CardBag cardBag = new CardBag();
 		if (bytes != null)
 			cardBag.dbBytesRead(new ByteBuffer(bytes));
-		return cardBag;
-	}
-	/** 获取布阵 */
-	public Formation getFormation(int userId)
-	{
-		Field[] array=new Field[1];
-		array[0]=FieldKit.create("formation",(byte[])null);
-		Fields fields=new Fields(array);
-		DBKit.get("player_info",cm,FieldKit.create("userId",userId),fields);
-		byte[] bytes=((ByteArrayField)array[0]).value;
-		Formation formation=new Formation();
+		player.setCardBag(cardBag);
+		bytes = ((ByteArrayField)array[2]).value;
+		Formation formation = new Formation();
 		if (bytes != null)
 			formation.dbBytesRead(new ByteBuffer(bytes));
-		return formation;
+		player.formation = formation;
+		return player;
 	}
 	/** 获取排位赛 */
 	public Qualifying getQualifying()

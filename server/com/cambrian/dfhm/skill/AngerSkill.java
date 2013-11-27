@@ -46,7 +46,7 @@ public class AngerSkill extends Skill
 		int num=value/hp_;// 加攻的次数
 		System.err.println("加攻的次数 ==="+num);
 		double a=getSkillHurt(attCard.getAtt())/1000;
-		double b=attCard.getAtt()*num*hurt;
+		double b=attCard.getAtt()*num*hurt/100;
 		value=(int)(a+b);// 增加后的总攻击力
 		System.err.println("玩家攻击力 ==="+attCard.getAtt());
 		System.err.println("增加后的总攻击力 ==="+value);

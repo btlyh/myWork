@@ -10,6 +10,8 @@ import com.cambrian.common.util.MathKit;
 import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
+import com.cambrian.dfhm.instancing.entity.CrossNPC;
+import com.cambrian.dfhm.instancing.entity.NormalNPC;
 import com.cambrian.dfhm.instancing.entity.Sweep;
 import com.cambrian.dfhm.mail.entity.Mail;
 import com.cambrian.dfhm.mail.util.MailFactory;
@@ -36,10 +38,17 @@ public class SweepManager {
 		if (error != null) {
 			throw new DataAccessException(601, error);
 		}
-
+		
 		Sweep sweep = new Sweep();
-		//由于MAP ID和 sweepID  客户端一样 而服务器实现成2个部分 所以  SWEEP ID需要  从MAPID 加10000dedao
-		sweep = (Sweep) Sample.getFactory().getSample(mapId+10000);
+		if(maptype==3)//穿越副本
+		{
+			CrossNPC crossNPC =  (CrossNPC) Sample.getFactory().getSample(mapId);
+			sweep =  (Sweep) Sample.getFactory().getSample(crossNPC.getSweepId());
+		}else if(maptype==1)//主线副本
+		{
+			NormalNPC normalNPC =  (NormalNPC) Sample.getFactory().getSample(mapId);
+			sweep =  (Sweep) Sample.getFactory().getSample(normalNPC.getSweepId());
+		}	
 		ArrayList<Integer> cards = new ArrayList<Integer>();//
 		
 		for (int i = 0; i < sweepNum; i++) // 进行多少次扫荡
@@ -127,6 +136,13 @@ public class SweepManager {
 			System.out.println("card length ="+cards.size());
 			
 		}	
+		
+		
+		
+		if(maptype==3)//穿越副本 消耗穿越次数
+		{
+			player.getPlayerInfo().setCrossMapNum(player.getPlayerInfo().getCrossMapNum()-sweepNum);
+		}	
 	}
 
 	private String checkSweep(Player player, int mapId, int sweepNum,
@@ -139,6 +155,11 @@ public class SweepManager {
 		} else if (maptype == 3) {
 			if (player.getCurIndexForCorssNPC() <= mapId) {
 				return Lang.F1411;
+			}
+			
+			if(sweepNum>player.getPlayerInfo().getCrossMapNum())
+			{
+				return Lang.F1414;
 			}
 		} else {
 			return Lang.F1412;

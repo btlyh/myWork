@@ -37,7 +37,7 @@ public abstract class NPC extends Sample
 	private int type;
 	/** »ØºÏ */
 	private int round;
-
+	
 	/* constructors */
 
 	/* properties */

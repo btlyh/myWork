@@ -656,7 +656,7 @@ public class SlaveManager
 		fightEndHandleNormal(player,tarPlayer,isWin,isSave);
 		Map<String,Object> result=new HashMap<String,Object>();
 		result.put("resultList",resultList);
-		result.put("formation",tarPlayer.formation.getFormation());
+		result.put("formation",tarPlayer.formation);
 		return result;
 	}
 	/**
@@ -907,12 +907,18 @@ public class SlaveManager
 		List<Player> enemyList,boolean isSave)
 	{
 		if(enemyList.size()==GameCFG.getEnemySize()
-			||errorValue==GameCFG.getEnemySize()*GameCFG.getMatchTimes())
+			||errorValue==GameCFG.getErrorValue()*GameCFG.getMatchTimes())
 		{
 			return;
 		}
 		Session[] sessions=ds.getSessionMap().getSessions().clone();
 		List<Session> sessionList=Arrays.asList(sessions);
+		List<Session> sessionList_=new ArrayList<Session>(sessionList.size());
+		for(Session session:sessionList)
+		{
+			sessionList_.add(session);
+		}
+
 		List<Player> rmPlayers=new ArrayList<Player>();
 		for(Session session:sessionList)
 		{
@@ -923,7 +929,7 @@ public class SlaveManager
 		}
 		List<Player> players=dao.getAllPlayer();
 		players.removeAll(rmPlayers);
-		getIdentityForRAM(sessionList,player,enemyList,errorValue,isSave);
+		getIdentityForRAM(sessionList_,player,enemyList,errorValue,isSave);
 		getIdentityForDB(players,player,enemyList,errorValue,isSave);
 		errorValue+=GameCFG.getErrorValue();
 		getIdentity(player,errorValue,enemyList,isSave);
