@@ -923,7 +923,7 @@ public class SlaveManager
 		for(Session session:sessionList)
 		{
 			if(session!=null)
-			{
+			{	
 				rmPlayers.add(((Player)session.getSource()));
 			}
 		}
@@ -956,6 +956,10 @@ public class SlaveManager
 			{
 				sessionList.remove(index);
 				Player tarPlayer=(Player)session.getSource();
+				if(player.equals(tarPlayer))
+					continue;
+				if(enemyList.contains(tarPlayer))
+					continue;
 				if(isSave)
 				{
 					if(Math.abs(tarPlayer.getFightPoint()
@@ -1009,7 +1013,8 @@ public class SlaveManager
 			{
 				if(Math
 					.abs(tarPlayer.getFightPoint()-player.getFightPoint())<=errorValue
-					&&tarPlayer.getIdentity().getGrade()==Identity.OWNER)
+					&&tarPlayer.getIdentity().getGrade()==Identity.OWNER
+					&&player!=tarPlayer)
 				{
 					enemyList.add(tarPlayer);
 					if(enemyList.size()==GameCFG.getEnemySize())
@@ -1022,7 +1027,8 @@ public class SlaveManager
 			{
 				if(Math
 					.abs(tarPlayer.getFightPoint()-player.getFightPoint())<=errorValue
-					&&tarPlayer.getIdentity().getGrade()!=Identity.SLAVE)
+					&&tarPlayer.getIdentity().getGrade()!=Identity.SLAVE
+					&&player!=tarPlayer)
 				{
 					enemyList.add(tarPlayer);
 					if(enemyList.size()==GameCFG.getEnemySize())

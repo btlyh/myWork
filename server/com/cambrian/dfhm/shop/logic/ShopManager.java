@@ -64,6 +64,7 @@ public class ShopManager
 			throw new DataAccessException(601, error);
 		}
 		Goods goods = (Goods) Sample.factory.getSample(goodsId);
+		player.incrGold(goods.gold);
 		player.incrMoney(goods.money);
 		player.incrSoul(goods.soul);
 		player.incrToken(goods.token);

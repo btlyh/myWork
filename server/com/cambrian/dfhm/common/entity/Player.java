@@ -21,7 +21,6 @@ import com.cambrian.dfhm.globalboss.entity.BossFightRecord;
 import com.cambrian.dfhm.globalboss.logic.BossManager;
 import com.cambrian.dfhm.instancing.entity.AttRecord;
 import com.cambrian.dfhm.mail.entity.Mail;
-import com.cambrian.dfhm.message.MessageContainer;
 import com.cambrian.dfhm.qualifying.logic.QualifyingManager;
 import com.cambrian.dfhm.slaveAndWar.entity.Identity;
 import com.cambrian.dfhm.slaveAndWar.entity.Slave;
@@ -64,9 +63,8 @@ public class Player extends Sample implements Actor
 	/** 军帐 */
 	private ArmyCamp armyCamp=new ArmyCamp();
 	/** 消息,在加载时执行操作 */
-	public MessageContainer message;
 	// /** 任务 */
-	// public TaskContainer task;
+	public TaskContainer task;
 	public Formation formation=new Formation();
 	/** 玩家今日已购买军令数量 */
 	private int buyTokenNum;
@@ -803,7 +801,7 @@ public class Player extends Sample implements Actor
 	@Override
 	public boolean equals(Object paramObject)
 	{
-		return this.userid==((Player)paramObject).getUserId();
+		return (int)this.userid==((int)((Player)paramObject).getUserId());
 	}
 
 	/* inner class */

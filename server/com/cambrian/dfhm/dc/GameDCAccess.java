@@ -254,7 +254,6 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		p.setCurIndexForNormalNPC(GameCFG.getIndexForNormalNPC());
 		p.setVipLevel(5);
 		p.init();
-
 		try
 		{
 			saveName(nickName);

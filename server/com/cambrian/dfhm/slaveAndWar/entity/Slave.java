@@ -49,6 +49,7 @@ public class Slave implements Comparable<Slave>
 		this.fightPoint=fightPoint;
 		this.takeTime=TimeKit.nowTimeMills();
 		this.bossId=bossId;
+		this.status=STATUS_FREE;
 	}
 
 	public Slave()

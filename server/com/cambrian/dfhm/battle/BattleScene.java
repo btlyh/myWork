@@ -232,7 +232,9 @@ public class BattleScene
 			System.err.println("出手人员 ==="+attCard.getName()+", 出手者位置 ==="
 				+attCard.getIndex());
 			System.err.println("side ==="+attCard.getSide());
+			int deSkillTemp = attCard.getDeSkill().size();
 			int status=deBuffer(attCard,attList,type);
+
 			if(attCard.getCurHp()<0)
 			{
 				if(die)
@@ -242,7 +244,7 @@ public class BattleScene
 				return die;
 			}
 			deSkill=attCard.getDeSkill();
-			if(deSkill.size()>0)// 通知前端，攻击者自身还剩debuff
+			if(deSkillTemp>0)// 通知前端，攻击者自身还剩debuff
 			{
 				record.addRecord(deSkill.size());
 				for(Skill skill:deSkill)

@@ -171,4 +171,16 @@
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setIndexForNormalNPC">11001</method>
 	</obj>
+	<!-- 设置VIP配置-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setVipCfgXml">
+			<ints>21372,21373,21374,21375,21376,21377</ints>
+		</method>
+	</obj>
+	<!--VIP升级所需要的GOLD-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setVipLevelGold">
+			<ints>50,100,150,200,250,300,350,400,450,500,550,600,650</ints>
+		</method>
+	</obj>
 </objects>

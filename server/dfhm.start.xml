@@ -403,50 +403,6 @@
 	</method>
 
 	<!-- ########################################## -->
-	<!-- 消息处理器 -->
-	<field class="com.cambrian.dfhm.message.MessageManager" name="instance" id="messageManager"></field>
-	<method name="setDataServer" ref="messageManager"><ref id="DS"/></method>
-	<method name="setAccess" ref="messageManager">
-		<obj class="com.cambrian.dfhm.message.MessageSqlAccess">
-			<method name="setConnectionManager"><ref id="cm"/></method>
-			<method name="setTable">player_message</method>
-			<method name="init"/>
-		</obj>
-	</method>
-	<!-- 消息-后台间发送-消息 -->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_MESSAGE"/>
-		<obj class="com.cambrian.dfhm.message.command.MessageCommand"></obj>
-	</method>-->
-	<!-- 消息-前台发送-获取消息列表 -->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_MESSAGELIST"/>
-		<obj class="com.cambrian.dfhm.message.command.MessageListCommand"></obj>
-	</method>
-	<!-- 消息-前台发送-读消息 -->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_READMESSAGE"/>
-		<obj class="com.cambrian.dfhm.message.command.ReadMessageCommand"></obj>
-	</method>
-	<!-- 消息-前台发送-处理消息 -->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_HANDLEMESSAGE"/>
-		<obj class="com.cambrian.dfhm.message.command.HandleMessageCommand"></obj>
-	</method>
-	<!-- 消息-前台发送-移除消息 -->
-	<method name="setPort" ref="service">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_REMOVEMESSAGE"/>
-		<obj class="com.cambrian.dfhm.message.command.RemoveMessageCommand"></obj>
-	</method>
-	<!-- 消息-后台发送-新增消息 -->
-	<method name="setPort" ref="proxySendCommand">
-		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_MESSAGE_ADDMESSAGE"/>
-		<obj class="com.cambrian.dfhm.message.command.send.AddMessageCommand"></obj>
-	</method>
-
-	<!-- ########################################## -->
-	<!--  任务-初始化所有任务列表
-	<method class="com.cambrian.dfhm.task.TaskContainer" name="init"/> -->
 	<!-- 开启任务管理器 -->
 		<obj class="com.cambrian.dfhm.task.logic.TaskManager" id="TM">
 			<method name="setMf"><ref id="MF"/></method>
