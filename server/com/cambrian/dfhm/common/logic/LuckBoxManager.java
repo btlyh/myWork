@@ -293,7 +293,7 @@ public class LuckBoxManager
 			player.getPlayerInfo().setFirst(true);
 			player.getPlayerInfo().setPayTimes(0);
 		}
-		if(lastTime==0)
+		if(type==FLUSH_SOUL)
 		{
 			return LuckBoxCfg.CDTime;
 		}

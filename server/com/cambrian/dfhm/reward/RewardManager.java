@@ -71,9 +71,10 @@ public class RewardManager {
 			player.getPlayerInfo().setRewardNum(rewardNum + 1);
 			// todo 增加奖励物品
 
-			player.setGold(player.getGold() + reward.getMoney());// 获得金钱
+			player.setGold(player.getGold() + reward.getGold());// 获得金币
 			player.setSoul(player.getSoul() + reward.getSoul());// 获得武魂
 			player.setCurToken(player.getCurToken() + reward.getTired());// 获得奖励的军令数
+			player.setMoney(player.getMoney() + reward.getMoney());
 
 			int[][] card = reward.getCard();
 			int totalnum = 0;

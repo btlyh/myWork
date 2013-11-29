@@ -99,6 +99,9 @@ public class GameCFG
 	/** 玩家初始化可挑战副本SID*/
 	private static int indexForNormalNPC;
 
+	/** 卡牌吞噬消耗的基础金币***/
+	private static int engulfCardMony;
+	
 	public static int getPayForAwakeMinutes()
 	{
 		return payForAwakeMinutes;
@@ -334,6 +337,16 @@ public class GameCFG
 	public static int[] getVipLevelGold()
 	{
 		return vipLevelGold;
+	}
+	
+	
+
+	public static int getEngulfCardMony() {
+		return engulfCardMony;
+	} 
+
+	public static void setEngulfCardMony(int engulfCardMony) {
+		GameCFG.engulfCardMony = engulfCardMony;
 	}
 
 	/***

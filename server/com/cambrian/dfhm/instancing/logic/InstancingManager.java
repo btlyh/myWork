@@ -66,7 +66,7 @@ public class InstancingManager
 	}
 	/** 攻击NPC */
 	public synchronized ArrayList<Integer> attackNPC(int sid,Player player,
-		int npcType,int attType, List<Integer> cardList)
+		int npcType,int attType,List<Integer> cardList)
 	{
 		Map<String,Object> resultMap=checkAttackNPC(sid,player,npcType);
 		String error=(String)resultMap.get("error");
@@ -89,15 +89,15 @@ public class InstancingManager
 			default:
 				break;
 		}
-		
+
 		BattleScene scene=new BattleScene();
 		BattleCard[] att=player.formation.getFormation();
 		BattleCard[] def=npc.getMonsters();
-//		for(int i=0;i<def.length;i++)
-//		{
-//			if()
-//			System.err.println("技能ID==="+def[i].getSkill().getId());
-//		}
+		// for(int i=0;i<def.length;i++)
+		// {
+		// if()
+		// System.err.println("技能ID==="+def[i].getSkill().getId());
+		// }
 		battleInit(att,def);
 		if(attType==1)
 		{
@@ -112,25 +112,26 @@ public class InstancingManager
 		player.decrToken(npc.getNeedToken());
 		npc.winCondition(scene,att,player);
 		int win=scene.getRecord().get(scene.getRecord().size()-1);
-		if(win==1)// 胜利
+		if(win>0)// 胜利
 		{
 			if(npcType==NPC.CROSS)
 			{
 				if(player.getPlayerInfo().getCrossMapNum()>0)
 				{
-					player.getPlayerInfo().setCrossMapNum(player.getPlayerInfo().getCrossMapNum()-1);
-				}	
-				
-			}	
+					player.getPlayerInfo().setCrossMapNum(
+						player.getPlayerInfo().getCrossMapNum()-1);
+				}
+
+			}
 			npc.handleForWin(player);
 			npc.addAward(scene,player);
 		}
 		npc.handleForAtt(player);
 		/* 战斗完后改变卡牌的喝酒状态 */
-		for (int i = 0; i < cardList.size(); i++)
+		for(int i=0;i<cardList.size();i++)
 		{
-			Card card = player.getCardBag().getById(cardList.get(i));
-			if (card.isInArmyCamp() == 1)
+			Card card=player.getCardBag().getById(cardList.get(i));
+			if(card.isInArmyCamp()==1)
 				card.setDrinkStatus(Card.DRUNK);
 			else
 				card.setDrinkStatus(Card.AWAKE);
@@ -158,16 +159,16 @@ public class InstancingManager
 			resultMap.put("error",Lang.F1410);
 			return resultMap;
 		}
-		
+
 		if(npcType==NPC.CROSS)
 		{
 			if(player.getPlayerInfo().getCrossMapNum()==0)
 			{
 				resultMap.put("error",Lang.F1414);
 				return resultMap;
-			}	
-		}	
-		
+			}
+		}
+
 		NPC npc=null;
 		switch(npcType)
 		{

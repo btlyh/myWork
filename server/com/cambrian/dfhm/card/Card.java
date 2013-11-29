@@ -1,5 +1,6 @@
 package com.cambrian.dfhm.card;
 
+import java.awt.List;
 import java.util.ArrayList;
 
 import org.w3c.dom.Attr;
@@ -157,6 +158,8 @@ public class Card extends Sample
 	private boolean isNew;
 	/** 最后一次属性改变的时间 */
 	private long attLastChangeTime;
+	/** 卡牌价格系数 */
+	private int factor;
 
 	/* constructors */
 
@@ -781,7 +784,15 @@ public class Card extends Sample
 	{
 		this.beyongAddDodge=beyongAddDodge;
 	}
+	public int getFactor()
+	{
+		return factor;
+	}
 
+	public void setFactor(int factor)
+	{
+		this.factor=factor;
+	}
 	/* init start */
 	public void init(Card card)
 	{
@@ -845,7 +856,7 @@ public class Card extends Sample
 		beyongAddAct=card.getBeyongAddAct();
 		beyongAddDodge=card.getBeyongAddDodge();
 		beyongAddHp=card.getBeyongAddHp();
-		
+
 		isNew=card.isNew();
 		attLastChangeTime=card.getAttLastChangeTime();
 
@@ -855,6 +866,7 @@ public class Card extends Sample
 		drinkStatus=Card.AWAKE;
 		isNew=true;
 		attLastChangeTime=TimeKit.nowTimeMills();
+		factor=card.getFactor();
 
 	}
 
@@ -972,62 +984,56 @@ public class Card extends Sample
 	/** 升级经验计算 */
 	public boolean levelUp()
 	{
-		boolean result=false;
-		boolean islimit=false;
 		if(level>=90)
 		{
 			return false;
 		}
-		// TODO 一共有99级，每级的经验配置在gameconfig里面
+
 		while(exp>GameCFG.getExp(level))
 		{
-			
-			
-			if(level<90 )
+
+			if(level<90)
 			{
+				exp-=GameCFG.getExp(level);// 每升一级就减少经验
 				level++;
-			//	forsterNumber++;
 				attLastChangeTime=TimeKit.nowTimeMills();
-				result=true;
 				if(getRealmByLevel()[0]>0)
 				{
 					realm=true;
+					exp=0;
 					break;
 				}
 			}
-			
-			
+
 			if(level==90)
 			{
+				exp=0;
 				break;
-			}	
-
-		}
-
-		if(level<90)
-		{
-			/*if(result)
-			{
-				int temp=level;
-				forsterNumber+=--temp;
 			}
-			return result;*/
+
 		}
-		else
-		{
-			realm=false;
-			
-		}
+
+		/*
+		 * if(level<90) { if(result) { int temp=level; forsterNumber+=--temp;
+		 * } return result; } else { realm=false; }
+		 */
 		return false;
 	}
 
+	
+	/**获取不同品质卡牌吞噬消耗的金币数**/
+	public int computeEegulMoney()
+	{
+		return type*GameCFG.getEngulfCardMony();
+	}
+	
 	/** 获取卡牌战斗力 */
 
 	public int getZhandouli()
 	{
 		return (int)((maxHp+(double)att*3+(double)att*1.5*(double)critRate*3+(double)maxHp
 			*(double)dodgeRate)*0.00005d);
-	}
+	} 
 
 	/** 前台序列化读取 */
 	public void bytesWrite(ByteBuffer data)
@@ -1080,7 +1086,12 @@ public class Card extends Sample
 
 		data.writeInt(aimType);
 		data.writeInt(swallowExp);
+		if(level==30)
+		{
+			System.out.println("exp="+exp);
+		}
 		data.writeInt(exp);
+
 		data.writeInt(flushSkillId);
 		// data.writeInt(skillSwallowCount);
 
@@ -1226,8 +1237,8 @@ public class Card extends Sample
 		data.writeInt(beyongAddHp);
 		data.writeInt(beyongAddDodge);
 		data.writeBoolean(isNew);
+		data.writeInt(factor);
 	}
-
 	/** 从db读取数据 */
 	public void bytesRead_db(ByteBuffer data)
 	{
@@ -1349,7 +1360,14 @@ public class Card extends Sample
 		this.beyongAddHp=data.readInt();
 		this.beyongAddDodge=data.readInt();
 		this.isNew=data.readBoolean();
+		this.factor=data.readInt();
 	}
+
+	public int getMoneyForSell()
+	{
+		return money+factor*(level-1);
+	}
+
 	/*
 	 * 获取卡牌的实际攻击力 基础攻击+升级提升的攻击+进阶提升的攻击
 	 */

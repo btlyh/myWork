@@ -63,10 +63,10 @@ public class NormalNPC extends NPC
 	@Override
 	public String checkAttNpc(Player player,AttRecord checkRecord)
 	{
-		if(player.getCurIndexForNormalNPC()<getSid())
-		{
-			return Lang.F1402;
-		}
+//		if(player.getCurIndexForNormalNPC()<getSid())
+//		{
+//			return Lang.F1402;
+//		}
 		return null;
 	}
 

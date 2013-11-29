@@ -165,7 +165,7 @@ public class BattleScene
 				die=attackLogic(attList,defList,type);// 攻方攻击
 				if(die)
 				{
-					result=getResult(attList);
+					result=getResult(attList,defList);
 					record.addRecord(result);// win
 					endBattle(attList,defList,type,true);
 					return;
@@ -175,7 +175,7 @@ public class BattleScene
 				die=attackLogic(defList,attList,type);// 守方攻击
 				if(die)
 				{
-					result=getResult(attList);
+					result=getResult(attList,defList);
 					record.addRecord(result);// lose
 					endBattle(attList,defList,type,false);
 					return;
@@ -196,19 +196,80 @@ public class BattleScene
 	 * @param attList
 	 * @return
 	 */
-	private int getResult(BattleCard[] attList)
+	private int getResult(BattleCard[] attList,BattleCard[] defList)
 	{
-		int result=1;
-		BattleCard bCard;
-		for(int i=0;i<attList.length;i++)
+		double attTotalCurHp=0;
+		double attTotalMaxHp=0;
+		double defTotalCurHp=0;
+		double defTotalMaxHp=0;
+		double factor=0;
+		for(BattleCard card:attList)
 		{
-			bCard=attList[i];
-			if(bCard!=null&&bCard.getCurHp()>0) return result;
+			if(card!=null)
+			{
+				if(card.getCurHp()<0)
+				{
+					card.setCurHp(0);
+				}
+				attTotalCurHp+=card.getCurHp();
+				attTotalMaxHp+=card.getMaxHp();
+			}
 		}
-		result=-1;
-		return result;
+		if(attTotalCurHp>0)
+		{
+			factor=attTotalCurHp/attTotalMaxHp;
+			if(factor<=0.2)
+			{
+				return 1;
+			}
+			if(factor<=0.8)
+			{
+				return 2;
+			}
+			if(factor<=1)
+			{
+				return 3;
+			}
+		}
+		else
+		{
+			for(BattleCard card:defList)
+			{
+				if(card!=null)
+				{
+					if(card.getCurHp()<0)
+					{
+						card.setCurHp(0);
+					}
+					defTotalCurHp+=card.getCurHp();
+					defTotalMaxHp+=card.getMaxHp();
+				}
+			}
+			factor=defTotalCurHp/defTotalMaxHp;
+			if(factor<=0.2)
+			{
+				return -1;
+			}
+			if(factor<=0.8)
+			{
+				return -2;
+			}
+			if(factor<=1)
+			{
+				return -3;
+			}
+		}
+		// int result=1;
+		// BattleCard bCard;
+		// for(int i=0;i<attList.length;i++)
+		// {
+		// bCard=attList[i];
+		// if(bCard!=null&&bCard.getCurHp()>0) return result;
+		// }
+		// result=-1;
+		// return result;
+		return 0;
 	}
-
 	/**
 	 * 攻击逻辑
 	 * 
@@ -232,7 +293,7 @@ public class BattleScene
 			System.err.println("出手人员 ==="+attCard.getName()+", 出手者位置 ==="
 				+attCard.getIndex());
 			System.err.println("side ==="+attCard.getSide());
-			int deSkillTemp = attCard.getDeSkill().size();
+			int deSkillTemp=attCard.getDeSkill().size();
 			int status=deBuffer(attCard,attList,type);
 
 			if(attCard.getCurHp()<0)
@@ -313,6 +374,12 @@ public class BattleScene
 			}
 			else
 			{
+				if(status==DIZZY)
+				{
+					die=false;
+					attCard.setAttack(true);
+					return die;
+				}
 				if(deSkill.size()==0) record.addRecord(deSkill.size());
 				if(die)
 				{
@@ -320,12 +387,6 @@ public class BattleScene
 					die=true;
 					die=addLog_end(attList);
 					System.err.println("战斗结束 ======"+die);
-					return die;
-				}
-				if(status==DIZZY)
-				{
-					die=false;
-					attCard.setAttack(true);
 					return die;
 				}
 			}
@@ -366,19 +427,25 @@ public class BattleScene
 	private boolean doubleSkillAtt(int skillId,int index,
 		BattleCard[] attList,BattleCard[] defList)
 	{
-		if(GameCFG.getDSkillById(skillId)==null) return false;
+		int[] ds=GameCFG.getDSkillById(skillId);
+		boolean fire=false;
+		if(ds==null) return false;
 		ArrayList<Integer> aim=new ArrayList<Integer>();
 		BattleCard attCard;
-		int ran=0;
 		for(int i=index+1;i<attList.length;i++)
 		{
 			if(i==index) break;
 			attCard=attList[i];
 			if(attCard!=null&&attCard.getCurHp()>0)
 			{
-				// ran=MathKit.randomValue(0,100001);
-				// if(ran<=GameCFG.getDsSkillRateById(skillId))
-				if(attCard.getSkill().getSid()==33030)
+				for(int skillid:ds)
+				{
+					if(skillid==attCard.getSkill().getSid())
+					{
+						fire=true;
+					}
+				}
+				if(fire)
 				{
 					System.err.println("连续技攻击 -----------------");
 					addLog(attCard);

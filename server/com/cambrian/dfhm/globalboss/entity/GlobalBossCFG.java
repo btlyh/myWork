@@ -441,7 +441,7 @@ public class GlobalBossCFG extends Sample
 			damageReward.add(cardList);
 			damageReward.add(normalSoul*bfr.getTotalDamage());
 			damageReward.add(normalMoney*bfr.getTotalDamage());
-			rewardMap.put("rankReward",damageReward);
+			rewardMap.put("damageReward",damageReward);
 		}
 		return rewardMap;
 	}

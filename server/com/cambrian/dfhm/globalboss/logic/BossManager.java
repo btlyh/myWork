@@ -563,7 +563,10 @@ public class BossManager
 	{
 		Iterator<Integer> iterator=gbc.rankMap.keySet().iterator();
 		BossFightRecord bfr;
-		Mail mail=null;
+		Mail finishMail=null;
+		Mail rankMail=null;
+		Mail damageMail=null;
+		Mail autoMail=null;
 		ArrayList<Integer> cardList;
 		while(iterator.hasNext())
 		{
@@ -575,27 +578,24 @@ public class BossManager
 			ArrayList<Object> damageReward=rewardMap.get("damageReward");
 			if(finishReward!=null)
 			{
-				cardList =(ArrayList<Integer>)finishReward.get(0);
-				mail=mf.createSystemMail(
-					cardList,0,
+				cardList=(ArrayList<Integer>)finishReward.get(0);
+				finishMail=mf.createSystemMail(cardList,0,
 					Integer.parseInt(finishReward.get(2).toString()),0,
 					Integer.parseInt(finishReward.get(1).toString()),0,
 					bfr.getPlayerId());
 			}
 			if(rankReward!=null)
 			{
-				cardList =(ArrayList<Integer>)rankReward.get(0);
-				mail=mf.createSystemMail(
-					cardList,0,
+				cardList=(ArrayList<Integer>)rankReward.get(0);
+				rankMail=mf.createSystemMail(cardList,0,
 					Integer.parseInt(rankReward.get(2).toString()),0,
 					Integer.parseInt(rankReward.get(1).toString()),0,
 					bfr.getPlayerId());
 			}
 			if(damageReward!=null)
 			{
-				cardList =(ArrayList<Integer>)damageReward.get(0);
-				mail=mf.createSystemMail(
-					cardList,0,
+				cardList=(ArrayList<Integer>)damageReward.get(0);
+				damageMail=mf.createSystemMail(cardList,0,
 					Integer.parseInt(damageReward.get(2).toString()),0,
 					Integer.parseInt(damageReward.get(1).toString()),0,
 					bfr.getPlayerId());
@@ -605,7 +605,9 @@ public class BossManager
 			{
 				Player player=(Player)session.getSource();
 				player.setBfr(null);
-				player.addMail(mail);
+				if(finishMail!=null) player.addMail(finishMail);
+				if(rankMail!=null) player.addMail(rankMail);
+				if(damageMail!=null) player.addMail(damageMail);
 				msn.send(session,new Object[]{player.getUnreadMailCount()});
 			}
 		}
@@ -623,16 +625,15 @@ public class BossManager
 				Player player=(Player)session.getSource();
 				if(player.getPlayerInfo().isAutoSignBoss())
 				{
-					cardList =(ArrayList<Integer>)autoReward.get(0);
-					mail=mf.createSystemMail(
-						cardList,0,
+					cardList=(ArrayList<Integer>)autoReward.get(0);
+					autoMail=mf.createSystemMail(cardList,0,
 						Integer.parseInt(autoReward.get(2).toString()),0,
 						Integer.parseInt(autoReward.get(1).toString()),0,
 						(int)player.getUserId());
 					msn.send(session,
 						new Object[]{player.getUnreadMailCount()});
 					player.getPlayerInfo().setAutoSignBoss(false);
-					player.addMail(mail);
+					player.addMail(autoMail);
 				}
 			}
 			else
@@ -640,9 +641,8 @@ public class BossManager
 				Player player=dao.getPlayer(integer);
 				if(player.getPlayerInfo().isAutoSignBoss())
 				{
-					cardList =(ArrayList<Integer>)autoReward.get(0);
-					mf.createSystemMail(
-						cardList,0,
+					cardList=(ArrayList<Integer>)autoReward.get(0);
+					mf.createSystemMail(cardList,0,
 						Integer.parseInt(autoReward.get(2).toString()),0,
 						Integer.parseInt(autoReward.get(1).toString()),0,
 						(int)player.getUserId());

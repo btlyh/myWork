@@ -41,7 +41,7 @@ public class Main implements Runnable
 			ClientConnectManager factory=ClientConnectManager.getFactory();
 			TaskPoolExecutor executorPool=new TaskPoolExecutor();
 			factory.setExecutor(executorPool);
-
+ 
 			// init clientService
 			ProxyDataHandler clientService=new ProxyDataHandler();
 			// int port=DataAccessHandler.getInstance()
@@ -54,7 +54,7 @@ public class Main implements Runnable
 			// init service
 			ProxyDataHandler service=new ProxyDataHandler();
 
-			Context baseContext=new Context();
+			Context baseContext=new Context(); 
 			baseContext.set("service",service);
 			baseContext.set("clientService",clientService);
 			// baseContext.set("httpService",httpProxy);

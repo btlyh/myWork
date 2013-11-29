@@ -35,7 +35,7 @@
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setDoubleSkill">
-			<string>19412,19552,19451,19552,19414,19601,19651,19501,19601,19452,19553,19652,19852,19553,19751,19602,19503,19554,19602,19502,19801,19554,19602,19421,19555,,19603,19419,19555,19752,19420,19415,19419,19555</string>
+			<string>19412,19552;19451,19552;19414,19601;19651,19501,19601;19452,19553;19652,19852,19553;19751,19602;19503,19554,19602;19502,19801,19554,19602;19421,19555;19603,19419,19555;19752,19420,19415,19419,19555</string>
 		</method>
 	</obj>
 	<!-- 土豪培养花费 -->
@@ -59,7 +59,7 @@
 	<!-- 在线领奖等待时间 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setRewardIntervalTime">
-			<ints>30,60,90,120</ints>
+			<ints>15,15,15,15</ints>
 		</method>
 	</obj>
 	<obj class="com.cambrian.dfhm.back.GameCFG">
@@ -183,4 +183,12 @@
 			<ints>50,100,150,200,250,300,350,400,450,500,550,600,650</ints>
 		</method>
 	</obj>
+	<!--卡牌吞噬消耗的基础银币-->
+
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setEngulfCardMony">
+			30
+		</method>
+	</obj>
+	
 </objects>

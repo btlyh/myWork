@@ -1,6 +1,9 @@
 package com.cambrian.dfhm.common.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.object.Sample;
@@ -20,7 +23,7 @@ public class UsePointsManager
 {
 
 	/* static fields */
-	private static UsePointsManager instance=new UsePointsManager();
+	private static UsePointsManager instance = new UsePointsManager();
 
 	/* static methods */
 	public static UsePointsManager getInstance()
@@ -34,77 +37,67 @@ public class UsePointsManager
 	/* constructors */
 	public void setMf(MailFactory mf)
 	{
-		instance.mf=mf;
+		instance.mf = mf;
 	}
+
 	/* properties */
 
 	/* init start */
 
 	/* methods */
-	/**
-	 * 竞技场积分兑换
-	 * 
-	 * @param player 当前玩家
-	 * @param needPoint 需要消耗的积分
-	 * @return 兑换得到的奖品result,result[0]为类型，result[1]为该类型ID
-	 */
-	public int[] arenaGift(Player player,int needPoint)
+	/** 积分兑换奖品 */
+	public Map<String, Object> buyGift(Player player, int sid)
 	{
-		String error=checkArenaGift(player,needPoint);
-		if(error!=null)
+		String error = checkBuyGift(player, sid);
+		if (error != null)
+			throw new DataAccessException(601, error);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Gift gift = (Gift) Sample.getFactory().getSample(sid);
+		List<Integer> cardList = new ArrayList<Integer>();
+		ArrayList<Integer> giftCards = new ArrayList<Integer>();
+		boolean haveCard = false;
+		if (gift.cardSid != null && gift.cardSid.length > 0)
 		{
-			throw new DataAccessException(601,error);
-		}
-		Gift gift=(Gift)Sample.factory.getSample(Gift.SID);
-		int[] result=gift.dispense();
-		if(result[0]==Gift.TYPE_MONEY)
-		{
-			player.incrMoney(result[1]);
-		}
-		else if(result[0]==Gift.TYPE_SOUL)
-		{
-			player.incrSoul(result[1]);
-		}
-		else if(result[0]==Gift.TYPE_GOLD)
-		{
-			player.incrGold(result[1]);
-		}
-		else
-		{
-			if(player.getCardBag().getSurplusCapacity()<1)
+			haveCard = true;
+			for (Integer integer : gift.cardSid)
 			{
-				ArrayList<Integer> cards=new ArrayList<Integer>();
-				cards.add(result[0]);
-				Mail mail=mf.createSystemMail(cards,0,0,0,0,0,
-					(int)player.getUserId());
-				player.addMail(mail);
+				giftCards.add(integer);
 			}
-			else
-			{
-				Card card=player.getCardBag().add(result[0]);
-				result[1]=card.getId();
-			}
+		}
+		player.getPlayerInfo().decrNormalPoint(gift.price);
+		player.incrGold(gift.gold);
+		player.incrMoney(gift.money);
+		player.incrSoul(gift.soul);
+		player.incrToken(gift.token);
 
+		if (player.getCardBag().getSurplusCapacity() >= giftCards.size())
+		{
+			for (Integer integer : giftCards)
+			{
+				Card card = player.getCardBag().add(integer);
+				cardList.add(integer);
+				cardList.add(card.getId());
+				cardList.add(card.getSkillId());
+			}
+		} else
+		{
+			Mail mail = mf.createSystemMail(giftCards, 0, 0, 0, 0, 0,
+					(int) player.getUserId());
+			player.addMail(mail);
 		}
-		return result;
+		resultMap.put("cardList", cardList);
+		resultMap.put("haveCard", haveCard);
+		return resultMap;
 	}
+
 	/** 检查积分兑换 */
-	private String checkArenaGift(Player player,int needPoint)
+	private String checkBuyGift(Player player, int sid)
 	{
-		if(getNeedPoint()!=needPoint)
-		{
-			return Lang.F708;
-		}
-		if(player.getPlayerInfo().getNormalPoint()<needPoint)
-		{
-			return Lang.F709;
-		}
+		Gift gift = (Gift) Sample.getFactory().newSample(sid);
+		if (gift == null)
+			return Lang.F708; // SID错误
+		if (player.getPlayerInfo().getNormalPoint() < gift.price)
+			return Lang.F709; // 积分不足
 		return null;
-	}
-	/** 获得需要消耗的积分 */
-	private int getNeedPoint()
-	{
-		// TODO 数值没有，暂时写0
-		return 0;
 	}
 }

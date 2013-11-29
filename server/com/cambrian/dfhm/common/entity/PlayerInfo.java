@@ -712,4 +712,9 @@ public class PlayerInfo
 		bestCardSid=bestCard;
 		isBuyed=false;
 	}
+	/** ¼õÉÙ»ý·Ö */
+	public void decrNormalPoint(int price)
+	{
+		normalPoint -= price;
+	}
 }

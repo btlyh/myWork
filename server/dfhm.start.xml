@@ -317,11 +317,14 @@
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_USEGOLD_BAGSIZE"/>
 		<obj class="com.cambrian.dfhm.common.command.BuyBagSizeCommand"></obj>
 	</method>
-	
+	<!-- 开启卡牌抽奖管理器 -->
+	<obj class="com.cambrian.dfhm.common.logic.UsePointsManager" id="UPM">
+			<method name="setMf"><ref id="MF"/></method>
+	</obj>
 	<!-- 积分消耗-前台发送-兑换积分-->
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_USEPOINTS_GIFT"/>
-		<obj class="com.cambrian.dfhm.common.command.ArenaGiftCommand"></obj>
+		<obj class="com.cambrian.dfhm.common.command.UsePointCommand"></obj>
 	</method>
 	<!-- ########################################## -->
 	

@@ -256,7 +256,7 @@ public class BattleAct
 		ArrayList<Integer> list=new ArrayList<Integer>();
 		BattleCard aimCard=aimList[2];
 		if(aimCard==null||aimCard.getCurHp()<=0)
-			defaultAtt(aimList[0],aimList);
+			list=defaultAtt(aimList[0],aimList);
 		else
 			list.add(2);
 		return list;
