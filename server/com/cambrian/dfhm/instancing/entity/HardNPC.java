@@ -125,11 +125,11 @@ public class HardNPC extends NPC
 		AttRecord attRecord=new AttRecord(getSid(),KILLED,getType());
 		player.addAttRecord(attRecord);
 		player.getPlayerInfo().incrInstancingCount(1);
-		if (getSid() > player.getPlayerInfo().getHardNPCIndex())
+		player.getPlayerInfo().addHardNpc(getSid());
+		if (getSid() > player.getPlayerInfo().getHighestHardNPC())
 		{
 			player.getPlayerInfo().setHardNPCTime(
 				(int)TimeKit.nowTimeMills());
-			player.getPlayerInfo().setHardNPCIndex(getSid());
 		}
 	}
 	@Override
@@ -151,7 +151,7 @@ public class HardNPC extends NPC
 				card.getLevel(),card.getAtt(),card.getSkillRate(),
 				card.getAttRange(),card.getSkillId(),card.getMaxHp(),
 				card.getCurHp(),i,card.getAimType(),card.getCritRate(),
-				card.getDodgeRate(),card.getAwardSid(),i);
+				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor());
 			monsters[i]=battleCard;
 		}
 	}
@@ -172,8 +172,9 @@ public class HardNPC extends NPC
 					}
 				}
 			}
+			return false;
 		}
-		return false;
+		return true;
 	}
 	/** 检查是否需要全体存活 */
 	public boolean checkIsAllLive(BattleRecord record)

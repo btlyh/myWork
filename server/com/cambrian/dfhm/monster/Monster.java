@@ -41,6 +41,8 @@ public class Monster extends Sample{
 	private int attIndex;
 	/** ±©»÷ÂÊ */
 	private int critRate;
+	/** ±©»÷ÉËº¦ÏµÊı */
+	private int critFactor;
 	/** ÉÁ±ÜÂÊ */
 	private int dodgeRate;
 	/** ½±ÀøµôÂäsid */
@@ -146,6 +148,14 @@ public class Monster extends Sample{
 	}
 	public void setAttIndex(int attIndex) {
 		this.attIndex = attIndex;
+	}
+	public int getCritFactor()
+	{
+		return critFactor;
+	}
+	public void setCritFactor(int critFactor)
+	{
+		this.critFactor = critFactor;
 	}
 
 	/* init start */

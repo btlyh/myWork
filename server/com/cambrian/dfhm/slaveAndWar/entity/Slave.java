@@ -186,7 +186,7 @@ public class Slave implements Comparable<Slave>
 	 */
 	public void changeHandInit(int bossId)
 	{
-		this.status=0;
+		this.status=STATUS_FREE;
 		this.startWorkTime=0;
 		this.takeTime=TimeKit.nowTimeMills();
 		this.isManaged=false;

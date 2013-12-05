@@ -1,8 +1,11 @@
 package com.cambrian.dfhm.skill;
 
 import java.util.ArrayList;
+
+import com.cambrian.dfhm.battle.BattleAct;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleRecord;
+import com.cambrian.dfhm.battle.entity.DamageEntity;
 
 /**
  * ¿‡Àµ√˜£∫øÒ≈≠
@@ -54,20 +57,45 @@ public class AngerSkill extends Skill
 	}
 
 	@Override
-	public ArrayList<Integer> skillValue(BattleCard attCard,
+	public ArrayList<DamageEntity> skillValue(BattleCard attCard,
 		ArrayList<Integer> aim,BattleCard[] aimList,BattleRecord record)
 	{
 		clearHurt();
 		int value;
 		BattleCard aimCard;
+		boolean crit=false;
+		int damageStatus=DamageEntity.DAMAGE_NORMAL;
 		for(int i=0;i<aim.size();i++)
 		{
 			aimCard=aimList[aim.get(i)];
 			value=downHp(attCard);
 			value=super.buffValue(attCard,value,aimCard,record);
-			addHurt(value);
-			record.setAttMax(value);
-			System.err.println("øÒ≈≠ººƒ‹£¨’’≥……À∫¶ ==="+value);
+			if(BattleAct.isCrit(attCard))
+			{
+				crit=true;
+				damageStatus=DamageEntity.DAMAGE_CRIT;
+				value=BattleAct.countCritDamage(value,attCard);
+			}
+			else
+			{
+				if(BattleAct.isDodge(aimCard))
+				{
+					damageStatus=DamageEntity.DAMAGE_DODGE;
+					value=0;
+				}
+			}
+			if(value>0)
+			{
+				value=BattleAct.countFloatDamage(value);
+				record.setAttMax(value);
+			}
+			DamageEntity damage=new DamageEntity(damageStatus,value);
+			addHurt(damage);
+			if(value>0)
+				System.err.println("øÒ≈≠ººƒ‹£¨’’≥……À∫¶ ==="+value
+					+(crit?"±©ª˜…À∫¶":"∆’Õ®…À∫¶"));
+			else
+				System.err.println("…À∫¶±ª…¡±‹");
 		}
 		return getHurtList();
 	}

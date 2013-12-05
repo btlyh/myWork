@@ -60,6 +60,11 @@ public class EnterQualifyingCommand extends Command
 		Collections.sort(duelList);
 		int index = (Integer)resultMap.get("index");
 		data.writeInt(player.getPlayerInfo().getCanTakePoint());
+		if (player.getPlayerInfo().getCanTakePoint() != 1)
+		{
+			int point = QualifyingManager.getInstance().getPointGift(player);
+			data.writeInt(point);
+		}
 		data.writeInt(player.getPlayerInfo().getDuelBuyTimes());
 		data.writeInt(topList.size());
 		for (QualifyingInfo qualifyingInfo : topList)

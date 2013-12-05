@@ -150,6 +150,8 @@ public final class Lang
 	public static final String F1409="1409";
 	/** 1410; 没有上阵卡牌 */
 	public static final String F1410="1410";
+	/** 1411; 背包格子不够*/
+	public static final String F1415="1415";
 
 	/** 1411:副本未通关 */
 	public static final String F1411="1411";

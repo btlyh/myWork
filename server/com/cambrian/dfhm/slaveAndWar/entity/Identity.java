@@ -221,8 +221,10 @@ public class Identity
 				break;
 			case FREEMAN:
 				gradeName=Lang.FREEMAN;
+				break;
 			case OWNER:
 				gradeName=Lang.OWNER;
+				break;
 			default:
 				gradeName="error";
 				break;
@@ -241,15 +243,15 @@ public class Identity
 		data.writeInt(slaveList.size());
 		{
 			for(Slave slave:slaveList)
-				slave.dbBytesWrite(data);
+				slave.BytesWrite(data);
 		}
 		data.writeInt(ownerId);
 		data.writeInt(GameCFG.getWorkConfine()-workTimes);
-		data.writeInt(informations.size());
-		for(Information information:informations)
-		{
-			information.dbBytesWrite(data);
-		}
+//		data.writeInt(informations.size());
+//		for(Information information:informations)
+//		{
+//			information.BytesWrite(data);
+//		}
 		data.writeInt(GameCFG.getAttConfine()-attTimes);
 		data.writeInt(GameCFG.getReactConfine()-reactTimes);
 		data.writeInt(helpList.size());

@@ -298,7 +298,7 @@ public class LuckBoxManager
 			return LuckBoxCfg.CDTime;
 		}
 		long surplusTime=LuckBoxCfg.CDTime-(TimeKit.nowTimeMills()-lastTime);
-		return surplusTime<0?0:surplusTime;
+		return lastTime<1?LuckBoxCfg.CDTime:surplusTime;
 
 	}
 
@@ -351,7 +351,7 @@ public class LuckBoxManager
 			int cardSid=MathKit.randomValue(lbc.getStartCardSid(),
 				lbc.getEndCardSid()+1);
 			Card card=(Card)Sample.getFactory().getSample(cardSid);
-			if((card.getType()==4||card.getType()==5))// 是否是紫卡或者橙卡
+			if(card.getType()>6)// 是否是紫卡或者橙卡
 			{
 				if(isSave)
 				{
@@ -367,7 +367,6 @@ public class LuckBoxManager
 		}
 		return cards;
 	}
-
 	/**
 	 * 抽取卡牌
 	 * 

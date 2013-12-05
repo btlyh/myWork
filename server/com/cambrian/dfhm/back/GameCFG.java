@@ -19,8 +19,6 @@ public class GameCFG
 	private static int[] vipLevelGold;
 	/** VIP等级对应的配置表 */
 	private static int[] vipCfgXml;
-	/** 武魂抽奖 */
-	private static int[] soulLottery;
 	/** 付费醒酒分钟数 */
 	private static int payForAwakeMinutes;
 	/** 付费醒酒每x分钟消耗的金币 */
@@ -101,6 +99,8 @@ public class GameCFG
 
 	/** 卡牌吞噬消耗的基础金币***/
 	private static int engulfCardMony;
+	/** 服务器重置玩家每日数据时间 */
+	private static int serverTime;
 	
 	public static int getPayForAwakeMinutes()
 	{
@@ -135,11 +135,6 @@ public class GameCFG
 	public void setSkillLevel(int[] skillLevel)
 	{
 		GameCFG.skillLevel=skillLevel;
-	}
-
-	public void setSoulLottery(int[] soulLottery)
-	{
-		GameCFG.soulLottery=soulLottery;
 	}
 
 	public void setVipCfgXml(int[] vipCfgXml)
@@ -717,5 +712,15 @@ public class GameCFG
 	public static void setIndexForNormalNPC(int indexForNormalNPC)
 	{
 		GameCFG.indexForNormalNPC = indexForNormalNPC;
+	}
+
+	public static int getServerTime()
+	{
+		return serverTime;
+	}
+
+	public static void setServerTime(int serverTime)
+	{
+		GameCFG.serverTime = serverTime;
 	}
 }

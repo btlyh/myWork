@@ -1,7 +1,6 @@
 package com.cambrian.dfhm.battle;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import com.cambrian.common.log.Logger;
 import com.cambrian.common.object.Sample;
@@ -9,13 +8,9 @@ import com.cambrian.common.util.ChangeListener;
 import com.cambrian.common.util.ChangeListenerList;
 import com.cambrian.common.util.MathKit;
 import com.cambrian.dfhm.back.GameCFG;
-import com.cambrian.dfhm.common.entity.Player;
-import com.cambrian.dfhm.instancing.entity.HardNPC;
-import com.cambrian.dfhm.instancing.entity.NPC;
-import com.cambrian.dfhm.instancing.logic.InstancingManager;
+import com.cambrian.dfhm.battle.entity.DamageEntity;
 import com.cambrian.dfhm.skill.DecrHurtSkill;
 import com.cambrian.dfhm.skill.DizzySkill;
-import com.cambrian.dfhm.skill.NoHurtSkill;
 import com.cambrian.dfhm.skill.PoisonSkill;
 import com.cambrian.dfhm.skill.Skill;
 
@@ -295,7 +290,7 @@ public class BattleScene
 			System.err.println("side ==="+attCard.getSide());
 			int deSkillTemp=attCard.getDeSkill().size();
 			int status=deBuffer(attCard,attList,type);
-
+			int target;
 			if(attCard.getCurHp()<0)
 			{
 				if(die)
@@ -313,16 +308,22 @@ public class BattleScene
 			}
 			if(status==NORMAL&&!die)
 			{
-				int attType=2; // getAttType(attCard);
-				// if(type==FIGHT_GLOBALBOSS)
-				// {
-				// attType=0;
-				// if(attList[0].getAwardSid()==2&&curRound>=roundConfine)
-				// {
-				// attType=2;
-				// }
-				// }
-				if(attCard.getSkill().getAim()==OWN)
+				int attType=getAttType(attCard);
+				if(type==FIGHT_GLOBALBOSS&&attList[0].getSide()==2)
+				{
+					attType=DEFAULTATT;
+					if(attList[0].getAwardSid()==2&&curRound>=roundConfine)
+					{
+						attType=2;
+					}
+				}
+				if(attType==DEFAULTATT)
+				{
+					target=attCard.getAimType();
+				}else{
+					target=attCard.getSkill().getAim();
+				}
+				if(target==OWN)
 				{
 					record.addRecord(attCard.getSide());
 					record.addRecord(attType);
@@ -338,7 +339,7 @@ public class BattleScene
 				}
 				else
 				{
-					if(attCard.getSkill().getAim()==1)
+					if(target==1)
 					{
 						record.addRecord(attCard.getSide());
 					}
@@ -438,9 +439,10 @@ public class BattleScene
 			attCard=attList[i];
 			if(attCard!=null&&attCard.getCurHp()>0)
 			{
-				for(int skillid:ds)
+				for(int skillId_:ds)
 				{
-					if(skillid==attCard.getSkill().getSid())
+					if(skillId==skillId_) continue;
+					if(skillId_==attCard.getSkill().getSid())
 					{
 						fire=true;
 					}
@@ -476,13 +478,26 @@ public class BattleScene
 		step++;
 		record.addRecord(1);// 有连续技
 		record.addRecord(attCard.getIndex());// 触发连续技人的位置，前台需要
+		record.addRecord(-99999);
 		record.addRecord(curRound);
+		record.addRecord(attCard.getSide());
 		record.addRecord(attCard.getIndex());
 		record.addRecord(0);// 连续技不受debuff状态影响
-		if(attCard.getSide()==1)
-			record.addRecord(2);
+		if(attCard.getSkill().getAim()==1)
+		{
+			record.addRecord(attCard.getSide());
+		}
 		else
-			record.addRecord(1);
+		{
+			if(attCard.getSide()==1)
+			{
+				record.addRecord(2);
+			}
+			else
+			{
+				record.addRecord(1);
+			}
+		}
 		record.addRecord(2);// 技能攻击
 	}
 
@@ -500,41 +515,43 @@ public class BattleScene
 		BattleCard[] aimList,int attType,boolean isDamage)
 	{
 		boolean die=false;
-		ArrayList<Integer> hurtList=new ArrayList<Integer>();
+		ArrayList<DamageEntity> hurtList=new ArrayList<DamageEntity>();
 		BattleCard bCard;
-		int hurt;
+		DamageEntity damageEntity;
 		if(attType==SKILLATT)
 		{
 			// 技能伤害等于技能伤害系数乘以玩家攻击力
 			// 实际伤害会在攻击力上进行正负5%区间的浮动
 			System.err.println("------技能攻击-------");
 			record.addRecord(attCard.getSkill().getId());
-			hurtList=attCard.getSkill().skillValue(attCard,aim,aimList,
+			 hurtList=attCard.getSkill().skillValue(attCard,aim,aimList,
 				record);
 		}
 		else
 		{
 			System.err.println("------普通攻击-------");
-			hurt=BattleAct.getAttValue(attCard,1,attType);
-			hurtList.add(hurt);
+			hurtList=BattleAct.getAttValue(attCard,aim,aimList,record,
+				hurtList);
+			System.out.println();
 		}
 		record.addRecord(aim.size());
 		for(int i=0;i<aim.size();i++)
 		{
 			bCard=aimList[aim.get(i)];
 			if(hurtList.size()>i)
-				hurt=hurtList.get(i);
+				damageEntity=hurtList.get(i);
 			else
-				hurt=hurtList.get(0);
+				damageEntity=hurtList.get(0);
 			if(attCard.getAimType()==OWN)
 			{
-				bCard.incrHp(hurt);
+				bCard.incrHp(damageEntity.getValue());
 				die=false;
 			}
 			else
-				die=bCard.decrHp(hurt);
+				die=bCard.decrHp(damageEntity.getValue());
 			record.addRecord(bCard.getIndex());
-			record.addRecord(hurt);
+			record.addRecord(damageEntity.getValue());
+			record.addRecord(damageEntity.getStatus());
 			if(die)
 			{
 				record.addRecord(1);// 死
@@ -545,9 +562,9 @@ public class BattleScene
 				record.addRecord(-1);// 没死
 				record.addRecord(-1);// 不掉东西
 			}
-			System.err.println(bCard.getName()+",被照成伤害，血量损失 ==="+hurt
+			System.err.println(bCard.getName()+",被照成伤害，血量损失 ==="+damageEntity.getValue()
 				+", 剩余血量 ==="+bCard.getCurHp());
-			if(isDamage&&attCard.getSide()==1) record.countDamage(hurt);
+			if(isDamage&&attCard.getSide()==1) record.countDamage(damageEntity.getValue());
 			// 计算被攻击者，身上的debuff
 			deSkill=bCard.getDeSkill();
 			record.addRecord(deSkill.size());
@@ -649,21 +666,21 @@ public class BattleScene
 			deSkill.clear();
 		}
 		int status=0;
-		ArrayList<Skill> skillList=new ArrayList<Skill>();
+		// ArrayList<Skill> skillList=new ArrayList<Skill>();
+		// for(int i=0;i<deSkill.size();i++)
+		// {
+		// if(deSkill.get(i) instanceof DecrHurtSkill
+		// ||deSkill.get(i) instanceof NoHurtSkill) continue;
+		// skillList.add(deSkill.get(i));
+		// }
+		record.addRecord(deSkill.size());
 		for(int i=0;i<deSkill.size();i++)
 		{
-			if(deSkill.get(i) instanceof DecrHurtSkill
-				||deSkill.get(i) instanceof NoHurtSkill) continue;
-			skillList.add(deSkill.get(i));
-		}
-		record.addRecord(skillList.size());
-		for(Skill skill:skillList)
-		{
-			if(skill instanceof PoisonSkill)
+			if(deSkill.get(i) instanceof PoisonSkill)
 			{
 				System.err.println("出手人员拥有debuffer状态，debuff ==="
-					+skill.getName());
-				skill.buffValue(attCard,0,attCard,record);
+					+deSkill.get(i).getName());
+				deSkill.get(i).buffValue(attCard,0,attCard,record);
 				if(attCard.getCurHp()<0)
 				{
 					drop(attCard);
@@ -672,14 +689,14 @@ public class BattleScene
 					status=POISON;
 				}
 			}
-			else if(skill instanceof DizzySkill)
+			else if(deSkill.get(i) instanceof DizzySkill)
 			{
-				skill.buffValue(attCard,0,attCard,record);
+				deSkill.get(i).buffValue(attCard,0,attCard,record);
 				status=DIZZY;
 			}
-			else if(skill instanceof DecrHurtSkill)
+			else if(deSkill.get(i) instanceof DecrHurtSkill)
 			{
-				record.addRecord(skill.getSid());
+				record.addRecord(deSkill.get(i).getSid());
 				record.addRecord(DEHURT);
 				status=0;
 			}
@@ -765,7 +782,7 @@ public class BattleScene
 		{
 			com.cambrian.dfhm.drop.Monster drop=(com.cambrian.dfhm.drop.Monster)Sample.factory
 				.getSample(dieCard.getAwardSid());
-			int[] award=drop.dispense();
+			int[] award=drop.dispense(dropAward);
 			type=award[0];
 			dropAward.add(award[0]);
 			dropAward.add(award[1]);

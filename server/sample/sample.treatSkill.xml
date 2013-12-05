@@ -12,8 +12,8 @@
 	aim			攻击对象，1=自己，2=敌人
 	
 	-->
-	<sample sid="19851" class="com.cambrian.dfhm.skill.TreatSkill" name="治疗" description="目标身上闪出十字符号" att="1485" attRange="9" level="1" aim="1" skillRate="0"/>
-	<sample sid="19852" class="com.cambrian.dfhm.skill.TreatSkill" name="回春" description="目标身上闪出十字符号" att="1620" attRange="9" level="1" aim="1" skillRate="0"/>
-	<sample sid="19853" class="com.cambrian.dfhm.skill.TreatSkill" name="沐春风" description="目标身上闪出十字符号" att="1755" attRange="5" level="1" aim="1" skillRate="0"/>
+	<sample sid="19851" class="com.cambrian.dfhm.skill.TreatSkill" name="治疗" description="治疗本方血最少的单位，148%的加血量" att="1485" attRange="9" level="1" aim="1" skillRate="0"/>
+	<sample sid="19852" class="com.cambrian.dfhm.skill.TreatSkill" name="回春" description="治疗本方血最少的单位，162%的加血量" att="1620" attRange="9" level="1" aim="1" skillRate="0"/>
+	<sample sid="19853" class="com.cambrian.dfhm.skill.TreatSkill" name="沐春风" description="治疗本方全体单位，175%的加血量" att="1755" attRange="5" level="1" aim="1" skillRate="0"/>
 
 </objects>

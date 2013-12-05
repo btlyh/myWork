@@ -65,7 +65,7 @@ public class EnterRankingsCommand extends Command
 		data.writeInt(rankings.getPlayerRankInfo(player,rankings.getStoryRankings()));
 		data.writeInt(player.getCurIndexForNormalNPC()-1);
 		data.writeInt(rankings.getPlayerRankInfo(player,rankings.getChallengeRankings()));
-		data.writeInt(player.getPlayerInfo().getHardNPCIndex());
+		data.writeInt(player.getPlayerInfo().getHighestHardNPC());
 		data.writeInt(rankings.getPlayerRankInfo(player,rankings.getPayRankings()));
 		data.writeInt(player.getPlayerInfo().getPayRMB());
 		Card card = (Card) resultMap.get("card");

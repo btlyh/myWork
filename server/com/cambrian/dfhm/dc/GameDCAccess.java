@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -246,11 +245,11 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 				+", userid="+userid+", nickName="+p.getNickname());
 		// p.setNickname(nickName);// TODO Í«≥∆ƒ¨»œ…Ë÷√
 		p.setNickname(nickName);
-		p.setMoney(60000000);
-		p.setGold(100000);
-		p.setMaxToken(1000);
-		p.setCurToken(500);
-		p.setSoul(10000);
+		p.setMoney(0);
+		p.setGold(0);
+		p.setMaxToken(50);
+		p.setCurToken(50);
+		p.setSoul(0);
 		p.setCurIndexForNormalNPC(GameCFG.getIndexForNormalNPC());
 		p.setVipLevel(5);
 		p.init();
@@ -338,8 +337,7 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 				.toString()));
 			mail.setState(Integer.parseInt(fields.get("state").getValue()
 				.toString()));
-			mail.setSendTime(Long.parseLong(fields.get("sendTime")
-				.getValue().toString()));
+			mail.setSendTime(fields.get("sendTime").getValue().toString());
 			mail.setTitle(fields.get("title").getValue().toString());
 			mail.setContent(fields.get("content").getValue().toString());
 			String cardList=fields.get("cardList").getValue().toString();

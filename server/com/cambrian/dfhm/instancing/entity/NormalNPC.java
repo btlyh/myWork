@@ -1,8 +1,6 @@
 package com.cambrian.dfhm.instancing.entity;
-
 import com.cambrian.common.object.Sample;
 import com.cambrian.common.util.TimeKit;
-import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
 import com.cambrian.dfhm.common.entity.Player;
@@ -72,14 +70,16 @@ public class NormalNPC extends NPC
 
 	@Override
 	public void handleForWin(Player player)
-	{
+	{		
 		if(getNextSid()>player.getCurIndexForNormalNPC())
 		{
 			player.setCurIndexForNormalNPC(getNextSid());
 			player.getPlayerInfo().setNormalNPCTime(
 				(int)TimeKit.nowTimeMills());
-			player.getPlayerInfo().incrInstancingCount(1);
+		
+			
 		}
+		player.getPlayerInfo().incrInstancingCount(1);
 		if(getIsBoss()==BOSS)
 		{
 			if(hardIndex>player.getCurIndexForHardNPC())
@@ -91,7 +91,8 @@ public class NormalNPC extends NPC
 				player.setCurIndexForCorssNPC(crossIndex);
 			}
 		}
-
+		
+		
 	}
 	@Override
 	public void handleForAtt(Player player)
@@ -113,7 +114,7 @@ public class NormalNPC extends NPC
 				card.getLevel(),card.getAtt(),card.getSkillRate(),
 				card.getAttRange(),card.getSkillId(),card.getMaxHp(),
 				card.getCurHp(),i,card.getAimType(),card.getCritRate(),
-				card.getDodgeRate(),card.getAwardSid(),i);
+				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor());
 			monsters[i]=battleCard;
 		}
 	}

@@ -15,22 +15,8 @@ import com.cambrian.common.util.ArrayList;
 public class CardContainer implements Serializable,DBSerializable
 {
 
-	/* static fields */
-
-	/* static methods */
-
-	/* fields */
 	/** ¿¨Æ¬ÁÐ±í  */
-	ArrayList list=new ArrayList();
-
-	/* constructors */
-
-	/* properties */
-
-	/* init start */
-
-	/* methods */
-	
+	ArrayList list=new ArrayList();	
 	/**  */
 	public void add(int id)
 	{

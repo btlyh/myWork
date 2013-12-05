@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleRecord;
+import com.cambrian.dfhm.battle.entity.DamageEntity;
 
 /**
  * 类说明：治疗技能
@@ -27,7 +28,7 @@ public class TreatSkill extends Skill
 
 	/* methods */
 	@Override
-	public ArrayList<Integer> skillValue(BattleCard attCard,
+	public ArrayList<DamageEntity> skillValue(BattleCard attCard,
 		ArrayList<Integer> aim,BattleCard[] aimList,BattleRecord record)
 	{
 		clearHurt();
@@ -41,7 +42,8 @@ public class TreatSkill extends Skill
 			int byAttValue = aimCard.getMaxHp()- aimCard.getCurHp();
 			if(value > byAttValue )
 				value=byAttValue;
-			addHurt(-value);
+			DamageEntity damage=new DamageEntity(DamageEntity.DAMAGE_NORMAL,-value);
+			addHurt(damage);
 			System.err.println("治疗技能，血量增加 ==="+value);
 		}
 		return getHurtList();

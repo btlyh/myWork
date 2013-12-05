@@ -8,7 +8,6 @@ import java.util.Map;
 import com.cambrian.common.field.Fields;
 import com.cambrian.common.field.IntField;
 import com.cambrian.common.net.DataAccessException;
-import com.cambrian.common.util.TimeKit;
 import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
@@ -134,7 +133,6 @@ public class MailManager
 		for(Mail mail:canTakeMails)
 		{
 			dataList.addAll(takeAnnex(mail,player));
-			mail.setState(Mail.MAILSTATE_READ_GET);
 		}
 		return dataList;
 	}
@@ -160,12 +158,7 @@ public class MailManager
 			if(mail.getState()==Mail.MAILSTATE_READ_UNGET
 				||mail.getState()==Mail.MAILSTATE_UNREAD)
 			{
-				if(mail.getCardList().size()>=Mail.MAIL_ANNEX_MINNUM
-					||mail.getGold()>=Mail.MAIL_ANNEX_MINNUM
-					||mail.getMoney()>=Mail.MAIL_ANNEX_MINNUM
-					||mail.getToken()>=Mail.MAIL_ANNEX_MINNUM
-					||mail.getSoulPoint()>=Mail.MAIL_ANNEX_MINNUM
-					||mail.getNormalPoint()>=Mail.MAIL_ANNEX_MINNUM)
+				if(mail.isHaveAnnex())
 				{
 					canTakeMails.add(mail);
 				}
@@ -176,18 +169,23 @@ public class MailManager
 			mapInfo.put("error",Lang.F1307);
 			return mapInfo;
 		}
-		int cardListSize=0;
-		for(Mail mail:canTakeMails)
+		// int cardListSize=0;
+		// for(Mail mail:canTakeMails)
+		// {
+		// cardListSize+=mail.getCardList().size();
+		// }
+		// if(cardListSize>=Mail.MAIL_ANNEX_MINNUM)
+		// {
+		// if(cardListSize>player.getCardBag().getSurplusCapacity())
+		// {
+		// mapInfo.put("error",Lang.F1309);
+		// return mapInfo;
+		// }
+		// }
+		if(player.getCardBag().getSurplusCapacity()<1)
 		{
-			cardListSize+=mail.getCardList().size();
-		}
-		if(cardListSize>=Mail.MAIL_ANNEX_MINNUM)
-		{
-			if(cardListSize>player.getCardBag().getSurplusCapacity())
-			{
-				mapInfo.put("error",Lang.F1309);
-				return mapInfo;
-			}
+			mapInfo.put("error",Lang.F1309);
+			return mapInfo;
 		}
 		mapInfo.put("error",null);
 		mapInfo.put("canTakeMails",canTakeMails);
@@ -230,7 +228,10 @@ public class MailManager
 		Mail mail=(Mail)resultMap.get(String.valueOf(uid));
 		if(mail.getState()==Mail.MAILSTATE_UNREAD)
 		{
-			mail.setState(Mail.MAILSTATE_READ_UNGET);
+			if(mail.isHaveAnnex())
+				mail.setState(Mail.MAILSTATE_READ_UNGET);
+			else
+				mail.setState(Mail.MAILSTATE_READ_GET);
 			dao.setMailState(uid,mail);
 		}
 	}
@@ -298,15 +299,15 @@ public class MailManager
 	private ArrayList<Integer> takeAnnex(Mail mail,Player player)
 	{
 		ArrayList<Integer> dataList=new ArrayList<Integer>();
-		if(mail.getCardList().size()>=Mail.MAIL_ANNEX_MINNUM)
+
+		while(player.getCardBag().getSurplusCapacity()>0
+			&&mail.getCardList().size()>0)
 		{
-			for(int i=0;i<mail.getCardList().size();i++)
-			{
-				Card card=player.getCardBag().add(mail.getCardList().get(i));
-				dataList.add(card.getSid());
-				dataList.add(card.uid);
-				dataList.add(card.getSkillId());
-			}
+			Card card=player.getCardBag().add(mail.getCardList().get(0));
+			dataList.add(card.getSid());
+			dataList.add(card.uid);
+			dataList.add(card.getSkillId());
+			mail.getCardList().remove(0);
 		}
 		// 软妹币
 		if(mail.getGold()>=Mail.MAIL_ANNEX_MINNUM)
@@ -333,11 +334,26 @@ public class MailManager
 		{
 			player.getPlayerInfo().incrNormalPoint(mail.getNormalPoint());
 		}
-		mail.setState(Mail.MAILSTATE_READ_GET);
+		// 补发邮件
+		if(mail.getCardList().size()>0)
+		{
+			mail.setGold(0);
+			mail.setMoney(0);
+			mail.setToken(0);
+			mail.setSoulPoint(0);
+			mail.setNormalPoint(0);
+			mail.setState(Mail.MAILSTATE_UNREAD);
+			Session session=null;
+			session=dataServer.getSession(player.getNickname());
+			msn.send(session,new Object[]{player.getUnreadMailCount()});
+		}
+		else
+		{
+			mail.setState(Mail.MAILSTATE_READ_GET);
+		}
 		dao.setMailState((int)mail.getMailId(),mail);
 		return dataList;
 	}
-
 	/**
 	 * 检查收取邮件 (附件)
 	 * 
@@ -368,13 +384,7 @@ public class MailManager
 			mapInfo.put("error",Lang.F1306);
 			return mapInfo;
 		}
-		int cardListSize=mail.getCardList().size();
-		if(mail.getCardList().size()<Mail.MAIL_ANNEX_MINNUM
-			&&mail.getGold()<Mail.MAIL_ANNEX_MINNUM
-			&&mail.getMoney()<Mail.MAIL_ANNEX_MINNUM
-			&&mail.getToken()<Mail.MAIL_ANNEX_MINNUM
-			&&mail.getSoulPoint()<Mail.MAIL_ANNEX_MINNUM
-			&&mail.getNormalPoint()<Mail.MAIL_ANNEX_MINNUM)
+		if(!mail.isHaveAnnex())
 		{
 			mapInfo.put("error",Lang.F1307);
 			return mapInfo;
@@ -384,13 +394,10 @@ public class MailManager
 			mapInfo.put("error",Lang.F1308);
 			return mapInfo;
 		}
-		if(cardListSize>=Mail.MAIL_ANNEX_MINNUM)
+		if(player.getCardBag().getSurplusCapacity()<1)
 		{
-			if(cardListSize>player.getCardBag().getSurplusCapacity())
-			{
-				mapInfo.put("error",Lang.F1309);
-				return mapInfo;
-			}
+			mapInfo.put("error",Lang.F1309);
+			return mapInfo;
 		}
 		mapInfo.put("error",null);
 		mapInfo.put(String.valueOf(uid),mail);
@@ -425,7 +432,6 @@ public class MailManager
 		{
 			if(player.getNickname().equals(getPlayerName))
 			{
-				mail.setSendTime(TimeKit.nowTimeMills());
 				player.addMail(mail);
 				msn.send(session,new Object[]{player.getUnreadMailCount()});
 			}

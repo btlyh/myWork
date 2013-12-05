@@ -41,7 +41,7 @@ public class SlaveAndWarDao
 
 	/* methods */
 	/** 获取数据库中所有玩家uid */
-	private List<Integer> getAllPlayerId()
+	public List<Integer> getAllPlayerId()
 	{
 		String sql="select userid from player";
 		Fields[] resultFields=SqlKit.querys(cm,sql);

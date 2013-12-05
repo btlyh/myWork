@@ -13,9 +13,9 @@
 	round		回合数
 	
 	-->
-	<sample sid="19501" class="com.cambrian.dfhm.skill.DizzySkill" name="他山崩" description="单体击晕" att="1440" attRange="0" level="1" aim="2" round="1" skillRate="0"/>
-	<sample sid="19502" class="com.cambrian.dfhm.skill.DizzySkill" name="白冰封" description="群体击晕" att="1560" attRange="3" level="1" aim="2" round="1" skillRate="0"/>
-	<sample sid="19503" class="com.cambrian.dfhm.skill.DizzySkill" name="耳光" description="群体击晕" att="1560" attRange="8" level="1" aim="2" round="1" skillRate="0"/>
-	<sample sid="19504" class="com.cambrian.dfhm.skill.DizzySkill" name="无字天碑" description="群体击晕" att="1820" attRange="4" level="1" aim="2" round="1" skillRate="0"/>
+	<sample sid="19501" class="com.cambrian.dfhm.skill.DizzySkill" name="他山崩" description="单体击晕，144%的伤害" att="1440" attRange="0" level="1" aim="2" round="1" skillRate="0"/>
+	<sample sid="19502" class="com.cambrian.dfhm.skill.DizzySkill" name="白冰封" description="横向击晕，156%的伤害" att="1560" attRange="3" level="1" aim="2" round="1" skillRate="0"/>
+	<sample sid="19503" class="com.cambrian.dfhm.skill.DizzySkill" name="耳光" description="单体击晕，156%的伤害，目标敌方3号位" att="1560" attRange="8" level="1" aim="2" round="1" skillRate="0"/>
+	<sample sid="19504" class="com.cambrian.dfhm.skill.DizzySkill" name="无字天碑" description="全体击晕，182%的伤害" att="1820" attRange="4" level="1" aim="2" round="1" skillRate="0"/>
 
 </objects>

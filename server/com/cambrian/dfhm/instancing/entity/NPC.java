@@ -37,7 +37,7 @@ public abstract class NPC extends Sample
 	private int type;
 	/** 回合 */
 	private int round;
-	
+
 	/* constructors */
 
 	/* properties */
@@ -122,13 +122,15 @@ public abstract class NPC extends Sample
 	/** 攻击之后的处理 */
 	public abstract void handleForAtt(Player player);
 	/** 胜利条件判定 */
-	public abstract void winCondition(BattleScene scene,BattleCard[] attList,Player player);
+	public abstract void winCondition(BattleScene scene,
+		BattleCard[] attList,Player player);
 	/** 派发奖励 */
-	public void addAward(BattleScene scene,Player player)
+	public ArrayList<Integer> addAward(BattleScene scene,Player player)
 	{
 		ArrayList<Integer> list=scene.getDropAward();
 		int type,value;
 		scene.getRecord().add(list.size()/2);
+		ArrayList<Integer> rewardCards=new ArrayList<Integer>();
 		for(int i=0;i<list.size();i+=2)
 		{
 			type=list.get(i);
@@ -151,8 +153,9 @@ public abstract class NPC extends Sample
 			// 卡牌
 			{
 				System.err.println("sid ==="+value);
-				player.getCardBag().add(value);
+				rewardCards.add(value);
 			}
 		}
+		return rewardCards;
 	}
 }

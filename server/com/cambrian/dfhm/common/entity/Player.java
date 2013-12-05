@@ -95,6 +95,9 @@ public class Player extends Sample implements Actor
 	private BossFightRecord bfr;
 	/** 身份对象(当土豪功能用) */
 	private Identity identity=new Identity();
+	
+	
+	boolean isRefresh = false;
 
 	/** 设置玩家id */
 	public void setUserId(long uid)
@@ -322,7 +325,8 @@ public class Player extends Sample implements Actor
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
 			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
 			card.getMaxHp(),card.getCurHp(),0,card.getAimType(),
-			card.getCritRate(),card.getDodgeRate(),0,card.getType());
+			card.getCritRate(),card.getDodgeRate(),0,card.getType(),
+			card.getSid(),card.getCritFactor());
 		formation.changeFormation(0,bCard);
 
 		card=cardBag.add(10052);
@@ -333,7 +337,8 @@ public class Player extends Sample implements Actor
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
 			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
 			card.getMaxHp(),card.getCurHp(),1,card.getAimType(),
-			card.getCritRate(),card.getDodgeRate(),0,card.getType());
+			card.getCritRate(),card.getDodgeRate(),0,card.getType(),
+			card.getSid(),card.getCritFactor());
 		formation.changeFormation(1,bCard);
 
 		card=cardBag.add(10053);
@@ -342,7 +347,8 @@ public class Player extends Sample implements Actor
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
 			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
 			card.getMaxHp(),card.getCurHp(),2,card.getAimType(),
-			card.getCritRate(),card.getDodgeRate(),0,card.getType());
+			card.getCritRate(),card.getDodgeRate(),0,card.getType(),
+			card.getSid(),card.getCritFactor());
 		formation.changeFormation(2,bCard);
 
 		card=cardBag.add(10054);
@@ -351,7 +357,8 @@ public class Player extends Sample implements Actor
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
 			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
 			card.getMaxHp(),card.getCurHp(),3,card.getAimType(),
-			card.getCritRate(),card.getDodgeRate(),0,card.getType());
+			card.getCritRate(),card.getDodgeRate(),0,card.getType(),
+			card.getSid(),card.getCritFactor());
 		formation.changeFormation(3,bCard);
 
 		card=cardBag.add(10055);
@@ -360,7 +367,8 @@ public class Player extends Sample implements Actor
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
 			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
 			card.getMaxHp(),card.getCurHp(),4,card.getAimType(),
-			card.getCritRate(),card.getDodgeRate(),0,card.getType());
+			card.getCritRate(),card.getDodgeRate(),0,card.getType(),
+			card.getSid(),card.getCritFactor());
 		formation.changeFormation(4,bCard);
 
 		// card = cardBag.add(50002);
@@ -520,12 +528,30 @@ public class Player extends Sample implements Actor
 		int vipSid=GameCFG.getVipCfg(vipLevel);
 		VipCfg vip=(VipCfg)Sample.factory.getSample(vipSid);
 		if(vip==null) vip=(VipCfg)Sample.factory.newSample(vipSid);
+		refreshVip(vip);
+		armyCamp.setPrivateSeatSize(vip.privateSeat);
+		armyCamp.setPublicSeatSize(vip.publicSeat);
+	}
+	/* 需要每日刷新的东西都写在这 */
+	/** 服务器固定时间刷新数据 */
+	public void refreshDayly()
+	{
+		int vipSid=GameCFG.getVipCfg(vipLevel);
+		VipCfg vip=(VipCfg)Sample.factory.getSample(vipSid);
+		if(vip==null) vip=(VipCfg)Sample.factory.newSample(vipSid);
+		refreshVip(vip);
+		playerInfo.setDuelFreeTimes(10);
+		playerInfo.setDuelBuyTimes(0);
+		playerInfo.setCanTakePoint(0);
+	}
+	
+	/** 刷新playerInfo中Vip相关属性 */
+	private void refreshVip(VipCfg vip)
+	{
 		playerInfo.setGetToken(vip.getToken);
 		playerInfo.setBuyToken(vip.buyToken);
 		playerInfo.setSkillFlushFreeTimes(vip.skillFlushFreeTimes);
 		playerInfo.setLuckBoxFreeTimes(vip.luckBoxFreeTimes);
-		armyCamp.setPrivateSeatSize(vip.privateSeat);
-		armyCamp.setPublicSeatSize(vip.publicSeat);
 		playerInfo.setCardGoldForsterFreeTimes(vip.cardGoldForsterFreeTimes);
 		playerInfo.setCardGoldForster(vip.cardGoldForster);
 		playerInfo.setBattleSkip(vip.battleSkip);
@@ -539,7 +565,8 @@ public class Player extends Sample implements Actor
 	@Override
 	public void bytesWrite(ByteBuffer data)
 	{
-		System.err.println("-------序列化(前台登陆时获取的数据)---------");
+		System.err.println("-------序列化(前台登陆时获取的数据)---------"); // TODO
+																// VIP等级没存没序列化
 		data.writeLong(userid);
 		data.writeUTF(nickname);
 		data.writeInt(money);
@@ -547,6 +574,7 @@ public class Player extends Sample implements Actor
 		data.writeInt(curToken);
 		data.writeInt(maxtToken);
 		data.writeInt(soul);
+		data.writeInt(vipLevel);
 		// System.err.println("userid ==="+userid);
 		// System.err.println("nickname ==="+nickname);
 		// System.err.println("money ==="+money);
@@ -592,6 +620,7 @@ public class Player extends Sample implements Actor
 		data.writeInt(curToken);
 		data.writeInt(maxtToken);
 		data.writeInt(soul);
+		data.writeInt(vipLevel);
 		// System.err.println("userid ==="+userid);
 		// System.err.println("nickname ==="+nickname);
 		// System.err.println("money ==="+money);
@@ -642,6 +671,7 @@ public class Player extends Sample implements Actor
 		curToken=data.readInt();
 		maxtToken=data.readInt();
 		soul=data.readInt();
+		vipLevel=data.readInt();
 		System.err.println("userid ==="+userid);
 		System.err.println("nickname ==="+nickname);
 		System.err.println("money ==="+money);
@@ -697,7 +727,7 @@ public class Player extends Sample implements Actor
 	 */
 	public void initToken()
 	{
-		if(logoutTime!=0)
+		if(logoutTime!=0 && !isRefresh)
 		{
 			long times;
 			if((times=(TimeKit.nowTimeMills()-logoutTime)
@@ -767,7 +797,30 @@ public class Player extends Sample implements Actor
 		{
 			player.getPlayerInfo().setNextRewardTime(0);
 		}
-
+		
+		if(checkForRefreshDayly())
+		{
+			refreshDayly();
+		}
+	}
+	/** 检查是否刷新每日数据 */
+	private boolean checkForRefreshDayly()
+	{
+		if (isRefresh) return false;
+		long refreshTime = TimeKit.timeOf(GameCFG.getServerTime());
+		if(logoutTime < refreshTime-TimeKit.DAY_MILLS)
+		{
+			isRefresh = true;
+			return true;
+		}else if (logoutTime < refreshTime)
+		{
+			if (TimeKit.nowTimeMills() > refreshTime)
+			{
+				isRefresh = true;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

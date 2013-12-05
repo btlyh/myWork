@@ -14,8 +14,8 @@
 	hp			下降血量度百分比	[填1-100，程序自己转换]
 	
 	-->
-	<sample sid="19601" class="com.cambrian.dfhm.skill.AngerSkill" name="火龙卷" description="按自身生命减少的百分比对敌方个体单位造成伤害加成" att="1560" attRange="0" level="1" aim="2" hurt="5" hp="5" skillRate="0"/>
-	<sample sid="19602" class="com.cambrian.dfhm.skill.AngerSkill" name="雷狱术" description="按自身生命减少的百分比对敌方个体单位造成伤害加成" att="1690" attRange="3" level="1" aim="2" hurt="5" hp="5" skillRate="0"/>
-	<sample sid="19603" class="com.cambrian.dfhm.skill.AngerSkill" name="横扫千军" description="按自身生命减少的百分比对敌方个体单位造成伤害加成" att="1820" attRange="4" level="1" aim="2" hurt="5" hp="5" skillRate="0"/>
+	<sample sid="19601" class="com.cambrian.dfhm.skill.AngerSkill" name="火龙卷" description="按自身生命减少的百分比对敌方造成伤害加成，156%的伤害" att="1560" attRange="0" level="1" aim="2" hurt="5" hp="5" skillRate="0"/>
+	<sample sid="19602" class="com.cambrian.dfhm.skill.AngerSkill" name="雷狱术" description="按自身生命减少的百分比对敌方横向造成伤害加成，169%的伤害" att="1690" attRange="3" level="1" aim="2" hurt="5" hp="5" skillRate="0"/>
+	<sample sid="19603" class="com.cambrian.dfhm.skill.AngerSkill" name="横扫千军" description="按自身生命减少的百分比对敌方全体造成伤害加成，182%的伤害" att="1820" attRange="4" level="1" aim="2" hurt="5" hp="5" skillRate="0"/>
 
 </objects>

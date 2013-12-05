@@ -1,7 +1,6 @@
 package com.cambrian.dfhm.card;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.cambrian.common.net.ByteBuffer;
@@ -13,7 +12,6 @@ import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.common.entity.Player;
-import com.cambrian.dfhm.reward.Reward;
 import com.cambrian.dfhm.skill.Skill;
 
 /**
@@ -152,10 +150,9 @@ public class CardManager
 
 			}
 
-			levelUp(player, cardId, list);
-			
-			
-			int levelNum = card.getLevel() - level;// 检测本次卡牌升了多少级
+			levelUp(player,cardId,list);
+
+			int levelNum=card.getLevel()-level;// 检测本次卡牌升了多少级
 			card.incrForsterNumber(levelNum);
 			int act=levelNum*card.getBaseAtt()*4/100;
 			int hp=levelNum*card.getBaseHp()*4/100;
@@ -196,14 +193,17 @@ public class CardManager
 				for(int i=0;i<array.length;i++)
 				{
 					BattleCard battleCard=array[i];
-					if(card.getId()==battleCard.getId())
+					if(battleCard!=null)
 					{
-						battleCard.setAtt(card.getAtt());
-						battleCard.setMaxHp(card.getMaxHp());
-						battleCard.setDodgeRate(card.getDodgeRate());
-						battleCard.setCurHp(card.getCurHp());
-						break;
-						// array[i] = battleCard;
+						if(card.getId()==battleCard.getId())
+						{
+							battleCard.setAtt(card.getAtt());
+							battleCard.setMaxHp(card.getMaxHp());
+							battleCard.setDodgeRate(card.getDodgeRate());
+							battleCard.setCurHp(card.getCurHp());
+							break;
+							// array[i] = battleCard;
+						}
 					}
 				}
 
@@ -292,7 +292,7 @@ public class CardManager
 			card.getAtt(),card.getSkillRate(),card.getAttRange(),
 			card.getSkillId(),card.getMaxHp(),card.getCurHp(),index,
 			card.getAimType(),card.getCritRate(),card.getDodgeRate(),0,
-			card.getType());
+			card.getType(),card.getSid(),card.getCritFactor());
 		array[index]=bCard;
 	}
 
@@ -477,16 +477,18 @@ public class CardManager
 		card.setForsterAttLast(0);
 		card.setForsterRangeLast(0);
 
-		BattleCard[] array = player.formation.getFormation();
-		for (int i = 0; i < array.length; i++) {
-			BattleCard battleCard = array[i];
-			if (battleCard != null && card.getId() == battleCard.getId()) {
+		BattleCard[] array=player.formation.getFormation();
+		for(int i=0;i<array.length;i++)
+		{
+			BattleCard battleCard=array[i];
+			if(battleCard!=null&&card.getId()==battleCard.getId())
+			{
 				battleCard.setAtt(card.getAtt());
 				battleCard.setMaxHp(card.getMaxHp());
 				battleCard.setDodgeRate(card.getDodgeRate());
 				battleCard.setCurHp(card.getCurHp());
 				battleCard.setSkillRate(card.getSkillRate());
-				array[i] = battleCard;
+				array[i]=battleCard;
 			}
 		}
 
@@ -581,7 +583,8 @@ public class CardManager
 		}
 		else if(type==3)// 普通培养
 		{
-			if(money!=GameCFG.getNormalFosterNum()*perNum)
+			if(money!=GameCFG.getNormalFosterNum()*perNum
+				*Math.ceil((card.getType()*0.5d))*(card.getLevel()-1))
 				return Lang.F1204;
 			if(player.getMoney()<money) return Lang.F701;
 		}
@@ -646,17 +649,16 @@ public class CardManager
 		{
 			throw new DataAccessException(601,error);
 		}
-		
+
 		player.decrMoney(getDecrMoney(cardList));
 		// boolean skillResult=skillLevelUp(player,cardId,list);
 		// int exp=0;
-			
+
 		for(Card tempcard:cardList)
 		{
 			if(!card.isRealm())
 			{
-				// card.incrExp(tempcard.getSwallowExp());
-				card.incrExp(5000);
+				card.incrExp(tempcard.getSwallowExp());
 				card.levelUp();
 				if(card.isRealm())// 卡牌升级达到 突破条件的时候 盈余经验设置为0
 				{
@@ -664,21 +666,11 @@ public class CardManager
 				}
 			}
 		}
-		// if(!card.isRealm())
-		// {
-		// exp=getIncrExp(cardList);
-		// exp =5000;
-		// }
-		// card.incrExp(exp);
-		// card.levelUp();
-		/*
-		 * if(card.getRealmByLevel()[0]>0) { card.setRealm(true); }
-		 */
 		for(Integer id:list)
 		{
 			player.getCardBag().remove(id);
 		}
-		// return new boolean[]{skillResult,levelResult};
+
 	}
 
 	/** 检查卡牌升级 */
@@ -686,22 +678,16 @@ public class CardManager
 		ArrayList<Card> cardList)
 	{
 		Card card_;
-		
-	
-		 	
-		for (int i = 0; i < cardList.size(); i++) {
-			card_ = cardList.get(i);
-			if (card_ == null)
-				return Lang.F1207;
-			if (card.getLevel() >= 90)
-				return Lang.F1228;
-			if (card_.getStatus() != Card.NORMAL && card_.isLock())
+		for(int i=0;i<cardList.size();i++)
+		{
+			card_=cardList.get(i);
+			if(card_==null) return Lang.F1207;
+			if(card.getLevel()>=90) return Lang.F1228;
+			if(card_.getStatus()!=Card.NORMAL&&card_.isLock())
 				return Lang.F1208;
 		}
-		
-		
-		
-		if (player.getMoney()<getDecrMoney(cardList)) 
+
+		if(player.getMoney()<getDecrMoney(cardList))
 		{
 			return Lang.F701;
 		}
@@ -709,30 +695,29 @@ public class CardManager
 	}
 
 	/******
-	 * 
 	 * 获取吞噬卡牌消耗的金钱
-	 * *******/
+	 *******/
 	private int getDecrMoney(ArrayList<Card> cardList)
 	{
 		int money=0;
 		for(Card card:cardList)
 		{
 			money+=card.computeEegulMoney();
-		}	
-		
+		}
+
 		return money;
 	}
-	
-	/** 吞噬经验计算 */
-	private int getIncrExp(ArrayList<Card> cardList)
-	{
-		int exp=0;
-		for(Card card:cardList)
-		{
-			exp+=card.getSwallowExp();
-		}
-		return exp;
-	}
+
+	// /** 吞噬经验计算 */
+	// private int getIncrExp(ArrayList<Card> cardList)
+	// {
+	// int exp=0;
+	// for(Card card:cardList)
+	// {
+	// exp+=card.getSwallowExp();
+	// }
+	// return exp;
+	// }
 
 	/**
 	 * 境界突破
@@ -751,18 +736,13 @@ public class CardManager
 		{
 			throw new DataAccessException(601,error);
 		}
-		// boolean skillResult=skillLevelUp(player,cardId,list);
 		for(Integer id:list)
 		{
 			player.getCardBag().remove(id);
 		}
 		boolean breakOutResult=false;
-		// if(card.getEngulfCards().size()==(limit.length-1))
 		if(isBeyong(card,limit))
-		{// 已经到境界突破
-			//
-			// card.incrForsterNumber(list.get(list.size()-1));
-			// TODO 移除规则还要和策划讨论
+		{
 			card.setRealm(false);
 			card.getEngulfCards().clear();
 			breakOutResult=true;
@@ -779,7 +759,6 @@ public class CardManager
 		{
 			return false;
 		}
-
 		List<Integer> needList=new ArrayList<Integer>();
 		for(int i=0;i<limit.length-1;i++)
 		{
@@ -809,29 +788,6 @@ public class CardManager
 			}
 			isbeyong=true;
 		}
-		// for(int i=0;i<limit.length-1;i++)
-		// {
-		// isbeyong=false;
-		// for(int j=0;j<card.getEngulfCards().size();j++)
-		// {
-		// if(card.getEngulfCards().get(j)==limit[i])
-		// {
-		// isbeyong=true;
-		// }
-		// else
-		// {
-		// if(limit[i]==0)// 特殊情况 有五个突破卡牌条件 有可能只需要3个 其他条件为0的处理
-		// {
-		// isbeyong=true;
-		// }
-		// }
-		// }
-		//
-		// if(!isbeyong)// 如果有一个条件卡牌没找到 则没能突破成功
-		// {
-		// break;
-		// }
-		// }
 		return isbeyong;
 
 	}
@@ -842,19 +798,6 @@ public class CardManager
 	{
 		Card card_;
 		int id;
-		// System.out.println("ssss");
-		// for(int i=0;i<cardList.size();i++)
-		// {
-		// for(int j=cardList.size()-1;j>i;j--)
-		// {
-		// if(player.getCardBag().getById(cardList.get(i)).getSid()==player
-		// .getCardBag().getById(cardList.get(j)).getSid())
-		// {
-		// return Lang.F1229;
-		// }
-		// }
-		// }
-
 		for(int i=0;i<cardList.size();i++)
 		{
 			id=cardList.get(i);

@@ -16,6 +16,9 @@ import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
+import com.cambrian.dfhm.mail.entity.Mail;
+import com.cambrian.dfhm.mail.notice.MailSendNotice;
+import com.cambrian.dfhm.mail.util.MailFactory;
 import com.cambrian.dfhm.qualifying.dao.QualifyingDao;
 import com.cambrian.dfhm.qualifying.entity.Qualifying;
 import com.cambrian.dfhm.qualifying.entity.QualifyingInfo;
@@ -35,7 +38,7 @@ public class QualifyingManager
 	/* static fields */
 	private static QualifyingManager instance = new QualifyingManager();
 	/** 计时器：更新排行信息 */
-	private static long TIME = TimeKit.MIN_MILLS * 5;
+	private static long TIME = TimeKit.MIN_MILLS * 30;
 
 	/* static methods */
 	public static QualifyingManager getInstance()
@@ -52,6 +55,10 @@ public class QualifyingManager
 	Qualifying qualifying = new Qualifying();
 	/** 时间格式 */
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	/** 邮件工厂 */
+	MailFactory mf;
+	/** 邮件推送 */
+	MailSendNotice msn;
 
 	/* constructors */
 
@@ -64,6 +71,15 @@ public class QualifyingManager
 	public void setDS(DataServer ds)
 	{
 		instance.ds = ds;
+	}
+	
+	public void setMf(MailFactory mf)
+	{
+		instance.mf = mf;
+	}
+	public void setMailSendNotice(MailSendNotice msn)
+	{
+		instance.msn = msn;
 	}
 
 	/** 开始定时器 */
@@ -227,6 +243,12 @@ public class QualifyingManager
 			player.getPlayerInfo().incrQualifyingWin(1);
 			changeRanking(player.getNickname(), tarName);
 			log = "失败";
+			Mail mail = mf.createFightBackMail(player.getNickname()+"挑战并战胜了你", Mail.MAILSTATE_UNREAD);
+			mail.setFight(true);
+			tarPlayer.addMail(mail);
+			Session session = ds.getSession(tarName);
+			if (session != null)
+				msn.send(ds.getSession(tarName), new Object[]{tarPlayer.getUnreadMailCount()});
 		} else
 		{
 			BattleScene scene = new BattleScene();
@@ -237,7 +259,7 @@ public class QualifyingManager
 			scene.getRecord().set(0, scene.getStep());
 			int win = scene.getRecord().get(scene.getRecord().size() - 1);
 			System.err.println("win====="+win);
-			if (win == 1)
+			if (win > 0)
 			{
 				int rank = qualifying.getPlayerRank(tarName);
 				if (rank > GameCFG.getDuelWinPoint().length)
@@ -247,6 +269,12 @@ public class QualifyingManager
 				player.getPlayerInfo().incrQualifyingWin(1);
 				changeRanking(player.getNickname(), tarName);
 				log = "失败";
+				Mail mail = mf.createFightBackMail(player.getNickname()+"挑战并战胜了你", Mail.MAILSTATE_UNREAD);
+				mail.setFight(true);
+				tarPlayer.addMail(mail);
+				Session session = ds.getSession(tarName);
+				if (session != null)
+					msn.send(ds.getSession(tarName), new Object[]{tarPlayer.getUnreadMailCount()});
 			} else
 			{
 				int rank = qualifying.getPlayerRank(tarName);

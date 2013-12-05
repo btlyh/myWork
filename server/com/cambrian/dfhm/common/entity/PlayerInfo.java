@@ -1,6 +1,7 @@
 package com.cambrian.dfhm.common.entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.cambrian.common.net.ByteBuffer;
@@ -65,8 +66,6 @@ public class PlayerInfo
 	private int payRMB=0;
 	/** 故事模式副本时间 */
 	private int normalNPCTime=0;
-	/** 挑战了的NPC */
-	private int hardNPCIndex=-1;
 	/** 挑战模式副本时间 */
 	private int hardNPCTime=0;
 
@@ -102,6 +101,13 @@ public class PlayerInfo
 	private int nextRewardId=21657;// 下一次的领奖ID 用于前台初始化领奖信息
 
 	private int crossMapNum = 10;//当日穿越副本挑战次数
+	
+	/** 已经打过的挑战副本 */
+	private List<Integer> hardNPCList = new ArrayList<Integer>();
+	
+	/*****已经开启的穿越副本****/
+	
+	private List<Integer>crossNPCList = new ArrayList<Integer>(); 
 	/* constructors */
 
 	/* properties */
@@ -439,17 +445,6 @@ public class PlayerInfo
 		this.nextRewardId=nextRewardId;
 	}
 
-	public int getHardNPCIndex()
-	{
-		return hardNPCIndex;
-	}
-
-	public void setHardNPCIndex(int hardNPCIndex)
-	{
-		if (hardNPCIndex > this.hardNPCIndex)
-			this.hardNPCIndex = hardNPCIndex;
-	}
-
 	public void setAutoSignBoss(boolean isAutoSignBoss)
 	{
 		this.isAutoSignBoss=isAutoSignBoss;
@@ -473,9 +468,31 @@ public class PlayerInfo
 		this.crossMapNum = crossMapNum;
 	}
 
+	public List<Integer> getHardNPCList()
+	{
+		return hardNPCList;
+	}
+
+	public void setHardNPCList(List<Integer> hardNPCList)
+	{
+		this.hardNPCList = hardNPCList;
+	}
+
+	
+	
+	
+	public List<Integer> getCrossNPCList() {
+		return crossNPCList;
+	}
+
+	public void setCrossNPCList(List<Integer> crossNPCList) {
+		this.crossNPCList = crossNPCList;
+	}
+
 	/** 序列化 和前台通信 */
 	public void bytesWrite(ByteBuffer data)
 	{
+		int len =0;
 		data.writeInt(skillFlushFreeTimes);
 		data.writeInt(normalPoint);
 		data.writeInt(luckBoxFreeTimes);
@@ -493,6 +510,23 @@ public class PlayerInfo
 		data.writeInt(duelBuyTimes);
 		data.writeInt(nextRewardId);
 		data.writeInt(crossMapNum);
+		
+		len = hardNPCList.size();
+		data.writeInt(len);
+		for (Integer integer : hardNPCList)
+		{
+			data.writeInt(integer);
+		}
+		
+		len = crossNPCList.size();
+		data.writeInt(len);
+		for (Integer integer : crossNPCList)
+		{
+			data.writeInt(integer);
+		}
+		
+		
+		
 	}
 
 	/** 序列化 和DC通信 存 */
@@ -544,8 +578,19 @@ public class PlayerInfo
 		data.writeInt(qualifyingCount);
 		data.writeInt(qualifyingWin);
 		data.writeInt(nextRewardId);
-		data.writeInt(hardNPCIndex);
 		data.writeInt(crossMapNum);
+		data.writeInt(hardNPCList.size());
+		for (Integer integer : hardNPCList)
+		{
+			data.writeInt(integer);
+		}
+		
+		
+		data.writeInt(crossNPCList.size());
+		for (Integer integer : crossNPCList)
+		{
+			data.writeInt(integer);
+		}
 	}
 	/** 序列化 和DC通信 取 */
 	public void dbBytesRead(ByteBuffer data)
@@ -601,9 +646,21 @@ public class PlayerInfo
 		qualifyingCount=data.readInt();
 		qualifyingWin=data.readInt();
 		nextRewardId=data.readInt();
-		hardNPCIndex = data.readInt();
 		crossMapNum = data.readInt();
-	
+		len=data.readInt();
+		for (int i = 0; i < len; i++)
+		{
+			int index=data.readInt();
+			hardNPCList.add(index);
+		}
+		
+		
+		len=data.readInt();
+		for (int i = 0; i < len; i++)
+		{
+			int index=data.readInt();
+			crossNPCList.add(index);
+		}
 	}
 
 	public void decrLuckBoxFreeTimes(int times)
@@ -717,4 +774,30 @@ public class PlayerInfo
 	{
 		normalPoint -= price;
 	}
+	
+
+	/** 获得挑战了的最高挑战副本SID */
+	public int getHighestHardNPC()
+	{
+		if (hardNPCList.size()>0)
+			return hardNPCList.get(hardNPCList.size()-1);
+		else
+			return -1;
+	}
+	
+	/**  添加 打过的 挑战副本和穿越副本**/
+	public void addHardNpc(int hardIndex)
+	{
+		if (!hardNPCList.contains(hardIndex))
+			hardNPCList.add(hardIndex);
+		Collections.sort(hardNPCList);
+	}
+	
+	public void addCrossNpc(int crossIndex)
+	{
+		if (!crossNPCList.contains(crossIndex))
+			crossNPCList.add(crossIndex);
+		Collections.sort(crossNPCList);
+	}
+
 }

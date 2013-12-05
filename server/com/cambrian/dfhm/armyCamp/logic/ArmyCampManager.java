@@ -22,6 +22,7 @@ import com.cambrian.dfhm.bag.CardBag;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.mail.entity.Mail;
+import com.cambrian.dfhm.mail.notice.MailSendNotice;
 import com.cambrian.dfhm.mail.util.MailFactory;
 import com.cambrian.game.Session;
 import com.cambrian.game.ds.DataServer;
@@ -55,6 +56,8 @@ public class ArmyCampManager
 	UseAwakeSoupNotice uasn;
 	/** 邮件工厂 */
 	MailFactory mf;
+	/** 邮件推送 */
+	MailSendNotice msn;
 	/** 时间格式 */
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
@@ -88,6 +91,10 @@ public class ArmyCampManager
 	public void setMf(MailFactory mf)
 	{
 		instance.mf = mf;
+	}
+	public void setMailSendNotice(MailSendNotice msn)
+	{
+		instance.msn = msn;
 	}
 
 	/**
@@ -526,6 +533,8 @@ public class ArmyCampManager
 						+ card.getName() + "卡牌冷却时间已到，系统已自动移除。祝您游戏愉快！";
 				Mail mail = mf.createSystemMailNothing(s);
 				tarPlayer.addMail(mail);
+				if (session != null)
+					msn.send(session, new Object[] {tarPlayer.getUnreadMailCount()});
 				// Session noticeSession =
 				// ds.getSession(seatCard.getOwnerName());
 				// if (noticeSession != null)
@@ -551,12 +560,9 @@ public class ArmyCampManager
 						+ "卡牌冷却时间已到，系统已自动移除。祝您游戏愉快！";
 				Mail mail = mf.createSystemMailNothing(s);
 				player.addMail(mail);
-				// Session noticeSession =
-				// ds.getSession(seatCard.getOwnerName());
-				// if (noticeSession != null)
-				// {
-				// rmcn.send(noticeSession, new Object[] { card.uid });
-				// }
+				Session noticeSession = ds.getSession(player.getNickname());
+				if (noticeSession != null)
+					msn.send(noticeSession, new Object[] {player.getUnreadMailCount()});
 			}
 		}
 		resultMap.put("player", armyPlayer);

@@ -7,6 +7,7 @@ import com.cambrian.common.object.Sample;
 import com.cambrian.common.object.SampleFactory;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleRecord;
+import com.cambrian.dfhm.battle.entity.DamageEntity;
 
 /**
  * 类说明：卡牌技能基类
@@ -43,8 +44,8 @@ public class Skill extends Sample
 	private int att;
 	/** 攻击对象，1=自己，2=敌人 */
 	private int aim;
-	/** 伤害值记录 */
-	private ArrayList<Integer> hurtList=new ArrayList<Integer>();
+	/** 伤害对象记录 */
+	private ArrayList<DamageEntity> hurtList=new ArrayList<DamageEntity>();
 	/** 技能发动率 */
 	private int skillRate;
 
@@ -109,7 +110,7 @@ public class Skill extends Sample
 		this.skillRate=skillRate;
 	}
 
-	public ArrayList<Integer> getHurtList()
+	public ArrayList<DamageEntity> getHurtList()
 	{
 		return hurtList;
 	}
@@ -124,7 +125,7 @@ public class Skill extends Sample
 	 * @param aimList 被攻击对象数组
 	 * @return
 	 */
-	public ArrayList<Integer> skillValue(BattleCard attCard,
+	public ArrayList<DamageEntity> skillValue(BattleCard attCard,
 		ArrayList<Integer> aim,BattleCard[] aimList,BattleRecord record)
 	{
 		System.err.println("技能攻击伤害值,多态的基类哦--------------");
@@ -181,7 +182,7 @@ public class Skill extends Sample
 	}
 
 	/** 添加死亡位置 */
-	public void addHurt(int hurt)
+	public void addHurt(DamageEntity hurt)
 	{
 		hurtList.add(hurt);
 	}

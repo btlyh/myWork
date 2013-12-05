@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.cambrian.common.object.Sample;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleRecord;
+import com.cambrian.dfhm.battle.entity.DamageEntity;
 
 /**
  * 类说明：减少伤害技能
@@ -32,7 +33,7 @@ public class DecrHurtSkill extends Skill
 
 	/* methods */
 	@Override
-	public ArrayList<Integer> skillValue(BattleCard attCard,
+	public ArrayList<DamageEntity> skillValue(BattleCard attCard,
 		ArrayList<Integer> aim,BattleCard[] aimList,BattleRecord record)
 	{
 		clearHurt();
@@ -47,9 +48,10 @@ public class DecrHurtSkill extends Skill
 					.getSkill().getSid());
 				bCard.addDeBuff(skill);
 			}
+			System.err.println("减伤技能!!!");
 		}
-		addHurt(0);
-		System.err.println("减伤技能!!!");
+		DamageEntity damage=new DamageEntity(DamageEntity.DAMAGE_NORMAL,0);
+		addHurt(damage);
 		return getHurtList();
 	}
 

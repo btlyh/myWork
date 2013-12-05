@@ -18,6 +18,10 @@ import com.cambrian.dfhm.instancing.entity.CrossNPC;
 import com.cambrian.dfhm.instancing.entity.HardNPC;
 import com.cambrian.dfhm.instancing.entity.NPC;
 import com.cambrian.dfhm.instancing.entity.NormalNPC;
+import com.cambrian.dfhm.mail.dao.MailDao;
+import com.cambrian.dfhm.mail.entity.Mail;
+import com.cambrian.dfhm.mail.notice.MailSendNotice;
+import com.cambrian.dfhm.mail.util.MailFactory;
 
 /**
  * 类说明：副本管理器
@@ -37,11 +41,30 @@ public class InstancingManager
 	}
 
 	/* fields */
+	/** 推送发送邮件消息 */
+	MailSendNotice msn;
+	/** 邮件数据访问对象 */
+	MailDao dao;
+	/** 邮件工厂类 */
+	MailFactory mf;
 
 	/* constructors */
 
 	/* properties */
+	public void setMailSendNotice(MailSendNotice msn)
+	{
+		instance.msn=msn;
+	}
 
+	public void setMailDao(MailDao dao)
+	{
+		instance.dao=dao;
+	}
+
+	public void setMailFactory(MailFactory mf)
+	{
+		instance.mf=mf;
+	}
 	/* init start */
 
 	/* methods */
@@ -65,10 +88,11 @@ public class InstancingManager
 		return openActiveNPC;
 	}
 	/** 攻击NPC */
-	public synchronized ArrayList<Integer> attackNPC(int sid,Player player,
-		int npcType,int attType,List<Integer> cardList)
+	public synchronized Map<String,ArrayList<Integer>> attackNPC(int sid,
+		Player player,int npcType,int attType,List<Integer> cardList)
 	{
 		Map<String,Object> resultMap=checkAttackNPC(sid,player,npcType);
+		Map<String,ArrayList<Integer>> resultData=new HashMap<String,ArrayList<Integer>>();
 		String error=(String)resultMap.get("error");
 		if(error!=null)
 		{
@@ -112,6 +136,7 @@ public class InstancingManager
 		player.decrToken(npc.getNeedToken());
 		npc.winCondition(scene,att,player);
 		int win=scene.getRecord().get(scene.getRecord().size()-1);
+		ArrayList<Integer> rewardCardList=new ArrayList<Integer>();
 		if(win>0)// 胜利
 		{
 			if(npcType==NPC.CROSS)
@@ -124,7 +149,27 @@ public class InstancingManager
 
 			}
 			npc.handleForWin(player);
-			npc.addAward(scene,player);
+			ArrayList<Integer> rewardCards=npc.addAward(scene,player);
+			if(rewardCards.size()>0)
+			{
+				if(rewardCards.size()>player.getCardBag()
+					.getSurplusCapacity())
+				{
+					Mail mail=mf.createSystemMail(rewardCards,0,0,0,0,0,
+						(int)player.getUserId());
+					player.addMail(mail);
+				}
+				else
+				{
+					for(Integer integer:rewardCards)
+					{
+						Card card=player.getCardBag().add(integer);
+						rewardCardList.add(card.getSid());
+						rewardCardList.add(card.uid);
+						rewardCardList.add(card.getSkillId());
+					}
+				}
+			}
 		}
 		npc.handleForAtt(player);
 		/* 战斗完后改变卡牌的喝酒状态 */
@@ -136,19 +181,25 @@ public class InstancingManager
 			else
 				card.setDrinkStatus(Card.AWAKE);
 		}
-		return scene.getRecord();
+		resultData.put("record",scene.getRecord());
+		resultData.put("reward",rewardCardList);
+		return resultData;
 	}
-
 	/** 检查攻击NPC */
 	private Map<String,Object> checkAttackNPC(int sid,Player player,
 		int npcType)
 	{
-		System.err.println("npcType ==="+npcType);
+		Map<String,Object> resultMap=new HashMap<String,Object>();
+		if(player.getCardBag().getSurplusCapacity()<1)
+		{
+			resultMap.put("error",Lang.F1415);
+			return resultMap;
+		}
 		if(npcType>NPC.CROSS||npcType<NPC.NORMAL)
 		{
-			throw new DataAccessException(601,Lang.F1409);
+			resultMap.put("error",Lang.F1409);
+			return resultMap;
 		}
-		Map<String,Object> resultMap=new HashMap<String,Object>();
 		if(player.getCurToken()<1)
 		{
 			resultMap.put("error",Lang.F1403);

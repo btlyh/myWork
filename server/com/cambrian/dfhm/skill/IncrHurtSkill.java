@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.cambrian.common.object.Sample;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleRecord;
+import com.cambrian.dfhm.battle.entity.DamageEntity;
 
 /**
  * 类说明：加攻
@@ -32,7 +33,7 @@ public class IncrHurtSkill extends Skill
 
 	/* methods */
 	@Override
-	public ArrayList<Integer> skillValue(BattleCard attCard,
+	public ArrayList<DamageEntity> skillValue(BattleCard attCard,
 		ArrayList<Integer> aim,BattleCard[] aimList,BattleRecord record)
 	{
 		clearHurt();
@@ -44,10 +45,21 @@ public class IncrHurtSkill extends Skill
 			if(!bCard.hadDeSkill(this.getSid()))
 			{
 				skill=(IncrHurtSkill)Sample.factory.newSample(this.getSid());
-				bCard.addDeBuff(skill);
+				boolean isIncrHurt=false;
+				for(Skill skill_:bCard.getDeSkill())
+				{
+					if(skill_ instanceof IncrHurtSkill)
+					{
+						isIncrHurt=true;
+						break;
+					}
+				}
+				if(!isIncrHurt) bCard.addDeBuff(skill);
 			}
+			System.err.println("加攻技能！！！！！！");
 		}
-		addHurt(0);
+		DamageEntity damage=new DamageEntity(DamageEntity.DAMAGE_NORMAL,0);
+		addHurt(damage);
 		return getHurtList();
 	}
 
@@ -58,7 +70,7 @@ public class IncrHurtSkill extends Skill
 	public int buffValue(BattleCard attCard,int att,BattleCard aimCard,
 		BattleRecord record)
 	{
-		att=att*(1+hurt);
+		att=att*(100+hurt)/100;
 		round--;
 		if(round==0) aimCard.delDeBuff(this.getSid());
 		System.err.println("加攻伤害技能，加成伤害 ==="+att);

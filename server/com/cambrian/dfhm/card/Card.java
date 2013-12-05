@@ -1,15 +1,12 @@
 package com.cambrian.dfhm.card;
 
-import java.awt.List;
 import java.util.ArrayList;
 
-import org.w3c.dom.Attr;
 
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.object.Sample;
 import com.cambrian.common.util.MathKit;
 import com.cambrian.dfhm.back.GameCFG;
-import com.cambrian.dfhm.skill.Skill;
 import com.cambrian.common.util.TimeKit;
 
 /**
@@ -64,6 +61,8 @@ public class Card extends Sample
 	private int forsterNumber=0;
 	/** 暴击率 */
 	private int critRate;
+	/** 暴击伤害系数 */
+	private int critFactor;
 	/** 闪避率 */
 	private int dodgeRate;
 	/** 金币培养攻击成长最大值 */
@@ -867,6 +866,7 @@ public class Card extends Sample
 		isNew=true;
 		attLastChangeTime=TimeKit.nowTimeMills();
 		factor=card.getFactor();
+		critFactor=card.getCritFactor();
 
 	}
 
@@ -958,6 +958,16 @@ public class Card extends Sample
 		this.isNew=isNew;
 	}
 
+	public int getCritFactor()
+	{
+		return critFactor;
+	}
+
+	public void setCritFactor(int critFactor)
+	{
+		this.critFactor=critFactor;
+	}
+
 	/**
 	 * 获得境界突破限制
 	 * 
@@ -1012,6 +1022,9 @@ public class Card extends Sample
 			}
 
 		}
+		
+		
+		
 
 		/*
 		 * if(level<90) { if(result) { int temp=level; forsterNumber+=--temp;
@@ -1020,20 +1033,19 @@ public class Card extends Sample
 		return false;
 	}
 
-	
-	/**获取不同品质卡牌吞噬消耗的金币数**/
+	/** 获取不同品质卡牌吞噬消耗的金币数 **/
 	public int computeEegulMoney()
 	{
-		return type*GameCFG.getEngulfCardMony();
+		return (int) (Math.ceil((type*0.5d))*GameCFG.getEngulfCardMony())*level;
 	}
-	
+
 	/** 获取卡牌战斗力 */
 
 	public int getZhandouli()
 	{
 		return (int)((maxHp+(double)att*3+(double)att*1.5*(double)critRate*3+(double)maxHp
 			*(double)dodgeRate)*0.00005d);
-	} 
+	}
 
 	/** 前台序列化读取 */
 	public void bytesWrite(ByteBuffer data)
@@ -1238,6 +1250,7 @@ public class Card extends Sample
 		data.writeInt(beyongAddDodge);
 		data.writeBoolean(isNew);
 		data.writeInt(factor);
+		data.writeInt(critFactor);
 	}
 	/** 从db读取数据 */
 	public void bytesRead_db(ByteBuffer data)
@@ -1361,13 +1374,13 @@ public class Card extends Sample
 		this.beyongAddDodge=data.readInt();
 		this.isNew=data.readBoolean();
 		this.factor=data.readInt();
+		this.critFactor=data.readInt();
 	}
 
 	public int getMoneyForSell()
 	{
 		return money+factor*(level-1);
 	}
-
 	/*
 	 * 获取卡牌的实际攻击力 基础攻击+升级提升的攻击+进阶提升的攻击
 	 */

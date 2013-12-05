@@ -235,6 +235,13 @@
 	
 	<!-- 副本-->
 	<!-- ########################################## -->
+	<!-- 开副本管理器 -->
+	<obj class="com.cambrian.dfhm.instancing.logic.InstancingManager" id="IM">
+		<method name="setMailDao"><ref id="MD"/></method>
+		<method name="setMailSendNotice"><ref id="MSN"/></method>
+		<method name="setMailFactory"><ref id="MF"/></method>
+	</obj>
+	
 	<!-- 副本-前台发送-攻击NPC-->
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_INSTANCING_ATT"/>
@@ -317,9 +324,11 @@
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_USEGOLD_BAGSIZE"/>
 		<obj class="com.cambrian.dfhm.common.command.BuyBagSizeCommand"></obj>
 	</method>
-	<!-- 开启卡牌抽奖管理器 -->
+	<!-- 开启积分兑换管理器 -->
 	<obj class="com.cambrian.dfhm.common.logic.UsePointsManager" id="UPM">
 			<method name="setMf"><ref id="MF"/></method>
+			<method name="setMailSendNotice"><ref id="MSN"/></method>
+			<method name="setDS"><ref id="DS"/></method>
 	</obj>
 	<!-- 积分消耗-前台发送-兑换积分-->
 	<method name="setPort" ref="service">
@@ -409,6 +418,8 @@
 	<!-- 开启任务管理器 -->
 		<obj class="com.cambrian.dfhm.task.logic.TaskManager" id="TM">
 			<method name="setMf"><ref id="MF"/></method>
+			<method name="setMailSendNotice"><ref id="MSN"/></method>
+			<method name="setDS"><ref id="DS"/></method>
 		</obj>	
 	<!--  任务-前台发送-获取任务列表 -->
 	<method name="setPort" ref="service">
@@ -468,6 +479,7 @@
 			<method name="setRemoveMyCardNotice"><ref id="RMCN"/></method>
 			<method name="setUseAwakeSoupNotice"><ref id="UASN"/></method>
 			<method name="setMf"><ref id="MF"/></method>
+			<method name="setMailSendNotice"><ref id="MSN"/></method>
 		</obj>	
 	<!-- 军帐-前台发送-使用醒酒汤 -->
 	<method name="setPort" ref="service">
@@ -539,6 +551,8 @@
 	<!-- 开启商城管理器 -->
 	<obj class="com.cambrian.dfhm.shop.logic.ShopManager" id="SM">
 			<method name="setMailFactory"><ref id="MF"/></method>
+			<method name="setMailSendNotice"><ref id="MSN"/></method>
+			<method name="setDS"><ref id="DS"/></method>
 	</obj>
 		<!-- 世界BOSS-->
 	<!-- ########################################## -->
@@ -637,6 +651,8 @@
 		<method name="setDS"><ref id="DS"/></method>
 		<method name="setQualifyingDao"><ref id="QD"/></method>
 		<method name="timerStart"/>
+		<method name="setMf"><ref id="MF"/></method>
+		<method name="setMailSendNotice"><ref id="MSN"/></method>
 	</obj>
 	<!-- 排位赛-前台发送-进入排位赛 -->
 	<method name="setPort" ref="service">
@@ -784,4 +800,17 @@
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_RELEASE"/>
 		<obj class="com.cambrian.dfhm.slaveAndWar.command.ReleaseSlaveCommand"></obj>
 	</method>
+
+
+	<!-- 服务器刷新-推送-->
+	<obj class="com.cambrian.dfhm.timer.notice.ServerRefreshNotice" id="srn">
+		<method name="setPort">3701</method>
+	</obj>
+	
+	<!-- 服务器刷新 开起定时器 -->
+	<obj class="com.cambrian.dfhm.timer.ServerTimer" id="ServerTimer">
+		<method name="setDS"><ref id="DS"/></method>
+		<method name="setServerRefreshNotice"><ref id="srn"/></method>
+		<method name="timerStart"/>
+	</obj>
 </objects>

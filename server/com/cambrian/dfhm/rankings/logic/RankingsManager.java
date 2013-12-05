@@ -12,10 +12,13 @@ import com.cambrian.game.Session;
 import com.cambrian.game.SessionMap;
 import com.cambrian.game.ds.DataServer;
 import com.cambrian.common.net.DataAccessException;
+import com.cambrian.common.object.Sample;
 import com.cambrian.common.util.TimeKit;
 import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
+import com.cambrian.dfhm.instancing.entity.NPC;
+import com.cambrian.dfhm.instancing.entity.NormalNPC;
 import com.cambrian.dfhm.rankings.dao.RankingsDao;
 import com.cambrian.dfhm.rankings.entity.CardRankInfo;
 import com.cambrian.dfhm.rankings.entity.RankInfo;
@@ -38,7 +41,7 @@ public class RankingsManager
 	/** 排行信息保存的上限 */
 	private static final int SIZE=200;
 	/** 计时器：更新排行信息 */
-	private static long TIME=TimeKit.MIN_MILLS;
+	private static long TIME=TimeKit.MIN_MILLS*30;
 
 	/* static methods */
 	public static RankingsManager getInstance()
@@ -191,21 +194,33 @@ public class RankingsManager
 		for(Player player:players)
 		{
 			RankInfo rankInfo=new RankInfo();
-			rankInfo.setPlayerName(player.getNickname());
-			rankInfo.setInfo(player.getCurIndexForNormalNPC()-1);
-			rankInfo.setTime(player.getPlayerInfo().getNormalNPCTime());
-			ranking.getStoryRankings().add(rankInfo);
+			NPC npc = null;
+			if (player.getCurIndexForNormalNPC()-1 > 0)
+				npc = (NPC)Sample.getFactory().getSample(player.getCurIndexForNormalNPC()-1);
+			if (npc != null && npc instanceof NormalNPC)
+			{
+				rankInfo.setPlayerName(player.getNickname());
+				rankInfo.setInfo(player.getCurIndexForNormalNPC()-1);
+				rankInfo.setTime(player.getPlayerInfo().getNormalNPCTime());
+				ranking.getStoryRankings().add(rankInfo);
+			}
 
-			rankInfo=new RankInfo();
-			rankInfo.setPlayerName(player.getNickname());
-			rankInfo.setInfo(player.getPlayerInfo().getHardNPCIndex());
-			rankInfo.setTime(player.getPlayerInfo().getHardNPCTime());
-			ranking.getChallengeRankings().add(rankInfo);
+			if (player.getPlayerInfo().getHighestHardNPC() > 0)
+			{
+				rankInfo=new RankInfo();
+				rankInfo.setPlayerName(player.getNickname());
+				rankInfo.setInfo(player.getPlayerInfo().getHighestHardNPC());
+				rankInfo.setTime(player.getPlayerInfo().getHardNPCTime());
+				ranking.getChallengeRankings().add(rankInfo);
+			}
 
-			rankInfo=new RankInfo();
-			rankInfo.setPlayerName(player.getNickname());
-			rankInfo.setInfo(player.getPlayerInfo().getPayRMB());
-			ranking.getPayRankings().add(rankInfo);
+			if (player.getPlayerInfo().getPayRMB() > 0)
+			{
+				rankInfo=new RankInfo();
+				rankInfo.setPlayerName(player.getNickname());
+				rankInfo.setInfo(player.getPlayerInfo().getPayRMB());
+				ranking.getPayRankings().add(rankInfo);
+			}
 
 			for(Card card:player.getCardBag().getList())
 			{

@@ -56,6 +56,7 @@ public class CrossNPC extends NPC
 		{
 			return Lang.F1402;
 		}
+		player.getPlayerInfo().incrInstancingCount(1);
 //		if(checkRecord!=null)
 //		{
 //			if(checkRecord.getAttacks()>=attConfine)
@@ -73,6 +74,8 @@ public class CrossNPC extends NPC
 		{
 			player.setCurIndexForCorssNPC(getNextSid());
 			player.getPlayerInfo().incrInstancingCount(1);
+		//	CrossNPC crossNPC = (CrossNPC)Sample.getFactory().getSample(getSid());						
+			player.getPlayerInfo().addCrossNpc(getSid());
 		}
 
 	}
@@ -109,7 +112,7 @@ public class CrossNPC extends NPC
 				card.getLevel(),card.getAtt(),card.getSkillRate(),
 				card.getAttRange(),card.getSkillId(),card.getMaxHp(),
 				card.getCurHp(),i,card.getAimType(),card.getCritRate(),
-				card.getDodgeRate(),card.getAwardSid(),i);
+				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor());
 			monsters[i]=battleCard;
 		}
 	}

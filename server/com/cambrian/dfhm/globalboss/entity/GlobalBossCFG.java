@@ -360,7 +360,7 @@ public class GlobalBossCFG extends Sample
 				card.getLevel(),card.getAtt(),card.getSkillRate(),
 				card.getAttRange(),card.getSkillId(),card.getMaxHp(),
 				card.getMaxHp(),i,card.getAimType(),card.getCritRate(),
-				card.getDodgeRate(),card.getAwardSid(),i);
+				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor());
 			monsters[i]=battleCard;
 		}
 	}

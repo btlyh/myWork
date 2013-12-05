@@ -47,7 +47,6 @@ public class CardSellCommand extends Command
 			list.add(cardId);
 		}
 		int money = data.readInt();//总共获得多少钱
-		System.err.println("money ==="+money);
 		data.clear();
 		CardManager.getInstance().sellCard(player,list,money);
 		data.writeBoolean(true);

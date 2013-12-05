@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.cambrian.common.util.MathKit;
+import com.cambrian.dfhm.battle.entity.DamageEntity;
+import com.cambrian.dfhm.skill.DecrHurtSkill;
+import com.cambrian.dfhm.skill.IncrHurtSkill;
+import com.cambrian.dfhm.skill.Skill;
 
 /**
  * 战斗计算类
@@ -161,19 +165,31 @@ public class BattleAct
 				}
 			}
 		}
-		if(aimCard.getIndex()<2)
+		if(aimCard.getIndex()==0||aimCard.getIndex()==1)
 		{
 			if(aimList[0]!=null&&aimList[0].getCurHp()>0) list.add(0);
 			if(aimList[1]!=null&&aimList[1].getCurHp()>0) list.add(1);
 		}
-		else if(aimCard.getIndex()<3)
+		else if(aimCard.getIndex()==2)
+		{
 			if(aimList[2]!=null&&aimList[2].getCurHp()>0)
-				list.add(2);
-			else
 			{
-				if(aimList[3]!=null&&aimList[3].getCurHp()>0) list.add(3);
-				if(aimList[4]!=null&&aimList[4].getCurHp()>0) list.add(4);
+				list.add(2);
 			}
+		}
+		else if(aimCard.getIndex()==3||aimCard.getIndex()==4)
+		{
+			if(aimList[3]!=null&&aimList[3].getCurHp()>0) list.add(3);
+			if(aimList[4]!=null&&aimList[4].getCurHp()>0) list.add(4);
+		}
+		// else if(aimCard.getIndex()<3)
+		// if(aimList[2]!=null&&aimList[2].getCurHp()>0)
+		// list.add(2);
+		// else
+		// {
+		// if(aimList[3]!=null&&aimList[3].getCurHp()>0) list.add(3);
+		// if(aimList[4]!=null&&aimList[4].getCurHp()>0) list.add(4);
+		// }
 		return list;
 	}
 
@@ -303,23 +319,46 @@ public class BattleAct
 	 * @param attType 攻击类型
 	 * @return
 	 */
-	public static int getAttValue(BattleCard attCard,int att,int attType)
+	public static ArrayList<DamageEntity> getAttValue(BattleCard attCard,
+		ArrayList<Integer> aim,BattleCard[] aimList,BattleRecord record,
+		ArrayList<DamageEntity> hurtList)
 	{
-		double a=attCard.getDodgeRate()/100000;// 闪避率
-		double a1=MathKit.randomValue(-1,1)+1;
-		int sanbi=(int)Math.ceil(a-a1);
-		double b=attCard.getCritRate()/100000;// 暴击率
-		double b1=MathKit.randomValue(-1,1)+1;
-		int baoji=(int)(Math.ceil(b-b1)*0.5+1);
-		double c=((MathKit.randomInt()%6)/100);// 5%的上下浮动值
-		int hurt=(int)c*sanbi*baoji;
-		if(attType==1)// 普通攻击
-			hurt*=att*attCard.getAtt();
-		else
-			hurt*=att;
-		return hurt;
+		hurtList.clear();
+		BattleCard aimCard=null;
+		int value=0;
+		boolean crit=false;
+		int damageStatus=DamageEntity.DAMAGE_NORMAL;
+		for(int i=0;i<aim.size();i++)
+		{
+			aimCard=aimList[aim.get(i)];
+			value=buffValue(attCard,attCard.getAtt(),aimCard,record);
+			if(isCrit(attCard))
+			{
+				crit=true;
+				damageStatus=DamageEntity.DAMAGE_CRIT;
+				value=countCritDamage(value,attCard);
+			}
+			else
+			{
+				if(isDodge(aimCard))
+				{
+					damageStatus=DamageEntity.DAMAGE_DODGE;
+					value=0;
+				}
+			}
+			if(value > 0){
+				value=countFloatDamage(value);
+				record.setAttMax(value);
+			}
+			DamageEntity damage = new DamageEntity(damageStatus,value);
+			hurtList.add(damage);
+			if(value>0)
+				System.err.println("照成伤害 ==="+value+(crit?"暴击伤害":"普通伤害"));
+			else
+				System.err.println("伤害被闪避");
+		}
+		return hurtList;
 	}
-
 	/**
 	 * 获得攻击对象
 	 * 
@@ -332,7 +371,7 @@ public class BattleAct
 		int index=attCard.getIndex();
 		BattleCard aimCard=null,aimCard_1=null;
 		for(int i=0;i<aimList.length;i++)
-		{	
+		{
 			aimCard=aimList[i];
 			if(aimCard!=null&&aimCard.getCurHp()>0)
 			{
@@ -356,5 +395,103 @@ public class BattleAct
 			}
 		}
 		return aimCard;
+	}
+
+	/**
+	 * 技能buff伤害值
+	 * 
+	 * @param attCard 出手攻击者
+	 * @param att 本次攻击伤害值
+	 * @param aimCard 伤害目标
+	 * @param record 记录
+	 * @return 伤害值
+	 */
+	private static int buffValue(BattleCard attCard,int att,
+		BattleCard aimCard,BattleRecord record)
+	{
+		// System.err.println("技能buff伤害值,多态的基类哦--------------");
+		if(aimCard.hadNoHurtSkill())// 判断放手方是否有免伤状态
+		{
+			return 0;
+		}
+		// 判断攻击方是否有攻状态
+		ArrayList<Skill> deSkill=attCard.getDeSkill();
+		for(Skill skill:deSkill)
+		{
+			if(skill instanceof IncrHurtSkill)
+			{
+				att=skill.buffValue(attCard,att,aimCard,record);
+				break;
+			}
+		}
+		// 判断防守方是否有减伤状态
+		deSkill=aimCard.getDeSkill();
+		for(Skill skill:deSkill)
+		{
+			if(skill instanceof DecrHurtSkill)
+			{
+				att=skill.buffValue(attCard,att,aimCard,record);
+				break;
+			}
+		}
+		return att;
+	}
+
+	/**
+	 * 判断是否暴击
+	 * 
+	 * @param attCard 进攻卡牌
+	 * @return 是否暴击
+	 */
+	public static boolean isCrit(BattleCard attCard)
+	{
+		boolean isCrit=false;
+		int critRate=attCard.getCritRate()/1000;// 暴击率
+		int randomValue=MathKit.randomValue(1,101);
+		if(randomValue<critRate)
+		{
+			isCrit=true;
+		}
+		return isCrit;
+	}
+
+	/**
+	 * 判断是否闪避
+	 * 
+	 * @param defCard 防守卡牌
+	 * @return 是否闪避
+	 */
+	public static boolean isDodge(BattleCard defCard)
+	{
+		boolean isDodge=false;
+		int dodgeRate=defCard.getDodgeRate()/1000;// 闪避率
+		int randomValue=MathKit.randomValue(1,101);
+		if(randomValue<dodgeRate)
+		{
+			isDodge=true;
+		}
+		return isDodge;
+	}
+	/**
+	 * 计算暴击伤害
+	 * 
+	 * @param value 实际值
+	 * @param card 卡牌对象
+	 * @return 暴击伤害值
+	 */
+	public static int countCritDamage(int value,BattleCard card)
+	{
+		return value*card.getCritFactor()/1000;
+	}
+	/**
+	 * 计算伤害浮动值(95%-105%)
+	 * 
+	 * @param value 实际值
+	 * @return 浮动伤害值s
+	 */
+	public static int countFloatDamage(int value)
+	{
+		int randomValue=MathKit.randomValue(95,106);
+		return value*randomValue/100;
 	}
 }

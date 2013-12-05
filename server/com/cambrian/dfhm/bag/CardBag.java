@@ -191,6 +191,9 @@ public class CardBag implements Serializable,DBSerializable
 			if (card.getZhandouli() > bestCard.getZhandouli())
 				bestCard = card;
 		}
-		return bestCard.getSid();
+		if (bestCard != null)
+			return bestCard.getSid();
+		else
+			return 10001;
 	}
 }

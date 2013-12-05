@@ -35,7 +35,7 @@ public class Task extends Sample
 	/** 任务类型 */
 	int kind;
 	/** 状态 */
-	int status=0;
+	public int status=0;
 	/** 是否是日常 */
 	int isDayly;
 
@@ -124,7 +124,7 @@ public class Task extends Sample
 					&& player.getCurIndexForNormalNPC() <= sid)
 				return false;
 			if (sample instanceof HardNPC
-					&& player.getCurIndexForHardNPC() <= sid)
+					&& !player.getPlayerInfo().getHardNPCList().contains(sid))
 				return false;
 			if (sample instanceof CrossNPC
 					&& player.getCurIndexForCorssNPC() <= sid)
@@ -136,8 +136,10 @@ public class Task extends Sample
 	public boolean finish(Player player)
 	{
 		if (this.status == FINISHED	) return false;
-		if (!checkFinish(player)) return false;
+		//if (!checkFinish(player)) return false;
 		this.status = FINISHED;
+		player.getTasks().taskList.remove(this);
+		player.getTasks().finishedTaskList.add(this);
 		return true;
 	}
 

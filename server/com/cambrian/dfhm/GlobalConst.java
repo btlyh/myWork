@@ -323,6 +323,9 @@ public final class GlobalConst
 	/**玩家充值通信**/
 	public static final int COMMAND_RECHARGE=3601;
 	
+	/** 服务器数据刷新推送 */
+	public static final int COMMAND_SERVER_BACK=3701;
+	
 	/* 功能处理器-消息 */
 
 	/* 功能处理器-商城 */

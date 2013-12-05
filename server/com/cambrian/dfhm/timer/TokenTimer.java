@@ -1,7 +1,4 @@
-                     package com.cambrian.dfhm.timer;
-
-import java.util.concurrent.ArrayBlockingQueue;
-
+package com.cambrian.dfhm.timer;
 import com.cambrian.common.timer.TimerCenter;
 import com.cambrian.common.timer.TimerEvent;
 import com.cambrian.common.timer.TimerListener;
@@ -23,7 +20,7 @@ public class TokenTimer implements TimerListener
 
 	/* static fields */
 	/** 恢复时间 默认现在30分钟 */
-	public static long TOKENADDTIME = TimeKit.MIN_MILLS * 1;
+	public static long TOKENADDTIME = TimeKit.MIN_MILLS * 30;
 	/** 恢复数量 */
 	public static int TOKENADDNUM = 1;
 	/* static methods */

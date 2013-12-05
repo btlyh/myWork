@@ -11,9 +11,12 @@ import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.mail.entity.Mail;
+import com.cambrian.dfhm.mail.notice.MailSendNotice;
 import com.cambrian.dfhm.mail.util.MailFactory;
 import com.cambrian.dfhm.task.entity.Task;
 import com.cambrian.dfhm.task.entity.TaskAward;
+import com.cambrian.game.Session;
+import com.cambrian.game.ds.DataServer;
 
 /**
  * 类说明：任务逻辑处理类
@@ -33,12 +36,24 @@ public class TaskManager
 	/* fields */
 	/** 邮件工厂 */
 	MailFactory mf;
+	/** 邮件推送 */
+	MailSendNotice msn;
+	/** 数据服务器 */
+	DataServer ds;
 	/* constructors */
 
 	/* properties */
 	public void setMf(MailFactory mf)
 	{
 		instance.mf = mf;
+	}
+	public void setMailSendNotice(MailSendNotice msn)
+	{
+		instance.msn = msn;
+	}
+	public void setDS(DataServer ds)
+	{
+		instance.ds = ds;
 	}
 	/* init start */
 
@@ -54,6 +69,7 @@ public class TaskManager
 			throw new DataAccessException(601, error);
 		}
 		Task task = (Task)resultMap.get("task");
+		task.finish(player);
 		TaskAward award = (TaskAward)Sample.getFactory().getSample(task.awardSid);
 		ArrayList<Card> cardList = new ArrayList<Card>();
 		ArrayList<Integer> cardSidList = new ArrayList<Integer>(0);
@@ -83,6 +99,9 @@ public class TaskManager
 				Mail mail = mf.createSystemMail(cardSidList, 0, 0, 0, 0, 0,
 						(int) player.getUserId());
 				player.addMail(mail);
+				Session session = ds.getSession(player.getNickname());
+				if (session != null)
+					msn.send(session, new Object[] {player.getUnreadMailCount()});
 			}else
 			{
 				for (Integer integer : cardSidList)
@@ -126,7 +145,7 @@ public class TaskManager
 			mapInfo.put("error", Lang.F2402);
 			return mapInfo;
 		}
-		if (!task.finish(player))
+		if (task.status != Task.FINISH)
 		{
 			mapInfo.put("error", Lang.F2403);
 			return mapInfo;

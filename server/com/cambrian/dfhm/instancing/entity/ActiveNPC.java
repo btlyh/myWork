@@ -108,7 +108,7 @@ public class ActiveNPC extends NPC
 				card.getLevel(),card.getAtt(),card.getSkillRate(),
 				card.getAttRange(),card.getSkillId(),card.getMaxHp(),
 				card.getCurHp(),i,card.getAimType(),card.getCritRate(),
-				card.getDodgeRate(),card.getAwardSid(),i);
+				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor());
 			monsters[i]=battleCard;
 		}
 	}

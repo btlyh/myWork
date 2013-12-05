@@ -14,8 +14,8 @@
 	hurt		每次攻击伤害数
 	
 	-->
-	<sample sid="19451" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭" description="连击1次" att="1200" attRange="0" level="1" aim="2" count="1" hurt="500" skillRate="0"/>
-	<sample sid="19452" class="com.cambrian.dfhm.skill.AttacksSkill" name="风神矢" description="连击2次" att="1300" attRange="0" level="1" aim="2" count="2" hurt="500" skillRate="0"/>
-	<sample sid="19453" class="com.cambrian.dfhm.skill.AttacksSkill" name="抱天揽月" description="连击3次" att="1400" attRange="4" level="1" aim="2" count="3" hurt="500" skillRate="0"/>
+	<sample sid="19451" class="com.cambrian.dfhm.skill.AttacksSkill" name="穿云箭" description="对目标照成多次攻击，120%的伤害" att="1200" attRange="0" level="1" aim="2" count="1" hurt="500" skillRate="0"/>
+	<sample sid="19452" class="com.cambrian.dfhm.skill.AttacksSkill" name="风神矢" description="对目标照成多次攻击，130%的伤害" att="1300" attRange="0" level="1" aim="2" count="2" hurt="500" skillRate="0"/>
+	<sample sid="19453" class="com.cambrian.dfhm.skill.AttacksSkill" name="抱天揽月" description="对目标照成多次攻击，140%的伤害" att="1400" attRange="4" level="1" aim="2" count="3" hurt="500" skillRate="0"/>
 
 </objects>

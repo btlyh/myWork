@@ -14,6 +14,6 @@
 	round		回合数
 	
 	-->
-	<sample sid="19701" class="com.cambrian.dfhm.skill.IncrHurtSkill" name="如来神掌" description="增加攻击力" att="0" attRange="5" level="1" aim="1" hurt="25" round="2" skillRate="0"/>
+	<sample sid="19701" class="com.cambrian.dfhm.skill.IncrHurtSkill" name="如来神掌" description="增加全体25%攻击力" att="0" attRange="5" level="1" aim="1" hurt="25" round="2" skillRate="0"/>
 
 </objects>

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.object.Sample;
-import com.cambrian.dfhm.skill.IncrHurtSkill;
 import com.cambrian.dfhm.skill.NoHurtSkill;
 import com.cambrian.dfhm.skill.Skill;
 
@@ -21,12 +20,12 @@ public class BattleCard implements Cloneable
 	/* static methods */
 
 	@Override
-	public Object clone() 
+	public Object clone()
 	{
 		BattleCard battleCard=null;
 		try
 		{
-			battleCard = (BattleCard)super.clone();
+			battleCard=(BattleCard)super.clone();
 		}
 		catch(CloneNotSupportedException e)
 		{
@@ -37,7 +36,11 @@ public class BattleCard implements Cloneable
 	}
 
 	/* fields */
+	/** 卡牌UID */
 	private int id;
+	/** 卡牌SID */
+	private int sid;
+	/** 卡牌名称 */
 	private String name;
 	/** 卡片头像(前台用) */
 	private String avatar;
@@ -65,6 +68,8 @@ public class BattleCard implements Cloneable
 	private int aimType;
 	/** 暴击率 */
 	private int critRate;
+	/** 暴击伤害系数 */
+	private int critFactor;
 	/** 闪避率 */
 	private int dodgeRate;
 	/** 被作用技能 */
@@ -80,7 +85,7 @@ public class BattleCard implements Cloneable
 	public BattleCard(int id,String name,String avatar,String tinyAvatar,
 		int level,int att,int skillRate,int attRange,int skillId,int maxHp,
 		int curHp,int index,int aimType,int critRate,int dodgeRate,
-		int awardSid,int type)
+		int awardSid,int type,int sid,int critFactor)
 	{
 		this.id=id;
 		this.name=name;
@@ -103,6 +108,9 @@ public class BattleCard implements Cloneable
 		deSkill=new ArrayList<Skill>();
 		this.awardSid=awardSid;
 		this.type=type;
+		this.sid=sid;
+		this.critFactor=critFactor;
+		this.level=level;
 	}
 
 	public BattleCard()
@@ -294,6 +302,15 @@ public class BattleCard implements Cloneable
 		return deSkill;
 	}
 
+	public int getCritFactor()
+	{
+		return critFactor;
+	}
+
+	public void setCritFactor(int critFactor)
+	{
+		this.critFactor=critFactor;
+	}
 	/* init start */
 
 	/* methods */
@@ -366,20 +383,20 @@ public class BattleCard implements Cloneable
 	 */
 	public void delDeBuff(int skillId)
 	{
-		for(Skill skill_:deSkill)
+		for(int i=0;i<deSkill.size();i++)
 		{
-			if(skill_.getSid()==skillId)
+			if(deSkill.get(i).getSid()==skillId)
 			{
-				deSkill.remove(skill_);
+				deSkill.remove(i);
 				return;
 			}
 		}
 	}
-
 	/** 前台序列化读取 */
 	public void bytesWrite(ByteBuffer data)
 	{
 		data.writeInt(id);
+		data.writeInt(sid);
 		data.writeUTF(name);
 		data.writeUTF(avatar);
 		data.writeUTF(tinyAvatar);
@@ -447,6 +464,8 @@ public class BattleCard implements Cloneable
 		}
 		data.writeInt(awardSid);
 		data.writeInt(type);
+		data.writeInt(sid);
+		data.writeInt(critFactor);
 	}
 
 	/** 反序列化(和dc通信) */
@@ -498,5 +517,7 @@ public class BattleCard implements Cloneable
 		}
 		awardSid=data.readInt();
 		type=data.readInt();
+		sid=data.readInt();
+		critFactor=data.readInt();
 	}
 }

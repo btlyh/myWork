@@ -2,18 +2,14 @@ package com.cambrian.dfhm.common;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 
 import com.cambrian.common.log.Logger;
-import com.cambrian.common.util.ByteKit;
 import com.cambrian.game.ds.DataServer;
 
 /**
@@ -59,7 +55,7 @@ public class UidFile
 
 	/* fields */
 	// /** 正数唯一编号 */
-	// private int plusUid;
+	 private int plusUid;
 	/** 正数唯一编号的最小值 */
 	private int plusUidMin;
 	/** 正数唯一编号的最大值 */

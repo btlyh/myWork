@@ -60,6 +60,14 @@ public class MailFactory
 		return mail;
 	}
 
+	/** 打回去邮件 */
+	public Mail createFightBackMail(String mailContent, int mailType)
+	{
+		Mail mail=new Mail((int)dao.getMailId(),mailType,
+			Lang.SYSTEM_MAIL_TITLE,mailContent,Lang.SYSTEM_MAIL_TITLE);
+		return mail;
+	}
+	
 	/**
 	 * 创建系统邮件
 	 * 

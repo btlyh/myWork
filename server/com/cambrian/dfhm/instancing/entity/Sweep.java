@@ -1,6 +1,5 @@
 package com.cambrian.dfhm.instancing.entity;
 
-import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.object.Sample;
 /**
  * 

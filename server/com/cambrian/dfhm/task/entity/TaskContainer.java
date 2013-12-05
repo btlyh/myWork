@@ -84,24 +84,27 @@ public class TaskContainer
 			if (sample != null && sample instanceof Task)
 			{
 				Task task = (Task)Sample.getFactory().newSample(sample.getSid());
+				task.status=0;
 				if (task.isDayly == Task.NORMAL)
 				{
 					boolean b = task.take(player);
 					if (b)
+					{
 						taskList.add(task);
+					}
 				}
 			}
 		}
 		for (int i = 0; i < taskList.size(); i++)
 		{
 			Task task = taskList.get(i);
-			if (task.status == Task.FINISHED)
-			{
-				finishedTaskList.add(task);
-				taskList.remove(i);
-				i--;
-				continue;
-			}
+//			if (task.status == Task.FINISHED)
+//			{
+//				finishedTaskList.add(task);
+//				taskList.remove(i);
+//				i--;
+//				continue;
+//			}
 			task.checkFinish(player);
 		}
 	}

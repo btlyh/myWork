@@ -649,7 +649,7 @@ public class SlaveManager
 		resultList=pvpFight(player.formation.getFormation(),
 			tarPlayer.formation.getFormation());
 		int win=resultList.get(resultList.size()-1);
-		if(win==1)
+		if(win>0)
 		{
 			isWin=true;
 		}
@@ -923,8 +923,9 @@ public class SlaveManager
 		for(Session session:sessionList)
 		{
 			if(session!=null)
-			{	
-				rmPlayers.add(((Player)session.getSource()));
+			{
+				Player rmPlayer=(Player)session.getSource();
+				if(rmPlayer!=null) rmPlayers.add(rmPlayer);
 			}
 		}
 		List<Player> players=dao.getAllPlayer();
@@ -956,36 +957,38 @@ public class SlaveManager
 			{
 				sessionList.remove(index);
 				Player tarPlayer=(Player)session.getSource();
-				if(player.equals(tarPlayer))
-					continue;
-				if(enemyList.contains(tarPlayer))
-					continue;
-				if(isSave)
+				if(tarPlayer!=null)
 				{
-					if(Math.abs(tarPlayer.getFightPoint()
-						-player.getFightPoint())<=errorValue
-						&&tarPlayer.getIdentity().getGrade()==Identity.OWNER)
-					{
-						enemyList.add(tarPlayer);
-						if(enemyList.size()==GameCFG.getEnemySize())
-						{
-							return;
-						}
-					}
-				}
-				else
-				{
-					if(Math.abs(tarPlayer.getFightPoint()
-						-player.getFightPoint())<=errorValue
-						&&tarPlayer.getIdentity().getGrade()!=Identity.SLAVE)
-					{
-						enemyList.add(tarPlayer);
-						if(enemyList.size()==GameCFG.getEnemySize())
-						{
-							return;
-						}
-					}
 
+					if(player.equals(tarPlayer)) continue;
+					if(enemyList.contains(tarPlayer)) continue;
+					if(isSave)
+					{
+						if(Math.abs(tarPlayer.getFightPoint()
+							-player.getFightPoint())<=errorValue
+							&&tarPlayer.getIdentity().getGrade()==Identity.OWNER)
+						{
+							enemyList.add(tarPlayer);
+							if(enemyList.size()==GameCFG.getEnemySize())
+							{
+								return;
+							}
+						}
+					}
+					else
+					{
+						if(Math.abs(tarPlayer.getFightPoint()
+							-player.getFightPoint())<=errorValue
+							&&tarPlayer.getIdentity().getGrade()!=Identity.SLAVE)
+						{
+							enemyList.add(tarPlayer);
+							if(enemyList.size()==GameCFG.getEnemySize())
+							{
+								return;
+							}
+						}
+
+					}
 				}
 			}
 		}

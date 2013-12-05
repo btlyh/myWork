@@ -8,9 +8,12 @@ import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.mail.entity.Mail;
+import com.cambrian.dfhm.mail.notice.MailSendNotice;
 import com.cambrian.dfhm.mail.util.MailFactory;
 import com.cambrian.dfhm.shop.entity.Goods;
 import com.cambrian.dfhm.shop.entity.Shop;
+import com.cambrian.game.Session;
+import com.cambrian.game.ds.DataServer;
 
 /**
  * 类说明：商城处理
@@ -34,13 +37,25 @@ public class ShopManager
 	Shop shop = new Shop();
 	/** 邮件工厂 */
 	MailFactory mf;
+	/** 邮件推送 */
+	MailSendNotice msn;
+	/** 数据服务器 */
+	DataServer ds;
 
 	/* constructors */
 	public void setMailFactory(MailFactory mf)
 	{
 		instance.mf = mf;
 	}
+	public void setMailSendNotice(MailSendNotice msn)
+	{
+		instance.msn = msn;
+	}
 
+	public void setDS(DataServer ds)
+	{
+		instance.ds = ds;
+	}
 	/* properties */
 
 	/* init start */
@@ -84,6 +99,9 @@ public class ShopManager
 			Mail mail = mf.createSystemMail(cardsList, 0, 0, 0, 0, 0,
 					(int) player.getUserId());
 			player.addMail(mail);
+			Session session = ds.getSession(player.getNickname());
+			if (session != null)
+				msn.send(session, new Object[] {player.getUnreadMailCount()});
 		}else
 		{
 			for (Integer integer : cardsList)

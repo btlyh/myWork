@@ -5,7 +5,6 @@ import com.cambrian.common.net.Command;
 import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.net.NioTcpConnect;
 import com.cambrian.dfhm.Lang;
-import com.cambrian.dfhm.card.CardManager;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.instancing.logic.SweepManager;
 import com.cambrian.game.Session;

@@ -12,7 +12,10 @@ import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Gift;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.mail.entity.Mail;
+import com.cambrian.dfhm.mail.notice.MailSendNotice;
 import com.cambrian.dfhm.mail.util.MailFactory;
+import com.cambrian.game.Session;
+import com.cambrian.game.ds.DataServer;
 
 /**
  * 类说明：竞技场积分消耗业务逻辑处理类
@@ -33,11 +36,23 @@ public class UsePointsManager
 
 	/* fields */
 	MailFactory mf;
+	/** 邮件推送 */
+	MailSendNotice msn;
+	/** 数据服务器 */
+	DataServer ds;
 
 	/* constructors */
 	public void setMf(MailFactory mf)
 	{
 		instance.mf = mf;
+	}
+	public void setMailSendNotice(MailSendNotice msn)
+	{
+		instance.msn = msn;
+	}
+	public void setDS(DataServer ds)
+	{
+		instance.ds = ds;
 	}
 
 	/* properties */
@@ -84,6 +99,9 @@ public class UsePointsManager
 			Mail mail = mf.createSystemMail(giftCards, 0, 0, 0, 0, 0,
 					(int) player.getUserId());
 			player.addMail(mail);
+			Session session = ds.getSession(player.getNickname());
+			if (session != null)
+				msn.send(session, new Object[] {player.getUnreadMailCount()});
 		}
 		resultMap.put("cardList", cardList);
 		resultMap.put("haveCard", haveCard);

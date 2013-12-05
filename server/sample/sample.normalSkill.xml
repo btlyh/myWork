@@ -12,26 +12,26 @@
 	aim			攻击对象，1=自己，2=敌人
 	
 	-->
-	<sample sid="19401" class="com.cambrian.dfhm.skill.NormalSkill" name="刀砍" description="刀砍" att="1300" attRange="0" level="1" aim="2" skillRate="0"/>
-	<sample sid="19402" class="com.cambrian.dfhm.skill.NormalSkill" name="剑诀" description="剑诀" att="1300" attRange="0" level="1" aim="2" skillRate="0"/>
-	<sample sid="19403" class="com.cambrian.dfhm.skill.NormalSkill" name="憾地斩" description="憾地斩" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
-	<sample sid="19404" class="com.cambrian.dfhm.skill.NormalSkill" name="弓箭" description="弓箭" att="1300" attRange="0" level="1" aim="2" skillRate="0"/>
-	<sample sid="19405" class="com.cambrian.dfhm.skill.NormalSkill" name="蓄力击" description="蓄力击" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
-	<sample sid="19406" class="com.cambrian.dfhm.skill.NormalSkill" name="嗜血刺" description="嗜血刺" att="1560" attRange="1" level="1" aim="2" skillRate="0"/>
-	<sample sid="19407" class="com.cambrian.dfhm.skill.NormalSkill" name="千钧击" description="千钧击" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
-	<sample sid="19408" class="com.cambrian.dfhm.skill.NormalSkill" name="封喉诀" description="封喉诀" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
-	<sample sid="19409" class="com.cambrian.dfhm.skill.NormalSkill" name="开天斩" description="开天斩" att="1560" attRange="2" level="1" aim="2" skillRate="0"/>
-	<sample sid="19410" class="com.cambrian.dfhm.skill.NormalSkill" name="流矢" description="流矢" att="1560" attRange="0" level="1" aim="2" skillRate="0"/>
-	<sample sid="19411" class="com.cambrian.dfhm.skill.NormalSkill" name="法术" description="法术" att="1300" attRange="0" level="1" aim="2" skillRate="0"/>
-	<sample sid="19412" class="com.cambrian.dfhm.skill.NormalSkill" name="爆裂矢" description="爆裂矢" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
-	<sample sid="19413" class="com.cambrian.dfhm.skill.NormalSkill" name="疾风箭" description="疾风箭" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
-	<sample sid="19414" class="com.cambrian.dfhm.skill.NormalSkill" name="唤雷" description="唤雷" att="1560" attRange="1" level="1" aim="2" skillRate="0"/>
-	<sample sid="19415" class="com.cambrian.dfhm.skill.NormalSkill" name="枪挑万里" description="枪挑万里" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
-	<sample sid="19416" class="com.cambrian.dfhm.skill.NormalSkill" name="龙胆单骑" description="龙胆单骑" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
-	<sample sid="19417" class="com.cambrian.dfhm.skill.NormalSkill" name="千古兵圣" description="千古兵圣" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
-	<sample sid="19418" class="com.cambrian.dfhm.skill.NormalSkill" name="无双霸王" description="无双霸王" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
-	<sample sid="19419" class="com.cambrian.dfhm.skill.NormalSkill" name="威震山河" description="威震山河" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
-	<sample sid="19420" class="com.cambrian.dfhm.skill.NormalSkill" name="一代天骄" description="一代天骄" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
-	<sample sid="19421" class="com.cambrian.dfhm.skill.NormalSkill" name="斗转星移" description="斗转星移" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
+	<sample sid="19401" class="com.cambrian.dfhm.skill.NormalSkill" name="刀砍" description="单体攻击，130%的伤害" att="1300" attRange="0" level="1" aim="2" skillRate="0"/>
+	<sample sid="19402" class="com.cambrian.dfhm.skill.NormalSkill" name="剑诀" description="单体攻击，130%的伤害" att="1300" attRange="0" level="1" aim="2" skillRate="0"/>
+	<sample sid="19403" class="com.cambrian.dfhm.skill.NormalSkill" name="憾地斩" description="单体攻击，143%的伤害" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
+	<sample sid="19404" class="com.cambrian.dfhm.skill.NormalSkill" name="弓箭" description="单体攻击，130%的伤害" att="1300" attRange="0" level="1" aim="2" skillRate="0"/>
+	<sample sid="19405" class="com.cambrian.dfhm.skill.NormalSkill" name="蓄力击" description="单体攻击，143%的伤害" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
+	<sample sid="19406" class="com.cambrian.dfhm.skill.NormalSkill" name="嗜血刺" description="单体攻击，156%的伤害，随机目标" att="1560" attRange="1" level="1" aim="2" skillRate="0"/>
+	<sample sid="19407" class="com.cambrian.dfhm.skill.NormalSkill" name="千钧击" description="单体攻击，143%的伤害" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
+	<sample sid="19408" class="com.cambrian.dfhm.skill.NormalSkill" name="封喉诀" description="单体攻击，143%的伤害" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
+	<sample sid="19409" class="com.cambrian.dfhm.skill.NormalSkill" name="开天斩" description="纵向攻击，156%的伤害" att="1560" attRange="2" level="1" aim="2" skillRate="0"/>
+	<sample sid="19410" class="com.cambrian.dfhm.skill.NormalSkill" name="流矢" description="单体攻击，156%的伤害" att="1560" attRange="0" level="1" aim="2" skillRate="0"/>
+	<sample sid="19411" class="com.cambrian.dfhm.skill.NormalSkill" name="法术" description="单体攻击，130%的伤害" att="1300" attRange="0" level="1" aim="2" skillRate="0"/>
+	<sample sid="19412" class="com.cambrian.dfhm.skill.NormalSkill" name="爆裂矢" description="单体攻击，143%的伤害" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
+	<sample sid="19413" class="com.cambrian.dfhm.skill.NormalSkill" name="疾风箭" description="单体攻击，143%的伤害" att="1430" attRange="0" level="1" aim="2" skillRate="0"/>
+	<sample sid="19414" class="com.cambrian.dfhm.skill.NormalSkill" name="唤雷" description="单体攻击，156%的伤害，随机目标" att="1560" attRange="1" level="1" aim="2" skillRate="0"/>
+	<sample sid="19415" class="com.cambrian.dfhm.skill.NormalSkill" name="枪挑万里" description="全体攻击，182%的伤害" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
+	<sample sid="19416" class="com.cambrian.dfhm.skill.NormalSkill" name="龙胆单骑" description="全体攻击，182%的伤害" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
+	<sample sid="19417" class="com.cambrian.dfhm.skill.NormalSkill" name="千古兵圣" description="全体攻击，182%的伤害" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
+	<sample sid="19418" class="com.cambrian.dfhm.skill.NormalSkill" name="无双霸王" description="全体攻击，182%的伤害" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
+	<sample sid="19419" class="com.cambrian.dfhm.skill.NormalSkill" name="威震山河" description="全体攻击，182%的伤害" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
+	<sample sid="19420" class="com.cambrian.dfhm.skill.NormalSkill" name="一代天骄" description="全体攻击，182%的伤害" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
+	<sample sid="19421" class="com.cambrian.dfhm.skill.NormalSkill" name="斗转星移" description="全体攻击，182%的伤害" att="1820" attRange="4" level="1" aim="2" skillRate="0"/>
 
 </objects>

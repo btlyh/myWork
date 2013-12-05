@@ -13,6 +13,6 @@
 	number		免伤次数
 	
 	-->
-	<sample sid="19801" class="com.cambrian.dfhm.skill.NoHurtSkill" name="盾墙" description="免伤" att="0" attRange="11" level="1" aim="1" number="1" skillRate="0"/>
+	<sample sid="19801" class="com.cambrian.dfhm.skill.NoHurtSkill" name="盾墙" description="免伤免疫伤害一次" att="0" attRange="11" level="1" aim="1" number="1" skillRate="0"/>
 
 </objects>
