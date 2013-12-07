@@ -25,8 +25,8 @@ public class LuckBoxManager
 
 	/* static fields */
 	private static LuckBoxManager instance=new LuckBoxManager();
-	/** 免费刷新、武魂刷新 */
-	private static final int FLUSH_FREE=0,FLUSH_SOUL=1;
+	/** 免费刷新、武魂刷新 ,金币刷新*/
+	private static final int FLUSH_FREE=0,FLUSH_SOUL=1,FLUSH_GOLD=2;
 
 	/* static methods */
 	public static LuckBoxManager getInstance()
@@ -75,7 +75,7 @@ public class LuckBoxManager
 		}
 		else
 		{
-			card=player.getCardBag().add(cardSid);
+			card=player.getCardBag().add(cardSid,player.getAchievements());
 		}
 		player.getPlayerInfo().setBuyed(true);
 		return card;
@@ -99,11 +99,6 @@ public class LuckBoxManager
 			resultMap.put("error",Lang.F1603);
 			return resultMap;
 		}
-		// if(player.getVipLevel()<3)
-		// {
-		// resultMap.put("error",Lang.F1610);
-		// return resultMap;
-		// }
 		if(needGold>player.getGold())
 		{
 			resultMap.put("error",Lang.F1606);
@@ -137,40 +132,24 @@ public class LuckBoxManager
 	 * @param index 位置
 	 * @return
 	 */
-	public Card takeCard(Player player,int needGold,int index)
+	public Card takeCard(Player player,int needGold,int index,Boolean type)
 	{
-		Map<String,Object> resultMap=checkTakeCard(player,needGold);
+		Map<String,Object> resultMap=checkTakeCard(player,needGold,type);
 		String error=(String)resultMap.get("error");
 		if(error!=null)
 		{
 			throw new DataAccessException(601,error);
 		}
-		LuckBoxCfg lbc=(LuckBoxCfg)resultMap.get("lbc");
-		if(player.getPlayerInfo().getLuckBoxFreeTimes()>0)
+		LuckBoxCfg lbc=(LuckBoxCfg)resultMap.get("lbc");		
+		if (type)//武魂抽取
 		{
-			player.getPlayerInfo().decrLuckBoxFreeTimes(1);
-		}
-		else
+			player.decrSoul(lbc.gettNeedSoul()*(player.getPlayerInfo().getExtractTimes()+1));
+			player.getPlayerInfo().inSoulextractTimes(1);
+		
+		}else
 		{
-			if(player.getPlayerInfo().isFirst())
-			{
-				if(player.getSoul()>lbc.gettNeedSoul())
-				{
-					player.decrSoul(lbc.gettNeedSoul());
-					player.getPlayerInfo().setFirst(false);
-				}
-				else
-				{
-					player.getPlayerInfo().inPayTimes(1);
-					player.decrGold(needGold);
-				}
-			}
-			else
-			{
-				player.getPlayerInfo().inPayTimes(1);
-				player.decrGold(needGold);
-			}
-
+			player.decrGold(lbc.getNeedGold()*(player.getPlayerInfo().getExtractTimes()+1));
+			player.getPlayerInfo().inSoulextractTimes(1);		
 		}
 		TakeCardRecord cardRecord=getRandomCard(player.getPlayerInfo()
 			.getTakeCardRecords());
@@ -185,7 +164,7 @@ public class LuckBoxManager
 		}
 		else
 		{
-			card=player.getCardBag().add(cardRecord.getSid());
+			card=player.getCardBag().add(cardRecord.getSid(),player.getAchievements());
 		}
 		if(card==null)
 		{
@@ -202,7 +181,7 @@ public class LuckBoxManager
 	 * @param player 玩家对象
 	 * @return
 	 */
-	private Map<String,Object> checkTakeCard(Player player,int needGold)
+	private Map<String,Object> checkTakeCard(Player player,int needGold,boolean type)
 	{
 		Map<String,Object> resultMap=new HashMap<String,Object>();
 		LuckBoxCfg lbc=(LuckBoxCfg)Sample.getFactory().getSample(
@@ -212,7 +191,42 @@ public class LuckBoxManager
 			resultMap.put("error",Lang.F1603);
 			return resultMap;
 		}
-		if(player.getPlayerInfo().isFirst()
+		if(type)//武魂获取
+		{
+			int useGold=(player.getPlayerInfo().getExtractTimes()+1)
+					*lbc.gettNeedSoul();
+			if(needGold!=useGold)//武魂抽奖 客户端消耗和服务器不一样
+			{
+				resultMap.put("error",Lang.F1614);
+				return resultMap;
+			}else
+			{
+				if(needGold>useGold)//武魂抽奖  武魂值不足
+				{
+					resultMap.put("error",Lang.F1613);
+					return resultMap;
+				}	
+			}	
+		}else//金币抽取
+		{
+			int useGold=(player.getPlayerInfo().getExtractTimes()+1)
+					*lbc.getNeedGold();
+			if(needGold!=useGold)//金币抽奖 客户端消耗和服务器不一样
+			{
+				resultMap.put("error",Lang.F1604);
+				return resultMap;
+			}else
+			{
+				if(needGold>useGold)//武魂抽奖   金币不足
+				{
+					resultMap.put("error",Lang.F1605);
+					return resultMap;
+				}	
+			}	
+		}	
+		
+		
+		/*if(player.getPlayerInfo().isFirst()
 			&&player.getSoul()<lbc.gettNeedSoul())
 		{
 			if(needGold>player.getGold())
@@ -235,7 +249,7 @@ public class LuckBoxManager
 		{
 			resultMap.put("error",Lang.F1604);
 			return resultMap;
-		}
+		}*/
 		boolean isAllTake=true;
 		for(TakeCardRecord cardRecord:player.getPlayerInfo()
 			.getTakeCardRecords())
@@ -279,8 +293,8 @@ public class LuckBoxManager
 				player.getPlayerInfo().setTakeCardRecords(
 					getCardRecord(getRandomCards(lbc)));
 				player.getPlayerInfo().initBestCardSid();
-				player.getPlayerInfo().setFirst(true);
-				player.getPlayerInfo().setPayTimes(0);
+				player.getPlayerInfo().setExtractTimes(0);
+			//	player.getPlayerInfo().setSoulTimes(0);
 			}
 		}
 		else if(type==FLUSH_SOUL)
@@ -290,10 +304,21 @@ public class LuckBoxManager
 			player.getPlayerInfo().setTakeCardRecords(
 				getCardRecord(getRandomCards(lbc)));
 			player.getPlayerInfo().initBestCardSid();
-			player.getPlayerInfo().setFirst(true);
-			player.getPlayerInfo().setPayTimes(0);
+			player.getPlayerInfo().setExtractTimes(0);
+		//	player.getPlayerInfo().setSoulTimes(0);
 		}
-		if(type==FLUSH_SOUL)
+		else if(type==FLUSH_GOLD)
+		{
+			player.decrGold(lbc.getFlushGold());
+			player.getPlayerInfo().setLastTime(TimeKit.nowTimeMills());
+			player.getPlayerInfo().setTakeCardRecords(
+				getCardRecord(getRandomCards(lbc)));
+			player.getPlayerInfo().initBestCardSid();
+			player.getPlayerInfo().setExtractTimes(0);
+		//	player.getPlayerInfo().setSoulTimes(0);
+		}
+		
+		if(type==FLUSH_SOUL||type==FLUSH_GOLD)
 		{
 			return LuckBoxCfg.CDTime;
 		}
@@ -331,6 +356,15 @@ public class LuckBoxManager
 				return resultMap;
 			}
 		}
+		
+		if(type==FLUSH_GOLD)
+		{
+			if(player.getGold()<lbc.getFlushGold())
+			{
+				resultMap.put("error", Lang.F1612);
+				return resultMap;
+			}	
+		}	
 		resultMap.put("error",null);
 		resultMap.put("lbc",lbc);
 		return resultMap;

@@ -42,12 +42,6 @@
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setGoldFosterNum">50</method>
 	</obj>
-	<!-- 设置VIP等级对应配置表的SID -->
-	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setVipCfgXml">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
-		</method>
-	</obj>
 	<!-- 金币培养 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setMoneyFosterNum">20</method>
@@ -174,13 +168,13 @@
 	<!-- 设置VIP配置-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setVipCfgXml">
-			<ints>21372,21373,21374,21375,21376,21377</ints>
+			<ints>21372,21373,21374,21375,21376,21377,21378,21379,21380,21381,21382</ints>
 		</method>
 	</obj>
 	<!--VIP升级所需要的GOLD-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setVipLevelGold">
-			<ints>50,100,150,200,250,300,350,400,450,500,550,600,650</ints>
+			<ints>100,200,500,1000,2000,5000,10000,20000,50000,100000</ints>
 		</method>
 	</obj>
 	<!--卡牌吞噬消耗的基础银币-->
@@ -191,10 +185,31 @@
 		</method>
 	</obj>
 	
+		<!--新手引导的卡牌奖励-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setLeadAwardCard">
+			<ints>1,10218</ints>
+		</method>
+	</obj>
 	
+	<!--卡牌被吞噬所能提供的经验  不同等级-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setEngulfLevelExp">
+			<ints>10,21,32,43,54,66,78,90,102,114,127,140,153,166,180,194,208,222,237,252,267,282,298,314,330,346,363,380,397,414,432,450,468,486,504,523,542,561,580,600,620,640,660,681,702,723,744,766,788,810,832,855,878,901,924,948,972,996,1020,1044,1069,1094,1119,1144,1170,1196,1222,1248,1275,1302,1329,1356,1384,1412,1440,1468,1497,1526,1555,1584,1614,1644,1674,1704,1734,1765,1796,1827,1858,1889</ints>
+		</method>
+	</obj>
+	
+		<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setEngulfExpPer">
+			0.5
+		</method>
+	</obj>
 	<!-- 服务器刷新时间（24小时，同世界BOSS时间） -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setServerTime">5</method>
 	</obj>
-	
+	<!-- 当壕信息SID集合 -->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setSlaveInformations">50001,50002,50003,50004,50005,50006,50007,50008,50009,50010,50011,50012,50013,50014,50015,50016,50017,50018,50019,50020,50021,50022,50023,50024,50025,50026,50027,50028,50029,50030,50031,50032,50033,50034,50035,50036</method>
+	</obj>
 </objects>

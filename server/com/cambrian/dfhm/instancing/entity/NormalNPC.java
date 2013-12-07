@@ -1,6 +1,12 @@
 package com.cambrian.dfhm.instancing.entity;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.cambrian.common.object.Sample;
 import com.cambrian.common.util.TimeKit;
+import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
 import com.cambrian.dfhm.common.entity.Player;
@@ -118,6 +124,7 @@ public class NormalNPC extends NPC
 			monsters[i]=battleCard;
 		}
 	}
+
 
 	@Override
 	public void winCondition(BattleScene scene,BattleCard[] attList,Player player)

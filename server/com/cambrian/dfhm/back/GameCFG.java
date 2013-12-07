@@ -1,5 +1,7 @@
 package com.cambrian.dfhm.back;
 
+import java.util.ArrayList;
+
 /**
  * 类说明：游戏全局配置(功能配置)
  * 
@@ -90,18 +92,30 @@ public class GameCFG
 	private static int managedGold;
 	/** 当壕功能速去速回所需金币数量 */
 	private static int fastWorkGold;
+	/** 当壕功能身份维持时间(小时) */
+	private static int slaveKeepTime;
+	/** 当壕功能信息SID集合 */
+	private static int[] slaveInformations;
 	/** 世界BOSS集合 */
 	private static int[] globalBossList;
 	/** 世界BOSS自动报名所需金币 */
 	private static int bossAutoSignGold;
-	/** 玩家初始化可挑战副本SID*/
+	/** 玩家初始化可挑战副本SID */
 	private static int indexForNormalNPC;
 
-	/** 卡牌吞噬消耗的基础金币***/
+	/** 卡牌吞噬消耗的基础金币 ***/
 	private static int engulfCardMony;
 	/** 服务器重置玩家每日数据时间 */
 	private static int serverTime;
-	
+
+	/** 新手引导 奖励的卡牌ID **/
+	private static int[] leadAwardCard;
+
+	/** 卡牌被吞噬所能提供的经验值 ***/
+	private static int[] engulfLevelExp;
+	/** 卡牌吞噬经验回收比例 **/
+	private static float engulfExpPer;
+
 	public static int getPayForAwakeMinutes()
 	{
 		return payForAwakeMinutes;
@@ -221,6 +235,16 @@ public class GameCFG
 		System.err.println("length ===="+DoubleSkill);
 	}
 
+	public static float getEngulfExpPer()
+	{
+		return engulfExpPer;
+	}
+
+	public static void setEngulfExpPer(float engulfExpPer)
+	{
+		GameCFG.engulfExpPer=engulfExpPer;
+	}
+
 	/**
 	 * 获得所有BOSS集合
 	 * 
@@ -333,15 +357,25 @@ public class GameCFG
 	{
 		return vipLevelGold;
 	}
-	
-	
 
-	public static int getEngulfCardMony() {
+	public static int getEngulfCardMony()
+	{
 		return engulfCardMony;
-	} 
+	}
 
-	public static void setEngulfCardMony(int engulfCardMony) {
-		GameCFG.engulfCardMony = engulfCardMony;
+	public static void setEngulfCardMony(int engulfCardMony)
+	{
+		GameCFG.engulfCardMony=engulfCardMony;
+	}
+
+	public static int[] getLeadAwardCard()
+	{
+		return leadAwardCard;
+	}
+
+	public static void setLeadAwardCard(int[] leadAwardCard)
+	{
+		GameCFG.leadAwardCard=leadAwardCard;
 	}
 
 	/***
@@ -685,9 +719,10 @@ public class GameCFG
 	{
 		GameCFG.skillFlushNeedGold=skillFlushNeedGold;
 	}
-	
+
 	/***
 	 * 求救次数
+	 * 
 	 * @return
 	 */
 	public static int getHelpConfine()
@@ -697,11 +732,22 @@ public class GameCFG
 
 	public static void setHelpConfine(int helpConfine)
 	{
-		GameCFG.helpConfine = helpConfine;
+		GameCFG.helpConfine=helpConfine;
 	}
-	
+
+	public static int[] getEngulfLevelExp()
+	{
+		return engulfLevelExp;
+	}
+
+	public static void setEngulfLevelExp(int[] engulfLevelExp)
+	{
+		GameCFG.engulfLevelExp=engulfLevelExp;
+	}
+
 	/***
 	 * 获取玩家初始化可挑战副本SID
+	 * 
 	 * @return
 	 */
 	public static int getIndexForNormalNPC()
@@ -711,7 +757,23 @@ public class GameCFG
 
 	public static void setIndexForNormalNPC(int indexForNormalNPC)
 	{
-		GameCFG.indexForNormalNPC = indexForNormalNPC;
+		GameCFG.indexForNormalNPC=indexForNormalNPC;
+	}
+
+	public static ArrayList<Integer> getAwardCardByStep(int step)
+	{
+		ArrayList<Integer> rtList=new ArrayList<Integer>();
+
+		for(int i=0;i<leadAwardCard.length;i++)
+		{
+			if(leadAwardCard[i]==step)
+			{
+				rtList.add(leadAwardCard[i+1]);
+			}
+		}
+
+		return rtList;
+
 	}
 
 	public static int getServerTime()
@@ -721,6 +783,40 @@ public class GameCFG
 
 	public static void setServerTime(int serverTime)
 	{
-		GameCFG.serverTime = serverTime;
+		GameCFG.serverTime=serverTime;
+	}
+
+	public static int getEngulfExpByLevel(int level)
+	{
+		return engulfLevelExp[level-1];
+	}
+
+	/**
+	 * 获取身份维持时间
+	 * 
+	 * @return
+	 */
+	public static int getSlaveKeepTime()
+	{
+		return slaveKeepTime;
+	}
+
+	public static void setSlaveKeepTime(int slaveKeepTime)
+	{
+		GameCFG.slaveKeepTime=slaveKeepTime;
+	}
+	
+	/***
+	 * 获取当壕信息SID集合
+	 * @return
+	 */
+	public static int[] getSlaveInformations()
+	{
+		return slaveInformations;
+	}
+
+	public static void setSlaveInformations(int[] slaveInformations)
+	{
+		GameCFG.slaveInformations = slaveInformations;
 	}
 }

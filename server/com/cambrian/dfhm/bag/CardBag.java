@@ -8,6 +8,7 @@ import com.cambrian.common.object.Sample;
 import com.cambrian.common.object.Serializable;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.UidFile;
+import com.cambrian.dfhm.common.entity.Achievements;
 
 /**
  * 类说明：卡片列表
@@ -59,13 +60,22 @@ public class CardBag implements Serializable,DBSerializable
 	}
 
 	/** 添加卡片 */
-	public synchronized Card add(int sid)
+	public synchronized Card add(int sid,Achievements achievements)
 	{
 		Card card=(Card)Sample.factory.newSample(sid);
 		Card card_ = new Card();
 		card_.init(card);
 		card_.uid = UidFile.getCardFile().getPlusUid();
 		list.add(card_);
+		
+		if (!achievements.isBuleCard())
+		{
+			if (card_.getType()==5||card_.getType()==6) {
+				achievements.setBuleCard(true);
+			}
+			
+		}
+		
 		return card_;
 	}
 

@@ -89,7 +89,7 @@ public class UsePointsManager
 		{
 			for (Integer integer : giftCards)
 			{
-				Card card = player.getCardBag().add(integer);
+				Card card = player.getCardBag().add(integer,player.getAchievements());
 				cardList.add(integer);
 				cardList.add(card.getId());
 				cardList.add(card.getSkillId());

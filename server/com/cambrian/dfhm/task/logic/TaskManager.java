@@ -106,7 +106,7 @@ public class TaskManager
 			{
 				for (Integer integer : cardSidList)
 				{
-					Card card = player.getCardBag().add(integer);
+					Card card = player.getCardBag().add(integer,player.getAchievements());
 					cardList.add(card);
 					resultMap.put("flag", true);
 				}
@@ -126,6 +126,12 @@ public class TaskManager
 			resultMap.put("list", cardSidList);
 		}
 		resultMap.put("award", award);
+		
+		
+		if(player.getPlayerInfo().getLeadStep() != -1)//引导第四步 领取奖励 
+		{
+			player.getPlayerInfo().setLeadStep(-1);
+		}
 		return resultMap;
 	}
 	

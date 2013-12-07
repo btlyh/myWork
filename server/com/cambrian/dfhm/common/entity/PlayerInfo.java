@@ -25,8 +25,8 @@ public class PlayerInfo
 	private int getToken;
 	/** 每日可购买军令数量 */
 	private int buyToken;
-	/** 每日武魂抽奖免费次数 */
-	private int luckBoxFreeTimes;
+	/** 每轮武魂抽奖次数 */
+	private int extractTimes = 0;
 	/** 每日刷新技能免费次数 */
 	private int skillFlushFreeTimes;
 	/** 免费金币培养次数 */
@@ -54,14 +54,13 @@ public class PlayerInfo
 	private long lastTime;
 	/** 卡牌抽取记录集合 */
 	private ArrayList<TakeCardRecord> takeCardRecords=new ArrayList<TakeCardRecord>();
-	/** 付费抽取的次数 */
-	private int payTimes;
+	
 	/** 可以购买的卡牌SID */
 	private int bestCardSid;
 	/** 积分 */
 	private int normalPoint;
 	/** 是否第一次抽取 */
-	private boolean isFirst;
+//	private boolean isFirst;
 	/** 总充值金额 */
 	private int payRMB=0;
 	/** 故事模式副本时间 */
@@ -109,7 +108,8 @@ public class PlayerInfo
 	
 	private List<Integer>crossNPCList = new ArrayList<Integer>(); 
 	/* constructors */
-
+	/**新手引导的第几步  如果为-1 则表示已经完成新手引导*/
+	private int leadStep = 1;
 	/* properties */
 	public int getSkillFlushFreeTimes()
 	{
@@ -131,16 +131,7 @@ public class PlayerInfo
 		this.luckBoxSid=luckBoxSid;
 	}
 
-	public int getLuckBoxFreeTimes()
-	{
-		return luckBoxFreeTimes;
-	}
-
-	public void setLuckBoxFreeTimes(int luckBoxFreeTimes)
-	{
-		this.luckBoxFreeTimes=luckBoxFreeTimes;
-	}
-
+ 
 	public long getLastTime()
 	{
 		return lastTime;
@@ -151,15 +142,7 @@ public class PlayerInfo
 		this.lastTime=lastTime;
 	}
 
-	public int getPayTimes()
-	{
-		return payTimes;
-	}
-
-	public void setPayTimes(int payTimes)
-	{
-		this.payTimes=payTimes;
-	}
+	
 	public int getBestCardSid()
 	{
 		return bestCardSid;
@@ -188,15 +171,7 @@ public class PlayerInfo
 	{
 		this.normalPoint=normalPoint;
 	}
-	public boolean isFirst()
-
-	{
-		return isFirst;
-	}
-	public void setFirst(boolean isFirst)
-	{
-		this.isFirst=isFirst;
-	}
+	
 	public int getPayRMB()
 	{
 		return payRMB;
@@ -230,9 +205,19 @@ public class PlayerInfo
 
 	/* methods */
 
+	
+	
 	public int getGetToken()
 	{
 		return getToken;
+	}
+
+	public int getExtractTimes() {
+		return extractTimes;
+	}
+
+	public void setExtractTimes(int extractTimes) {
+		this.extractTimes = extractTimes;
 	}
 
 	public void setGetToken(int getToken)
@@ -488,6 +473,19 @@ public class PlayerInfo
 	public void setCrossNPCList(List<Integer> crossNPCList) {
 		this.crossNPCList = crossNPCList;
 	}
+	
+	
+	
+
+
+
+	public int getLeadStep() {
+		return leadStep;
+	}
+
+	public void setLeadStep(int leadStep) {
+		this.leadStep = leadStep;
+	}
 
 	/** 序列化 和前台通信 */
 	public void bytesWrite(ByteBuffer data)
@@ -495,8 +493,7 @@ public class PlayerInfo
 		int len =0;
 		data.writeInt(skillFlushFreeTimes);
 		data.writeInt(normalPoint);
-		data.writeInt(luckBoxFreeTimes);
-		data.writeInt(payTimes);
+		data.writeInt(extractTimes);
 		data.writeInt(getToken);
 		data.writeInt(buyToken);
 		data.writeInt(cardGoldForsterFreeTimes);
@@ -525,6 +522,7 @@ public class PlayerInfo
 			data.writeInt(integer);
 		}
 		
+		data.writeInt(leadStep);
 		
 		
 	}
@@ -534,9 +532,8 @@ public class PlayerInfo
 	{
 		data.writeInt(skillFlushFreeTimes);
 		data.writeInt(luckBoxSid);
-		data.writeInt(luckBoxFreeTimes);
+		data.writeInt(extractTimes);
 		data.writeLong(lastTime);
-		data.writeInt(payTimes);
 		data.writeInt(bestCardSid);
 		data.writeInt(takeCardRecords.size());
 		for(TakeCardRecord cardRecord:takeCardRecords)
@@ -544,7 +541,6 @@ public class PlayerInfo
 			cardRecord.dbBytesWrite(data);
 		}
 		data.writeInt(normalPoint);
-		data.writeBoolean(isFirst);
 		data.writeInt(payRMB);
 		data.writeInt(normalNPCTime);
 		data.writeInt(hardNPCTime);
@@ -591,15 +587,16 @@ public class PlayerInfo
 		{
 			data.writeInt(integer);
 		}
+		
+		data.writeInt(leadStep);
 	}
 	/** 序列化 和DC通信 取 */
 	public void dbBytesRead(ByteBuffer data)
 	{
 		skillFlushFreeTimes=data.readInt();
 		luckBoxSid=data.readInt();
-		luckBoxFreeTimes=data.readInt();
+		extractTimes=data.readInt();
 		lastTime=data.readLong();
-		payTimes=data.readInt();
 		bestCardSid=data.readInt();
 		int len=data.readInt();
 		for(int i=0;i<len;i++)
@@ -609,7 +606,6 @@ public class PlayerInfo
 			takeCardRecords.add(cardRecord);
 		}
 		normalPoint=data.readInt();
-		isFirst=data.readBoolean();
 		payRMB=data.readInt();
 		normalNPCTime=data.readInt();
 		hardNPCTime=data.readInt();
@@ -661,16 +657,18 @@ public class PlayerInfo
 			int index=data.readInt();
 			crossNPCList.add(index);
 		}
+		leadStep = data.readInt();
 	}
 
-	public void decrLuckBoxFreeTimes(int times)
+	public void decrLuckBoxextractTimes(int times)
 	{
-		luckBoxFreeTimes-=times;
+		extractTimes-=times;
 	}
 
-	public void inPayTimes(int times)
+
+	public void inSoulextractTimes(int times)
 	{
-		payTimes+=times;
+		extractTimes+=times;
 	}
 
 	public void incrNormalPoint(int normalPoint)

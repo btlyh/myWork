@@ -38,6 +38,7 @@ public class Player extends Sample implements Actor
 
 	private static final int UPDATE_PLAYER=0;
 
+
 	private long userid;
 	private String nickname;
 	/** 游戏币 */
@@ -82,7 +83,7 @@ public class Player extends Sample implements Actor
 	{
 		return userid;
 	}
-
+ 
 	/** 当前可以挑战普通副本NPC的位置 */
 	private int curIndexForNormalNPC;
 	/** 当前可以挑战挑战副本NPC的位置 */
@@ -95,6 +96,11 @@ public class Player extends Sample implements Actor
 	private BossFightRecord bfr;
 	/** 身份对象(当土豪功能用) */
 	private Identity identity=new Identity();
+	
+	/**玩家成就系统**/
+	private Achievements achievements = new Achievements();
+	
+	
 	
 	
 	boolean isRefresh = false;
@@ -311,25 +317,34 @@ public class Player extends Sample implements Actor
 		if(listener!=null) listener.change(this,UPDATE_PLAYER);
 	}
 
+	
+	public Achievements getAchievements() {
+		return achievements;
+	}
+
+	public void setAchievements(Achievements achievements) {
+		this.achievements = achievements;
+	}
+
 	/** player的初始化 */
 	public void init()
 	{
 		Card card;
 		BattleCard bCard;
 		// for (int i = 0; i < 1; i++) {
-		card=cardBag.add(10051);
-		card.setStatus(Card.ATTACK);
+		card=cardBag.add(10051,achievements);
+		card.setStatus(Card.NORMAL);
 		System.err.println("id !!!======="+card.getId());
 		// card.setForsterNumber(100);
-		bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
+		/*bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
 			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
 			card.getMaxHp(),card.getCurHp(),0,card.getAimType(),
 			card.getCritRate(),card.getDodgeRate(),0,card.getType(),
 			card.getSid(),card.getCritFactor());
-		formation.changeFormation(0,bCard);
+		formation.changeFormation(0,bCard);*/
 
-		card=cardBag.add(10052);
+		card=cardBag.add(10052,achievements);
 		card.setStatus(Card.ATTACK);
 		// card.setForsterNumber(100);
 		System.err.println("id !!!======="+card.getId());
@@ -341,7 +356,7 @@ public class Player extends Sample implements Actor
 			card.getSid(),card.getCritFactor());
 		formation.changeFormation(1,bCard);
 
-		card=cardBag.add(10053);
+		card=cardBag.add(10053,achievements);
 		card.setStatus(Card.ATTACK);
 		bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
@@ -351,7 +366,7 @@ public class Player extends Sample implements Actor
 			card.getSid(),card.getCritFactor());
 		formation.changeFormation(2,bCard);
 
-		card=cardBag.add(10054);
+		card=cardBag.add(10054,achievements);
 		card.setStatus(Card.ATTACK);
 		bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
@@ -361,7 +376,7 @@ public class Player extends Sample implements Actor
 			card.getSid(),card.getCritFactor());
 		formation.changeFormation(3,bCard);
 
-		card=cardBag.add(10055);
+		card=cardBag.add(10055,achievements);
 		card.setStatus(Card.ATTACK);
 		bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
 			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
@@ -551,7 +566,6 @@ public class Player extends Sample implements Actor
 		playerInfo.setGetToken(vip.getToken);
 		playerInfo.setBuyToken(vip.buyToken);
 		playerInfo.setSkillFlushFreeTimes(vip.skillFlushFreeTimes);
-		playerInfo.setLuckBoxFreeTimes(vip.luckBoxFreeTimes);
 		playerInfo.setCardGoldForsterFreeTimes(vip.cardGoldForsterFreeTimes);
 		playerInfo.setCardGoldForster(vip.cardGoldForster);
 		playerInfo.setBattleSkip(vip.battleSkip);
@@ -607,6 +621,7 @@ public class Player extends Sample implements Actor
 		}
 		playerInfo.bytesWrite(data);
 		armyCamp.bytesWrite(data);
+	//	achievements.bytesWrite(data);
 	}
 
 	/** 序列化(和dc通信) */
@@ -658,6 +673,7 @@ public class Player extends Sample implements Actor
 		tasks.dbBytesWrite(data);
 		if(identity==null) identity=new Identity();
 		identity.dbBytesWrite(data);
+	//	achievements.dbBytesWrite(data);
 	}
 
 	/** 反序列化(和dc通信) */
@@ -714,6 +730,7 @@ public class Player extends Sample implements Actor
 		tasks.dbBytesRead(data);
 		if(identity==null) identity=new Identity();
 		identity.dbBytesRead(data);
+	//	achievements.dbBytesRead(data);
 	}
 
 	@Override
@@ -727,7 +744,7 @@ public class Player extends Sample implements Actor
 	 */
 	public void initToken()
 	{
-		if(logoutTime!=0 && !isRefresh)
+		if(logoutTime!=0)
 		{
 			long times;
 			if((times=(TimeKit.nowTimeMills()-logoutTime)

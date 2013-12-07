@@ -128,6 +128,7 @@ public class ArmyCampManager
 	public void setCardToDrink(Player player, String userName, int cardUid,
 			int sitNum)
 	{
+
 		Map<String, Object> resultMap = checkSetCardToDrink(player, userName,
 				cardUid, sitNum);
 		String error = (String) resultMap.get("error");
@@ -169,6 +170,9 @@ public class ArmyCampManager
 			int userId = dao.getUserIdByName(userName, ds.getSession(userName));
 			dao.setArmyCamp(tarArmyCamp, userId);
 		}
+		
+	
+		
 	}
 
 	/** 检查卡牌进入座位喝酒 */
@@ -504,6 +508,37 @@ public class ArmyCampManager
 		{
 			throw new DataAccessException(601, error);
 		}
+		List<Card> armyCardList = new ArrayList<Card>();
+		for (Card card : player.getCardBag().getList())
+		{
+			if(card.isInArmyCamp()==1 && !card.getArmyName().equals(player.getNickname()))
+			{
+				armyCardList.add(card);
+			}
+		}
+		for (Card card : armyCardList)
+		{
+			if (TimeKit.nowTimeMills() - card.getLastDrinkTime() >= ArmyCamp.DRINK_CD)
+			{
+				ArmyCamp otherArmyCamp = getArmyCamp(card.getArmyName());
+				SeatCard seatCard = otherArmyCamp.getSeatCardById(card.getId());
+				otherArmyCamp.removeSeatCard(seatCard);
+				setArmyCamp(otherArmyCamp, card.getArmyName());
+				card.setDrinkStatus(Card.AWAKE);
+				card.setInArmyCamp(0);
+				card.setArmyName("");
+				String s = "亲爱的玩家您好，在您自己军帐中的" + card.getName()
+						+ "卡牌冷却时间已到，系统已自动移除。祝您游戏愉快！";
+				Mail mail = mf.createSystemMailNothing(s);
+				player.addMail(mail);
+				Session noticeSession = ds.getSession(player.getNickname());
+				if (noticeSession != null)
+				{
+					msn.send(noticeSession, new Object[] {player.getUnreadMailCount()});
+					rmcn.send(noticeSession, new Object[] {card.getId()});
+				}
+			}
+		}
 		ArmyCamp armyCamp = getArmyCamp(userName);
 		Player armyPlayer = dao.getPlayer(userName, ds.getSession(userName));
 		List<SeatCard> publicList = armyCamp.getPublicList();
@@ -525,16 +560,21 @@ public class ArmyCampManager
 			{
 				card.setDrinkStatus(Card.AWAKE);
 				card.setInArmyCamp(0);
+				card.setArmyName("");
+				cardList.remove(card);
 				setCardBag(cardBag, seatCard.getOwnerName());
 				publicList.remove(seatCard);
 				armyCamp.setPublicList(publicList);
 				setArmyCamp(armyCamp, userName);
-				String s = "亲爱的玩家您好，在您" + seatCard.getOwnerName() + "军帐中的"
+				String s = "亲爱的玩家您好，您在" + card.getArmyName() + "军帐中的"
 						+ card.getName() + "卡牌冷却时间已到，系统已自动移除。祝您游戏愉快！";
 				Mail mail = mf.createSystemMailNothing(s);
 				tarPlayer.addMail(mail);
 				if (session != null)
+				{
 					msn.send(session, new Object[] {tarPlayer.getUnreadMailCount()});
+					rmcn.send(session, new Object[] {card.getId()});
+				}
 				// Session noticeSession =
 				// ds.getSession(seatCard.getOwnerName());
 				// if (noticeSession != null)
@@ -552,6 +592,7 @@ public class ArmyCampManager
 			{
 				card.setDrinkStatus(Card.AWAKE);
 				card.setInArmyCamp(0);
+				card.setArmyName("");
 				setCardBag(cardBag, seatCard.getOwnerName());
 				privateList.remove(seatCard);
 				armyCamp.setPrivateList(privateList);
@@ -562,7 +603,10 @@ public class ArmyCampManager
 				player.addMail(mail);
 				Session noticeSession = ds.getSession(player.getNickname());
 				if (noticeSession != null)
+				{
 					msn.send(noticeSession, new Object[] {player.getUnreadMailCount()});
+					rmcn.send(noticeSession, new Object[] {card.getId()});
+				}
 			}
 		}
 		resultMap.put("player", armyPlayer);

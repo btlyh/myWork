@@ -48,11 +48,12 @@ public class TakeCardCommand extends Command
 		{
 			throw new DataAccessException(601,Lang.F9000_SDE);
 		}
+		boolean type = data.readBoolean();
 		int needGold=data.readInt();
 		int index=data.readInt();
 		data.clear();
 		Card card=LuckBoxManager.getInstance().takeCard(player,needGold,
-			index);
+			index,type);
 		if(card==null)
 		{
 			card=new Card();

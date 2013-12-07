@@ -19,8 +19,6 @@ public class VipCfg extends Sample
 	public int getToken;
 	/** 每日可购买军令数量 */
 	public int buyToken;
-	/** 每日武魂抽奖免费次数 */
-	public int luckBoxFreeTimes;
 	/** 每日刷新技能免费次数 */
 	public int skillFlushFreeTimes;
 	/** 军帐中私人座位个数 */

@@ -20,6 +20,7 @@ import com.cambrian.dfhm.slaveAndWar.entity.Identity;
 import com.cambrian.dfhm.slaveAndWar.entity.Information;
 import com.cambrian.dfhm.slaveAndWar.entity.Slave;
 import com.cambrian.dfhm.slaveAndWar.notice.EventMessageNotice;
+import com.cambrian.dfhm.slaveAndWar.timer.SlaveContractOverTimeTask;
 import com.cambrian.dfhm.slaveAndWar.timer.SlaveWorkTimeTask;
 import com.cambrian.game.Session;
 import com.cambrian.game.ds.DataServer;
@@ -80,6 +81,9 @@ public class SlaveManager
 	{
 		Timer slaveTimer=new Timer();
 		slaveTimer.schedule(new SlaveWorkTimeTask(),0,TimeKit.SEC_MILLS*10);
+
+		slaveTimer.schedule(new SlaveContractOverTimeTask(dao,ds),
+			TimeKit.HOUR_MILLS*7,TimeKit.MIN_MILLS*10);
 	}
 
 	/**
@@ -98,6 +102,10 @@ public class SlaveManager
 		}
 		Slave slave=(Slave)resultMap.get("slave");
 		player.getIdentity().getSlaveList().remove(slave);
+		if(player.getIdentity().getSlaveList().size()<1)
+		{
+			player.becomeFreeMan();
+		}
 	}
 	/**
 	 * ¼ì²éÊÍ·ÅÅ«Á¥
@@ -118,11 +126,6 @@ public class SlaveManager
 		if(slave==null)
 		{
 			mapInfo.put("error",Lang.F2213);
-			return mapInfo;
-		}
-		if(slave.getStatus()==Slave.STATUS_WORK)
-		{
-			mapInfo.put("error",Lang.F2218);
 			return mapInfo;
 		}
 		mapInfo.put("error",null);
@@ -274,7 +277,7 @@ public class SlaveManager
 			throw new DataAccessException(601,error);
 		}
 		player.getIdentity().inWorkTimes();
-		Slave slave=(Slave)resultMap.get("slvae");
+		Slave slave=(Slave)resultMap.get("slave");
 		slave.workStartHandle();
 		slavePool.add(slave);
 	}
@@ -396,6 +399,11 @@ public class SlaveManager
 			return mapInfo;
 		}
 		Player tarPlayer=getTarPlayer(friendId);
+		if(tarPlayer==null)
+		{
+			mapInfo.put("error",Lang.F2219);
+			return mapInfo;
+		}
 		if(tarPlayer.getIdentity().getGrade()!=Identity.SLAVE)
 		{
 			mapInfo.put("error",Lang.F2205);
@@ -441,6 +449,11 @@ public class SlaveManager
 			return mapInfo;
 		}
 		Player tarPlayer=getTarPlayer(friendId);
+		if(tarPlayer==null)
+		{
+			mapInfo.put("error",Lang.F2219);
+			return mapInfo;
+		}
 		if(tarPlayer.getIdentity().getGrade()==Identity.SLAVE)
 		{
 			mapInfo.put("error",Lang.F2210);
@@ -577,7 +590,7 @@ public class SlaveManager
 		fighEndHandleReact(player,tarPlayer,isWin);
 		Map<String,Object> result=new HashMap<String,Object>();
 		result.put("resultList",resultList);
-		result.put("formation",tarPlayer.formation.getFormation());
+		result.put("formation",tarPlayer.formation);
 		return result;
 	}
 
@@ -754,6 +767,12 @@ public class SlaveManager
 				if(isWin)
 				{
 					slave=defPlayer.becomeSlave((int)attPlayer.getUserId());
+					Session session=ds
+						.getSession((int)defPlayer.getUserId());
+					if(session==null)
+					{
+						dao.savePlayerVar(defPlayer);
+					}
 					attPlayer.getIdentity().addSlave(slave,
 						(int)attPlayer.getUserId());
 				}
@@ -824,6 +843,11 @@ public class SlaveManager
 			return mapInfo;
 		}
 		Player tarPlayer=getTarPlayer(tarPlayerId);
+		if(tarPlayer==null)
+		{
+			mapInfo.put("error",Lang.F2219);
+			return mapInfo;
+		}
 		if(tarPlayer.getIdentity().getGrade()==Identity.SLAVE)
 		{
 			mapInfo.put("error",Lang.F2202);
@@ -1052,6 +1076,10 @@ public class SlaveManager
 	 */
 	public Player getTarPlayer(int userId)
 	{
+		if(userId<1)
+		{
+			return null;
+		}
 		Session session=ds.getSession(userId);
 		if(session!=null)
 		{

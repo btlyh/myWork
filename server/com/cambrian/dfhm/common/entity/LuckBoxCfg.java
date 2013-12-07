@@ -31,6 +31,9 @@ public class LuckBoxCfg extends Sample
 	/** 卡牌直接购买所需RMB */
 	private int buyGold;
 
+	/**金币刷新的消耗值*/
+	private int flushGold;
+	
 	/* constructors */
 
 	/* properties */
@@ -90,6 +93,15 @@ public class LuckBoxCfg extends Sample
 	{
 		this.tNeedSoul=tNeedSoul;
 	}
+	public int getFlushGold() {
+		return flushGold;
+	}
+	public void setFlushGold(int flushGold) {
+		this.flushGold = flushGold;
+	}
+	
+	
+	
 	/* init start */
 
 	/* methods */

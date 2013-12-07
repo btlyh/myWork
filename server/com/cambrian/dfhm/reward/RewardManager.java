@@ -105,7 +105,7 @@ public class RewardManager {
 				{
 					for (int j = 0; j < card[i][1]; j++)
 					{
-						templist.add(player.getCardBag().add(card[i][0]));
+						templist.add(player.getCardBag().add(card[i][0],player.getAchievements()));
 					}
 				}
 				

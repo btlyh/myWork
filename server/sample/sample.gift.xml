@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <objects>
 	<!--
-	sid	          唯一标签
-	class			    程序使用
-	type			  	类型{1：银币；2：军令；3：卡牌}
-	name	        名字
-	img			    	显示图片
+	sid	唯一标签
+	class	程序使用
+	name	名字
+	description	介绍
+	img	显示图片
+	type    类型(前台显示用)
+	
+	money   银币
+	soul    武魂
+	token   军令
+	cardSid 卡牌组合，数组形式
+	price	价格
 
-	money			    银币
-	token			    军令
-	cardSid		    卡牌组合，数组形式
-	price				  积分
 	-->
-	<sample sid="20121" class="com.cambrian.dfhm.common.entity.Gift" type="1" name="5000个银币" img="award/money_big" money="5000" token="0" price="10"/>
-	<sample sid="20122" class="com.cambrian.dfhm.common.entity.Gift" type="2" name="500个军令" img="award/tired_big" money="0" token="500" price="10"/>
-	<sample sid="20123" class="com.cambrian.dfhm.common.entity.Gift" type="3" name="1张卡牌" img="role/hejin" money="0" token="0" price="100" _1cardSid="10001"/>
-	<sample sid="20124" class="com.cambrian.dfhm.common.entity.Gift" type="3" name="5张卡牌" img="role/hejin" money="0" token="0" price="1000" _1cardSid="10007,10008,10009,10006,10010"/>
+	<sample sid="20121" class="com.cambrian.dfhm.common.entity.Gift" name="银币100" description="购买后立即获得100个银币" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="0" money="100" soul="0" token="0" price="10"/>
+	<sample sid="20122" class="com.cambrian.dfhm.common.entity.Gift" name="银币500" description="购买后立即获得500个银币" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="0" money="500" soul="0" token="0" price="50"/>
+	<sample sid="20123" class="com.cambrian.dfhm.common.entity.Gift" name="银币1000" description="购买后立即获得1000个银币" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="0" money="1000" soul="0" token="0" price="100"/>
+	<sample sid="20124" class="com.cambrian.dfhm.common.entity.Gift" name="银币5000" description="购买后立即获得5000个银币" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="0" money="5000" soul="0" token="0" price="500"/>
+	<sample sid="20125" class="com.cambrian.dfhm.common.entity.Gift" name="银币10000" description="购买后立即获得10000个银币" img="img/tubiao/bag/gold/1" animation="0" type="1" gold="0" money="10000" soul="0" token="0" price="1000"/>
+	<sample sid="20126" class="com.cambrian.dfhm.common.entity.Gift" name="1张卡牌1" description="购买后立即获得1张卡牌" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10221" price="1000"/>
+	<sample sid="20127" class="com.cambrian.dfhm.common.entity.Gift" name="1张卡牌2" description="购买后立即获得1张卡牌" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10022" price="1000"/>
+	<sample sid="20128" class="com.cambrian.dfhm.common.entity.Gift" name="1张卡牌3" description="购买后立即获得1张卡牌" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10023" price="1000"/>
+	<sample sid="20129" class="com.cambrian.dfhm.common.entity.Gift" name="1张卡牌4" description="购买后立即获得1张卡牌" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10024" price="1000"/>
+	<sample sid="20130" class="com.cambrian.dfhm.common.entity.Gift" name="5张卡牌1" description="购买后立即获得5张卡牌" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10221,10221,10221,10221,10221" price="5000"/>
+	<sample sid="20131" class="com.cambrian.dfhm.common.entity.Gift" name="5张卡牌2" description="购买后立即获得5张卡牌" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10222,10222,10222,10222,10222" price="5000"/>
+	<sample sid="20132" class="com.cambrian.dfhm.common.entity.Gift" name="5张卡牌3" description="购买后立即获得5张卡牌" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10223,10223,10223,10223,10223" price="5000"/>
+	<sample sid="20133" class="com.cambrian.dfhm.common.entity.Gift" name="5张卡牌4" description="购买后立即获得5张卡牌" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10224,10224,10224,10224,10224" price="5000"/>
 
 </objects>

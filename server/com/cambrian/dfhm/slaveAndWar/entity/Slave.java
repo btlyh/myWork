@@ -3,6 +3,10 @@ package com.cambrian.dfhm.slaveAndWar.entity;
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.util.TimeKit;
 import com.cambrian.dfhm.back.GameCFG;
+import com.cambrian.dfhm.common.entity.Player;
+import com.cambrian.dfhm.slaveAndWar.dao.SlaveAndWarDao;
+import com.cambrian.game.Session;
+import com.cambrian.game.ds.DataServer;
 
 /**
  * 类说明：马仔类-，-
@@ -230,5 +234,46 @@ public class Slave implements Comparable<Slave>
 			}
 		}
 		return surplusTime;
+	}
+
+	/**
+	 * 马仔自由事件处理
+	 * 
+	 * @param ds 内存数据对象
+	 * @param dao 数据库数据对象
+	 */
+	public void beFreeHandle(DataServer ds,SlaveAndWarDao dao)
+	{
+		Player tarPlayer;
+		Session session=ds.getSession(userId);
+		if(session!=null)
+		{
+			tarPlayer=(Player)session.getSource();
+			tarPlayer.becomeFreeMan();
+		}
+		else
+		{
+			tarPlayer=dao.getPlayer(userId);
+			tarPlayer.becomeFreeMan();
+			dao.savePlayerVar(tarPlayer);
+		}
+		if(status==STATUS_WORK) //工作状态下
+		{
+			int money=(int)((TimeKit.nowTimeMills()-startWorkTime)/60000*fightPoint);
+			session=ds.getSession(bossId);
+			if(session!=null)
+			{
+				tarPlayer=(Player)session.getSource();
+				tarPlayer.getIdentity().cutSlave(userId);
+				tarPlayer.incrMoney(money);
+			}
+			else
+			{
+				tarPlayer=dao.getPlayer(bossId);
+				tarPlayer.getIdentity().cutSlave(userId);
+				tarPlayer.incrMoney(money);
+				dao.savePlayerVar(tarPlayer);
+			}
+		}
 	}
 }

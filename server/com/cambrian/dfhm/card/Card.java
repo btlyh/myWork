@@ -999,7 +999,7 @@ public class Card extends Sample
 			return false;
 		}
 
-		while(exp>GameCFG.getExp(level))
+		while(exp>=GameCFG.getExp(level))
 		{
 
 			if(level<90)
@@ -1046,6 +1046,13 @@ public class Card extends Sample
 		return (int)((maxHp+(double)att*3+(double)att*1.5*(double)critRate*3+(double)maxHp
 			*(double)dodgeRate)*0.00005d);
 	}
+	
+	/**返回卡牌被吞噬提供的经验**/
+	
+	public int getEgfulExp()
+	{
+		return (int)Math.ceil(GameCFG.getEngulfExpByLevel(level)*Math.ceil((type*0.5d))*GameCFG.getEngulfExpPer());
+	}	
 
 	/** 前台序列化读取 */
 	public void bytesWrite(ByteBuffer data)

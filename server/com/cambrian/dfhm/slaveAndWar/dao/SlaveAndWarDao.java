@@ -69,21 +69,20 @@ public class SlaveAndWarDao
 	/** 获取玩家对象 */
 	public Player getPlayer(int userId)
 	{
-		Field[] array=new Field[3];
+		Field[] array=new Field[1];
 		array[0]=FieldKit.create("identity",(byte[])null);
-		array[1]=FieldKit.create("cardBag",(byte[])null);
-		array[2]=FieldKit.create("formation",(byte[])null);
 		Fields fields=new Fields(array);
 		DBKit.get("player_info",cm,FieldKit.create("userId",userId),fields);
 		Player player=new Player();
 		player.setUserId(userId);
 		byte[] bytes=((ByteArrayField)array[0]).value;
 		player.getIdentity().dbBytesRead(new ByteBuffer(bytes));
-		bytes=((ByteArrayField)array[1]).value;
-		player.getCardBag().dbBytesRead(new ByteBuffer(bytes));
-		bytes=((ByteArrayField)array[2]).value;
-		player.formation.dbBytesRead(new ByteBuffer(bytes));
-
+		
+		array=new Field[1];
+		array[0]=FieldKit.create("money",player.getMoney());
+		fields=new Fields(array);
+		DBKit.get("player",cm,FieldKit.create("userId",userId),fields);
+		player.setMoney(((IntField)array[0]).value);
 		return player;
 	}
 
@@ -95,6 +94,11 @@ public class SlaveAndWarDao
 		player.getIdentity().dbBytesWrite(data);
 		array[0]=FieldKit.create("identity",data.toArray());
 		DBKit.set("player_info",cm,FieldKit.create("userid",
+			(int)player.getUserId()),new Fields(array));
+		
+		array=new Field[1];
+		array[0]=FieldKit.create("money",player.getMoney());
+		DBKit.set("player",cm,FieldKit.create("userid",
 			(int)player.getUserId()),new Fields(array));
 	}
 }

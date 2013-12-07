@@ -800,6 +800,13 @@
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_RELEASE"/>
 		<obj class="com.cambrian.dfhm.slaveAndWar.command.ReleaseSlaveCommand"></obj>
 	</method>
+	
+		<!-- 充值协议-->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_RECHARGE"/>
+		<obj class="com.cambrian.dfhm.shop.command.RechargeCommand"></obj>
+	</method>
+	
 
 
 	<!-- 服务器刷新-推送-->

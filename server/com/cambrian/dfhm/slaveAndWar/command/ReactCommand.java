@@ -54,7 +54,7 @@ public class ReactCommand extends Command
 		Map<String,Object> result=SlaveManager.getInstance().react(player);
 		@SuppressWarnings("unchecked")
 		List<Integer> record=(List<Integer>)result.get("resultList");
-		Formation formation=(Formation)result.get("resultList");
+		Formation formation=(Formation)result.get("formation");
 		formation.bytesWrite(data);
 		data.writeInt(record.size());
 		for(Integer integer:record)

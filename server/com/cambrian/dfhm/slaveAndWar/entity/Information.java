@@ -1,115 +1,78 @@
 package com.cambrian.dfhm.slaveAndWar.entity;
 
 import com.cambrian.common.net.ByteBuffer;
-import com.cambrian.common.util.TimeKit;
+import com.cambrian.common.object.Sample;
 
 /**
  * 类说明：信息对象(用于当壕功购能)
  * 
  * @author：LazyBear
  */
-public class Information implements Comparable<Information>
+public class Information extends Sample implements Comparable<Information>
 {
 
 	/* static fields */
-	/** 事件类型：1 战斗打自由人 2 战斗打土豪 3战斗救陌生人 4战斗救朋友 5办事 6 赎身*/
-	public static final int EVENT_FIGHT_FREE=1,EVENT_FIGHT_OWNER=2,
-					EVENT_FIGHT_SAVENOR=3,EVENT_FIGHT_SAVEFRI=4,
-					EVENT_WORK=5,EVENT_GETFREE=6;
+	/* 事件类型 1办事 2打架 3路见不平 4好友求助 5反抗 6赎身 7释放 8身份关系时间到 */
+	public static final int TYPE_WORKDONE=1,TYPE_FIGHT=2,TYPE_SAVE=3,
+					TYPE_HELP=4,TYPE_REACT=5,TYPE_RANSOM=6,TYPE_RELEASE=7,
+					TYPE_TIMEOVER=8;
+	/* 事件 1成功 0失败 */
+	public static final int EVENT_SUCCESS=1,EVENT_FAIL=0;
 	/* static methods */
 
 	/* fields */
 	/** 事件类型 */
-	private int eventType;
-	/** 是否成功 */
-	private boolean success;
-	/** 主动角色 */
-	private String activeName;
-	/** 被动角色 */
-	private String unactiveName;
-	/** 附加角色 */
-	private String attachName;
-	/** 附加值（用于办事获利显示） */
-	private int attachValue;
-	/** 获取信息时间 */
+	private int type;
+	/** 事件结果 */
+	private int result;
+	/** 事件影响身份 1马仔 2侠客 3土豪 */
+	private int identity;
+	/** 事件信息内容 */
+	private String content;
+	/** 事件产生时间 */
 	private long createTime;
 
 	/* constructors */
-	public Information(int eventType,boolean success,String activeName,
-		String unactivName,String attachName,int attachValue)
-	{
-		this.eventType=eventType;
-		this.success=success;
-		this.activeName=activeName;
-		this.unactiveName=unactivName;
-		this.attachName=attachName;
-		this.attachValue=attachValue;
-		this.createTime=TimeKit.nowTimeMills();
-	}
 
-	public Information()
-	{
-
-	}
 	/* properties */
-	public int getEventType()
+	public int getType()
 	{
-		return eventType;
+		return type;
 	}
 
-	public void setEventType(int eventType)
+	public void setType(int type)
 	{
-		this.eventType=eventType;
+		this.type=type;
 	}
 
-	public boolean isSuccess()
+	public int getResult()
 	{
-		return success;
+		return result;
 	}
 
-	public void setSuccess(boolean success)
+	public void setResult(int result)
 	{
-		this.success=success;
+		this.result=result;
 	}
 
-	public String getActiveName()
+	public int getIdentity()
 	{
-		return activeName;
+		return identity;
 	}
 
-	public void setActiveName(String activeName)
+	public void setIdentity(int identity)
 	{
-		this.activeName=activeName;
+		this.identity=identity;
 	}
 
-	public String getUnacitveName()
+	public String getContent()
 	{
-		return unactiveName;
+		return content;
 	}
 
-	public void setUnacitveName(String unacitveName)
+	public void setContent(String content)
 	{
-		this.unactiveName=unacitveName;
-	}
-
-	public String getAttachName()
-	{
-		return attachName;
-	}
-
-	public void setAttachName(String attachName)
-	{
-		this.attachName=attachName;
-	}
-
-	public int getAttachValue()
-	{
-		return attachValue;
-	}
-
-	public void setAttachValue(int attachValue)
-	{
-		this.attachValue=attachValue;
+		this.content=content;
 	}
 	public long getCreateTime()
 	{
@@ -123,37 +86,22 @@ public class Information implements Comparable<Information>
 	/* init start */
 
 	/* methods */
-
-	/** 序列化 和前端通信 写 */
-	public void BytesWrite(ByteBuffer data)
-	{
-		data.writeInt(eventType);
-		data.writeBoolean(success);
-		data.writeUTF(activeName);
-		data.writeUTF(unactiveName);
-		data.writeUTF(attachName);
-		data.writeInt(attachValue);
-		data.writeLong(createTime);
-	}
 	/** 序列化 和DC通信 存 */
 	public void dbBytesWrite(ByteBuffer data)
 	{
-		data.writeInt(eventType);
-		data.writeBoolean(success);
-		data.writeUTF(activeName);
-		data.writeUTF(unactiveName);
-		data.writeUTF(attachName);
-		data.writeInt(attachValue);
+		data.writeInt(type);
+		data.writeInt(result);
+		data.writeInt(identity);
+		data.writeUTF(content);
 		data.writeLong(createTime);
 	}
 	/** 序列化 和DC通信 取 */
 	public void dbBytesRead(ByteBuffer data)
 	{
-		eventType=data.readInt();
-		success=data.readBoolean();
-		activeName=data.readUTF();
-		unactiveName=data.readUTF();
-		attachName=data.readUTF();
+		type=data.readInt();
+		result=data.readInt();
+		identity=data.readInt();
+		content=data.readUTF();
 		createTime=data.readLong();
 	}
 
@@ -166,5 +114,4 @@ public class Information implements Comparable<Information>
 		long j=information.getCreateTime();
 		return ((i==j)?0:(i>j)?-1:1);
 	}
-
 }

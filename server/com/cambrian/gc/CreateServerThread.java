@@ -147,12 +147,12 @@ public class CreateServerThread extends Thread
 		}
 		Player player=(Player)session.getSource();
 		int cardSid=jObject.get("cardSid").getAsInt();
-		Card card=player.getCardBag().add(cardSid);
+		Card card=player.getCardBag().add(cardSid,player.getAchievements());
 
 		pun.send(session,
 			new Object[]{card.getSid(),card.uid,card.getSkillId()});
 	}
-	
+
 	/**
 	 * ¿¨ÅÆÊìÏ¤ÐÞ¸Ä
 	 */

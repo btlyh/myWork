@@ -13,9 +13,9 @@
        
     
 	-->
-	<sample sid="21657" class="com.cambrian.dfhm.reward.Reward" time="30" money="0" _2card="10001,1|10002,1" soul="0" tired="0" gold="0"/>
-	<sample sid="21658" class="com.cambrian.dfhm.reward.Reward" time="60" money="0" _2card="10001,2|10002,1" soul="0" tired="0" gold="0"/>
-	<sample sid="21659" class="com.cambrian.dfhm.reward.Reward" time="90" money="30" _2card="10001,2|10002,2" soul="10" tired="3" gold="0"/>
-	<sample sid="21660" class="com.cambrian.dfhm.reward.Reward" time="120" money="50" _2card="10001,3|10002,2" soul="20" tired="5" gold="10"/>
+	<sample sid="21657" class="com.cambrian.dfhm.reward.Reward" time="30" money="50" _2card="10221,0" soul="0" tired="0" gold="0"/>
+	<sample sid="21658" class="com.cambrian.dfhm.reward.Reward" time="60" money="50" _2card="10221,0" soul="0" tired="0" gold="0"/>
+	<sample sid="21659" class="com.cambrian.dfhm.reward.Reward" time="90" money="50" _2card="10221,1" soul="10" tired="0" gold="0"/>
+	<sample sid="21660" class="com.cambrian.dfhm.reward.Reward" time="120" money="50" _2card="10221,1|10222,1" soul="20" tired="5" gold="10"/>
 
 </objects>

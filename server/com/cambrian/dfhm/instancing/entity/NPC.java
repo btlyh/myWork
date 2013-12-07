@@ -1,8 +1,10 @@
 package com.cambrian.dfhm.instancing.entity;
 
+
 import java.util.ArrayList;
 
 import com.cambrian.common.object.Sample;
+import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
 import com.cambrian.dfhm.common.entity.Player;
@@ -128,9 +130,32 @@ public abstract class NPC extends Sample
 	public ArrayList<Integer> addAward(BattleScene scene,Player player)
 	{
 		ArrayList<Integer> list=scene.getDropAward();
+		
+		int step = player.getPlayerInfo().getLeadStep();
+		ArrayList<Integer> rewardCards=new ArrayList<Integer>();
+		if(step ==1) //新手引导获取的卡牌特殊处理
+		{ 
+			
+			list = GameCFG.getAwardCardByStep(step);
+			scene.getRecord().add(list.size());
+			for (int i = 0; i < list.size(); i++) {
+				scene.getRecord().add(4);
+				scene.getRecord().add(list.get(i));
+				rewardCards.add(list.get(i));
+			}	
+			player.getPlayerInfo().setLeadStep(step+1);
+			
+			return rewardCards;
+		}
+		
+		
 		int type,value;
 		scene.getRecord().add(list.size()/2);
-		ArrayList<Integer> rewardCards=new ArrayList<Integer>();
+		
+		
+		
+		
+		
 		for(int i=0;i<list.size();i+=2)
 		{
 			type=list.get(i);
@@ -159,3 +184,4 @@ public abstract class NPC extends Sample
 		return rewardCards;
 	}
 }
+

@@ -106,7 +106,7 @@ public class ShopManager
 		{
 			for (Integer integer : cardsList)
 			{
-				Card card = player.getCardBag().add(integer);
+				Card card = player.getCardBag().add(integer,player.getAchievements());
 				uidList.add(card.getId());
 				uidList.add(card.getSkillId());
 			}

@@ -38,6 +38,9 @@ public class SweepManager {
 			throw new DataAccessException(601, error);
 		}
 		
+		
+		
+		
 		Sweep sweep = new Sweep();
 		if(maptype==3)//穿越副本
 		{
@@ -112,7 +115,7 @@ public class SweepManager {
 					data.writeInt(recard.size());
 					for (int j = 0; j < recard.size(); j++)// 往前台返回获得的卡牌的数量
 					{
-						tmepList.add(player.getCardBag().add(recard.get(j)));	
+						tmepList.add(player.getCardBag().add(recard.get(j),player.getAchievements()));	
 					}
 						
 					for (int k = 0; k <tmepList.size(); k++)
@@ -138,10 +141,11 @@ public class SweepManager {
 		
 		
 		
-		if(maptype==3)//穿越副本 消耗穿越次数
+	/*	if(maptype==3)//穿越副本 消耗穿越次数
 		{
 			player.getPlayerInfo().setCrossMapNum(player.getPlayerInfo().getCrossMapNum()-sweepNum);
-		}	
+		}	*/
+
 	}
 
 	private String checkSweep(Player player, int mapId, int sweepNum,

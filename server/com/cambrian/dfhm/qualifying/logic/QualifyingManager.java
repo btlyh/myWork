@@ -52,7 +52,7 @@ public class QualifyingManager
 	/** 数据服务器 */
 	DataServer ds;
 	/** 排位赛对象 */
-	Qualifying qualifying = new Qualifying();
+	Qualifying qualifying;
 	/** 时间格式 */
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	/** 邮件工厂 */
@@ -135,11 +135,23 @@ public class QualifyingManager
 					i++;
 					continue;
 				}
+				if (getInfo(i) == null)
+				{
+					qualifying.getQualifyingList().remove(i);
+					i--;
+					continue;
+				}
 				QualifyingInfo qualifyingInfo = getInfo(i);
 				duelList.add(qualifyingInfo);
 				if (duelList.size() >= 6)
 					break;
 				i++;
+				continue;
+			}
+			if (getInfo(i) == null)
+			{
+				qualifying.getQualifyingList().remove(i);
+				i--;
 				continue;
 			}
 			QualifyingInfo qualifyingInfo = getInfo(i);
@@ -156,6 +168,7 @@ public class QualifyingManager
 		QualifyingInfo qualifyingInfo = new QualifyingInfo();
 		String name = qualifying.getQualifyingList().get(i);
 		Player player = getPlayer(name);
+		if (player == null) return null;
 		qualifyingInfo.setPlayerName(name);
 		qualifyingInfo.setPlayerRanking(i);
 		qualifyingInfo.setPlayerVipLevel(player.getVipLevel());
@@ -443,14 +456,24 @@ public class QualifyingManager
 	/** 刷新前三名信息 */
 	public void flushTopList()
 	{
-//		 if (dao.getQualifying() != null)
-//		 qualifying=dao.getQualifying();
+		if (qualifying == null)
+		{
+			qualifying = new Qualifying();
+			if (dao.getQualifying() != null)
+				qualifying=dao.getQualifying();
+		}
 		List<QualifyingInfo> topList = qualifying.getTopList();
 		topList.clear();
 		for (int i = 0; i < qualifying.getQualifyingList().size(); i++)
 		{
-			if (i > 2)
+			if (topList.size() > 2)
 				break;
+			if (getInfo(i) == null)
+			{
+				qualifying.getQualifyingList().remove(i);
+				i--;
+				continue;
+			}
 			topList.add(getInfo(i));
 		}
 		saveQualifying();

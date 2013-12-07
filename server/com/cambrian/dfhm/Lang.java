@@ -208,6 +208,15 @@ public final class Lang
 	public static final String F1610="1610";
 	/** 1611; 所有卡牌已经抽取完毕 */
 	public static final String F1611="1611";
+	/** 抽奖刷新的RMB不足*/
+	public static final String F1612="1612";
+	/** 武魂抽奖 武魂不足*/
+	public static final String F1613="1613";
+	
+	/** 武魂抽奖  武魂和服务器配置不同*/
+	public static final String F1614="1614";
+	
+	
 
 	/* 军帐 */
 	/** 1701：姓名错误 */
@@ -284,42 +293,44 @@ public final class Lang
 	public static final String F1902="1902";
 
 	/* 当壕 */
-	/** 2101; 马仔身份不能获取攻击对象列表 */
+	/** 2201; 马仔身份不能获取攻击对象列表 */
 	public static final String F2201="2201";
-	/** 2102; 不能直接攻击马仔 */
+	/** 2202; 不能直接攻击马仔 */
 	public static final String F2202="2202";
-	/** 2103; 你的阵上没有战斗卡牌 */
+	/** 2203; 你的阵上没有战斗卡牌 */
 	public static final String F2203="2203";
-	/** 2104; 无效的身份,非法操作 */
+	/** 2204; 无效的身份,非法操作 */
 	public static final String F2204="2204";
-	/** 2105; 对方无效身份,非法操作 */
+	/** 2205; 对方无效身份,非法操作 */
 	public static final String F2205="2205";
-	/** 2106; 到达攻击次数限制,不能再次攻击 */
+	/** 2206; 到达攻击次数限制,不能再次攻击 */
 	public static final String F2206="2206";
-	/** 2107; 现在不是奴隶了 */
+	/** 2207; 现在不是奴隶了 */
 	public static final String F2207="2207";
-	/** 2108; 到达反抗次数限制,不能再次反抗 */
+	/** 2208; 到达反抗次数限制,不能再次反抗 */
 	public static final String F2208="2208";
-	/** 2109; 金币不足,不能赎身 */
+	/** 2209; 金币不足,不能赎身 */
 	public static final String F2209="2209";
-	/** 2110; 求助的好友现在也是奴隶,不能求助 */
+	/** 2210; 求助的好友现在也是奴隶,不能求助 */
 	public static final String F2210="2210";
-	/** 2111; 救好友次数到达上限 */
+	/** 2211; 救好友次数到达上限 */
 	public static final String F2211="2211";
-	/** 2112; 拯救陌生人次数到达上限 */
+	/** 2212; 拯救陌生人次数到达上限 */
 	public static final String F2212="2212";
-	/** 2113; 你没有此奴隶了 */
+	/** 2213; 你没有此奴隶了 */
 	public static final String F2213="2213";
-	/** 2114; 办事次数到达上限 */
+	/** 2214; 办事次数到达上限 */
 	public static final String F2214="2214";
-	/** 2115; 托管金币不够 */
+	/** 2215; 托管金币不够 */
 	public static final String F2215="2215";
-	/** 2116; 奴隶没有在工作中,不能托管 或 速去速回 */
+	/** 2216; 奴隶没有在工作中,不能托管 或 速去速回 */
 	public static final String F2216="2216";
-	/** 2117; 速去速回金币不够 */
+	/** 2217; 速去速回金币不够 */
 	public static final String F2217="2217";
-	/** 2118; 奴隶正在办事中，不能释放 */
+	/** 2218; 奴隶正在办事中，不能释放 */
 	public static final String F2218="2218";
+	/** 2219; 没有此人 */
+	public static final String F2219="2219";
 
 	/* 商城 */
 	/** 1901：商品序号不存在 */
@@ -354,6 +365,9 @@ public final class Lang
 
 	/**充值金额错误*/
 	public static final String F2305="2305";
+	
+	/*新手引导 卡牌上阵情况错误  没有全部上阵*/
+	public static final String F2501="2501";
 	/** 9000；网络错误,请重新登录 */
 	public static final String F9000_SDE="9000";
 

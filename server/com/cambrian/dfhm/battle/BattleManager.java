@@ -139,7 +139,7 @@ public class BattleManager extends ChangeAdapter implements TimerListener
 			else if(type == 3)//½ð±Ò
 				player.incrGold(value);
 			else if(type == 4)//¿¨ÅÆ
-				player.getCardBag().add(value);
+				player.getCardBag().add(value,player.getAchievements());
 		}		
 	}
 }

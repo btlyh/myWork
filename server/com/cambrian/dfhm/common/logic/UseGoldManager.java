@@ -40,6 +40,11 @@ public class UseGoldManager
 		}
 		player.decrGold(needGold);
 		player.getCardBag().inCapacity(bagSize);
+		
+	/*	if(player.getPlayerInfo().getLeadStep() != -1)//引导第五步  背包购买 
+		{
+			player.getPlayerInfo().setLeadStep(player.getPlayerInfo().getLeadStep()+1);
+		}*/	
 	}
 
 	/** 检查购买背包空间 */

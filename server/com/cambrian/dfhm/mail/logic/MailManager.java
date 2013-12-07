@@ -215,7 +215,7 @@ public class MailManager
 	 * 浏览邮件
 	 * 
 	 * @param uid 唯一标识
-	 * @param player 玩家对象
+	 * @param player 玩家对象 
 	 */
 	public void browseMail(int uid,Player player)
 	{
@@ -303,7 +303,8 @@ public class MailManager
 		while(player.getCardBag().getSurplusCapacity()>0
 			&&mail.getCardList().size()>0)
 		{
-			Card card=player.getCardBag().add(mail.getCardList().get(0));
+			Card card=player.getCardBag().add(mail.getCardList().get(0),
+				player.getAchievements());
 			dataList.add(card.getSid());
 			dataList.add(card.uid);
 			dataList.add(card.getSkillId());
@@ -349,7 +350,7 @@ public class MailManager
 		}
 		else
 		{
-			mail.setState(Mail.MAILSTATE_READ_GET);
+			mail.setState(Mail.MAILSTATE_READ_UNGET);
 		}
 		dao.setMailState((int)mail.getMailId(),mail);
 		return dataList;

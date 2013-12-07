@@ -14,6 +14,7 @@ import com.cambrian.common.field.Field;
 import com.cambrian.common.field.FieldKit;
 import com.cambrian.common.field.Fields;
 import com.cambrian.common.field.IntField;
+import com.cambrian.common.field.LongField;
 import com.cambrian.common.field.StringField;
 import com.cambrian.common.log.Logger;
 import com.cambrian.common.net.ByteBuffer;
@@ -229,6 +230,12 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		p.setCurToken(((IntField)array[4]).value);
 		p.setMaxToken(((IntField)array[5]).value);
 		p.setSoul(((IntField)array[6]).value);
+		p.setLogoutTime(((LongField)array[7]).value);
+		p.setBuyTokenNum(((IntField)array[8]).value);
+		p.setVipLevel(((IntField)array[9]).value);
+		p.setCurIndexForNormalNPC(((IntField)array[10]).value);
+		p.setCurIndexForHardNPC(((IntField)array[11]).value);
+		p.setCurIndexForCorssNPC(((IntField)array[12]).value);
 
 		loadPlayerVar(p);
 		loadPlayerLog(p);
@@ -245,8 +252,8 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 				+", userid="+userid+", nickName="+p.getNickname());
 		// p.setNickname(nickName);// TODO Í«≥∆ƒ¨»œ…Ë÷√
 		p.setNickname(nickName);
-		p.setMoney(0);
-		p.setGold(0);
+		p.setMoney(200);
+		p.setGold(200);
 		p.setMaxToken(50);
 		p.setCurToken(50);
 		p.setSoul(0);

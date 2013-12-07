@@ -215,6 +215,12 @@ public class CardManager
 				data.writeInt(dodge);
 				data.writeInt(card.getForsterNumber());
 			}
+			
+			
+			if(player.getPlayerInfo().getLeadStep() != -1)//引导第二步 卡牌吞噬 
+			{
+				player.getPlayerInfo().setLeadStep(player.getPlayerInfo().getLeadStep()+1);
+			}	
 		}
 	}
 
@@ -491,7 +497,12 @@ public class CardManager
 				array[i]=battleCard;
 			}
 		}
-
+		
+		if(player.getPlayerInfo().getLeadStep() != -1)//引导第三步 卡牌吞培养
+		{
+			player.getPlayerInfo().setLeadStep(player.getPlayerInfo().getLeadStep()+1);
+		}	
+		
 	}
 
 	/** 检测卡牌培养保存 */
@@ -656,9 +667,11 @@ public class CardManager
 
 		for(Card tempcard:cardList)
 		{
+			
+			
 			if(!card.isRealm())
 			{
-				card.incrExp(tempcard.getSwallowExp());
+				card.incrExp(tempcard.getEgfulExp());
 				card.levelUp();
 				if(card.isRealm())// 卡牌升级达到 突破条件的时候 盈余经验设置为0
 				{

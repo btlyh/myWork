@@ -65,6 +65,5 @@ public class FlushCardCommand extends Command
 			cardRecord.BytesWrite(data);
 		}
 		data.writeInt(player.getPlayerInfo().getLuckBoxSid());
-		data.writeBoolean(player.getPlayerInfo().isFirst());
 	}
 }

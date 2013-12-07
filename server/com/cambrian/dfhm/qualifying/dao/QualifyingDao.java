@@ -95,16 +95,19 @@ public class QualifyingDao
 		PlayerInfo playerInfo = new PlayerInfo();
 		if (bytes != null)
 			playerInfo.dbBytesRead(new ByteBuffer(bytes));
+		else return null;
 		player.setPlayerInfo(playerInfo);
 		bytes = ((ByteArrayField)array[1]).value;
 		CardBag cardBag = new CardBag();
 		if (bytes != null)
 			cardBag.dbBytesRead(new ByteBuffer(bytes));
+		else return null;
 		player.setCardBag(cardBag);
 		bytes = ((ByteArrayField)array[2]).value;
 		Formation formation = new Formation();
 		if (bytes != null)
 			formation.dbBytesRead(new ByteBuffer(bytes));
+		else return null;
 		player.formation = formation;
 		return player;
 	}
