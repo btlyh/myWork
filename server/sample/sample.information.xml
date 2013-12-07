@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <objects>
 	<!--
 	type 事件类型 1办事完成 2打架 3路见不平 4好友求助 5反抗 6赎身 7释放 8身份关系时间到
@@ -23,9 +23,9 @@
 	<sample sid="50014" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="3" success="1" infomation="你未打败A，他的实力还没有弱到变成你的马仔啊"/>
 	<sample sid="50015" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="2" success="0" infomation="你未打败A，他的实力还没有弱到变成你的马仔啊"/>
 	<sample sid="50016" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="3" success="1" infomation="一个路人A看到你正在修理你的马仔B时，出手救了他，真是太丢脸了"/>
-	<sample sid="50017" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="1" success="1" infomation="一个路人A看到你正被你的老大A修理时，出手救了你，赶快谢谢你的恩人吧"/>
+	<sample sid="50017" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="1" success="1" infomation="一个路人A看到你正被你的老大B修理时，出手救了你，赶快谢谢你的恩人吧"/>
 	<sample sid="50018" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="3" success="0" infomation="一个路人A看到你正在修理你的马仔时，看不下去了想出手相救，真是异想天开"/>
-	<sample sid="50019" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="2" success="1" infomation="你看到A正在修理他的马仔A，你忍不住出手救了B，他不再是马仔了"/>
+	<sample sid="50019" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="2" success="1" infomation="你看到A正在修理他的马仔B，你忍不住出手救了B，他不再是马仔了"/>
 	<sample sid="50020" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="2" success="0" infomation="你看到A正在修理他的马仔，可是你也打不过A，还是赶快溜了吧"/>
 	<sample sid="50021" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="4" identity="3" success="1" infomation="你的马仔A被他的好友B拯救了，赶快去抓新的马仔吧"/>
 	<sample sid="50022" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="4" identity="1" success="1" infomation="你的好友A奋力相救，让你摆脱了你的老大B，你不再是马仔了"/>

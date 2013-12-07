@@ -45,8 +45,7 @@ public class EventMessageNotice extends SendCommand
 			return;
 		}
 		ByteBuffer data=new ByteBuffer();
-		Information information=(Information)objs[0];
-		information.BytesWrite(data);
+		data.writeInt(Integer.parseInt(objs[0].toString()));
 		connect.send(noticePort,data);
 	}
 }
