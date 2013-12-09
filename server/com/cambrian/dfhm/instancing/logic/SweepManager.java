@@ -9,7 +9,6 @@ import com.cambrian.common.util.MathKit;
 import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
-import com.cambrian.dfhm.instancing.entity.CrossNPC;
 import com.cambrian.dfhm.instancing.entity.NormalNPC;
 import com.cambrian.dfhm.instancing.entity.Sweep;
 import com.cambrian.dfhm.mail.entity.Mail;
@@ -33,40 +32,42 @@ public class SweepManager {
 
 	public void sweepMap(Player player, int mapId, int sweepNum, int maptype,
 			ByteBuffer data) {
-		String error = checkSweep(player, mapId, sweepNum, maptype);
+		
+		int token  = 0;
+		Sweep sweep = new Sweep();
+		NormalNPC normalNPC =  (NormalNPC) Sample.getFactory().getSample(mapId);
+		token = normalNPC.getNeedToken()*sweepNum;
+		sweep =  (Sweep) Sample.getFactory().getSample(normalNPC.getSweepId());
+		
+		String error = checkSweep(player, mapId, token, maptype);
 		if (error != null) {
 			throw new DataAccessException(601, error);
 		}
 		
 		
-		
-		
-		Sweep sweep = new Sweep();
-		if(maptype==3)//穿越副本
+	/*	if(maptype==3)//穿越副本
 		{
 			CrossNPC crossNPC =  (CrossNPC) Sample.getFactory().getSample(mapId);
 			sweep =  (Sweep) Sample.getFactory().getSample(crossNPC.getSweepId());
 		}else if(maptype==1)//主线副本
-		{
-			NormalNPC normalNPC =  (NormalNPC) Sample.getFactory().getSample(mapId);
-			sweep =  (Sweep) Sample.getFactory().getSample(normalNPC.getSweepId());
-		}	
+		{*/
+		
+	//	}	
+		
+		player.decrToken(token);
 		ArrayList<Integer> cards = new ArrayList<Integer>();//
 		
 		for (int i = 0; i < sweepNum; i++) // 进行多少次扫荡
 		{
-			int money = MathKit.randomValue(sweep.getMoneymin(),
-					sweep.getMoneymax() + 1);
-			int gold = MathKit.randomValue(sweep.getGoldmin(),
-					sweep.getGoldmax() + 1);
-			int soul = MathKit.randomValue(sweep.getSoulmin(),
-					sweep.getSoulmax() + 1);
-			player.incrMoney(money);
-			player.incrGold(gold);
-			player.incrSoul(soul);
-			data.writeInt(gold);
-			data.writeInt(money); 
-			data.writeInt(soul);
+		//	int money =  sweep.getMoney();
+			int gold = 0;
+			int soul = 0;
+		//	player.incrMoney(money);
+		//	player.incrGold(gold);
+		//	player.incrSoul(soul);
+		//	data.writeInt(gold);
+		//	data.writeInt(money); 
+		//	data.writeInt(soul);
 			int[] awardCard = sweep.getCard();
 		
 			ArrayList<Integer>recard = new ArrayList<Integer>();
@@ -96,26 +97,49 @@ public class SweepManager {
  
 			}
 
+			while(recard.size()>4)
+			{
+				for (int j=recard.size()-1;j>0;j--)
+				{
+					recard.remove(j);
+				}
+			}	
+			
+
+		
+			
+			int money = sweep.getMoney()*(5-recard.size());
+			
 			if (recard.size() != 0) {
 				
 				ArrayList<Card> tmepList = new ArrayList<Card>();	
-				if (player.getCardBag().getSurplusCapacity() < recard.size())// 背包容量不足
-				{	
-					data.writeInt(recard.size());
+				ArrayList<Integer>cardidlList  =  changePos(recard);
+				//recard = changePos(recard);
 				
-					for (int j = 0; j < recard.size(); j++)
+					player.incrMoney(money);
+					player.incrGold(gold);
+					player.incrSoul(soul);
+					data.writeInt(gold);
+					data.writeInt(money); 
+					data.writeInt(soul);
+				
+				if (player.getCardBag().getSurplusCapacity() < cardidlList.size())// 背包容量不足
+				{	
+					data.writeInt(cardidlList.size());
+				
+					for (int j = 0; j < cardidlList.size(); j++)
 					{							
-						cards.add( recard.get(j));	
+						cards.add( cardidlList.get(j));	
 						data.writeInt(0);
-						data.writeInt(cards.get(j));
+						data.writeInt(cardidlList.get(j));
 						data.writeInt(0);
 					}					
 				} else
 				{		
-					data.writeInt(recard.size());
-					for (int j = 0; j < recard.size(); j++)// 往前台返回获得的卡牌的数量
+					data.writeInt(cardidlList.size());
+					for (int j = 0; j < cardidlList.size(); j++)// 往前台返回获得的卡牌的数量
 					{
-						tmepList.add(player.getCardBag().add(recard.get(j),player.getAchievements()));	
+						tmepList.add(player.getCardBag().add(cardidlList.get(j),player.getAchievements()));	
 					}
 						
 					for (int k = 0; k <tmepList.size(); k++)
@@ -127,6 +151,12 @@ public class SweepManager {
 				}																	
 			}else//本次扫荡没得到卡牌
 			{
+				player.incrMoney(money);
+				player.incrGold(gold);
+				player.incrSoul(soul);
+				data.writeInt(gold);
+				data.writeInt(money); 
+				data.writeInt(soul);
 				data.writeInt(0);
 			}
 		}
@@ -148,27 +178,48 @@ public class SweepManager {
 
 	}
 
-	private String checkSweep(Player player, int mapId, int sweepNum,
+	
+	/**扫荡的卡牌获取  扫荡  随机换位**/
+	private  ArrayList<Integer> changePos(ArrayList<Integer> arr)
+	{
+
+		ArrayList<Integer> rtlist = new ArrayList<Integer>();
+		int []inarr =  new int [arr.size()];
+		for (int i = 0; i < arr.size(); i++) {
+			 inarr[i] =arr.get(i);
+		}
+		int value =0;
+		//int [] rtarr =new int [inarr.length];
+		
+		 for (int i = 0; i < inarr.length; i++) 
+		 {
+			 int pos = MathKit.randomValue(0, inarr.length);
+			  value = inarr[pos];
+			  inarr[pos] = inarr[i];
+			  inarr[i] =value;
+		 }
+		 
+		for (int i = 0; i < inarr.length; i++) {
+			rtlist.add(inarr[i]);
+		}
+		
+		
+		
+		 return rtlist;
+	}
+	
+	private String checkSweep(Player player, int mapId, int tokenNum,
 			int maptype) {
 
 		if (maptype == 1) {
 			if (player.getCurIndexForNormalNPC() <= mapId) {
 				return Lang.F1411;
 			}
-		} else if (maptype == 3) {
-			if (player.getCurIndexForCorssNPC() <= mapId) {
-				return Lang.F1411;
-			}
-			
-			if(sweepNum>player.getPlayerInfo().getCrossMapNum())
-			{
-				return Lang.F1414;
-			}
 		} else {
 			return Lang.F1412;
 		}
 
-		if (player.getCurToken() < sweepNum) {
+		if (player.getCurToken() < tokenNum) {
 			return Lang.F1413;
 		}
 

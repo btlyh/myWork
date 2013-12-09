@@ -48,7 +48,8 @@ public class FastWorkCommand extends Command
 			throw new DataAccessException(601,Lang.F9000_SDE);
 		}
 		int slaveId=data.readInt();
-		SlaveManager.getInstance().fastWork(player,slaveId);
+		int money=SlaveManager.getInstance().fastWork(player,slaveId);
+		data.writeInt(money);
 
 	}
 }

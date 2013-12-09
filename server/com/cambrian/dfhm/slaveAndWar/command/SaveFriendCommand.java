@@ -56,7 +56,7 @@ public class SaveFriendCommand extends Command
 			player,friendId);
 		@SuppressWarnings("unchecked")
 		List<Integer> record=(List<Integer>)result.get("resultList");
-		Formation formation=(Formation)result.get("resultList");
+		Formation formation=(Formation)result.get("formation");
 		formation.bytesWrite(data);
 		data.writeInt(record.size());
 		for(Integer integer:record)

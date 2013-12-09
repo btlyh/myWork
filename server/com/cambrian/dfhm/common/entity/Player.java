@@ -64,8 +64,6 @@ public class Player extends Sample implements Actor
 	/** 军帐 */
 	private ArmyCamp armyCamp=new ArmyCamp();
 	/** 消息,在加载时执行操作 */
-	// /** 任务 */
-	public TaskContainer task;
 	public Formation formation=new Formation();
 	/** 玩家今日已购买军令数量 */
 	private int buyTokenNum;
@@ -558,6 +556,7 @@ public class Player extends Sample implements Actor
 		playerInfo.setDuelFreeTimes(10);
 		playerInfo.setDuelBuyTimes(0);
 		playerInfo.setCanTakePoint(0);
+		tasks.refreshDaly(this);
 	}
 	
 	/** 刷新playerInfo中Vip相关属性 */

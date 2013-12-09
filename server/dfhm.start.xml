@@ -706,7 +706,7 @@
 	
 	<!-- 当壕-后台发送-信息推送-->
 	<obj class="com.cambrian.dfhm.slaveAndWar.notice.EventMessageNotice" id="EMN">
-		<method name="setPort">2602</method>
+		<method name="setPort">2613</method>
 	</obj>
 	
 	<!-- 开启当壕管理器 -->
@@ -750,13 +750,13 @@
 	<!-- 当壕-前台发送-获取求助列表  -->
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_GETHELP"/>
-		<obj class="com.cambrian.dfhm.slaveAndWar.command.getHelpListCommand"></obj>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.GetHelpListCommand"></obj>
 	</method>
 	
 	<!-- 当壕-前台发送-获取奴隶列表  -->
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_GETSLAVE"/>
-		<obj class="com.cambrian.dfhm.slaveAndWar.command.getSlaveListCommand"></obj>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.GetSlaveListCommand"></obj>
 	</method>
 	
 	<!-- 当壕-前台发送-求助好友  -->
@@ -799,6 +799,24 @@
 	<method name="setPort" ref="service">
 		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_RELEASE"/>
 		<obj class="com.cambrian.dfhm.slaveAndWar.command.ReleaseSlaveCommand"></obj>
+	</method>
+	
+		<!-- 当壕-前台发送-取消托管  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_MANAGEDOFF"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.ManagedOffCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-获取信息  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_INFORMATION"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.GetInforMationsCommand"></obj>
+	</method>
+	
+	<!-- 当壕-前台发送-购买次数  -->
+	<method name="setPort" ref="service">
+		<field class="com.cambrian.dfhm.GlobalConst" name="COMMAND_SLAVE_BUYTIMES"/>
+		<obj class="com.cambrian.dfhm.slaveAndWar.command.BuyTimesCommand"></obj>
 	</method>
 	
 		<!-- 充值协议-->

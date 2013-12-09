@@ -72,11 +72,12 @@ public class QualifyingManager
 	{
 		instance.ds = ds;
 	}
-	
+
 	public void setMf(MailFactory mf)
 	{
 		instance.mf = mf;
 	}
+
 	public void setMailSendNotice(MailSendNotice msn)
 	{
 		instance.msn = msn;
@@ -168,7 +169,8 @@ public class QualifyingManager
 		QualifyingInfo qualifyingInfo = new QualifyingInfo();
 		String name = qualifying.getQualifyingList().get(i);
 		Player player = getPlayer(name);
-		if (player == null) return null;
+		if (player == null)
+			return null;
 		qualifyingInfo.setPlayerName(name);
 		qualifyingInfo.setPlayerRanking(i);
 		qualifyingInfo.setPlayerVipLevel(player.getVipLevel());
@@ -209,17 +211,16 @@ public class QualifyingManager
 				}
 			}
 			return bestCard.getSid();
-		}else
+		} else
 		{
 			return player.getCardBag().getBestCardSid();
 		}
-		
-		
-//		int uid = player.formation.getBestCardUid();
-//		Card card = player.getCardBag().getById(uid);
-//		if (card == null)
-//			return 10001;
-//		return card.getSid();
+
+		// int uid = player.formation.getBestCardUid();
+		// Card card = player.getCardBag().getById(uid);
+		// if (card == null)
+		// return 10001;
+		// return card.getSid();
 	}
 
 	/** 挑战对手 */
@@ -236,11 +237,15 @@ public class QualifyingManager
 		}
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Player tarPlayer = getPlayer(tarName);
+		int tarRank = qualifying.getPlayerRank(tarName);
+		int myRank = qualifying.getPlayerRank(player.getNickname());
 		BattleCard[] playerBattleCards = player.formation.getFormation();
 		BattleCard[] tarBattleCards = tarPlayer.formation.getFormation();
 		int tarBCardNull = 0;
 		int point = 0;
+		int win = 1;
 		String log = "";
+		String myLog = "";
 		for (BattleCard battleCard : tarBattleCards)
 		{
 			if (battleCard == null)
@@ -248,20 +253,21 @@ public class QualifyingManager
 		}
 		if (tarBCardNull >= 5)
 		{
-			int rank = qualifying.getPlayerRank(tarName);
-			if (rank > GameCFG.getDuelWinPoint().length)
-				rank = GameCFG.getDuelWinPoint().length - 1;
-			point = GameCFG.getDuelWinPoint(rank);
+			point = GameCFG.getDuelWinPoint();
 			player.getPlayerInfo().incrNormalPoint(point);
 			player.getPlayerInfo().incrQualifyingWin(1);
 			changeRanking(player.getNickname(), tarName);
-			log = "失败";
-			Mail mail = mf.createFightBackMail(player.getNickname()+"挑战并战胜了你", Mail.MAILSTATE_UNREAD);
+			myLog = "大获全胜";
+			log = "落荒而逃";
+			Mail mail = mf.createFightBackMail(
+					player.getNickname() + "挑战并战胜了你", Mail.MAILSTATE_UNREAD);
 			mail.setFight(true);
 			tarPlayer.addMail(mail);
 			Session session = ds.getSession(tarName);
 			if (session != null)
-				msn.send(ds.getSession(tarName), new Object[]{tarPlayer.getUnreadMailCount()});
+				msn.send(ds.getSession(tarName),
+						new Object[] { tarPlayer.getUnreadMailCount() });
+			tarPlayer.getPlayerInfo().addEnemy(player.getNickname());
 		} else
 		{
 			BattleScene scene = new BattleScene();
@@ -270,50 +276,55 @@ public class QualifyingManager
 			scene.start(playerBattleCards, tarBattleCards,
 					BattleScene.FIGHT_NORMAL);
 			scene.getRecord().set(0, scene.getStep());
-			int win = scene.getRecord().get(scene.getRecord().size() - 1);
-			System.err.println("win====="+win);
+			win = scene.getRecord().get(scene.getRecord().size() - 1);
+			System.err.println("win=====" + win);
 			if (win > 0)
 			{
-				int rank = qualifying.getPlayerRank(tarName);
-				if (rank > GameCFG.getDuelWinPoint().length)
-					rank = GameCFG.getDuelWinPoint().length -1;
-				point = GameCFG.getDuelWinPoint(rank);
+				point = GameCFG.getDuelWinPoint();
 				player.getPlayerInfo().incrNormalPoint(point);
 				player.getPlayerInfo().incrQualifyingWin(1);
 				changeRanking(player.getNickname(), tarName);
-				log = "失败";
-				Mail mail = mf.createFightBackMail(player.getNickname()+"挑战并战胜了你", Mail.MAILSTATE_UNREAD);
+				myLog = "大获全胜";
+				log = "侥幸获胜";
+				Mail mail = mf.createFightBackMail(player.getNickname()
+						+ "挑战并战胜了你", Mail.MAILSTATE_UNREAD);
 				mail.setFight(true);
 				tarPlayer.addMail(mail);
 				Session session = ds.getSession(tarName);
 				if (session != null)
-					msn.send(ds.getSession(tarName), new Object[]{tarPlayer.getUnreadMailCount()});
+					msn.send(ds.getSession(tarName),
+							new Object[] { tarPlayer.getUnreadMailCount() });
+				tarPlayer.getPlayerInfo().addEnemy(player.getNickname());
 			} else
 			{
-				int rank = qualifying.getPlayerRank(tarName);
-				if (rank >= GameCFG.getDuelLosePoint().length)
-					rank = GameCFG.getDuelLosePoint().length - 1;
-				point = GameCFG.getDuelLosePoint(rank);
+				point = GameCFG.getDuelLosePoint();
 				player.getPlayerInfo().incrNormalPoint(point);
-				log = "胜利";
+				myLog = "不幸落败";
+				log = "落荒而逃";
 			}
-			tarPlayer.getPlayerInfo().addEnemy(player.getNickname());
-			tarPlayer.getPlayerInfo().addQualifyingLog(
-					getLog(log, player.getNickname()));
 			resultMap.put("record", scene.getRecord());
 			resultMap.put("battleCards", tarBattleCards);
 		}
+		tarPlayer.getPlayerInfo().addQualifyingLog(
+				getLog(2, win, log, player.getNickname(), tarRank + 1,
+						qualifying.getPlayerRank(tarPlayer.getNickname()) + 1));
+		player.getPlayerInfo().addQualifyingLog(
+				getLog(1, win, myLog, tarName,
+						myRank + 1,
+						qualifying.getPlayerRank(player.getNickname()) + 1)
+						);
 		player.getPlayerInfo().decrDuelFreeTimes(1);
 		player.getPlayerInfo().incrQualifyingCount(1);
 		resultMap.put("point", point);
 		return resultMap;
 	}
+
 	/** 检查挑战 */
 	private String checkDuel(Player player, int useGold)
 	{
 		if (player.getPlayerInfo().getDuelFreeTimes() < 1)
 		{
-			if (useGold != 10 * (player.getPlayerInfo().getDuelBuyTimes()+1))
+			if (useGold != 10 * (player.getPlayerInfo().getDuelBuyTimes() + 1))
 			{
 				return Lang.F2101; // 金钱错误
 			}
@@ -330,16 +341,52 @@ public class QualifyingManager
 				i++;
 		}
 		if (i >= 5)
-			return Lang.F2102; //没有卡牌在阵上
+			return Lang.F2102; // 没有卡牌在阵上
 		return null;
 	}
 
-	/** 获得一条记录字符串 */
-	private String getLog(String log, String name)
+	/**
+	 * 获得一条记录字符串
+	 * @param type 
+	 * @param win 
+	 * 
+	 * @param j
+	 * @param i
+	 */
+	private String getLog(int type, int win, String log, String name, int rankBack, int rank)
 	{
 		Date nowTime = new Date();
 		String date = dateFormat.format(nowTime);
-		String historyLog = date + " (" + name + ")挑战了你，你战斗" + log;
+		String str = "";
+		String historyLog = "";
+		if (type == 1)
+		{
+			if (win > 0)
+			{
+				if (rank < rankBack)
+					str = "，你的排名升至" + rank + "。";
+				else
+					str = ",你的排名保持不变。";
+			}else
+			{
+				str = ",你的排名保持不变。";
+			}
+			historyLog = date + " 你挑战了（" + name + "），" + log + str;
+		}
+		else
+		{
+			if (win > 0)
+			{
+				if (rank > rankBack)
+					str = "，你的排名降至" + rank + "。";
+				else
+					str = ",你的排名保持不变。";
+			}else
+			{
+				str = ",你的排名保持不变。";
+			}
+			historyLog = date + " (" + name + ")挑战了你，" + log + str;
+		}
 		return historyLog;
 	}
 
@@ -407,10 +454,10 @@ public class QualifyingManager
 		// {
 		// return Lang.F1100; // 次数已满，不能购买
 		// }
-		
-//		if (useGold != 5 * (int) Math.pow(2, player.getPlayerInfo()
-//				.getDuelBuyTimes()))
-		if (useGold != 10 * (player.getPlayerInfo().getDuelBuyTimes()+1))
+
+		// if (useGold != 5 * (int) Math.pow(2, player.getPlayerInfo()
+		// .getDuelBuyTimes()))
+		if (useGold != 10 * (player.getPlayerInfo().getDuelBuyTimes() + 1))
 		{
 			return Lang.F2101; // 金钱错误
 		}
@@ -437,12 +484,13 @@ public class QualifyingManager
 		player.getPlayerInfo().setCanTakePoint(1);
 		return point;
 	}
+
 	/** 检查领取积分 */
 	private String checkGetPointGift(Player player)
 	{
 		if (player.getPlayerInfo().getCanTakePoint() == 1)
 		{
-			return Lang.F2406;//已经领取过了
+			return Lang.F2406;// 已经领取过了
 		}
 		return null;
 	}
@@ -460,7 +508,7 @@ public class QualifyingManager
 		{
 			qualifying = new Qualifying();
 			if (dao.getQualifying() != null)
-				qualifying=dao.getQualifying();
+				qualifying = dao.getQualifying();
 		}
 		List<QualifyingInfo> topList = qualifying.getTopList();
 		topList.clear();

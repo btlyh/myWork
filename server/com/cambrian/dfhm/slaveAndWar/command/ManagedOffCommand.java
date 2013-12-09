@@ -10,12 +10,13 @@ import com.cambrian.dfhm.slaveAndWar.logic.SlaveManager;
 import com.cambrian.game.Session;
 
 /**
- * 类说明：身份信息获取
- * 
+ * 类说明： 取消托管
  * @author：LazyBear
+ * 
  */
-public class GetIdentityCommand extends Command
+public class ManagedOffCommand extends Command
 {
+
 
 	/* static fields */
 
@@ -47,18 +48,8 @@ public class GetIdentityCommand extends Command
 		{
 			throw new DataAccessException(601,Lang.F9000_SDE);
 		}
-		Player bossPlayer=SlaveManager.getInstance().getBossPlayer(player);
-		player.getIdentity().BytesWrite(data);
-		data.writeInt(player.getFightPoint());
-		if(bossPlayer==null)
-		{
-			data.writeBoolean(false);
-		}
-		else
-		{
-			data.writeBoolean(true);
-			data.writeUTF(bossPlayer.getNickname());
-			data.writeInt(player.getFightPoint());
-		}
+		int slaveId=data.readInt();
+		SlaveManager.getInstance().managedOff(player,slaveId);
+		
 	}
 }

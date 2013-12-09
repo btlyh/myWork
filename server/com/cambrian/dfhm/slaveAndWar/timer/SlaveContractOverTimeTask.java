@@ -10,6 +10,7 @@ import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.slaveAndWar.dao.SlaveAndWarDao;
 import com.cambrian.dfhm.slaveAndWar.entity.Identity;
 import com.cambrian.dfhm.slaveAndWar.entity.Slave;
+import com.cambrian.dfhm.slaveAndWar.notice.EventMessageNotice;
 import com.cambrian.game.Session;
 import com.cambrian.game.ds.DataServer;
 
@@ -29,12 +30,15 @@ public class SlaveContractOverTimeTask extends TimerTask
 	SlaveAndWarDao dao;
 
 	DataServer ds;
+	
+	EventMessageNotice emn;
 
 	/* constructors */
-	public SlaveContractOverTimeTask(SlaveAndWarDao dao,DataServer ds)
+	public SlaveContractOverTimeTask(SlaveAndWarDao dao,DataServer ds,EventMessageNotice emn)
 	{
 		this.dao=dao;
 		this.ds=ds;
+		this.emn=emn;
 	}
 	/* properties */
 
@@ -86,7 +90,7 @@ public class SlaveContractOverTimeTask extends TimerTask
 					*GameCFG.getSlaveKeepTime()))
 				{
 					player.getIdentity().cutSlave(slave.getUserId())
-						.beFreeHandle(ds,dao);
+						.beFreeHandle(ds,dao,emn);
 				}
 			}
 		}

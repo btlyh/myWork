@@ -1,47 +1,54 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <objects>
 	<!--
-	type 事件类型 1办事完成 2打架 3路见不平 4好友求助 5反抗 6赎身 7释放 8身份关系时间到
+	type 事件类型 1办事完成 2主动打土豪 3被动打土豪 4主动打侠客 5被动打侠客 6主动路见不平 7被动路见不平 8主动好友求助 9被动好友求助 10反抗 11赎身 12释放 13身份关系时间到
 	active 主动或者被动 1主动 0被动
 	identity 身份  1 马仔 2侠客 3土豪
-	success 1成功 0失败
-	information 信息内容
+	result 1成功 0失败
+	content 信息内容
 	-->
-	<sample sid="50001" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="1" identity="3" success="1" infomation="A为你办事获得value银币"/>
-	<sample sid="50002" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="1" identity="1" success="1" infomation="你为A办事获得value银币"/>
-	<sample sid="50003" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="3" success="1" infomation="A打败了您，抢走了你的马仔B"/>
-	<sample sid="50004" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="1" success="1" infomation="你的老大A被B击败了，你被A抢走了成了他的马仔"/>
-	<sample sid="50005" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="3" success="0" infomation="A想来抢你的马仔，真是异想天开"/>
-	<sample sid="50006" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="2" success="1" infomation="A打败了您，你变成了他的马仔，不能忍"/>
-	<sample sid="50007" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="2" success="0" infomation="A想把你变成他的马仔，真是想多了"/>
-	<sample sid="50008" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="3" success="1" infomation="你打败了A，抢走了他的马仔B，哈哈哈"/>
-	<sample sid="50009" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="2" success="0" infomation="你打败了A，抢走了他的马仔B，哈哈哈"/>
-	<sample sid="50010" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="3" success="1" infomation="你未打败A，小心他的马仔都能过来干掉你哦"/>
-	<sample sid="50011" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="2" success="0" infomation="你未打败A，小心他的马仔都能过来干掉你哦"/>
-	<sample sid="50012" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="3" success="1" infomation="你打败了A，他变成了你的马仔，你可以尽情的奴役他了"/>
-	<sample sid="50013" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="2" success="0" infomation="你打败了A，他变成了你的马仔，你可以尽情的奴役他了"/>
-	<sample sid="50014" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="3" success="1" infomation="你未打败A，他的实力还没有弱到变成你的马仔啊"/>
-	<sample sid="50015" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="2" identity="2" success="0" infomation="你未打败A，他的实力还没有弱到变成你的马仔啊"/>
-	<sample sid="50016" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="3" success="1" infomation="一个路人A看到你正在修理你的马仔B时，出手救了他，真是太丢脸了"/>
-	<sample sid="50017" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="1" success="1" infomation="一个路人A看到你正被你的老大B修理时，出手救了你，赶快谢谢你的恩人吧"/>
-	<sample sid="50018" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="3" success="0" infomation="一个路人A看到你正在修理你的马仔时，看不下去了想出手相救，真是异想天开"/>
-	<sample sid="50019" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="2" success="1" infomation="你看到A正在修理他的马仔B，你忍不住出手救了B，他不再是马仔了"/>
-	<sample sid="50020" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="3" identity="2" success="0" infomation="你看到A正在修理他的马仔，可是你也打不过A，还是赶快溜了吧"/>
-	<sample sid="50021" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="4" identity="3" success="1" infomation="你的马仔A被他的好友B拯救了，赶快去抓新的马仔吧"/>
-	<sample sid="50022" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="4" identity="1" success="1" infomation="你的好友A奋力相救，让你摆脱了你的老大B，你不再是马仔了"/>
-	<sample sid="50023" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="4" identity="3" success="0" infomation="你的马仔A居然叫他的好友B来救他，还好及时发现，赶快给他点教训吧"/>
-	<sample sid="50024" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="4" identity="1" success="1" infomation="你的好友A想救你于危难之间，可是他也打不过你的老大B，自身难保了"/>
-	<sample sid="50025" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="4" identity="2" success="1" infomation="你拯救了你的好友A，摆脱了他的老大B他不再是马仔了"/>
-	<sample sid="50026" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="4" identity="2" success="0" infomation=" 你想拯救你的好友A，可你还打不过他的老大B，无能为力啊"/>
-	<sample sid="50027" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="5" identity="3" success="1" infomation="你的马仔A反抗成功，他不再是你的马仔了"/>
-	<sample sid="50028" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="5" identity="3" success="0" infomation="你的马仔A反抗失败，他真是不想活了"/>
-	<sample sid="50029" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="5" identity="1" success="1" infomation="你成功反抗你的老大A，恢复了自由身"/>
-	<sample sid="50030" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="5" identity="1" success="0" infomation="你反抗你的老大A失败，小心没有好果子吃了"/>
-	<sample sid="50031" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="6" identity="3" success="1" infomation="你的马仔A花了大价钱赎身，他不再是你的马仔了"/>
-	<sample sid="50032" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="6" identity="1" success="1" infomation="你花钱赎身成功，你不再是马仔了"/>
-	<sample sid="50033" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="7" identity="1" success="1" infomation="你的老大A释放了你，你不再是马仔了"/>
-	<sample sid="50034" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="7" identity="3" success="1" infomation="你大发慈悲将B释放了，好人好报"/>
-	<sample sid="50035" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="8" identity="3" success="1" infomation="你的马仔A已经在你这里待了足够长的时间了，他自动离去了"/>
-	<sample sid="50036" class="com.cambrian.dfhm.slaveAndWar.entity.Identity" type="8" identity="1" success="1" infomation="你在A那里受尽折磨，终于逃离了他的魔掌"/>
+	<sample sid="50001" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="1" identity="3" result="1" content="A为你办事获得value银币"/>
+	<sample sid="50002" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="1" identity="1" result="1" content="你为A办事获得value银币"/>
+	<sample sid="50003" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="3" identity="3" result="1" content="A打败了您，抢走了你的马仔B"/>
+	<sample sid="50004" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="3" identity="1" result="1" content="你的老大A被B击败了，你被B抢走了成了他的马仔"/>
+	<sample sid="50005" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="3" identity="3" result="0" content="A想来抢你的马仔，真是异想天开"/>
+	<sample sid="50006" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="5" identity="2" result="1" content="A打败了您，你变成了他的马仔，不能忍"/>
+	<sample sid="50007" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="5" identity="2" result="0" content="A想把你变成他的马仔，真是想多了"/>
+	<sample sid="50008" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="2" identity="3" result="1" content="你打败了A，抢走了他的马仔B，哈哈哈"/>
+	<sample sid="50009" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="2" identity="2" result="1" content="你打败了A，抢走了他的马仔B，哈哈哈"/>
+	<sample sid="50010" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="2" identity="3" result="0" content="你未打败A，小心他的马仔都能过来干掉你哦"/>
+	<sample sid="50011" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="2" identity="2" result="0" content="你未打败A，小心他的马仔都能过来干掉你哦"/>
+	<sample sid="50012" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="4" identity="3" result="1" content="你打败了A，他变成了你的马仔，你可以尽情的奴役他了"/>
+	<sample sid="50013" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="4" identity="2" result="1" content="你打败了A，他变成了你的马仔，你可以尽情的奴役他了"/>
+	<sample sid="50014" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="4" identity="3" result="0" content="你未打败A，他的实力还没有弱到变成你的马仔啊"/>
+	<sample sid="50015" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="4" identity="2" result="0" content="你未打败A，他的实力还没有弱到变成你的马仔啊"/>
+	<sample sid="50016" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="7" identity="3" result="1" content="一个路人A看到你正在修理你的马仔B时，出手救了他，真是太丢脸了"/>
+	<sample sid="50017" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="7" identity="2" result="1" content="一个路人A看到你正在修理你的马仔B时，出手救了他，真是太丢脸了"/>
+	<sample sid="50018" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="7" identity="1" result="1" content="一个路人A看到你正被你的老大B修理时，出手救了你，赶快谢谢你的恩人吧"/>
+	<sample sid="50019" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="7" identity="3" result="0" content="一个路人A看到你正在修理你的马仔时，看不下去了想出手相救，真是异想天开"/>
+	<sample sid="50020" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="7" identity="2" result="0" content="一个路人A看到你正在修理你的马仔时，看不下去了想出手相救，真是异想天开"/>
+	<sample sid="50021" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="6" identity="2" result="1" content="你看到A正在修理他的马仔B，你忍不住出手救了B，他不再是马仔了"/>
+	<sample sid="50022" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="6" identity="3" result="1" content="你看到A正在修理他的马仔B，你忍不住出手救了B，他不再是马仔了"/>
+	<sample sid="50023" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="6" identity="2" result="0" content="你看到A正在修理他的马仔，可是你也打不过A，还是赶快溜了吧"/>
+	<sample sid="50024" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="6" identity="3" result="0" content="你看到A正在修理他的马仔，可是你也打不过A，还是赶快溜了吧"/>
+	<sample sid="50025" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="9" identity="3" result="1" content="你的马仔A被他的好友B拯救了，赶快去抓新的马仔吧"/>
+	<sample sid="50026" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="9" identity="2" result="1" content="你的马仔A被他的好友B拯救了，赶快去抓新的马仔吧"/>
+	<sample sid="50027" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="9" identity="1" result="1" content="你的好友A奋力相救，让你摆脱了你的老大B，你不再是马仔了"/>
+	<sample sid="50028" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="9" identity="3" result="0" content="你的马仔A居然叫他的好友B来救他，还好及时发现，赶快给他点教训吧"/>
+	<sample sid="50029" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="9" identity="1" result="0" content="你的好友A想救你于危难之间，可是他也打不过你的老大B，自身难保了"/>
+	<sample sid="50030" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="8" identity="2" result="1" content="你拯救了你的好友A，摆脱了他的老大B他不再是马仔了"/>
+	<sample sid="50031" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="8" identity="3" result="1" content="你拯救了你的好友A，摆脱了他的老大B他不再是马仔了"/>
+	<sample sid="50032" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="8" identity="2" result="0" content="你想拯救你的好友A，可你还打不过他的老大B，无能为力啊"/>
+	<sample sid="50033" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="10" identity="3" result="1" content="你的马仔A反抗成功，他不再是你的马仔了"/>
+	<sample sid="50034" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="10" identity="3" result="0" content="你的马仔A反抗失败，他真是不想活了"/>
+	<sample sid="50035" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="10" identity="1" result="1" content="你成功反抗你的老大A，恢复了自由身"/>
+	<sample sid="50036" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="10" identity="1" result="0" content="你反抗你的老大A失败，小心没有好果子吃了"/>
+	<sample sid="50037" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="11" identity="3" result="1" content="你的马仔A花了大价钱赎身，他不再是你的马仔了"/>
+	<sample sid="50038" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="11" identity="1" result="1" content="你花钱赎身成功，你不再是马仔了"/>
+	<sample sid="50039" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="12" identity="1" result="1" content="你的老大A释放了你，你不再是马仔了"/>
+	<sample sid="50040" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="12" identity="3" result="1" content="你大发慈悲将A释放了，好人好报"/>
+	<sample sid="50041" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="13" identity="3" result="1" content="你的马仔A已经在你这里待了足够长的时间了，他自动离去了"/>
+	<sample sid="50042" class="com.cambrian.dfhm.slaveAndWar.entity.Information" type="13" identity="1" result="1" content="你在A那里受尽折磨，终于逃离了他的魔掌"/>
+
 
 </objects>

@@ -8,62 +8,36 @@ import com.cambrian.common.object.Sample;
  *
  */
 public class Sweep extends Sample {
-	private int goldmax; // 最大金币数
-	private int goldmin; // 最小金币数
-	private int moneymax; // 最大银币
-	private int moneymin; // 最小银币
-	private int soulmax;// 最大武魂
-	private int soulmin;// 最小武魂
+	private int gold; // 最大金币数
+	private int money; // 最小金币数
+	private int soul; // 最大银币
 	private int[] card;
 
-	public int getGoldmax() {
-		return goldmax;
+	
+	public int getGold() {
+		return gold;
 	}
 
-	public void setGoldmax(int goldmax) {
-		this.goldmax = goldmax;
+	public void setGold(int gold) {
+		this.gold = gold;
 	}
 
-	public int getGoldmin() {
-		return goldmin;
+	public int getMoney() {
+		return money;
 	}
 
-	public void setGoldmin(int goldmin) {
-		this.goldmin = goldmin;
+	public void setMoney(int money) {
+		this.money = money;
 	}
 
-	public int getMoneymax() {
-		return moneymax;
+	public int getSoul() {
+		return soul;
 	}
 
-	public void setMoneymax(int moneymax) {
-		this.moneymax = moneymax;
+	public void setSoul(int soul) {
+		this.soul = soul;
 	}
 
-	public int getMoneymin() {
-		return moneymin;
-	}
-
-	public void setMoneymin(int moneymin) {
-		this.moneymin = moneymin;
-	}
-
-	public int getSoulmax() {
-		return soulmax;
-	}
-
-	public void setSoulmax(int soulmax) {
-		this.soulmax = soulmax;
-	}
-
-	public int getSoulmin() {
-		return soulmin;
-	}
-
-	public void setSoulmin(int soulmin) {
-		this.soulmin = soulmin;
-	}
- 
 	public int[] getCard() {
 		return card;
 	}

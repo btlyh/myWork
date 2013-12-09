@@ -4,231 +4,178 @@
 	扫荡副本
 	 sid
 	 class
-	 goldmax //最大金币数
-	 goldmin //最小金币数
-	 moneymax //最大银币
-	 moneymin //最小银币
-	 soulmax //最大武魂
-	 soulmin//最小武魂	 
+	 gold //金币掉落数
+	 money//金钱掉落
+	 soul//武魂掉落
 	 _1card //(card   依次是卡牌的SID  掉落几率 和 掉落最大张数)
 	-->
 	
-	<sample sid="20722" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10001,20000,1,10001,20000,1,10001,20000,1,10001,20000,1,10001,20000,1"/>
-	<sample sid="20723" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10001,20000,1,10001,20000,1,10002,20000,1,10001,20000,1,10001,20000,1"/>
-	<sample sid="20724" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10001,20000,1,10001,20000,1,10003,20000,1,10003,20000,1,10003,20000,1"/>
-	<sample sid="20725" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10003,20000,1,10003,20000,1,10004,20000,1,10003,20000,1,10003,20000,1"/>
-	<sample sid="20726" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10005,20000,1,10005,20000,1,10005,20000,1,10005,20000,1,10005,20000,1"/>
-	<sample sid="20727" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10005,20000,1,10005,20000,1,10006,20000,1,10005,20000,1,10005,20000,1"/>
-	<sample sid="20728" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10005,20000,1,10005,20000,1,10007,20000,1,10005,20000,1,10005,20000,1"/>
-	<sample sid="20729" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10008,20000,1,10008,20000,1,10008,20000,1,10008,20000,1,10008,20000,1"/>
-	<sample sid="20730" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10008,20000,1,10008,20000,1,10009,20000,1,10008,20000,1,10008,20000,1"/>
-	<sample sid="20731" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10010,20000,1,10010,20000,1,10010,20000,1,10010,20000,1,10010,20000,1"/>
-	<sample sid="20732" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10010,20000,1,10010,20000,1,10011,20000,1,10010,20000,1,10010,20000,1"/>
-	<sample sid="20733" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10010,20000,1,10010,20000,1,10012,20000,1,10010,20000,1,10010,20000,1"/>
-	<sample sid="20734" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10013,20000,1,10013,20000,1,10013,20000,1,10013,20000,1,10013,20000,1"/>
-	<sample sid="20735" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10013,20000,1,10013,20000,1,10014,20000,1,10013,20000,1,10013,20000,1"/>
-	<sample sid="20736" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10009,20000,1,10011,20000,1,10015,20000,1,10014,20000,1,10012,20000,1"/>
-	<sample sid="20737" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10017,20000,1,10017,20000,1,10016,20000,1,10017,20000,1,10017,20000,1"/>
-	<sample sid="20738" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10017,20000,1,10017,20000,1,10017,20000,1,10017,20000,1,10017,20000,1"/>
-	<sample sid="20739" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10018,20000,1,10018,20000,1,10018,20000,1,10018,20000,1,10018,20000,1"/>
-	<sample sid="20740" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10018,20000,1,10018,20000,1,10019,20000,1,10018,20000,1,10018,20000,1"/>
-	<sample sid="20741" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10018,20000,1,10018,20000,1,10020,20000,1,10019,20000,1,10016,20000,1"/>
-	<sample sid="20742" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10021,20000,1,10021,20000,1,10021,20000,1,10021,20000,1,10021,20000,1"/>
-	<sample sid="20743" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10021,20000,1,10021,20000,1,10022,20000,1,10021,20000,1,10021,20000,1"/>
-	<sample sid="20744" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10023,20000,1,10023,20000,1,10023,20000,1,10023,20000,1,10023,20000,1"/>
-	<sample sid="20745" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10023,20000,1,10023,20000,1,10024,20000,1,10023,20000,1,10023,20000,1"/>
-	<sample sid="20746" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10023,20000,1,10023,20000,1,10025,20000,1,10024,20000,1,10022,20000,1"/>
-	<sample sid="20747" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10018,20000,1,10018,20000,1,10026,20000,1,10018,20000,1,10018,20000,1"/>
-	<sample sid="20748" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10021,20000,1,10021,20000,1,10027,20000,1,10021,20000,1,10021,20000,1"/>
-	<sample sid="20749" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10018,20000,1,10018,20000,1,10028,20000,1,10018,20000,1,10018,20000,1"/>
-	<sample sid="20750" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10029,20000,1,10029,20000,1,10029,20000,1,10029,20000,1,10029,20000,1"/>
-	<sample sid="20751" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10029,20000,1,10029,20000,1,10030,20000,1,10028,20000,1,10027,20000,1"/>
-	<sample sid="20752" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10032,20000,1,10032,20000,1,10031,20000,1,10032,20000,1,10032,20000,1"/>
-	<sample sid="20753" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10032,20000,1,10032,20000,1,10032,20000,1,10032,20000,1,10032,20000,1"/>
-	<sample sid="20754" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10032,20000,1,10032,20000,1,10033,20000,1,10032,20000,1,10032,20000,1"/>
-	<sample sid="20755" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10034,20000,1,10034,20000,1,10034,20000,1,10034,20000,1,10034,20000,1"/>
-	<sample sid="20756" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10034,20000,1,10034,20000,1,10035,20000,1,10033,20000,1,10031,20000,1"/>
-	<sample sid="20757" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10034,20000,1,10034,20000,1,10036,20000,1,10034,20000,1,10034,20000,1"/>
-	<sample sid="20758" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10034,20000,1,10034,20000,1,10037,20000,1,10034,20000,1,10034,20000,1"/>
-	<sample sid="20759" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10038,20000,1,10038,20000,1,10038,20000,1,10038,20000,1,10038,20000,1"/>
-	<sample sid="20760" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10039,20000,1,10039,20000,1,10039,20000,1,10039,20000,1,10039,20000,1"/>
-	<sample sid="20761" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10038,20000,1,10039,20000,1,10040,20000,1,10037,20000,1,10036,20000,1"/>
-	<sample sid="20762" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10043,20000,1,10043,20000,1,10041,20000,1,10043,20000,1,10043,20000,1"/>
-	<sample sid="20763" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10043,20000,1,10043,20000,1,10042,20000,1,10043,20000,1,10043,20000,1"/>
-	<sample sid="20764" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10043,20000,1,10043,20000,1,10043,20000,1,10043,20000,1,10043,20000,1"/>
-	<sample sid="20765" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10044,20000,1,10044,20000,1,10044,20000,1,10044,20000,1,10044,20000,1"/>
-	<sample sid="20766" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10043,20000,1,10044,20000,1,10045,20000,1,10042,20000,1,10041,20000,1"/>
-	<sample sid="20767" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10047,20000,1,10047,20000,1,10046,20000,1,10047,20000,1,10047,20000,1"/>
-	<sample sid="20768" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10047,20000,1,10047,20000,1,10047,20000,1,10047,20000,1,10047,20000,1"/>
-	<sample sid="20769" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10047,20000,1,10047,20000,1,10048,20000,1,10047,20000,1,10047,20000,1"/>
-	<sample sid="20770" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10049,20000,1,10049,20000,1,10049,20000,1,10049,20000,1,10049,20000,1"/>
-	<sample sid="20771" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10049,20000,1,10049,20000,1,10050,20000,1,10048,20000,1,10046,20000,1"/>
-	<sample sid="20772" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10051,20000,1,10051,20000,1,10051,20000,1,10051,20000,1,10051,20000,1"/>
-	<sample sid="20773" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10051,20000,1,10051,20000,1,10052,20000,1,10051,20000,1,10051,20000,1"/>
-	<sample sid="20774" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10051,20000,1,10051,20000,1,10053,20000,1,10051,20000,1,10051,20000,1"/>
-	<sample sid="20775" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10051,20000,1,10051,20000,1,10054,20000,1,10051,20000,1,10051,20000,1"/>
-	<sample sid="20776" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10055,20000,1,10055,20000,1,10055,20000,1,10055,20000,1,10055,20000,1"/>
-	<sample sid="20777" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10055,20000,1,10052,20000,1,10056,20000,1,10054,20000,1,10053,20000,1"/>
-	<sample sid="20778" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10057,20000,1,10057,20000,1,10057,20000,1,10057,20000,1,10057,20000,1"/>
-	<sample sid="20779" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10057,20000,1,10057,20000,1,10058,20000,1,10057,20000,1,10057,20000,1"/>
-	<sample sid="20780" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10057,20000,1,10057,20000,1,10059,20000,1,10057,20000,1,10057,20000,1"/>
-	<sample sid="20781" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10060,20000,1,10060,20000,1,10060,20000,1,10060,20000,1,10060,20000,1"/>
-	<sample sid="20782" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10060,20000,1,10060,20000,1,10061,20000,1,10060,20000,1,10060,20000,1"/>
-	<sample sid="20783" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10060,20000,1,10058,20000,1,10062,20000,1,10061,20000,1,10059,20000,1"/>
-	<sample sid="20784" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10058,20000,1,10059,20000,1,10063,20000,1,10061,20000,1,10062,20000,1"/>
-	<sample sid="20785" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10064,20000,1,10064,20000,1,10064,20000,1,10064,20000,1,10064,20000,1"/>
-	<sample sid="20786" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10064,20000,1,10064,20000,1,10065,20000,1,10064,20000,1,10064,20000,1"/>
-	<sample sid="20787" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10066,20000,1,10066,20000,1,10066,20000,1,10066,20000,1,10066,20000,1"/>
-	<sample sid="20788" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10066,20000,1,10066,20000,1,10067,20000,1,10066,20000,1,10066,20000,1"/>
-	<sample sid="20789" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10066,20000,1,10066,20000,1,10068,20000,1,10067,20000,1,10065,20000,1"/>
-	<sample sid="20790" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10069,20000,1,10069,20000,1,10069,20000,1,10069,20000,1,10069,20000,1"/>
-	<sample sid="20791" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10069,20000,1,10069,20000,1,10070,20000,1,10069,20000,1,10069,20000,1"/>
-	<sample sid="20792" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10071,20000,1,10071,20000,1,10071,20000,1,10071,20000,1,10071,20000,1"/>
-	<sample sid="20793" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10071,20000,1,10071,20000,1,10072,20000,1,10071,20000,1,10071,20000,1"/>
-	<sample sid="20794" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10071,20000,1,10071,20000,1,10073,20000,1,10072,20000,1,10070,20000,1"/>
-	<sample sid="20795" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10074,20000,1,10074,20000,1,10074,20000,1,10074,20000,1,10074,20000,1"/>
-	<sample sid="20796" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10074,20000,1,10074,20000,1,10075,20000,1,10074,20000,1,10074,20000,1"/>
-	<sample sid="20797" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10076,20000,1,10076,20000,1,10076,20000,1,10076,20000,1,10076,20000,1"/>
-	<sample sid="20798" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10076,20000,1,10076,20000,1,10077,20000,1,10076,20000,1,10076,20000,1"/>
-	<sample sid="20799" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10068,20000,1,10073,20000,1,10078,20000,1,10077,20000,1,10075,20000,1"/>
-	<sample sid="20800" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10079,20000,1,10079,20000,1,10079,20000,1,10079,20000,1,10079,20000,1"/>
-	<sample sid="20801" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10079,20000,1,10079,20000,1,10080,20000,1,10079,20000,1,10079,20000,1"/>
-	<sample sid="20802" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10081,20000,1,10081,20000,1,10081,20000,1,10081,20000,1,10081,20000,1"/>
-	<sample sid="20803" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10081,20000,1,10081,20000,1,10082,20000,1,10081,20000,1,10081,20000,1"/>
-	<sample sid="20804" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10081,20000,1,10081,20000,1,10083,20000,1,10082,20000,1,10080,20000,1"/>
-	<sample sid="20805" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10084,20000,1,10084,20000,1,10084,20000,1,10084,20000,1,10084,20000,1"/>
-	<sample sid="20806" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10084,20000,1,10084,20000,1,10085,20000,1,10084,20000,1,10084,20000,1"/>
-	<sample sid="20807" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10086,20000,1,10086,20000,1,10086,20000,1,10086,20000,1,10086,20000,1"/>
-	<sample sid="20808" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10086,20000,1,10086,20000,1,10087,20000,1,10086,20000,1,10086,20000,1"/>
-	<sample sid="20809" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10086,20000,1,10086,20000,1,10088,20000,1,10087,20000,1,10085,20000,1"/>
-	<sample sid="20810" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10089,20000,1,10089,20000,1,10089,20000,1,10089,20000,1,10089,20000,1"/>
-	<sample sid="20811" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10089,20000,1,10089,20000,1,10090,20000,1,10089,20000,1,10089,20000,1"/>
-	<sample sid="20812" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10091,20000,1,10091,20000,1,10091,20000,1,10091,20000,1,10091,20000,1"/>
-	<sample sid="20813" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10091,20000,1,10091,20000,1,10092,20000,1,10091,20000,1,10091,20000,1"/>
-	<sample sid="20814" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10083,20000,1,10088,20000,1,10093,20000,1,10092,20000,1,10090,20000,1"/>
-	<sample sid="20815" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10094,20000,1,10094,20000,1,10094,20000,1,10094,20000,1,10094,20000,1"/>
-	<sample sid="20816" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10094,20000,1,10094,20000,1,10095,20000,1,10094,20000,1,10094,20000,1"/>
-	<sample sid="20817" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10094,20000,1,10094,20000,1,10096,20000,1,10094,20000,1,10094,20000,1"/>
-	<sample sid="20818" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10097,20000,1,10097,20000,1,10097,20000,1,10097,20000,1,10097,20000,1"/>
-	<sample sid="20819" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10097,20000,1,10097,20000,1,10098,20000,1,10096,20000,1,10095,20000,1"/>
-	<sample sid="20820" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10099,20000,1,10099,20000,1,10099,20000,1,10099,20000,1,10099,20000,1"/>
-	<sample sid="20821" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10099,20000,1,10099,20000,1,10000,20000,1,10099,20000,1,10099,20000,1"/>
-	<sample sid="20822" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10099,20000,1,10099,20000,1,10001,20000,1,10099,20000,1,10099,20000,1"/>
-	<sample sid="20823" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10002,20000,1,10002,20000,1,10002,20000,1,10002,20000,1,10002,20000,1"/>
-	<sample sid="20824" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10002,20000,1,10002,20000,1,10003,20000,1,10001,20000,1,10000,20000,1"/>
-	<sample sid="20825" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10004,20000,1,10004,20000,1,10004,20000,1,10004,20000,1,10004,20000,1"/>
-	<sample sid="20826" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10004,20000,1,10004,20000,1,10005,20000,1,10004,20000,1,10004,20000,1"/>
-	<sample sid="20827" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10004,20000,1,10004,20000,1,10006,20000,1,10004,20000,1,10004,20000,1"/>
-	<sample sid="20828" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10007,20000,1,10007,20000,1,10007,20000,1,10007,20000,1,10007,20000,1"/>
-	<sample sid="20829" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10098,20000,1,10003,20000,1,10008,20000,1,10006,20000,1,10005,20000,1"/>
-	<sample sid="20830" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10010,20000,1,10010,20000,1,10009,20000,1,10010,20000,1,10010,20000,1"/>
-	<sample sid="20831" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10010,20000,1,10010,20000,1,10010,20000,1,10010,20000,1,10010,20000,1"/>
-	<sample sid="20832" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10011,20000,1,10011,20000,1,10011,20000,1,10011,20000,1"/>
-	<sample sid="20833" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10011,20000,1,10012,20000,1,10011,20000,1,10011,20000,1"/>
-	<sample sid="20834" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10011,20000,1,10013,20000,1,10011,20000,1,10011,20000,1"/>
-	<sample sid="20835" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10011,20000,1,10014,20000,1,10013,20000,1,10012,20000,1"/>
-	<sample sid="20836" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10015,20000,1,10015,20000,1,10015,20000,1,10015,20000,1,10015,20000,1"/>
-	<sample sid="20837" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10011,20000,1,10011,20000,1,10011,20000,1,10011,20000,1"/>
-	<sample sid="20838" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10015,20000,1,10015,20000,1,10017,20000,1,10011,20000,1,10011,20000,1"/>
-	<sample sid="20839" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10015,20000,1,10015,20000,1,10018,20000,1,10011,20000,1,10011,20000,1"/>
-	<sample sid="20840" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10011,20000,1,10019,20000,1,10018,20000,1,10017,20000,1"/>
-	<sample sid="20841" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10011,20000,1,10020,20000,1,10018,20000,1,10017,20000,1"/>
-	<sample sid="20842" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10017,20000,1,10018,20000,1,10021,20000,1,10020,20000,1,10019,20000,1"/>
-	<sample sid="20843" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10022,20000,1,10022,20000,1,10022,20000,1,10022,20000,1,10022,20000,1"/>
-	<sample sid="20844" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10011,20000,1,10011,20000,1,10011,20000,1,10011,20000,1"/>
-	<sample sid="20845" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10022,20000,1,10022,20000,1,10024,20000,1,10011,20000,1,10011,20000,1"/>
-	<sample sid="20846" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10011,20000,1,10025,20000,1,10011,20000,1,10011,20000,1"/>
-	<sample sid="20847" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10011,20000,1,10026,20000,1,10011,20000,1,10011,20000,1"/>
-	<sample sid="20848" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10011,20000,1,10027,20000,1,10026,20000,1,10025,20000,1"/>
-	<sample sid="20849" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10011,20000,1,10025,20000,1,10028,20000,1,10027,20000,1,10026,20000,1"/>
-	<sample sid="20850" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10029,20000,1,10029,20000,1,10029,20000,1,10029,20000,1,10029,20000,1"/>
-	<sample sid="20851" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10030,20000,1,10030,20000,1,10030,20000,1,10030,20000,1,10030,20000,1"/>
-	<sample sid="20852" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10029,20000,1,10029,20000,1,10031,20000,1,10030,20000,1,10030,20000,1"/>
-	<sample sid="20853" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10029,20000,1,10029,20000,1,10032,20000,1,10030,20000,1,10030,20000,1"/>
-	<sample sid="20854" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10029,20000,1,10029,20000,1,10033,20000,1,10030,20000,1,10030,20000,1"/>
-	<sample sid="20855" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10017,20000,1,10018,20000,1,10021,20000,1,10020,20000,1,10019,20000,1"/>
-	<sample sid="20856" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10022,20000,1,10022,20000,1,10022,20000,1,10022,20000,1,10022,20000,1"/>
-	<sample sid="20857" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10036,20000,1,10036,20000,1,10036,20000,1,10036,20000,1,10036,20000,1"/>
-	<sample sid="20858" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10037,20000,1,10037,20000,1,10037,20000,1,10037,20000,1,10037,20000,1"/>
-	<sample sid="20859" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10036,20000,1,10036,20000,1,10038,20000,1,10037,20000,1,10037,20000,1"/>
-	<sample sid="20860" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10036,20000,1,10036,20000,1,10039,20000,1,10037,20000,1,10037,20000,1"/>
-	<sample sid="20861" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10037,20000,1,10037,20000,1,10040,20000,1,10039,20000,1,10038,20000,1"/>
-	<sample sid="20862" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10037,20000,1,10038,20000,1,10041,20000,1,10040,20000,1,10039,20000,1"/>
-	<sample sid="20863" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10038,20000,1,10039,20000,1,10042,20000,1,10041,20000,1,10040,20000,1"/>
-	<sample sid="20864" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10043,20000,1,10043,20000,1,10043,20000,1,10043,20000,1,10043,20000,1"/>
-	<sample sid="20865" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10044,20000,1,10044,20000,1,10044,20000,1,10044,20000,1,10044,20000,1"/>
-	<sample sid="20866" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10043,20000,1,10043,20000,1,10045,20000,1,10044,20000,1,10044,20000,1"/>
-	<sample sid="20867" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10043,20000,1,10043,20000,1,10046,20000,1,10044,20000,1,10044,20000,1"/>
-	<sample sid="20868" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10044,20000,1,10044,20000,1,10047,20000,1,10046,20000,1,10045,20000,1"/>
-	<sample sid="20869" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10044,20000,1,10045,20000,1,10048,20000,1,10047,20000,1,10046,20000,1"/>
-	<sample sid="20870" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10045,20000,1,10046,20000,1,10049,20000,1,10048,20000,1,10047,20000,1"/>
-	<sample sid="20871" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10050,20000,1,10050,20000,1,10050,20000,1,10050,20000,1,10050,20000,1"/>
-	<sample sid="20872" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10051,20000,1,10051,20000,1,10051,20000,1,10051,20000,1,10051,20000,1"/>
-	<sample sid="20873" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10050,20000,1,10050,20000,1,10052,20000,1,10051,20000,1,10051,20000,1"/>
-	<sample sid="20874" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10051,20000,1,10051,20000,1,10053,20000,1,10051,20000,1,10051,20000,1"/>
-	<sample sid="20875" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10051,20000,1,10051,20000,1,10054,20000,1,10051,20000,1,10051,20000,1"/>
-	<sample sid="20876" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10051,20000,1,10052,20000,1,10055,20000,1,10054,20000,1,10053,20000,1"/>
-	<sample sid="20877" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10056,20000,1,10056,20000,1,10056,20000,1,10056,20000,1,10056,20000,1"/>
-	<sample sid="20878" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10057,20000,1,10057,20000,1,10057,20000,1,10057,20000,1,10057,20000,1"/>
-	<sample sid="20879" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10056,20000,1,10056,20000,1,10058,20000,1,10057,20000,1,10057,20000,1"/>
-	<sample sid="20880" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10057,20000,1,10057,20000,1,10059,20000,1,10057,20000,1,10057,20000,1"/>
-	<sample sid="20881" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10057,20000,1,10057,20000,1,10060,20000,1,10059,20000,1,10058,20000,1"/>
-	<sample sid="20882" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10057,20000,1,10058,20000,1,10061,20000,1,10060,20000,1,10059,20000,1"/>
-	<sample sid="20883" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10062,20000,1,10062,20000,1,10062,20000,1,10062,20000,1,10062,20000,1"/>
-	<sample sid="20884" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10063,20000,1,10063,20000,1,10063,20000,1,10063,20000,1,10063,20000,1"/>
-	<sample sid="20885" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10062,20000,1,10062,20000,1,10064,20000,1,10063,20000,1,10063,20000,1"/>
-	<sample sid="20886" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10063,20000,1,10063,20000,1,10065,20000,1,10063,20000,1,10063,20000,1"/>
-	<sample sid="20887" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10063,20000,1,10063,20000,1,10066,20000,1,10065,20000,1,10064,20000,1"/>
-	<sample sid="20888" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="100" moneymin="10" soulmax="0" soulmin="0" _1card="10063,20000,1,10064,20000,1,10067,20000,1,10066,20000,1,10065,20000,1"/>
-
-	<sample sid="21222" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10001,20000,1,10002,20000,1,10003,20000,1,10004,20000,1,10005,20000,1"/>
-	<sample sid="21223" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10006,20000,1,10007,20000,1,10008,20000,1,10009,20000,1,10010,20000,1"/>
-	<sample sid="21224" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10011,20000,1,10012,20000,1,10013,20000,1,10014,20000,1,10015,20000,1"/>
-	<sample sid="21225" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10012,20000,1,10016,20000,1,10017,20000,1,10018,20000,1,10019,20000,1"/>
-	<sample sid="21226" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10003,20000,1,10008,20000,1,10020,20000,1,10017,20000,1,10013,20000,1"/>
-	<sample sid="21227" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10021,20000,1,10022,20000,1,10023,20000,1,10024,20000,1,10025,20000,1"/>
-	<sample sid="21228" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10026,20000,1,10027,20000,1,10028,20000,1,10029,20000,1,10030,20000,1"/>
-	<sample sid="21229" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10027,20000,1,10027,20000,1,10031,20000,1,10032,20000,1,10033,20000,1"/>
-	<sample sid="21230" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10034,20000,1,10034,20000,1,10035,20000,1,17100,20000,1,10037,20000,1"/>
-	<sample sid="21231" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10035,20000,1,10029,20000,1,10038,20000,1,10039,20000,1,10033,20000,1"/>
-	<sample sid="21232" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10040,20000,1,10040,20000,1,10041,20000,1,10042,20000,1,10043,20000,1"/>
-	<sample sid="21233" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10043,20000,1,10044,20000,1,10045,20000,1,10046,20000,1,10047,20000,1"/>
-	<sample sid="21234" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10048,20000,1,10049,20000,1,10050,20000,1,10051,20000,1,10052,20000,1"/>
-	<sample sid="21235" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10046,20000,1,10041,20000,1,10053,20000,1,10050,20000,1,10045,20000,1"/>
-	<sample sid="21236" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10054,20000,1,10054,20000,1,10055,20000,1,10056,20000,1,10057,20000,1"/>
-	<sample sid="21237" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10058,20000,1,10059,20000,1,10060,20000,1,10061,20000,1,10062,20000,1"/>
-	<sample sid="21238" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10063,20000,1,10063,20000,1,10064,20000,1,10065,20000,1,10066,20000,1"/>
-	<sample sid="21239" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10063,20000,1,10055,20000,1,10067,20000,1,10064,20000,1,10060,20000,1"/>
-	<sample sid="21240" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10064,20000,1,10067,20000,1,10068,20000,1,10069,20000,1,10070,20000,1"/>
-	<sample sid="21241" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10071,20000,1,10071,20000,1,10072,20000,1,10073,20000,1,10074,20000,1"/>
-	<sample sid="21242" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10073,20000,1,10074,20000,1,10075,20000,1,10076,20000,1,10077,20000,1"/>
-	<sample sid="21243" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10076,20000,1,10077,20000,1,10078,20000,1,10079,20000,1,10080,20000,1"/>
-	<sample sid="21244" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10078,20000,1,10081,20000,1,10082,20000,1,10083,20000,1,10084,20000,1"/>
-	<sample sid="21245" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10072,20000,1,10075,20000,1,10085,20000,1,10082,20000,1,10078,20000,1"/>
-	<sample sid="21246" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10086,20000,1,10086,20000,1,10087,20000,1,10088,20000,1,10089,20000,1"/>
-	<sample sid="21247" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10090,20000,1,10090,20000,1,10091,20000,1,10092,20000,1,10093,20000,1"/>
-	<sample sid="21248" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10094,20000,1,10094,20000,1,10095,20000,1,10096,20000,1,10097,20000,1"/>
-	<sample sid="21249" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10098,20000,1,10099,20000,1,10000,20000,1,10001,20000,1,10002,20000,1"/>
-	<sample sid="21250" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10087,20000,1,10091,20000,1,10003,20000,1,10000,20000,1,10095,20000,1"/>
-	<sample sid="21251" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10004,20000,1,10004,20000,1,10005,20000,1,10006,20000,1,10007,20000,1"/>
-	<sample sid="21252" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10008,20000,1,10008,20000,1,10009,20000,1,10010,20000,1,10011,20000,1"/>
-	<sample sid="21253" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10012,20000,1,10012,20000,1,10013,20000,1,10014,20000,1,10015,20000,1"/>
-	<sample sid="21254" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10012,20000,1,10016,20000,1,10017,20000,1,10018,20000,1,10019,20000,1"/>
-	<sample sid="21255" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10005,20000,1,10009,20000,1,10020,20000,1,10017,20000,1,10013,20000,1"/>
-	<sample sid="21256" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10021,20000,1,10022,20000,1,10023,20000,1,10024,20000,1,10025,20000,1"/>
-	<sample sid="21257" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10026,20000,1,10027,20000,1,10028,20000,1,10029,20000,1,10030,20000,1"/>
-	<sample sid="21258" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10031,20000,1,10032,20000,1,10033,20000,1,10034,20000,1,10035,20000,1"/>
-	<sample sid="21259" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10032,20000,1,10031,20000,1,10036,20000,1,10037,20000,1,10038,20000,1"/>
-	<sample sid="21260" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10023,20000,1,10028,20000,1,10039,20000,1,10036,20000,1,10033,20000,1"/>
-	<sample sid="21261" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10040,20000,1,10041,20000,1,10042,20000,1,10043,20000,1,10044,20000,1"/>
-	<sample sid="21262" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10045,20000,1,10046,20000,1,10047,20000,1,10048,20000,1,10049,20000,1"/>
-	<sample sid="21263" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10050,20000,1,10051,20000,1,10052,20000,1,10053,20000,1,10054,20000,1"/>
-	<sample sid="21264" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10042,20000,1,10047,20000,1,10055,20000,1,10056,20000,1,10052,20000,1"/>
-	<sample sid="21265" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10057,20000,1,10058,20000,1,10059,20000,1,10060,20000,1,10061,20000,1"/>
-	<sample sid="21266" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10062,20000,1,10063,20000,1,10064,20000,1,10065,20000,1,10066,20000,1"/>
-	<sample sid="21267" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10067,20000,1,10068,20000,1,10069,20000,1,10070,20000,1,10071,20000,1"/>
-	<sample sid="21268" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10072,20000,1,10072,20000,1,10073,20000,1,10074,20000,1,10075,20000,1"/>
-	<sample sid="21269" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10076,20000,1,10077,20000,1,10078,20000,1,10079,20000,1,10080,20000,1"/>
-	<sample sid="21270" class="com.cambrian.dfhm.instancing.entity.Sweep" goldmax="0" goldmin="0" moneymax="80" moneymin="10" soulmax="10" soulmin="1" _1card="10064,20000,1,10069,20000,1,10081,20000,1,10078,20000,1,10073,20000,1"/>
+	<sample sid="20722" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="27" soul="0" _1card="10001,63000,1,10001,63000,1,10001,63000,1,10001,63000,1,10001,63000,1"/>
+	<sample sid="20723" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="27" soul="0" _1card="10001,63000,1,10001,63000,1,10002,49000,1,10001,63000,1,10001,63000,1"/>
+	<sample sid="20724" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="28" soul="0" _1card="10001,63000,1,10001,63000,1,10003,63000,1,10003,63000,1,10003,63000,1"/>
+	<sample sid="20725" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="29" soul="0" _1card="10003,63000,1,10003,63000,1,10004,49000,1,10003,63000,1,10003,63000,1"/>
+	<sample sid="20726" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="29" soul="0" _1card="10005,63000,1,10005,63000,1,10005,63000,1,10005,63000,1,10005,63000,1"/>
+	<sample sid="20727" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="30" soul="0" _1card="10005,63000,1,10005,63000,1,10006,49000,1,10005,63000,1,10005,63000,1"/>
+	<sample sid="20728" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="31" soul="0" _1card="10005,63000,1,10005,63000,1,10007,49000,1,10005,63000,1,10005,63000,1"/>
+	<sample sid="20729" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="31" soul="0" _1card="10008,63000,1,10008,63000,1,10008,63000,1,10008,63000,1,10008,63000,1"/>
+	<sample sid="20730" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="32" soul="0" _1card="10008,63000,1,10008,63000,1,10009,49000,1,10008,63000,1,10008,63000,1"/>
+	<sample sid="20731" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="33" soul="0" _1card="10010,63000,1,10010,63000,1,10010,63000,1,10010,63000,1,10010,63000,1"/>
+	<sample sid="20732" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="33" soul="0" _1card="10010,63000,1,10010,63000,1,10011,49000,1,10010,63000,1,10010,63000,1"/>
+	<sample sid="20733" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="34" soul="0" _1card="10010,63000,1,10010,63000,1,10012,49000,1,10010,63000,1,10010,63000,1"/>
+	<sample sid="20734" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="34" soul="0" _1card="10013,63000,1,10013,63000,1,10013,63000,1,10013,63000,1,10013,63000,1"/>
+	<sample sid="20735" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="35" soul="0" _1card="10013,63000,1,10013,63000,1,10014,49000,1,10013,63000,1,10013,63000,1"/>
+	<sample sid="20736" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="35" soul="0" _1card="10009,49000,1,10011,49000,1,10015,42000,1,10014,49000,1,10012,49000,1"/>
+	<sample sid="20737" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="35" soul="0" _1card="10017,63000,1,10017,63000,1,10016,49000,1,10017,63000,1,10017,63000,1"/>
+	<sample sid="20738" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="35" soul="0" _1card="10017,63000,1,10017,63000,1,10017,63000,1,10017,63000,1,10017,63000,1"/>
+	<sample sid="20739" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="36" soul="0" _1card="10018,63000,1,10018,63000,1,10018,63000,1,10018,63000,1,10018,63000,1"/>
+	<sample sid="20740" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="36" soul="0" _1card="10018,63000,1,10018,63000,1,10019,49000,1,10018,63000,1,10018,63000,1"/>
+	<sample sid="20741" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="37" soul="0" _1card="10018,63000,1,10018,63000,1,10020,14000,1,10019,49000,1,10016,49000,1"/>
+	<sample sid="20742" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="37" soul="0" _1card="10021,63000,1,10021,63000,1,10021,63000,1,10021,63000,1,10021,63000,1"/>
+	<sample sid="20743" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="37" soul="0" _1card="10021,63000,1,10021,63000,1,10022,49000,1,10021,63000,1,10021,63000,1"/>
+	<sample sid="20744" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="37" soul="0" _1card="10023,63000,1,10023,63000,1,10023,63000,1,10023,63000,1,10023,63000,1"/>
+	<sample sid="20745" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="38" soul="0" _1card="10023,63000,1,10023,63000,1,10024,49000,1,10023,63000,1,10023,63000,1"/>
+	<sample sid="20746" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="38" soul="0" _1card="10023,63000,1,10023,63000,1,10025,14000,1,10024,49000,1,10022,49000,1"/>
+	<sample sid="20747" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="39" soul="0" _1card="10018,63000,1,10018,63000,1,10026,49000,1,10018,63000,1,10018,63000,1"/>
+	<sample sid="20748" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="39" soul="0" _1card="10021,63000,1,10021,63000,1,10027,49000,1,10021,63000,1,10021,63000,1"/>
+	<sample sid="20749" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="39" soul="0" _1card="10018,63000,1,10018,63000,1,10028,42000,1,10018,63000,1,10018,63000,1"/>
+	<sample sid="20750" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="39" soul="0" _1card="10029,63000,1,10029,63000,1,10029,63000,1,10029,63000,1,10029,63000,1"/>
+	<sample sid="20751" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="40" soul="0" _1card="10029,63000,1,10029,63000,1,10030,14000,1,10028,42000,1,10027,49000,1"/>
+	<sample sid="20752" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="40" soul="0" _1card="10032,63000,1,10032,63000,1,10031,49000,1,10032,63000,1,10032,63000,1"/>
+	<sample sid="20753" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="41" soul="0" _1card="10032,63000,1,10032,63000,1,10032,63000,1,10032,63000,1,10032,63000,1"/>
+	<sample sid="20754" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="41" soul="0" _1card="10032,63000,1,10032,63000,1,10033,49000,1,10032,63000,1,10032,63000,1"/>
+	<sample sid="20755" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="41" soul="0" _1card="10034,63000,1,10034,63000,1,10034,63000,1,10034,63000,1,10034,63000,1"/>
+	<sample sid="20756" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="41" soul="0" _1card="10034,63000,1,10034,63000,1,10035,42000,1,10033,49000,1,10031,49000,1"/>
+	<sample sid="20757" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="42" soul="0" _1card="10034,63000,1,10034,63000,1,10036,49000,1,10034,63000,1,10034,63000,1"/>
+	<sample sid="20758" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="42" soul="0" _1card="10034,63000,1,10034,63000,1,10037,49000,1,10034,63000,1,10034,63000,1"/>
+	<sample sid="20759" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="43" soul="0" _1card="10038,63000,1,10038,63000,1,10038,63000,1,10038,63000,1,10038,63000,1"/>
+	<sample sid="20760" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="43" soul="0" _1card="10039,63000,1,10039,63000,1,10039,63000,1,10039,63000,1,10039,63000,1"/>
+	<sample sid="20761" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="43" soul="0" _1card="10038,63000,1,10039,63000,1,10040,42000,1,10037,49000,1,10036,49000,1"/>
+	<sample sid="20762" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="43" soul="0" _1card="10043,63000,1,10043,63000,1,10041,49000,1,10043,63000,1,10043,63000,1"/>
+	<sample sid="20763" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="44" soul="0" _1card="10043,63000,1,10043,63000,1,10042,49000,1,10043,63000,1,10043,63000,1"/>
+	<sample sid="20764" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="44" soul="0" _1card="10043,63000,1,10043,63000,1,10043,63000,1,10043,63000,1,10043,63000,1"/>
+	<sample sid="20765" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="45" soul="0" _1card="10044,63000,1,10044,63000,1,10044,63000,1,10044,63000,1,10044,63000,1"/>
+	<sample sid="20766" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="45" soul="0" _1card="10043,63000,1,10044,63000,1,10045,42000,1,10042,49000,1,10041,49000,1"/>
+	<sample sid="20767" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="45" soul="0" _1card="10047,63000,1,10047,63000,1,10046,49000,1,10047,63000,1,10047,63000,1"/>
+	<sample sid="20768" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="45" soul="0" _1card="10047,63000,1,10047,63000,1,10047,63000,1,10047,63000,1,10047,63000,1"/>
+	<sample sid="20769" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="46" soul="0" _1card="10047,63000,1,10047,63000,1,10048,49000,1,10047,63000,1,10047,63000,1"/>
+	<sample sid="20770" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="46" soul="0" _1card="10049,63000,1,10049,63000,1,10049,63000,1,10049,63000,1,10049,63000,1"/>
+	<sample sid="20771" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="47" soul="0" _1card="10049,63000,1,10049,63000,1,10050,42000,1,10048,49000,1,10046,49000,1"/>
+	<sample sid="20772" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="47" soul="0" _1card="10051,63000,1,10051,63000,1,10051,63000,1,10051,63000,1,10051,63000,1"/>
+	<sample sid="20773" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="47" soul="0" _1card="10051,63000,1,10051,63000,1,10052,49000,1,10051,63000,1,10051,63000,1"/>
+	<sample sid="20774" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="47" soul="0" _1card="10051,63000,1,10051,63000,1,10053,49000,1,10051,63000,1,10051,63000,1"/>
+	<sample sid="20775" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="48" soul="0" _1card="10051,63000,1,10051,63000,1,10054,49000,1,10051,63000,1,10051,63000,1"/>
+	<sample sid="20776" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="48" soul="0" _1card="10055,63000,1,10055,63000,1,10055,63000,1,10055,63000,1,10055,63000,1"/>
+	<sample sid="20777" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="49" soul="0" _1card="10055,63000,1,10052,49000,1,10056,42000,1,10054,49000,1,10053,49000,1"/>
+	<sample sid="20778" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="49" soul="0" _1card="10057,63000,1,10057,63000,1,10057,63000,1,10057,63000,1,10057,63000,1"/>
+	<sample sid="20779" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="49" soul="0" _1card="10057,63000,1,10057,63000,1,10058,49000,1,10057,63000,1,10057,63000,1"/>
+	<sample sid="20780" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="49" soul="0" _1card="10057,63000,1,10057,63000,1,10059,49000,1,10057,63000,1,10057,63000,1"/>
+	<sample sid="20781" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="50" soul="0" _1card="10060,63000,1,10060,63000,1,10060,63000,1,10060,63000,1,10060,63000,1"/>
+	<sample sid="20782" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="50" soul="0" _1card="10060,63000,1,10060,63000,1,10061,49000,1,10060,63000,1,10060,63000,1"/>
+	<sample sid="20783" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="51" soul="0" _1card="10060,63000,1,10058,49000,1,10062,14000,1,10061,49000,1,10059,49000,1"/>
+	<sample sid="20784" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="51" soul="0" _1card="10058,49000,1,10059,49000,1,10063,14000,1,10061,49000,1,10062,14000,1"/>
+	<sample sid="20785" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="51" soul="0" _1card="10064,63000,1,10064,63000,1,10064,63000,1,10064,63000,1,10064,63000,1"/>
+	<sample sid="20786" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="51" soul="0" _1card="10064,63000,1,10064,63000,1,10065,42000,1,10064,63000,1,10064,63000,1"/>
+	<sample sid="20787" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="52" soul="0" _1card="10066,63000,1,10066,63000,1,10066,63000,1,10066,63000,1,10066,63000,1"/>
+	<sample sid="20788" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="52" soul="0" _1card="10066,63000,1,10066,63000,1,10067,42000,1,10066,63000,1,10066,63000,1"/>
+	<sample sid="20789" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="53" soul="0" _1card="10066,63000,1,10066,63000,1,10068,14000,1,10067,42000,1,10065,42000,1"/>
+	<sample sid="20790" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="53" soul="0" _1card="10069,63000,1,10069,63000,1,10069,63000,1,10069,63000,1,10069,63000,1"/>
+	<sample sid="20791" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="53" soul="0" _1card="10069,63000,1,10069,63000,1,10070,42000,1,10069,63000,1,10069,63000,1"/>
+	<sample sid="20792" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="53" soul="0" _1card="10071,63000,1,10071,63000,1,10071,63000,1,10071,63000,1,10071,63000,1"/>
+	<sample sid="20793" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="54" soul="0" _1card="10071,63000,1,10071,63000,1,10072,42000,1,10071,63000,1,10071,63000,1"/>
+	<sample sid="20794" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="54" soul="0" _1card="10071,63000,1,10071,63000,1,10073,14000,1,10072,42000,1,10070,42000,1"/>
+	<sample sid="20795" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="55" soul="0" _1card="10074,63000,1,10074,63000,1,10074,63000,1,10074,63000,1,10074,63000,1"/>
+	<sample sid="20796" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="55" soul="0" _1card="10074,63000,1,10074,63000,1,10075,42000,1,10074,63000,1,10074,63000,1"/>
+	<sample sid="20797" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="55" soul="0" _1card="10076,63000,1,10076,63000,1,10076,63000,1,10076,63000,1,10076,63000,1"/>
+	<sample sid="20798" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="55" soul="0" _1card="10076,63000,1,10076,63000,1,10077,42000,1,10076,63000,1,10076,63000,1"/>
+	<sample sid="20799" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="56" soul="0" _1card="10068,14000,1,10073,14000,1,10078,14000,1,10077,42000,1,10075,42000,1"/>
+	<sample sid="20800" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="56" soul="0" _1card="10079,63000,1,10079,63000,1,10079,63000,1,10079,63000,1,10079,63000,1"/>
+	<sample sid="20801" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="57" soul="0" _1card="10079,63000,1,10079,63000,1,10080,42000,1,10079,63000,1,10079,63000,1"/>
+	<sample sid="20802" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="57" soul="0" _1card="10081,63000,1,10081,63000,1,10081,63000,1,10081,63000,1,10081,63000,1"/>
+	<sample sid="20803" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="57" soul="0" _1card="10081,63000,1,10081,63000,1,10082,42000,1,10081,63000,1,10081,63000,1"/>
+	<sample sid="20804" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="57" soul="0" _1card="10081,63000,1,10081,63000,1,10083,14000,1,10082,42000,1,10080,42000,1"/>
+	<sample sid="20805" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="58" soul="0" _1card="10084,63000,1,10084,63000,1,10084,63000,1,10084,63000,1,10084,63000,1"/>
+	<sample sid="20806" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="58" soul="0" _1card="10084,63000,1,10084,63000,1,10085,42000,1,10084,63000,1,10084,63000,1"/>
+	<sample sid="20807" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="59" soul="0" _1card="10086,63000,1,10086,63000,1,10086,63000,1,10086,63000,1,10086,63000,1"/>
+	<sample sid="20808" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="59" soul="0" _1card="10086,63000,1,10086,63000,1,10087,42000,1,10086,63000,1,10086,63000,1"/>
+	<sample sid="20809" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="59" soul="0" _1card="10086,63000,1,10086,63000,1,10088,14000,1,10087,42000,1,10085,42000,1"/>
+	<sample sid="20810" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="59" soul="0" _1card="10089,63000,1,10089,63000,1,10089,63000,1,10089,63000,1,10089,63000,1"/>
+	<sample sid="20811" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="60" soul="0" _1card="10089,63000,1,10089,63000,1,10090,42000,1,10089,63000,1,10089,63000,1"/>
+	<sample sid="20812" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="60" soul="0" _1card="10091,63000,1,10091,63000,1,10091,63000,1,10091,63000,1,10091,63000,1"/>
+	<sample sid="20813" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="61" soul="0" _1card="10091,63000,1,10091,63000,1,10092,42000,1,10091,63000,1,10091,63000,1"/>
+	<sample sid="20814" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="61" soul="0" _1card="10083,14000,1,10088,14000,1,10093,14000,1,10092,42000,1,10090,42000,1"/>
+	<sample sid="20815" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="61" soul="0" _1card="10094,63000,1,10094,63000,1,10094,63000,1,10094,63000,1,10094,63000,1"/>
+	<sample sid="20816" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="61" soul="0" _1card="10094,63000,1,10094,63000,1,10095,42000,1,10094,63000,1,10094,63000,1"/>
+	<sample sid="20817" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="62" soul="0" _1card="10094,63000,1,10094,63000,1,10096,42000,1,10094,63000,1,10094,63000,1"/>
+	<sample sid="20818" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="62" soul="0" _1card="10097,63000,1,10097,63000,1,10097,63000,1,10097,63000,1,10097,63000,1"/>
+	<sample sid="20819" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="63" soul="0" _1card="10097,63000,1,10097,63000,1,10098,14000,1,10096,42000,1,10095,42000,1"/>
+	<sample sid="20820" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="63" soul="0" _1card="10099,63000,1,10099,63000,1,10099,63000,1,10099,63000,1,10099,63000,1"/>
+	<sample sid="20821" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="63" soul="0" _1card="10099,63000,1,10099,63000,1,10000,42000,1,10099,63000,1,10099,63000,1"/>
+	<sample sid="20822" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="63" soul="0" _1card="10099,63000,1,10099,63000,1,10001,42000,1,10099,63000,1,10099,63000,1"/>
+	<sample sid="20823" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="64" soul="0" _1card="10002,63000,1,10002,63000,1,10002,63000,1,10002,63000,1,10002,63000,1"/>
+	<sample sid="20824" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="64" soul="0" _1card="10002,63000,1,10002,63000,1,10003,14000,1,10001,42000,1,10000,42000,1"/>
+	<sample sid="20825" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="65" soul="0" _1card="10004,63000,1,10004,63000,1,10004,63000,1,10004,63000,1,10004,63000,1"/>
+	<sample sid="20826" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="65" soul="0" _1card="10004,63000,1,10004,63000,1,10005,42000,1,10004,63000,1,10004,63000,1"/>
+	<sample sid="20827" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="65" soul="0" _1card="10004,63000,1,10004,63000,1,10006,42000,1,10004,63000,1,10004,63000,1"/>
+	<sample sid="20828" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="65" soul="0" _1card="10007,63000,1,10007,63000,1,10007,63000,1,10007,63000,1,10007,63000,1"/>
+	<sample sid="20829" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="66" soul="0" _1card="10098,14000,1,10003,14000,1,10008,14000,1,10006,42000,1,10005,42000,1"/>
+	<sample sid="20830" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="66" soul="0" _1card="10010,63000,1,10010,63000,1,10009,49000,1,10010,63000,1,10010,63000,1"/>
+	<sample sid="20831" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="67" soul="0" _1card="10010,63000,1,10010,63000,1,10010,63000,1,10010,63000,1,10010,63000,1"/>
+	<sample sid="20832" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="67" soul="0" _1card="10011,63000,1,10011,63000,1,10011,63000,1,10011,63000,1,10011,63000,1"/>
+	<sample sid="20833" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="67" soul="0" _1card="10011,63000,1,10011,63000,1,10012,14000,1,10011,63000,1,10011,63000,1"/>
+	<sample sid="20834" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="67" soul="0" _1card="10011,63000,1,10011,63000,1,10013,14000,1,10011,63000,1,10011,63000,1"/>
+	<sample sid="20835" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="68" soul="0" _1card="10011,63000,1,10011,63000,1,10014,14000,1,10013,14000,1,10012,14000,1"/>
+	<sample sid="20836" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="68" soul="0" _1card="10015,63000,1,10015,63000,1,10015,63000,1,10015,63000,1,10015,63000,1"/>
+	<sample sid="20837" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="69" soul="0" _1card="10011,63000,1,10011,63000,1,10011,63000,1,10011,63000,1,10011,63000,1"/>
+	<sample sid="20838" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="69" soul="0" _1card="10015,63000,1,10015,63000,1,10017,42000,1,10011,63000,1,10011,63000,1"/>
+	<sample sid="20839" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="69" soul="0" _1card="10015,63000,1,10015,63000,1,10018,42000,1,10011,63000,1,10011,63000,1"/>
+	<sample sid="20840" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="69" soul="0" _1card="10011,63000,1,10011,63000,1,10019,14000,1,10018,42000,1,10017,42000,1"/>
+	<sample sid="20841" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="70" soul="0" _1card="10011,63000,1,10011,63000,1,10020,14000,1,10018,42000,1,10017,42000,1"/>
+	<sample sid="20842" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="70" soul="0" _1card="10017,42000,1,10018,42000,1,10021,14000,1,10020,14000,1,10019,14000,1"/>
+	<sample sid="20843" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="71" soul="0" _1card="10099,63000,1,10099,63000,1,10000,42000,1,10099,63000,1,10099,63000,1"/>
+	<sample sid="20844" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="71" soul="0" _1card="10099,63000,1,10099,63000,1,10000,42000,1,10099,63000,1,10099,63000,1"/>
+	<sample sid="20845" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="71" soul="0" _1card="10022,63000,1,10022,63000,1,10024,42000,1,10011,63000,1,10011,63000,1"/>
+	<sample sid="20846" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="71" soul="0" _1card="10011,63000,1,10011,63000,1,10025,14000,1,10011,63000,1,10011,63000,1"/>
+	<sample sid="20847" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="72" soul="0" _1card="10011,63000,1,10011,63000,1,10026,14000,1,10011,63000,1,10011,63000,1"/>
+	<sample sid="20848" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="72" soul="0" _1card="10011,63000,1,10011,63000,1,10027,14000,1,10026,14000,1,10025,14000,1"/>
+	<sample sid="20849" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="73" soul="0" _1card="10011,63000,1,10025,14000,1,10028,14000,1,10027,14000,1,10026,14000,1"/>
+	<sample sid="20850" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="73" soul="0" _1card="10029,63000,1,10029,63000,1,10029,63000,1,10029,63000,1,10029,63000,1"/>
+	<sample sid="20851" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="73" soul="0" _1card="10030,63000,1,10030,63000,1,10030,63000,1,10030,63000,1,10030,63000,1"/>
+	<sample sid="20852" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="73" soul="0" _1card="10029,63000,1,10029,63000,1,10031,42000,1,10030,63000,1,10030,63000,1"/>
+	<sample sid="20853" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="74" soul="0" _1card="10029,63000,1,10029,63000,1,10032,42000,1,10030,63000,1,10030,63000,1"/>
+	<sample sid="20854" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="74" soul="0" _1card="10029,63000,1,10029,63000,1,10033,42000,1,10030,63000,1,10030,63000,1"/>
+	<sample sid="20855" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="75" soul="0" _1card="10017,42000,1,10018,42000,1,10021,14000,1,10020,14000,1,10019,14000,1"/>
+	<sample sid="20856" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="75" soul="0" _1card="10022,63000,1,10022,63000,1,10022,63000,1,10022,63000,1,10022,63000,1"/>
+	<sample sid="20857" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="75" soul="0" _1card="10036,63000,1,10036,63000,1,10036,63000,1,10036,63000,1,10036,63000,1"/>
+	<sample sid="20858" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="75" soul="0" _1card="10037,63000,1,10037,63000,1,10037,63000,1,10037,63000,1,10037,63000,1"/>
+	<sample sid="20859" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="76" soul="0" _1card="10036,63000,1,10036,63000,1,10038,42000,1,10037,63000,1,10037,63000,1"/>
+	<sample sid="20860" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="76" soul="0" _1card="10036,63000,1,10036,63000,1,10039,42000,1,10037,63000,1,10037,63000,1"/>
+	<sample sid="20861" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="77" soul="0" _1card="10037,63000,1,10037,63000,1,10040,14000,1,10039,42000,1,10038,42000,1"/>
+	<sample sid="20862" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="77" soul="0" _1card="10037,63000,1,10038,42000,1,10041,14000,1,10040,14000,1,10039,42000,1"/>
+	<sample sid="20863" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="77" soul="0" _1card="10038,42000,1,10039,42000,1,10042,14000,1,10041,14000,1,10040,14000,1"/>
+	<sample sid="20864" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="77" soul="0" _1card="10043,63000,1,10043,63000,1,10043,63000,1,10043,63000,1,10043,63000,1"/>
+	<sample sid="20865" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="78" soul="0" _1card="10044,63000,1,10044,63000,1,10044,63000,1,10044,63000,1,10044,63000,1"/>
+	<sample sid="20866" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="78" soul="0" _1card="10043,63000,1,10043,63000,1,10045,14000,1,10044,63000,1,10044,63000,1"/>
+	<sample sid="20867" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="79" soul="0" _1card="10043,63000,1,10043,63000,1,10046,14000,1,10044,63000,1,10044,63000,1"/>
+	<sample sid="20868" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="79" soul="0" _1card="10044,63000,1,10044,63000,1,10047,14000,1,10046,14000,1,10045,14000,1"/>
+	<sample sid="20869" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="79" soul="0" _1card="10044,63000,1,10045,14000,1,10048,14000,1,10047,14000,1,10046,14000,1"/>
+	<sample sid="20870" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="79" soul="0" _1card="10045,14000,1,10046,14000,1,10049,14000,1,10048,14000,1,10047,14000,1"/>
+	<sample sid="20871" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="80" soul="0" _1card="10050,63000,1,10050,63000,1,10050,63000,1,10050,63000,1,10050,63000,1"/>
+	<sample sid="20872" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="80" soul="0" _1card="10051,63000,1,10051,63000,1,10051,63000,1,10051,63000,1,10051,63000,1"/>
+	<sample sid="20873" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="81" soul="0" _1card="10050,63000,1,10050,63000,1,10052,42000,1,10051,63000,1,10051,63000,1"/>
+	<sample sid="20874" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="81" soul="0" _1card="10051,63000,1,10051,63000,1,10053,42000,1,10051,63000,1,10051,63000,1"/>
+	<sample sid="20875" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="81" soul="0" _1card="10051,63000,1,10051,63000,1,10054,42000,1,10051,63000,1,10051,63000,1"/>
+	<sample sid="20876" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="81" soul="0" _1card="10051,63000,1,10052,42000,1,10055,14000,1,10054,42000,1,10053,42000,1"/>
+	<sample sid="20877" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="82" soul="0" _1card="10056,63000,1,10056,63000,1,10056,63000,1,10056,63000,1,10056,63000,1"/>
+	<sample sid="20878" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="82" soul="0" _1card="10057,63000,1,10057,63000,1,10057,63000,1,10057,63000,1,10057,63000,1"/>
+	<sample sid="20879" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="83" soul="0" _1card="10056,63000,1,10056,63000,1,10058,42000,1,10057,63000,1,10057,63000,1"/>
+	<sample sid="20880" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="83" soul="0" _1card="10057,63000,1,10057,63000,1,10059,42000,1,10057,63000,1,10057,63000,1"/>
+	<sample sid="20881" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="83" soul="0" _1card="10057,63000,1,10057,63000,1,10060,14000,1,10059,42000,1,10058,42000,1"/>
+	<sample sid="20882" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="83" soul="0" _1card="10057,63000,1,10058,42000,1,10061,14000,1,10060,14000,1,10059,42000,1"/>
+	<sample sid="20883" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="84" soul="0" _1card="10062,63000,1,10062,63000,1,10062,63000,1,10062,63000,1,10062,63000,1"/>
+	<sample sid="20884" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="84" soul="0" _1card="10063,63000,1,10063,63000,1,10063,63000,1,10063,63000,1,10063,63000,1"/>
+	<sample sid="20885" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="85" soul="0" _1card="10062,63000,1,10062,63000,1,10064,14000,1,10063,63000,1,10063,63000,1"/>
+	<sample sid="20886" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="85" soul="0" _1card="10063,63000,1,10063,63000,1,10065,14000,1,10063,63000,1,10063,63000,1"/>
+	<sample sid="20887" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="85" soul="0" _1card="10063,63000,1,10063,63000,1,10066,14000,1,10065,14000,1,10064,14000,1"/>
+	<sample sid="20888" class="com.cambrian.dfhm.instancing.entity.Sweep" gold="0" money="85" soul="0" _1card="10063,63000,1,10064,14000,1,10067,14000,1,10066,14000,1,10065,14000,1"/>
 
 </objects>

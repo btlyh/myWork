@@ -536,6 +536,6 @@
 	<sample sid="17380" class="com.cambrian.dfhm.monster.Monster" name="察合台" avatar="role/chahetai" tinyAvatar="role/chahetai" level="98" att="839" skillRate="39580" attRange="0" maxHp="2083" skillId="19652" aimType="2" critRate="10000" critFactor="1500" dodgeRate="12460" awardSid="19369" type="8"/>
 	<sample sid="17381" class="com.cambrian.dfhm.monster.Monster" name="铁木真" avatar="role/tiemuzhen" tinyAvatar="role/tiemuzhen" level="99" att="1120" skillRate="47060" attRange="0" maxHp="2784" skillId="19752" aimType="2" critRate="10000" critFactor="1500" dodgeRate="13230" awardSid="19370" type="10"/>
 
-	<sample sid="21387" class="com.cambrian.dfhm.monster.Monster" name="小钻风" avatar="role/linchongnv" tinyAvatar="role/linchongnv" level="10" att="1470" skillRate="0" attRange="0" maxHp="1000000" skillId="19421" aimType="2" critRate="10000" dodgeRate="10500" awardSid="10001" type="5"/>
+	<sample sid="21387" class="com.cambrian.dfhm.monster.Monster" name="小钻风" avatar="role/dongzhuonv" tinyAvatar="role/dongzhuonv" level="10" att="1470" skillRate="0" attRange="0" maxHp="1000000" skillId="19421" aimType="2" critRate="10000" dodgeRate="10500" awardSid="10001" type="5"/>
 
 </objects>

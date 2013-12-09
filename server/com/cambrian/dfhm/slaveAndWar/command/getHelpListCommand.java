@@ -16,7 +16,7 @@ import com.cambrian.game.Session;
  * 
  * @author£ºLazyBear
  */
-public class getHelpListCommand extends Command
+public class GetHelpListCommand extends Command
 {
 
 	/* static fields */

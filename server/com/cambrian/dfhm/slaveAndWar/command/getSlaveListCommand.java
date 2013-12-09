@@ -7,6 +7,7 @@ import com.cambrian.common.net.Command;
 import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.net.NioTcpConnect;
 import com.cambrian.dfhm.Lang;
+import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.slaveAndWar.entity.Slave;
 import com.cambrian.dfhm.slaveAndWar.logic.SlaveManager;
@@ -17,7 +18,7 @@ import com.cambrian.game.Session;
  * 
  * @author£ºLazyBear
  */
-public class getSlaveListCommand extends Command
+public class GetSlaveListCommand extends Command
 {
 
 	/* static fields */
@@ -52,6 +53,9 @@ public class getSlaveListCommand extends Command
 		}
 		List<Slave> slaveList=SlaveManager.getInstance()
 			.getSlaveList(player);
+		int workTimes = GameCFG.getWorkConfine()-player.getIdentity().getWorkTimes();
+		if(workTimes<0)workTimes=0;
+		data.writeInt(workTimes);
 		data.writeInt(slaveList.size());
 		for(Slave slave:slaveList)
 		{

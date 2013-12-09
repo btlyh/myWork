@@ -8,7 +8,7 @@
 	needToken 			攻击此NPC所需要的军令
 	type				NPC的类型[1主线,2挑战,3穿越,4活动]
 	isBoss				此NPC是否为BOSS 1是 0否
-	nextSid				下一个普通NPC的sid   如果为0表示最高副本
+	nextSid				下一个普通NPC的sid   如果为0表示最高副本 
 	hardIndex			开启挑战NPC的位置    如果为0则不配置
 	crossIndex			开启穿越NPC的位置    如果为0则不配置
 	round				回合数

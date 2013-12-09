@@ -13,7 +13,7 @@ import com.cambrian.dfhm.instancing.entity.NormalNPC;
  * @author£ºZmk
  * 
  */
-public class Task extends Sample
+public class Task extends Sample implements Comparable<Task>
 {
 
 	/* static fields */
@@ -206,6 +206,10 @@ public class Task extends Sample
 	public void dbBytesRead(ByteBuffer data)
 	{
 		this.status = data.readInt();
+	}
+	public int compareTo(Task o)
+	{
+		return this.getSid() - o.getSid();
 	}
 
 }

@@ -5,6 +5,7 @@
 	class	程序使用
 	getToken	每日免费领取军令数量
 	buyToken    每日可购买军令数量
+	luckyBoxFreeTimes   每日武魂抽奖免费次数
 	flushSkillFreeTimes 每日刷新技能免费次数
 	privateSeat  军帐中私人座位个数
 	publicSeat   军帐中公共座位个数
@@ -15,11 +16,16 @@
 	payForAwake   付费醒酒功能
 	autoDrink     自动喝酒功能
 	-->
-	<sample sid="21372" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="2" buyToken="5"  skillFlushFreeTimes="0" privateSeat="3" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="0" battleSkip="0" payForAwake="0" autoDrink="0"/>
-	<sample sid="21373" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="4" buyToken="10"  skillFlushFreeTimes="1" privateSeat="4" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0"/>
-	<sample sid="21374" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="20"  skillFlushFreeTimes="2" privateSeat="5" publicSeat="1" cardGoldForsterFreeTimes="1" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0"/>
-	<sample sid="21375" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="40"  skillFlushFreeTimes="3" privateSeat="5" publicSeat="2" cardGoldForsterFreeTimes="1" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="0"/>
-	<sample sid="21376" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="40"  skillFlushFreeTimes="3" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="2" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
-	<sample sid="21377" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="40"  skillFlushFreeTimes="4" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="3" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
+	<sample sid="21372" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="0" buyToken="0"  skillFlushFreeTimes="0" privateSeat="3" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="0" payForAwake="0" autoDrink="0"/>
+	<sample sid="21373" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="2" buyToken="20"  skillFlushFreeTimes="0" privateSeat="3" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0"/>
+	<sample sid="21374" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="2" buyToken="40" skillFlushFreeTimes="0" privateSeat="3" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0"/>
+	<sample sid="21375" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="4" buyToken="60"  skillFlushFreeTimes="1" privateSeat="4" publicSeat="2" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0"/>
+	<sample sid="21376" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="4" buyToken="80"  skillFlushFreeTimes="1" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="0"/>
+	<sample sid="21377" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="6" buyToken="100" skillFlushFreeTimes="2" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
+	<sample sid="21378" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="6" buyToken="120"  skillFlushFreeTimes="2" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
+	<sample sid="21379" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="140"  skillFlushFreeTimes="3" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
+	<sample sid="21380" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="160"  skillFlushFreeTimes="3" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
+	<sample sid="21381" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="10" buyToken="180"  skillFlushFreeTimes="4" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
+	<sample sid="21382" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="10" buyToken="200"  skillFlushFreeTimes="4" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
 
 </objects>

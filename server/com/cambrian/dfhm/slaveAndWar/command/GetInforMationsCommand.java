@@ -1,20 +1,24 @@
 package com.cambrian.dfhm.slaveAndWar.command;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.net.Command;
 import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.net.NioTcpConnect;
+import com.cambrian.common.util.TimeKit;
 import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.common.entity.Player;
-import com.cambrian.dfhm.slaveAndWar.logic.SlaveManager;
+import com.cambrian.dfhm.slaveAndWar.entity.Information;
 import com.cambrian.game.Session;
 
 /**
- * 类说明：身份信息获取
+ * 类说明：获取信息
  * 
  * @author：LazyBear
  */
-public class GetIdentityCommand extends Command
+public class GetInforMationsCommand extends Command
 {
 
 	/* static fields */
@@ -24,7 +28,6 @@ public class GetIdentityCommand extends Command
 	/* fields */
 
 	/* constructors */
-
 	/* properties */
 
 	/* init start */
@@ -47,18 +50,15 @@ public class GetIdentityCommand extends Command
 		{
 			throw new DataAccessException(601,Lang.F9000_SDE);
 		}
-		Player bossPlayer=SlaveManager.getInstance().getBossPlayer(player);
-		player.getIdentity().BytesWrite(data);
-		data.writeInt(player.getFightPoint());
-		if(bossPlayer==null)
+		List<Information> informations=player.getIdentity()
+			.getInformations();
+		Collections.sort(informations);
+		data.writeInt(informations.size());
+		for(Information information:informations)
 		{
-			data.writeBoolean(false);
-		}
-		else
-		{
-			data.writeBoolean(true);
-			data.writeUTF(bossPlayer.getNickname());
-			data.writeInt(player.getFightPoint());
+			data.writeUTF(TimeKit.dateToString(information.getCreateTime(),
+				"yyyy年MM月dd日 HH:mm"));
+			data.writeUTF(information.getContent());
 		}
 	}
 }

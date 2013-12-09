@@ -51,7 +51,13 @@ public class Qualifying
 	/** 获得指定玩家的排名 */
 	public int getPlayerRank(String playerName)
 	{
-		return qualifyingList.indexOf(playerName);
+		for (int i = 0; i < qualifyingList.size(); i++)
+		{
+			String name = qualifyingList.get(i);
+			if (name.equals(playerName))
+				return i;
+		}
+		return -1;
 	}
 
 	public List<QualifyingInfo> getTopList()

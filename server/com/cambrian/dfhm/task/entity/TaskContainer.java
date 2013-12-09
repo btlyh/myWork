@@ -1,5 +1,6 @@
 package com.cambrian.dfhm.task.entity;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -107,6 +108,7 @@ public class TaskContainer
 //			}
 			task.checkFinish(player);
 		}
+		Collections.sort(taskList);
 	}
 	/** 刷新日常任务 */
 	public void refreshDaly(Player player)
@@ -117,6 +119,7 @@ public class TaskContainer
 			if (sample != null && sample instanceof Task)
 			{
 				Task task = (Task)sample;
+				task.status = 0;
 				if (task.isDayly == Task.DAYLY)
 				{
 					boolean b = task.take(player);
@@ -127,16 +130,17 @@ public class TaskContainer
 		}
 		for (int i = 0; i < daylyTaskList.size(); i++)
 		{
-			Task task = taskList.get(i);
-			if (task.status == Task.FINISHED)
-			{
-				finishedTaskList.add(task);
-				taskList.remove(i);
-				i--;
-				continue;
-			}
+			Task task = daylyTaskList.get(i);
+//			if (task.status == Task.FINISHED)
+//			{
+//				finishedTaskList.add(task);
+//				taskList.remove(i);
+//				i--;
+//				continue;
+//			}
 			task.checkFinish(player);
 		}
+		Collections.sort(daylyTaskList);
 	}
 	
 	/** 前台序列化 */

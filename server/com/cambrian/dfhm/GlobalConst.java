@@ -295,6 +295,12 @@ public final class GlobalConst
 	public static final int COMMAND_SLAVE_GETID=2614;
 	/** 当壕-前台发送-释放奴隶 */
 	public static final int COMMAND_SLAVE_RELEASE=2615;
+	/** 当壕-前台发送-停止托管 */
+	public static final int COMMAND_SLAVE_MANAGEDOFF=2616;
+	/** 当壕-前台发送-获取信息 */
+	public static final int COMMAND_SLAVE_INFORMATION=2617;
+	/** 当壕-前台发送-购买次数 */
+	public static final int COMMAND_SLAVE_BUYTIMES=2618;
 	/**/
 	/* 功能处理器 */
 	/** 空功能处理器 */
@@ -318,14 +324,13 @@ public final class GlobalConst
 
 	/** 扫荡副本通信 */
 	public static final int COMMAND_SWEEP_MAP=3501;
-	
-	
-	/**玩家充值通信**/
+
+	/** 玩家充值通信 **/
 	public static final int COMMAND_RECHARGE=3601;
-	
+
 	/** 服务器数据刷新推送 */
 	public static final int COMMAND_SERVER_BACK=3701;
-	
+
 	/* 功能处理器-消息 */
 
 	/* 功能处理器-商城 */

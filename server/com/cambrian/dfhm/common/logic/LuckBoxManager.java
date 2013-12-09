@@ -186,6 +186,7 @@ public class LuckBoxManager
 		Map<String,Object> resultMap=new HashMap<String,Object>();
 		LuckBoxCfg lbc=(LuckBoxCfg)Sample.getFactory().getSample(
 			player.getPlayerInfo().getLuckBoxSid());
+		int usergold =0;
 		if(lbc==null)
 		{
 			resultMap.put("error",Lang.F1603);
@@ -195,13 +196,16 @@ public class LuckBoxManager
 		{
 			int useGold=(player.getPlayerInfo().getExtractTimes()+1)
 					*lbc.gettNeedSoul();
+			usergold = player.getSoul();
+				
+			
 			if(needGold!=useGold)//武魂抽奖 客户端消耗和服务器不一样
 			{
 				resultMap.put("error",Lang.F1614);
 				return resultMap;
 			}else
 			{
-				if(needGold>useGold)//武魂抽奖  武魂值不足
+				if(usergold<useGold)
 				{
 					resultMap.put("error",Lang.F1613);
 					return resultMap;
@@ -211,13 +215,14 @@ public class LuckBoxManager
 		{
 			int useGold=(player.getPlayerInfo().getExtractTimes()+1)
 					*lbc.getNeedGold();
+			usergold = player.getGold();
 			if(needGold!=useGold)//金币抽奖 客户端消耗和服务器不一样
 			{
 				resultMap.put("error",Lang.F1604);
 				return resultMap;
 			}else
 			{
-				if(needGold>useGold)//武魂抽奖   金币不足
+				if(needGold>usergold)//武魂抽奖   金币不足
 				{
 					resultMap.put("error",Lang.F1605);
 					return resultMap;

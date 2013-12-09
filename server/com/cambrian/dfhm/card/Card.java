@@ -994,17 +994,17 @@ public class Card extends Sample
 	/** 升级经验计算 */
 	public boolean levelUp()
 	{
-		if(level>=90)
+		if(level>=GameCFG.getMaxLevel())
 		{
 			return false;
 		}
 
-		while(exp>=GameCFG.getExp(level))
+		while(exp>=GameCFG.getExp(level)*Math.ceil((type*0.5d)))
 		{
 
-			if(level<90)
+			if(level<GameCFG.getMaxLevel())
 			{
-				exp-=GameCFG.getExp(level);// 每升一级就减少经验
+				exp-=GameCFG.getExp(level)*Math.ceil((type*0.5d));// 每升一级就减少经验
 				level++;
 				attLastChangeTime=TimeKit.nowTimeMills();
 				if(getRealmByLevel()[0]>0)
@@ -1015,21 +1015,13 @@ public class Card extends Sample
 				}
 			}
 
-			if(level==90)
+			if(level==GameCFG.getMaxLevel())
 			{
 				exp=0;
 				break;
 			}
 
 		}
-		
-		
-		
-
-		/*
-		 * if(level<90) { if(result) { int temp=level; forsterNumber+=--temp;
-		 * } return result; } else { realm=false; }
-		 */
 		return false;
 	}
 

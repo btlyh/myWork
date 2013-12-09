@@ -28,5 +28,10 @@
 	<sample sid="20131" class="com.cambrian.dfhm.common.entity.Gift" name="5张卡牌2" description="购买后立即获得5张卡牌" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10222,10222,10222,10222,10222" price="5000"/>
 	<sample sid="20132" class="com.cambrian.dfhm.common.entity.Gift" name="5张卡牌3" description="购买后立即获得5张卡牌" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10223,10223,10223,10223,10223" price="5000"/>
 	<sample sid="20133" class="com.cambrian.dfhm.common.entity.Gift" name="5张卡牌4" description="购买后立即获得5张卡牌" img="img/tubiao/bag/gold/1" animation="0" type="3" gold="0" money="0" soul="0" token="0" _1cardSid="10224,10224,10224,10224,10224" price="5000"/>
+	<sample sid="20134" class="com.cambrian.dfhm.common.entity.Gift" name="1个军令" description="购买后立即获得1个军令" img="img/tubiao/bag/gold/1" animation="0" type="2" gold="0" money="0" soul="0" token="1" price="10"/>
+	<sample sid="20135" class="com.cambrian.dfhm.common.entity.Gift" name="2个军令" description="购买后立即获得2个军令" img="img/tubiao/bag/gold/1" animation="0" type="2" gold="0" money="0" soul="0" token="2" price="20"/>
+	<sample sid="20136" class="com.cambrian.dfhm.common.entity.Gift" name="3个军令" description="购买后立即获得3个军令" img="img/tubiao/bag/gold/1" animation="0" type="2" gold="0" money="0" soul="0" token="3" price="30"/>
+	<sample sid="20137" class="com.cambrian.dfhm.common.entity.Gift" name="5个军令" description="购买后立即获得5个军令" img="img/tubiao/bag/gold/1" animation="0" type="2" gold="0" money="0" soul="0" token="5" price="50"/>
+	<sample sid="20138" class="com.cambrian.dfhm.common.entity.Gift" name="10个军令" description="购买后立即获得10个军令" img="img/tubiao/bag/gold/1" animation="0" type="2" gold="0" money="0" soul="0" token="10" price="100"/>
 
 </objects>

@@ -71,20 +71,16 @@
 	</obj>
 	<!-- 设置排位赛挑战胜利获得的积分 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setDuelWinPoint">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
-		</method>
+		<method name="setDuelWinPoint">10</method>
 	</obj>
 	<!-- 设置排位赛挑战失败获得的积分 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setDuelLosePoint">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
-		</method>
+		<method name="setDuelLosePoint">5</method>
 	</obj>
 	<!-- 设置相应排位赛等级每日领取的积分 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setDayPoint">
-			<ints>64001,64002,64003,64004,64005,64006</ints>
+			<ints>1000,500,400,300,280,260,240,220,210,200,195,190,185,180,175,170,165,160,155,150,145,140,135,130,125,120,115,110,105,100,97,94,91,88,85,82,79,76,73,70,67,64,61,58,55,52,49,46,43,40,30</ints>
 		</method>
 	</obj>
 	<!-- 设置世界BOSS的SID-->
@@ -135,7 +131,7 @@
 	</obj>
 	<!-- 设置当壕功能办事所需时间(分钟)-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setWorkTime">60</method>
+		<method name="setWorkTime">3</method>
 	</obj>
 	<!-- 设置当壕功能办事次数上限-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
@@ -147,7 +143,7 @@
 	</obj>
 	<!-- 设置当壕功能速去速回所需金币数量-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setFastWorkGold">500</method>
+		<method name="setFastWorkGold">1</method>
 	</obj>
 	<!-- 设置当壕功能求救次数-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
@@ -195,7 +191,7 @@
 	<!--卡牌被吞噬所能提供的经验  不同等级-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setEngulfLevelExp">
-			<ints>10,21,32,43,54,66,78,90,102,114,127,140,153,166,180,194,208,222,237,252,267,282,298,314,330,346,363,380,397,414,432,450,468,486,504,523,542,561,580,600,620,640,660,681,702,723,744,766,788,810,832,855,878,901,924,948,972,996,1020,1044,1069,1094,1119,1144,1170,1196,1222,1248,1275,1302,1329,1356,1384,1412,1440,1468,1497,1526,1555,1584,1614,1644,1674,1704,1734,1765,1796,1827,1858,1889</ints>
+			<ints>10,16,21,27,32,38,44,50,56,62,69,75,82,88,95,102,109,116,124,131,139,146,154,162,170,178,187,195,204,212,221,230,239,248,257,267,276,286,295,305,315,325,335,346,356,367,377,388,399,410,421,433,444,456,467,479,491,503,515,527,540,552,565,577,590,603,616,629,643,656,670,683,697,711,725,739,754,768,783,797,812,827,842,857,872,888,903,919,934,950</ints>
 		</method>
 	</obj>
 	
@@ -210,6 +206,19 @@
 	</obj>
 	<!-- 当壕信息SID集合 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setSlaveInformations">50001,50002,50003,50004,50005,50006,50007,50008,50009,50010,50011,50012,50013,50014,50015,50016,50017,50018,50019,50020,50021,50022,50023,50024,50025,50026,50027,50028,50029,50030,50031,50032,50033,50034,50035,50036</method>
+		<method name="setSlaveInformations"><ints>50001,50002,50003,50004,50005,50006,50007,50008,50009,50010,50011,50012,50013,50014,50015,50016,50017,50018,50019,50020,50021,50022,50023,50024,50025,50026,50027,50028,50029,50030,50031,50032,50033,50034,50035,50036,50037,50038,50039,50040,50041,50042</ints></method>
 	</obj>
+		<!-- 当壕身份维持时间 -->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setSlaveKeepTime">7</method>
+	</obj>
+		<!-- 当壕赎身次数限制 -->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setRansomConfine">5</method>
+	</obj>
+	<!-- 卡牌最高等级-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setMaxlevel">90</method>
+	</obj>
+	
 </objects>

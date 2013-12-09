@@ -150,7 +150,7 @@ public final class Lang
 	public static final String F1409="1409";
 	/** 1410; 没有上阵卡牌 */
 	public static final String F1410="1410";
-	/** 1411; 背包格子不够*/
+	/** 1415; 背包格子不够*/
 	public static final String F1415="1415";
 
 	/** 1411:副本未通关 */
@@ -331,6 +331,12 @@ public final class Lang
 	public static final String F2218="2218";
 	/** 2219; 没有此人 */
 	public static final String F2219="2219";
+	/** 2220; 此奴隶没有在托管当中*/
+	public static final String F2220="2220";
+	/** 2221; 此奴隶已经在托管当中*/
+	public static final String F2221="2221";
+	/** 2222; 金币不足无法购买*/
+	public static final String F2222="2222";
 
 	/* 商城 */
 	/** 1901：商品序号不存在 */

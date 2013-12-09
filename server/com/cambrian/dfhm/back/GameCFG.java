@@ -56,9 +56,9 @@ public class GameCFG
 	//
 
 	/** 排位赛胜利获得积分 */
-	private static int[] duelWinPoint;
+	private static int duelWinPoint;
 	/** 排位赛失败获得积分 */
-	private static int[] duelLosePoint;
+	private static int duelLosePoint;
 	/** 排位赛每日领取积分 */
 	private static int[] dayPoint;
 
@@ -115,7 +115,11 @@ public class GameCFG
 	private static int[] engulfLevelExp;
 	/** 卡牌吞噬经验回收比例 **/
 	private static float engulfExpPer;
+	/** 当壕赎身次数限制*/
+	private static int ransomConfine;
 
+	/**角色最大等级**/
+	private static int maxLevel;
 	public static int getPayForAwakeMinutes()
 	{
 		return payForAwakeMinutes;
@@ -426,24 +430,22 @@ public class GameCFG
 		return -1;
 	}
 
-	public static int getDuelWinPoint(int rank)
+	public static int getDuelWinPoint()
 	{
-		if(rank>=duelWinPoint.length-1) rank=duelWinPoint.length-1;
-		return duelWinPoint[rank];
+		return duelWinPoint;
 	}
 
-	public static void setDuelWinPoint(int[] duelWinPoint)
+	public static void setDuelWinPoint(int duelWinPoint)
 	{
 		GameCFG.duelWinPoint=duelWinPoint;
 	}
 
-	public static int getDuelLosePoint(int rank)
+	public static int getDuelLosePoint()
 	{
-		if(rank>=duelLosePoint.length-1) rank=duelLosePoint.length-1;
-		return duelLosePoint[rank];
+		return duelLosePoint;
 	}
 
-	public static void setDuelLosePoint(int[] duelLosePoint)
+	public static void setDuelLosePoint(int duelLosePoint)
 	{
 		GameCFG.duelLosePoint=duelLosePoint;
 	}
@@ -456,16 +458,6 @@ public class GameCFG
 	public static void setDayPoint(int[] dayPoint)
 	{
 		GameCFG.dayPoint=dayPoint;
-	}
-
-	public static int[] getDuelWinPoint()
-	{
-		return duelWinPoint;
-	}
-
-	public static int[] getDuelLosePoint()
-	{
-		return duelLosePoint;
 	}
 
 	public static int[] getDayPoint()
@@ -745,6 +737,17 @@ public class GameCFG
 		GameCFG.engulfLevelExp=engulfLevelExp;
 	}
 
+	
+	
+	
+	public static int getMaxLevel() {
+		return maxLevel;
+	}
+
+	public static void setMaxlevel(int maxLevel) {
+		GameCFG.maxLevel = maxLevel;
+	}
+
 	/***
 	 * 获取玩家初始化可挑战副本SID
 	 * 
@@ -805,9 +808,10 @@ public class GameCFG
 	{
 		GameCFG.slaveKeepTime=slaveKeepTime;
 	}
-	
+
 	/***
 	 * 获取当壕信息SID集合
+	 * 
 	 * @return
 	 */
 	public static int[] getSlaveInformations()
@@ -817,6 +821,19 @@ public class GameCFG
 
 	public static void setSlaveInformations(int[] slaveInformations)
 	{
-		GameCFG.slaveInformations = slaveInformations;
+		GameCFG.slaveInformations=slaveInformations;
+	}
+	
+	/**
+	 * 获取赎身次数限制
+	 * */
+	public static int getRansomConfine()
+	{
+		return ransomConfine;
+	}
+
+	public static void setRansomConfine(int ransomConfine)
+	{
+		GameCFG.ransomConfine = ransomConfine;
 	}
 }

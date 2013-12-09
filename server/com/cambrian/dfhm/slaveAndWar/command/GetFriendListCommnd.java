@@ -52,5 +52,7 @@ public class GetFriendListCommnd extends Command{
 			data.writeUTF(tarPlayer.getNickname());// 目标名称
 			data.writeUTF(tarPlayer.getIdentity().getGradeName());// 目标身份名称
 		}
+		
+		
 	}
 }

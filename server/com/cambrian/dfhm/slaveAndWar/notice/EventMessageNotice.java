@@ -5,7 +5,6 @@ import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.net.NioTcpConnect;
 import com.cambrian.dfhm.SendCommand;
 import com.cambrian.dfhm.globalboss.notice.BossEndNotice;
-import com.cambrian.dfhm.slaveAndWar.entity.Information;
 import com.cambrian.game.Session;
 
 /**

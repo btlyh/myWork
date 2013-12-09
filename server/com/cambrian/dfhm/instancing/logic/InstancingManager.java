@@ -89,116 +89,117 @@ public class InstancingManager
 	}
 	/** ¹¥»÷NPC */
 	public synchronized Map<String,ArrayList<Integer>> attackNPC(int sid,
-			Player player,int npcType,int attType,List<Integer> cardList)
+		Player player,int npcType,int attType,List<Integer> cardList)
+	{
+		Map<String,Object> resultMap=checkAttackNPC(sid,player,npcType);
+		Map<String,ArrayList<Integer>> resultData=new HashMap<String,ArrayList<Integer>>();
+		String error=(String)resultMap.get("error");
+		if(error!=null)
 		{
-			Map<String,Object> resultMap=checkAttackNPC(sid,player,npcType);
-			Map<String,ArrayList<Integer>> resultData=new HashMap<String,ArrayList<Integer>>();
-			String error=(String)resultMap.get("error");
-			if(error!=null)
-			{
-				throw new DataAccessException(601,error);
-			}
-			NPC npc=null;
-			switch(npcType)
-			{
-				case NPC.NORMAL:
-					npc=(NormalNPC)resultMap.get("npc");
-					break;
-				case NPC.HARD:
-					npc=(HardNPC)resultMap.get("npc");
-					break;
-				case NPC.CROSS:
-					npc=(CrossNPC)resultMap.get("npc");
-					break;
-				default:
-					break;
-			}
-
-			BattleScene scene=new BattleScene();
-			BattleCard[] att=player.formation.getFormation();
-			BattleCard[] def=npc.getMonsters();
-			battleInit(att,def);
-			if(attType==1)
-			{
-				scene.setMaxRound(npc.getRound());
-				scene.start(att,def,BattleScene.FIGHT_NORMAL);
-				scene.getRecord().set(0,scene.getStep());
-			}
-			else if(attType==2)
-			{
-				// É¨µ´
-			}
-			player.decrToken(npc.getNeedToken());
-			npc.winCondition(scene,att,player);
-			int win=scene.getRecord().get(scene.getRecord().size()-1);
-			ArrayList<Integer> rewardCardList=new ArrayList<Integer>();
-			if(win>0)// Ê¤Àû
-			{
-				if(npcType==NPC.CROSS)
-				{
-					if(player.getPlayerInfo().getCrossMapNum()>0)
-					{
-						player.getPlayerInfo().setCrossMapNum(
-							player.getPlayerInfo().getCrossMapNum()-1);
-					}
-
-				}
-				npc.handleForWin(player);
-				ArrayList<Integer> rewardCards=npc.addAward(scene,player);
-				if(rewardCards.size()>0)
-				{
-					if(rewardCards.size()>player.getCardBag()
-						.getSurplusCapacity())
-					{
-						Mail mail=mf.createSystemMail(rewardCards,0,0,0,0,0,
-							(int)player.getUserId());
-						player.addMail(mail);
-					}
-					else
-					{
-						for(Integer integer:rewardCards)
-						{
-							Card card=player.getCardBag().add(integer,player.getAchievements());
-							rewardCardList.add(card.getSid());
-							rewardCardList.add(card.uid);
-							rewardCardList.add(card.getSkillId());
-						}
-					}
-				}
-				
-			//	setAttAchvments(player,sid);
-			}
-			npc.handleForAtt(player);
-			/* Õ½¶·Íêºó¸Ä±ä¿¨ÅÆµÄºÈ¾Æ×´Ì¬ */
-			for(int i=0;i<cardList.size();i++)
-			{
-				Card card=player.getCardBag().getById(cardList.get(i));
-				if(card.isInArmyCamp()==1)
-					card.setDrinkStatus(Card.DRUNK);
-				else
-					card.setDrinkStatus(Card.AWAKE);
-			}
-			resultData.put("record",scene.getRecord());
-			resultData.put("reward",rewardCardList);
-			return resultData;
+			throw new DataAccessException(601,error);
 		}
+		NPC npc=null;
+		switch(npcType)
+		{
+			case NPC.NORMAL:
+				npc=(NormalNPC)resultMap.get("npc");
+				break;
+			case NPC.HARD:
+				npc=(HardNPC)resultMap.get("npc");
+				break;
+			case NPC.CROSS:
+				npc=(CrossNPC)resultMap.get("npc");
+				break;
+			default:
+				break;
+		}
+
+		BattleScene scene=new BattleScene();
+		BattleCard[] att=player.formation.getFormation();
+		BattleCard[] def=npc.getMonsters();
+		battleInit(att,def);
+		if(attType==1)
+		{
+			scene.setMaxRound(npc.getRound());
+			scene.start(att,def,BattleScene.FIGHT_NORMAL);
+			scene.getRecord().set(0,scene.getStep());
+		}
+		else if(attType==2)
+		{
+			// É¨µ´
+		}
+		player.decrToken(npc.getNeedToken());
+		npc.winCondition(scene,att,player);
+		int win=scene.getRecord().get(scene.getRecord().size()-1);
+		ArrayList<Integer> rewardCardList=new ArrayList<Integer>();
+		if(win>0)// Ê¤Àû
+		{
+			if(npcType==NPC.CROSS)
+			{
+				if(player.getPlayerInfo().getCrossMapNum()>0)
+				{
+					player.getPlayerInfo().setCrossMapNum(
+						player.getPlayerInfo().getCrossMapNum()-1);
+				}
+
+			}
+			npc.handleForWin(player);
+			ArrayList<Integer> rewardCards=npc.addAward(scene,player);
+			if(rewardCards.size()>0)
+			{
+				if(rewardCards.size()>player.getCardBag()
+					.getSurplusCapacity())
+				{
+					Mail mail=mf.createSystemMail(rewardCards,0,0,0,0,0,
+						(int)player.getUserId());
+					player.addMail(mail);
+				}
+				else
+				{
+					for(Integer integer:rewardCards)
+					{
+						Card card=player.getCardBag().add(integer,
+							player.getAchievements());
+						rewardCardList.add(card.getSid());
+						rewardCardList.add(card.uid);
+						rewardCardList.add(card.getSkillId());
+					}
+				}
+			}
+
+			// setAttAchvments(player,sid);
+		}
+		npc.handleForAtt(player);
+		/* Õ½¶·Íêºó¸Ä±ä¿¨ÅÆµÄºÈ¾Æ×´Ì¬ */
+		for(int i=0;i<cardList.size();i++)
+		{
+			Card card=player.getCardBag().getById(cardList.get(i));
+			if(card.isInArmyCamp()==1)
+				card.setDrinkStatus(Card.DRUNK);
+			else
+				card.setDrinkStatus(Card.AWAKE);
+		}
+		resultData.put("record",scene.getRecord());
+		resultData.put("reward",rewardCardList);
+		return resultData;
+	}
 	/** ¼ì²é¹¥»÷NPC */
 	private Map<String,Object> checkAttackNPC(int sid,Player player,
 		int npcType)
 	{
-		
+
 		Map<String,Object> resultMap=new HashMap<String,Object>();
 		if(player.getPlayerInfo().getLeadStep()!=-1)
 		{
 			for(BattleCard card:player.formation.getFormation())
 			{
-				if (card==null)
+				if(card==null)
 				{
-					throw new DataAccessException(601,Lang.F2501);	
+					throw new DataAccessException(601,Lang.F2501);
 				}
-			}	
-		}	
-		
+			}
+		}
+
 		System.err.println("npcType ==="+npcType);
 		if(npcType>NPC.CROSS||npcType<NPC.NORMAL)
 		{
@@ -223,6 +224,12 @@ public class InstancingManager
 				resultMap.put("error",Lang.F1414);
 				return resultMap;
 			}
+		}
+
+		if(player.getCardBag().getSurplusCapacity()<1)
+		{
+			resultMap.put("error",Lang.F1415);
+			return resultMap;
 		}
 
 		NPC npc=null;
@@ -297,41 +304,39 @@ public class InstancingManager
 		}
 	}
 
-	private void setAttAchvments(Player player,int  sid)
+	private void setAttAchvments(Player player,int sid)
 	{
-		
-		
-		switch (sid)
+
+		switch(sid)
 		{
-		case 12230:
-			if (!player.getAchievements().isPassWoSong()) 
-				player.getAchievements().setPassWoSong(true);
-			break;
-		case 12220:
-			if (!player.getAchievements().isPassLuZhiShen()) 
-				player.getAchievements().setPassLuZhiShen(true);
-			break;
-		case 12215:
-			if (!player.getAchievements().isPassZhangJiao()) 
-				player.getAchievements().setPassZhangJiao(true);
-			break;
-		case 12202:
-			if (!player.getAchievements().isPassZhangManCheng()) 
-				player.getAchievements().setPassZhangManCheng(true);
-			break;
-		case 12001:
-			if (!player.getAchievements().isFristPassCross()) 
-				player.getAchievements().setFristPassCross(true);
-			break;
-		case 12201:
-			if (!player.getAchievements().isPassHuangJinQianShao()) 
-				player.getAchievements().setPassHuangJinQianShao(true);
-			break;
-		default:
-			break;
+			case 12230:
+				if(!player.getAchievements().isPassWoSong())
+					player.getAchievements().setPassWoSong(true);
+				break;
+			case 12220:
+				if(!player.getAchievements().isPassLuZhiShen())
+					player.getAchievements().setPassLuZhiShen(true);
+				break;
+			case 12215:
+				if(!player.getAchievements().isPassZhangJiao())
+					player.getAchievements().setPassZhangJiao(true);
+				break;
+			case 12202:
+				if(!player.getAchievements().isPassZhangManCheng())
+					player.getAchievements().setPassZhangManCheng(true);
+				break;
+			case 12001:
+				if(!player.getAchievements().isFristPassCross())
+					player.getAchievements().setFristPassCross(true);
+				break;
+			case 12201:
+				if(!player.getAchievements().isPassHuangJinQianShao())
+					player.getAchievements().setPassHuangJinQianShao(true);
+				break;
+			default:
+				break;
 		}
-		
+
 	}
-	
-	
+
 }

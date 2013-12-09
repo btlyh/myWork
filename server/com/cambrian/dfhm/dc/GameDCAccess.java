@@ -252,11 +252,11 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 				+", userid="+userid+", nickName="+p.getNickname());
 		// p.setNickname(nickName);// TODO Í«≥∆ƒ¨»œ…Ë÷√
 		p.setNickname(nickName);
-		p.setMoney(200);
-		p.setGold(200);
+		p.setMoney(1000);
+		p.setGold(1000);
 		p.setMaxToken(50);
 		p.setCurToken(50);
-		p.setSoul(0);
+		p.setSoul(10000);
 		p.setCurIndexForNormalNPC(GameCFG.getIndexForNormalNPC());
 		p.setVipLevel(5);
 		p.init();
