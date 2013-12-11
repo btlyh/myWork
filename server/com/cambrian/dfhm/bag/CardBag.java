@@ -206,4 +206,14 @@ public class CardBag implements Serializable,DBSerializable
 		else
 			return 10001;
 	}
+	/** 任务用：获得被收集的卡牌 */
+	public Card getBySid(int sid)
+	{
+		for (Card reCard : list)
+		{
+			if (reCard.getSid() == sid)
+				return reCard;
+		}
+		return null;
+	}
 }

@@ -38,7 +38,6 @@ public class Player extends Sample implements Actor
 
 	private static final int UPDATE_PLAYER=0;
 
-
 	private long userid;
 	private String nickname;
 	/** 游戏币 */
@@ -81,7 +80,7 @@ public class Player extends Sample implements Actor
 	{
 		return userid;
 	}
- 
+
 	/** 当前可以挑战普通副本NPC的位置 */
 	private int curIndexForNormalNPC;
 	/** 当前可以挑战挑战副本NPC的位置 */
@@ -94,14 +93,11 @@ public class Player extends Sample implements Actor
 	private BossFightRecord bfr;
 	/** 身份对象(当土豪功能用) */
 	private Identity identity=new Identity();
-	
-	/**玩家成就系统**/
-	private Achievements achievements = new Achievements();
-	
-	
-	
-	
-	boolean isRefresh = false;
+
+	/** 玩家成就系统 **/
+	private Achievements achievements=new Achievements();
+
+	boolean isRefresh=false;
 
 	/** 设置玩家id */
 	public void setUserId(long uid)
@@ -315,13 +311,14 @@ public class Player extends Sample implements Actor
 		if(listener!=null) listener.change(this,UPDATE_PLAYER);
 	}
 
-	
-	public Achievements getAchievements() {
+	public Achievements getAchievements()
+	{
 		return achievements;
 	}
 
-	public void setAchievements(Achievements achievements) {
-		this.achievements = achievements;
+	public void setAchievements(Achievements achievements)
+	{
+		this.achievements=achievements;
 	}
 
 	/** player的初始化 */
@@ -334,13 +331,15 @@ public class Player extends Sample implements Actor
 		card.setStatus(Card.NORMAL);
 		System.err.println("id !!!======="+card.getId());
 		// card.setForsterNumber(100);
-		/*bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
-			card.getTinyAvatar(),card.getLevel(),card.getAtt(),
-			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
-			card.getMaxHp(),card.getCurHp(),0,card.getAimType(),
-			card.getCritRate(),card.getDodgeRate(),0,card.getType(),
-			card.getSid(),card.getCritFactor());
-		formation.changeFormation(0,bCard);*/
+		/*
+		 * bCard=new BattleCard(card.getId(),card.getName(),card.getAvatar(),
+		 * card.getTinyAvatar(),card.getLevel(),card.getAtt(),
+		 * card.getSkillRate(),card.getAttRange(),card.getSkillId(),
+		 * card.getMaxHp(),card.getCurHp(),0,card.getAimType(),
+		 * card.getCritRate(),card.getDodgeRate(),0,card.getType(),
+		 * card.getSid(),card.getCritFactor());
+		 * formation.changeFormation(0,bCard);
+		 */
 
 		card=cardBag.add(10052,achievements);
 		card.setStatus(Card.ATTACK);
@@ -351,7 +350,7 @@ public class Player extends Sample implements Actor
 			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
 			card.getMaxHp(),card.getCurHp(),1,card.getAimType(),
 			card.getCritRate(),card.getDodgeRate(),0,card.getType(),
-			card.getSid(),card.getCritFactor());
+			card.getSid(),card.getCritFactor(),card.getDrinkStatus());
 		formation.changeFormation(1,bCard);
 
 		card=cardBag.add(10053,achievements);
@@ -361,7 +360,7 @@ public class Player extends Sample implements Actor
 			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
 			card.getMaxHp(),card.getCurHp(),2,card.getAimType(),
 			card.getCritRate(),card.getDodgeRate(),0,card.getType(),
-			card.getSid(),card.getCritFactor());
+			card.getSid(),card.getCritFactor(),card.getDrinkStatus());
 		formation.changeFormation(2,bCard);
 
 		card=cardBag.add(10054,achievements);
@@ -371,7 +370,7 @@ public class Player extends Sample implements Actor
 			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
 			card.getMaxHp(),card.getCurHp(),3,card.getAimType(),
 			card.getCritRate(),card.getDodgeRate(),0,card.getType(),
-			card.getSid(),card.getCritFactor());
+			card.getSid(),card.getCritFactor(),card.getDrinkStatus());
 		formation.changeFormation(3,bCard);
 
 		card=cardBag.add(10055,achievements);
@@ -381,7 +380,7 @@ public class Player extends Sample implements Actor
 			card.getSkillRate(),card.getAttRange(),card.getSkillId(),
 			card.getMaxHp(),card.getCurHp(),4,card.getAimType(),
 			card.getCritRate(),card.getDodgeRate(),0,card.getType(),
-			card.getSid(),card.getCritFactor());
+			card.getSid(),card.getCritFactor(),card.getDrinkStatus());
 		formation.changeFormation(4,bCard);
 
 		// card = cardBag.add(50002);
@@ -436,7 +435,6 @@ public class Player extends Sample implements Actor
 		// }
 		// }
 		setVipCfg(); // 初始化VIP配置
-		tasks.refreshDaly(this);
 	}
 
 	public void incrMoney(int money)
@@ -556,9 +554,9 @@ public class Player extends Sample implements Actor
 		playerInfo.setDuelFreeTimes(10);
 		playerInfo.setDuelBuyTimes(0);
 		playerInfo.setCanTakePoint(0);
-		tasks.refreshDaly(this);
+		tasks.refreshDayly(this);
 	}
-	
+
 	/** 刷新playerInfo中Vip相关属性 */
 	private void refreshVip(VipCfg vip)
 	{
@@ -572,6 +570,7 @@ public class Player extends Sample implements Actor
 		playerInfo.setAutoDrink(vip.autoDrink);
 		playerInfo.setAutoBossFight(vip.autoBossFight);
 		playerInfo.setAutoBossSign(vip.autoBossSign);
+		playerInfo.setSlaveManaged(vip.slaveManaged);
 	}
 
 	/** 序列化(前台登陆时获取的数据) */
@@ -620,7 +619,7 @@ public class Player extends Sample implements Actor
 		}
 		playerInfo.bytesWrite(data);
 		armyCamp.bytesWrite(data);
-	//	achievements.bytesWrite(data);
+		// achievements.bytesWrite(data);
 	}
 
 	/** 序列化(和dc通信) */
@@ -672,7 +671,7 @@ public class Player extends Sample implements Actor
 		tasks.dbBytesWrite(data);
 		if(identity==null) identity=new Identity();
 		identity.dbBytesWrite(data);
-	//	achievements.dbBytesWrite(data);
+		// achievements.dbBytesWrite(data);
 	}
 
 	/** 反序列化(和dc通信) */
@@ -729,7 +728,7 @@ public class Player extends Sample implements Actor
 		tasks.dbBytesRead(data);
 		if(identity==null) identity=new Identity();
 		identity.dbBytesRead(data);
-	//	achievements.dbBytesRead(data);
+		// achievements.dbBytesRead(data);
 	}
 
 	@Override
@@ -751,8 +750,21 @@ public class Player extends Sample implements Actor
 			{
 				return;
 			}
-			incrToken((int)times*TokenTimer.TOKENADDNUM);
-
+			if(curToken<maxtToken)
+			{
+				incrToken((int)times*TokenTimer.TOKENADDNUM);
+				if(curToken<maxtToken)
+				{
+					playerInfo.setLastRegainTokenTime(playerInfo
+						.getLastRegainTokenTime()
+						+times
+						*TokenTimer.TOKENADDTIME);
+				}
+				else
+				{
+					playerInfo.setLastRegainTokenTime(0L);
+				}
+			}
 		}
 	}
 
@@ -782,17 +794,20 @@ public class Player extends Sample implements Actor
 			data.writeBoolean(false);
 		}
 		long nextTokenFullTime=0;
-		TimerEvent[] events=TimerCenter.getMillisTimer().getArray();
-		for(TimerEvent event:events)
-		{
-			if(event.getParameter().equals("tokenTimeEvent"))
-			{
-				nextTokenFullTime=event.getNextTime();
-				break;
-			}
+		// TimerEvent[] events=TimerCenter.getMillisTimer().getArray();
+		// for(TimerEvent event:events)
+		// {
+		// if(event.getParameter().equals("tokenTimeEvent"))
+		// {
+		// nextTokenFullTime=event.getNextTime();
+		// break;
+		// }
+		//
+		// }
+		nextTokenFullTime=playerInfo.getLastRegainTokenTime()
+			+TokenTimer.TOKENADDTIME-TimeKit.nowTimeMills();
 
-		}
-		data.writeLong(nextTokenFullTime-TimeKit.nowTimeMills());
+		data.writeLong(nextTokenFullTime<0?0:nextTokenFullTime);
 		/** 登录时遍历军帐 */
 		if(nickname!=null)
 		{
@@ -813,7 +828,7 @@ public class Player extends Sample implements Actor
 		{
 			player.getPlayerInfo().setNextRewardTime(0);
 		}
-		
+
 		if(checkForRefreshDayly())
 		{
 			refreshDayly();
@@ -822,17 +837,18 @@ public class Player extends Sample implements Actor
 	/** 检查是否刷新每日数据 */
 	private boolean checkForRefreshDayly()
 	{
-		if (isRefresh) return false;
-		long refreshTime = TimeKit.timeOf(GameCFG.getServerTime());
-		if(logoutTime < refreshTime-TimeKit.DAY_MILLS)
+		if(isRefresh) return false;
+		long refreshTime=TimeKit.timeOf(GameCFG.getServerTime());
+		if(logoutTime<refreshTime-TimeKit.DAY_MILLS)
 		{
-			isRefresh = true;
+			isRefresh=true;
 			return true;
-		}else if (logoutTime < refreshTime)
+		}
+		else if(logoutTime<refreshTime)
 		{
-			if (TimeKit.nowTimeMills() > refreshTime)
+			if(TimeKit.nowTimeMills()>refreshTime)
 			{
-				isRefresh = true;
+				isRefresh=true;
 				return true;
 			}
 		}

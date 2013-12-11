@@ -58,6 +58,12 @@ public class FinishTaskCommand extends Command
 		TaskAward award = (TaskAward)resultMap.get("award");
 		award.bytesWrite(data);
 		boolean b = resultMap.get("flag")==null?false:(Boolean)resultMap.get("flag");
+		ArrayList<Integer> removeCards = (ArrayList<Integer>)resultMap.get("removeCards");
+		data.writeInt(removeCards.size());
+		for (Integer integer : removeCards)
+		{
+			data.writeInt(integer);
+		}
 		data.writeBoolean(b);
 		if (b)
 		{

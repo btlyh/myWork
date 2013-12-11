@@ -144,4 +144,19 @@ public class Formation implements Cloneable
 		}
 		return formation;
 	}
+	/** …Ë÷√’Ω∂∑ø®≈∆∫»æ∆◊¥Ã¨ */
+	public void setBattleCardDrink(int id, int status)
+	{
+		for (BattleCard bCard : battleCrad)
+		{
+			if (bCard != null)
+			{
+				if (bCard.getId() == id)
+				{
+					bCard.setDrinkStatus(status);
+					return;
+				}
+			}
+		}
+	}
 }

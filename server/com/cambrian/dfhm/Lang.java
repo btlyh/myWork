@@ -285,6 +285,8 @@ public final class Lang
 	public static final String F1814="1814";
 	/** 1815; 你已经复活了，不需要继续复活 */
 	public static final String F1815="1815";
+	/** 1816; 玩家VIP等级不足以开起自动报名 */
+	public static final String F1816="1816";
 
 	/* 排行榜 */
 	/** 1901： 排行榜类型错误 */
@@ -337,6 +339,8 @@ public final class Lang
 	public static final String F2221="2221";
 	/** 2222; 金币不足无法购买*/
 	public static final String F2222="2222";
+	/** 2223; 玩家VIP等级不足以开起托管功能 */
+	public static final String F2223="2223";
 
 	/* 商城 */
 	/** 1901：商品序号不存在 */
@@ -377,8 +381,8 @@ public final class Lang
 	/** 9000；网络错误,请重新登录 */
 	public static final String F9000_SDE="9000";
 
-	/** 邮件国际惯例标题 */
-	public static final String TITLE="的邮件";
+//	/** 邮件国际惯例标题 */
+//	public static final String TITLE="的邮件";
 	/** 系统邮件 */
 	public static final String SYSTEM_MAIL_TITLE="系统邮件";
 	/** 系统邮件内容 */

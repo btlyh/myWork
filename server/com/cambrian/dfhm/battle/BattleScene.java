@@ -11,6 +11,7 @@ import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.battle.entity.DamageEntity;
 import com.cambrian.dfhm.skill.DecrHurtSkill;
 import com.cambrian.dfhm.skill.DizzySkill;
+import com.cambrian.dfhm.skill.NoHurtSkill;
 import com.cambrian.dfhm.skill.PoisonSkill;
 import com.cambrian.dfhm.skill.Skill;
 
@@ -34,7 +35,7 @@ public class BattleScene
 	/** 最大卡牌参战数 */
 	public static final int MAXBATTLECOUNT=5;
 	/** DEBUFF常量：0=正常，1=中毒，2=晕眩,3=减伤 */
-	public static final int NORMAL=0,POISON=1,DIZZY=2,DEHURT=3;
+	public static final int NORMAL=0,POISON=1,DIZZY=2,DEHURT=3,NOHURT=4;
 	/** 战斗类型（ 1普通PVE战斗 2世界BOSS战斗 3普通PVP战斗） */
 	public static final int FIGHT_NORMAL=1,FIGHT_GLOBALBOSS=2,FIGHT_PVP=3;
 
@@ -137,7 +138,8 @@ public class BattleScene
 		{
 			if(battleCard!=null)
 				System.err.println(battleCard.getName()+", 位置="
-					+battleCard.getIndex()+", 血量="+battleCard.getCurHp());
+					+battleCard.getIndex()+", 血量="+battleCard.getCurHp()
+					+", 掉落IP ==="+battleCard.getAwardSid());
 		}
 		System.err.println("------出战，守方人员人数-------"+defList.length);
 		for(BattleCard battleCard:defList)
@@ -289,7 +291,7 @@ public class BattleScene
 				+attCard.getIndex());
 			System.err.println("side ==="+attCard.getSide());
 			int deSkillTemp=attCard.getDeSkill().size();
-			int status=deBuffer(attCard,attList,type);
+			int status=deBuffer(attCard,attList,type,deSkillTemp);
 			int target;
 			if(attCard.getCurHp()<0)
 			{
@@ -320,7 +322,9 @@ public class BattleScene
 				if(attType==DEFAULTATT)
 				{
 					target=attCard.getAimType();
-				}else{
+				}
+				else
+				{
 					target=attCard.getSkill().getAim();
 				}
 				if(target==OWN)
@@ -524,7 +528,7 @@ public class BattleScene
 			// 实际伤害会在攻击力上进行正负5%区间的浮动
 			System.err.println("------技能攻击-------");
 			record.addRecord(attCard.getSkill().getId());
-			 hurtList=attCard.getSkill().skillValue(attCard,aim,aimList,
+			hurtList=attCard.getSkill().skillValue(attCard,aim,aimList,
 				record);
 		}
 		else
@@ -562,9 +566,10 @@ public class BattleScene
 				record.addRecord(-1);// 没死
 				record.addRecord(-1);// 不掉东西
 			}
-			System.err.println(bCard.getName()+",被照成伤害，血量损失 ==="+damageEntity.getValue()
-				+", 剩余血量 ==="+bCard.getCurHp());
-			if(isDamage&&attCard.getSide()==1) record.countDamage(damageEntity.getValue());
+			System.err.println(bCard.getName()+",被照成伤害，血量损失 ==="
+				+damageEntity.getValue()+", 剩余血量 ==="+bCard.getCurHp());
+			if(isDamage&&attCard.getSide()==1)
+				record.countDamage(damageEntity.getValue());
 			// 计算被攻击者，身上的debuff
 			deSkill=bCard.getDeSkill();
 			record.addRecord(deSkill.size());
@@ -658,7 +663,8 @@ public class BattleScene
 	 * @param attList 攻方链表
 	 * @return 0=正常，1=中毒，2=晕眩
 	 */
-	private int deBuffer(BattleCard attCard,BattleCard[] attList,int type)
+	private int deBuffer(BattleCard attCard,BattleCard[] attList,int type,
+		int size)
 	{
 		deSkill=attCard.getDeSkill();
 		if(type==FIGHT_GLOBALBOSS)
@@ -674,7 +680,7 @@ public class BattleScene
 		// skillList.add(deSkill.get(i));
 		// }
 		record.addRecord(deSkill.size());
-		for(int i=0;i<deSkill.size();i++)
+		for(int i=0;i<size;i++)
 		{
 			if(deSkill.get(i) instanceof PoisonSkill)
 			{
@@ -698,6 +704,12 @@ public class BattleScene
 			{
 				record.addRecord(deSkill.get(i).getSid());
 				record.addRecord(DEHURT);
+				status=0;
+			}
+			else if(deSkill.get(i) instanceof NoHurtSkill)
+			{
+				record.addRecord(deSkill.get(i).getSid());
+				record.addRecord(NOHURT);
 				status=0;
 			}
 		}

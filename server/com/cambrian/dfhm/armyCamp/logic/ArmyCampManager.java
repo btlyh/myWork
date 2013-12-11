@@ -162,6 +162,7 @@ public class ArmyCampManager
 		card.setLastDrinkTime(TimeKit.nowTimeMills());
 		card.setInArmyCamp(1);
 		card.setDrinkStatus(Card.HYPER);
+		player.formation.setBattleCardDrink(card.getId(), Card.HYPER);
 		card.setArmyName(userName);
 		if (player.getNickname().equals(userName))
 			setArmyCamp(tarArmyCamp, userName);
@@ -305,6 +306,7 @@ public class ArmyCampManager
 		}
 		List<SeatCard> privateList = player.getArmyCamp().getPrivateList();
 		card.setDrinkStatus(Card.AWAKE);
+		player.formation.setBattleCardDrink(card.getId(), Card.AWAKE);
 		card.setInArmyCamp(0);
 		privateList.remove(seatCard);
 		player.getArmyCamp().setPrivateList(privateList);
@@ -351,6 +353,7 @@ public class ArmyCampManager
 		}
 		Card card = (Card) resultMap.get("card");
 		card.setDrinkStatus(Card.AWAKE);
+		player.formation.setBattleCardDrink(card.getId(), Card.AWAKE);
 		card.setInArmyCamp(0);
 		ArmyCamp tarArmyCamp = (ArmyCamp) resultMap.get("armyCamp");
 		SeatCard seatCard = (SeatCard) resultMap.get("seatCard");
@@ -525,6 +528,7 @@ public class ArmyCampManager
 				otherArmyCamp.removeSeatCard(seatCard);
 				setArmyCamp(otherArmyCamp, card.getArmyName());
 				card.setDrinkStatus(Card.AWAKE);
+				player.formation.setBattleCardDrink(card.getId(), Card.AWAKE);
 				card.setInArmyCamp(0);
 				card.setArmyName("");
 				String s = "亲爱的玩家您好，在您自己军帐中的" + card.getName()
@@ -559,6 +563,7 @@ public class ArmyCampManager
 			if (TimeKit.nowTimeMills() - card.getLastDrinkTime() >= ArmyCamp.DRINK_CD)
 			{
 				card.setDrinkStatus(Card.AWAKE);
+				tarPlayer.formation.setBattleCardDrink(card.getId(), Card.AWAKE);
 				card.setInArmyCamp(0);
 				card.setArmyName("");
 				cardList.remove(card);
@@ -591,6 +596,7 @@ public class ArmyCampManager
 			if (TimeKit.nowTimeMills() - card.getLastDrinkTime() >= ArmyCamp.DRINK_CD)
 			{
 				card.setDrinkStatus(Card.AWAKE);
+				player.formation.setBattleCardDrink(card.getId(), Card.AWAKE);
 				card.setInArmyCamp(0);
 				card.setArmyName("");
 				setCardBag(cardBag, seatCard.getOwnerName());
@@ -724,12 +730,14 @@ public class ArmyCampManager
 				} else
 				{
 					card.setDrinkStatus(Card.HYPER);
+					player.formation.setBattleCardDrink(card.getId(), Card.HYPER);
 					player.decrGold(countUseGold(TimeKit.nowTimeMills()));
 				}
 			}
 			if (card.getDrinkStatus() == Card.AWAKE)
 			{
 				card.setDrinkStatus(Card.HYPER);
+				player.formation.setBattleCardDrink(card.getId(), Card.HYPER);
 				player.decrGold(countUseGold(TimeKit.nowTimeMills()));
 			}
 		}

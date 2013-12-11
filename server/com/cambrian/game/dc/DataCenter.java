@@ -77,7 +77,7 @@ public class DataCenter extends ChangeListenerList implements CloseAble,
 	SessionMap sm;
 	DBAccess access;
 	int timeout=1800000;
-	int saveTimeout=3600000;
+	int saveTimeout=360000;
 	TimerEvent collateTimerEvent=new TimerEvent(this,"collate",60000);
 	AttributeList attributes=new AttributeList();
 	CollateSelector selecter=new CollateSelector();
@@ -352,7 +352,7 @@ public class DataCenter extends ChangeListenerList implements CloseAble,
 			}
 		}
 	}
-
+	
 	public DataAccessException saveSession(Session s)
 	{
 		String id=s.getId();

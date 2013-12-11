@@ -4,6 +4,7 @@ import com.cambrian.common.object.Sample;
 import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
+import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.monster.Monster;
 
@@ -56,24 +57,23 @@ public class CrossNPC extends NPC
 		{
 			return Lang.F1402;
 		}
-		player.getPlayerInfo().incrInstancingCount(1);
-//		if(checkRecord!=null)
-//		{
-//			if(checkRecord.getAttacks()>=attConfine)
-//			{
-//				return Lang.F1407;
-//			}
-//		}
+		if(checkRecord!=null)
+		{
+			if(checkRecord.getAttacks()>=attConfine)
+			{
+				return Lang.F1407;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public void handleForWin(Player player)
 	{
+		player.getPlayerInfo().addInstancingCount(this.getSid(), 1);
 		if(getIsBoss()!=BOSS&&getNextSid()>player.getCurIndexForCorssNPC())
 		{
 			player.setCurIndexForCorssNPC(getNextSid());
-			player.getPlayerInfo().incrInstancingCount(1);
 		//	CrossNPC crossNPC = (CrossNPC)Sample.getFactory().getSample(getSid());						
 			player.getPlayerInfo().addCrossNpc(getSid());
 		}
@@ -112,7 +112,7 @@ public class CrossNPC extends NPC
 				card.getLevel(),card.getAtt(),card.getSkillRate(),
 				card.getAttRange(),card.getSkillId(),card.getMaxHp(),
 				card.getCurHp(),i,card.getAimType(),card.getCritRate(),
-				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor());
+				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor(),Card.AWAKE);
 			monsters[i]=battleCard;
 		}
 	}

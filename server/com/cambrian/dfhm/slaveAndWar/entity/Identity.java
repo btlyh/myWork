@@ -429,7 +429,7 @@ public class Identity
 	 */
 	public void inBuyRansomTimes()
 	{
-		ransomTimes++;
+		buyRansomTimes++;
 	}
 
 	/* init start */
@@ -483,7 +483,7 @@ public class Identity
 		data.writeInt(GameCFG.getSaveConfine()-helpTimes);
 		data.writeInt(GameCFG.getSaveNorConfine()-saveNorTimes);
 		data.writeInt(GameCFG.getSaveConfine()-saveTimes);
-		data.writeInt(GameCFG.getRansomConfine()-ransomTimes);
+		//data.writeInt(GameCFG.getRansomConfine()-ransomTimes);
 
 		data.writeInt(buyWorkTimes);
 		data.writeInt(buyAttTimes);
@@ -491,7 +491,7 @@ public class Identity
 		data.writeInt(buyHelpTimes);
 		data.writeInt(buySaveNorTimes);
 		data.writeInt(buySaveTimes);
-//		data.writeInt(buyRansomTimes);
+		data.writeInt(buyRansomTimes);
 	}
 
 	/** 序列化 和DC通信 存 */

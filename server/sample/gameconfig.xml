@@ -196,9 +196,7 @@
 	</obj>
 	
 		<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setEngulfExpPer">
-			0.5
-		</method>
+		<method name="setEngulfExpPer">1</method>
 	</obj>
 	<!-- 服务器刷新时间（24小时，同世界BOSS时间） -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
@@ -214,11 +212,12 @@
 	</obj>
 		<!-- 当壕赎身次数限制 -->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
-		<method name="setRansomConfine">5</method>
-	</obj>
-	<!-- 卡牌最高等级-->
-	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setMaxlevel">90</method>
+	</obj>
+
+	<!-- 喝酒攻击力加成-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setDrinkAttUp">20</method>
 	</obj>
 	
 </objects>

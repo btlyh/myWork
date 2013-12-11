@@ -145,11 +145,11 @@ public class Skill extends Sample
 		BattleRecord record)
 	{
 		// System.err.println("技能buff伤害值,多态的基类哦--------------");
-		if(aimCard.hadNoHurtSkill())// 判断放手方是否有免伤状态
+		// 判断攻击方是否有攻状态
+		if(aimCard==null)
 		{
 			return 0;
 		}
-		// 判断攻击方是否有攻状态
 		ArrayList<Skill> deSkill=attCard.getDeSkill();
 		for(Skill skill:deSkill)
 		{
@@ -159,10 +159,14 @@ public class Skill extends Sample
 				break;
 			}
 		}
-		// 判断防守方是否有减伤状态
 		deSkill=aimCard.getDeSkill();
 		for(Skill skill:deSkill)
 		{
+			if(skill instanceof NoHurtSkill)
+			{
+				att=skill.buffValue(attCard,att,aimCard,record);
+				break;
+			}
 			if(skill instanceof DecrHurtSkill)
 			{
 				att=skill.buffValue(attCard,att,aimCard,record);

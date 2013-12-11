@@ -5,6 +5,7 @@ import com.cambrian.common.util.TimeKit;
 import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
+import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.monster.Monster;
 
@@ -108,7 +109,7 @@ public class ActiveNPC extends NPC
 				card.getLevel(),card.getAtt(),card.getSkillRate(),
 				card.getAttRange(),card.getSkillId(),card.getMaxHp(),
 				card.getCurHp(),i,card.getAimType(),card.getCritRate(),
-				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor());
+				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor(),Card.AWAKE);
 			monsters[i]=battleCard;
 		}
 	}

@@ -1,6 +1,5 @@
 package com.cambrian.dfhm.task.entity;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -84,7 +83,7 @@ public class TaskContainer
 		{
 			if (sample != null && sample instanceof Task)
 			{
-				Task task = (Task)Sample.getFactory().newSample(sample.getSid());
+				Task task = (Task)Sample.factory.newSample(sample.getSid());
 				task.status=0;
 				if (task.isDayly == Task.NORMAL)
 				{
@@ -99,26 +98,23 @@ public class TaskContainer
 		for (int i = 0; i < taskList.size(); i++)
 		{
 			Task task = taskList.get(i);
-//			if (task.status == Task.FINISHED)
-//			{
-//				finishedTaskList.add(task);
-//				taskList.remove(i);
-//				i--;
-//				continue;
-//			}
 			task.checkFinish(player);
 		}
-		Collections.sort(taskList);
+		for (int i = 0; i < daylyTaskList.size(); i++)
+		{
+			Task task = daylyTaskList.get(i);
+			task.checkFinish(player);
+		}
 	}
 	/** 刷新日常任务 */
-	public void refreshDaly(Player player)
+	public void refreshDayly(Player player)
 	{
 		Sample[] samples = Sample.getFactory().getSamples();
 		for (Sample sample : samples)
 		{
 			if (sample != null && sample instanceof Task)
 			{
-				Task task = (Task)sample;
+				Task task = (Task)Sample.factory.newSample(sample.getSid());
 				task.status = 0;
 				if (task.isDayly == Task.DAYLY)
 				{
@@ -140,7 +136,6 @@ public class TaskContainer
 //			}
 			task.checkFinish(player);
 		}
-		Collections.sort(daylyTaskList);
 	}
 	
 	/** 前台序列化 */
@@ -190,7 +185,7 @@ public class TaskContainer
 			int sid = data.readInt();
 			Task task = (Task)Sample.getFactory().getSample(sid);
 			task.dbBytesRead(data);
-			taskList.add(task);
+			daylyTaskList.add(task);
 		}
 	}
 }

@@ -1,11 +1,12 @@
 package com.cambrian.dfhm.task.entity;
 
+import java.util.ArrayList;
+
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.object.Sample;
+import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
-import com.cambrian.dfhm.instancing.entity.CrossNPC;
-import com.cambrian.dfhm.instancing.entity.HardNPC;
-import com.cambrian.dfhm.instancing.entity.NormalNPC;
+import com.cambrian.dfhm.qualifying.logic.QualifyingManager;
 
 /**
  * 类说明：任务对象类
@@ -62,6 +63,8 @@ public class Task extends Sample implements Comparable<Task>
 	int qualifyingCount;
 	/** 排位赛胜利次数 */
 	int qualifyingWin;
+	/** 排位赛名次 */
+	int qualifyingRank;
 	/** 通关指定副本 */
 	int instancingSid;
 
@@ -94,6 +97,8 @@ public class Task extends Sample implements Comparable<Task>
 				{
 					if (!player.getCardBag().isContain(integer))
 						return false;
+					else
+						break;
 				}
 			}
 		}
@@ -103,46 +108,45 @@ public class Task extends Sample implements Comparable<Task>
 			return false;
 		if (player.getPlayerInfo().getPayRMB() < payRmb)
 			return false;
-		if (player.getPlayerInfo().getInstancingCount() < instancingCount)
-			return false;
+		if (instancingSid != 0 && instancingCount != 0)
+		{
+			if (!player.getPlayerInfo().checkInstancingCount(instancingSid,instancingCount))
+				return false;
+		}
 		if (player.getPlayerInfo().getQualifyingCount() < qualifyingCount)
 			return false;
 		if (player.getPlayerInfo().getQualifyingWin() < qualifyingWin)
 			return false;
-		if (!checkInstancing(instancingSid, player))
-			return false;
 		
 		return true;
 	}
-	/** 检查副本条件 */
-	private boolean checkInstancing(int sid, Player player)
-	{
-		Sample sample = Sample.getFactory().getSample(sid);
-		if (sample != null)
-		{
-			if (sample instanceof NormalNPC
-					&& player.getCurIndexForNormalNPC() <= sid)
-				return false;
-			if (sample instanceof HardNPC
-					&& !player.getPlayerInfo().getHardNPCList().contains(sid))
-				return false;
-			if (sample instanceof CrossNPC
-					&& player.getCurIndexForCorssNPC() <= sid)
-				return false;
-		}
-		return true;
-	}
 	/** 完成任务 */
-	public boolean finish(Player player)
+	public ArrayList<Integer> finish(Player player)
 	{
-		if (this.status == FINISHED	) return false;
-		//if (!checkFinish(player)) return false;
 		this.status = FINISHED;
 		player.getTasks().taskList.remove(this);
+		player.getTasks().daylyTaskList.remove(this);
 		player.getTasks().finishedTaskList.add(this);
-		return true;
+		ArrayList<Integer> removeList = new ArrayList<Integer>();
+		if (getCard!=null && getCard[0] != 0)
+		{
+			removeList = getRemoveCard(getCard, player);
+		}
+		return removeList;
 	}
-
+	/** 获得需要移除的卡牌 
+	 * @param player */
+	private ArrayList<Integer> getRemoveCard(int[] getCard, Player player)
+	{
+		ArrayList<Integer> removeList = new ArrayList<Integer>();
+		for (int i = 0; i < getCard.length; i++)
+		{
+			Card card = player.getCardBag().getBySid(getCard[i]);
+			if (card != null)
+				removeList.add(card.getId());
+		}
+		return removeList;
+	}
 	/** 检查是否可领取任务 */
 	public boolean checkTake(Player player)
 	{
@@ -166,8 +170,11 @@ public class Task extends Sample implements Comparable<Task>
 			if (!task.isFinish())
 				return false;
 		}
-		if (!checkInstancing(needRaidSid, player))
-			return false;
+		if (needRaidSid != 0)
+		{
+			if (!player.getPlayerInfo().checkInstancingCount(needRaidSid, 1))
+				return false;
+		}
 		if (player.getVipLevel() < needVipLevel)
 			return false;
 		return true;

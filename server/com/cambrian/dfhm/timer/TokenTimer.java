@@ -1,4 +1,5 @@
 package com.cambrian.dfhm.timer;
+
 import com.cambrian.common.timer.TimerCenter;
 import com.cambrian.common.timer.TimerEvent;
 import com.cambrian.common.timer.TimerListener;
@@ -13,16 +14,15 @@ import com.cambrian.game.ds.DataServer;
  * 类说明：军令定时器，用于恢复军令
  * 
  * @author：LazyBear
- * 
  */
 public class TokenTimer implements TimerListener
 {
 
 	/* static fields */
 	/** 恢复时间 默认现在30分钟 */
-	public static long TOKENADDTIME = TimeKit.MIN_MILLS * 30;
+	public static long TOKENADDTIME=TimeKit.MIN_MILLS;
 	/** 恢复数量 */
-	public static int TOKENADDNUM = 1;
+	public static int TOKENADDNUM=1;
 	/* static methods */
 
 	/* fields */
@@ -30,31 +30,31 @@ public class TokenTimer implements TimerListener
 	DataServer dataServer;
 	/** 恢复军令定时器事件 */
 	TimerEvent tokenTimeEvent;
-	/***/
-	TokenSendNotice tsn;                                             
-	
+	/** 军令消息推送 */
+	TokenSendNotice tsn;
 
 	/* constructors */
 	public TokenTimer()
 	{
-		this.tokenTimeEvent = new TimerEvent(this, "tokenTimeEvent", (int) TOKENADDTIME);
+		this.tokenTimeEvent=new TimerEvent(this,"tokenTimeEvent",
+			(int)TimeKit.SEC_MILLS);
 	}
 
 	/* properties */
 	public void setDS(DataServer dataServer)
 	{
-		this.dataServer = dataServer;
+		this.dataServer=dataServer;
 	}
-	public void setTsn(TokenSendNotice tsn) {
-		this.tsn = tsn;
+	public void setTsn(TokenSendNotice tsn)
+	{
+		this.tsn=tsn;
 	}
 	/* init start */
 
 	/* methods */
 	public void onTimer(TimerEvent e)
 	{
-		if (!e.getParameter().equals("tokenTimeEvent"))
-			return;
+		if(!e.getParameter().equals("tokenTimeEvent")) return;
 		addTokenOnTime();
 	}
 
@@ -71,26 +71,58 @@ public class TokenTimer implements TimerListener
 	 */
 	private void addTokenOnTime()
 	{
-		SessionMap sm = this.dataServer.getSessionMap();
-		Session[] sessions = sm.getSessions();
-		Player player = null;
-		Session session = null;
-		for (int i = 0; i < sessions.length; i++)
+		SessionMap sm=this.dataServer.getSessionMap();
+		Session[] sessions=sm.getSessions();
+		Player player=null;
+		Session session=null;
+		for(int i=0;i<sessions.length;i++)
 		{
-			session = sessions[i];
-			if (session != null)
+			session=sessions[i];
+			if(session!=null)
 			{
-				if (session.getConnect().isActive())
+				if(session.getConnect().isActive())
 				{
-					player = (Player) session.getSource();
+					player=(Player)session.getSource();
 				}
 			}
-			if (player != null)
+			if(player!=null)
 			{
-				if (player.getCurToken() < player.getMaxToken())
+				if(player.getCurToken()<player.getMaxToken())
 				{
-					player.incrToken(TOKENADDNUM);
-					tsn.send(session,new Object[]{player.getCurToken()});
+					if(player.getPlayerInfo().getLastRegainTokenTime()==0)
+					{
+						player.getPlayerInfo().setLastRegainTokenTime(
+							TimeKit.nowTimeMills());
+					}
+					else
+					{
+						if(player.getPlayerInfo().getLastRegainTokenTime()
+							+TOKENADDTIME<=TimeKit.nowTimeMills())
+						{
+							System.err.println(player.getPlayerInfo()
+								.getLastRegainTokenTime()+TOKENADDTIME);
+							System.out.println(TimeKit.nowTimeMills());
+							player.incrToken(TOKENADDNUM);
+							tsn.send(session,
+								new Object[]{player.getCurToken()});
+							if(player.getCurToken()<player.getMaxToken())
+							{
+								player.getPlayerInfo()
+									.setLastRegainTokenTime(
+										TimeKit.nowTimeMills());
+							}
+							else
+							{
+								player.getPlayerInfo()
+									.setLastRegainTokenTime(0L);
+							}
+						}
+					}
+
+				}
+				else
+				{
+					player.getPlayerInfo().setLastRegainTokenTime(0L);
 				}
 			}
 		}

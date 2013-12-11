@@ -44,7 +44,7 @@ public class SweepManager {
 			throw new DataAccessException(601, error);
 		}
 		
-		
+		player.getPlayerInfo().addInstancingCount(mapId, sweepNum);
 	/*	if(maptype==3)//´©Ô½¸±±¾
 		{
 			CrossNPC crossNPC =  (CrossNPC) Sample.getFactory().getSample(mapId);

@@ -8,11 +8,11 @@ import com.cambrian.common.net.DataAccessException;
 import com.cambrian.common.object.Sample;
 import com.cambrian.common.util.TimeKit;
 import com.cambrian.dfhm.Lang;
+import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
 import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
-import com.cambrian.dfhm.instancing.entity.ActiveNPC;
 import com.cambrian.dfhm.instancing.entity.AttRecord;
 import com.cambrian.dfhm.instancing.entity.CrossNPC;
 import com.cambrian.dfhm.instancing.entity.HardNPC;
@@ -69,24 +69,6 @@ public class InstancingManager
 
 	/* methods */
 
-	/** 进入活动副本 */
-	public ArrayList<Integer> enterInstancing()
-	{
-		ArrayList<Integer> openActiveNPC=new ArrayList<Integer>();
-
-		ActiveNPC npc=null;
-		for(int i=0;i<ActiveNPC.ACTIVE_NPC_SIDS.length;i++)
-		{
-			npc=(ActiveNPC)Sample.factory
-				.getSample(ActiveNPC.ACTIVE_NPC_SIDS[i]);
-
-			if(npc.getOpenDay()==TimeKit.getDayOfWeek())
-			{
-				openActiveNPC.add(npc.getSid());
-			}
-		}
-		return openActiveNPC;
-	}
 	/** 攻击NPC */
 	public synchronized Map<String,ArrayList<Integer>> attackNPC(int sid,
 		Player player,int npcType,int attType,List<Integer> cardList)
@@ -115,7 +97,18 @@ public class InstancingManager
 		}
 
 		BattleScene scene=new BattleScene();
-		BattleCard[] att=player.formation.getFormation();
+		BattleCard[] att=player.formation.getFormation().clone();
+		for(BattleCard battleCard:att)
+		{
+			if(battleCard!=null)
+			{
+				if(battleCard.getDrinkStatus()==Card.HYPER)
+				{
+					battleCard.setAtt(battleCard.getAtt()
+						+battleCard.getAtt()*GameCFG.getDrinkAttUp()/100);
+				}
+			}
+		}
 		BattleCard[] def=npc.getMonsters();
 		battleInit(att,def);
 		if(attType==1)
@@ -171,13 +164,30 @@ public class InstancingManager
 		}
 		npc.handleForAtt(player);
 		/* 战斗完后改变卡牌的喝酒状态 */
+		for (BattleCard battleCard : player.formation.getFormation())
+		{
+			if (battleCard != null)
+			{
+				if (battleCard.getDrinkStatus() == Card.HYPER)
+				{
+					player.getCardBag().getById(battleCard.getId()).setDrinkStatus(Card.DRUNK);
+					battleCard.setDrinkStatus(Card.DRUNK);
+				}
+			}
+		}
 		for(int i=0;i<cardList.size();i++)
 		{
 			Card card=player.getCardBag().getById(cardList.get(i));
 			if(card.isInArmyCamp()==1)
+			{
 				card.setDrinkStatus(Card.DRUNK);
+				player.formation.setBattleCardDrink(card.getId(), Card.DRUNK);
+			}
 			else
+			{
 				card.setDrinkStatus(Card.AWAKE);
+				player.formation.setBattleCardDrink(card.getId(), Card.AWAKE);
+			}
 		}
 		resultData.put("record",scene.getRecord());
 		resultData.put("reward",rewardCardList);
@@ -189,16 +199,16 @@ public class InstancingManager
 	{
 
 		Map<String,Object> resultMap=new HashMap<String,Object>();
-		if(player.getPlayerInfo().getLeadStep()!=-1)
-		{
-			for(BattleCard card:player.formation.getFormation())
-			{
-				if(card==null)
-				{
-					throw new DataAccessException(601,Lang.F2501);
-				}
-			}
-		}
+//		if(player.getPlayerInfo().getLeadStep()!=-1)
+//		{
+//			for(BattleCard card:player.formation.getFormation())
+//			{
+//				if(card==null)
+//				{
+//					throw new DataAccessException(601,Lang.F2501);
+//				}
+//			}
+//		}
 
 		System.err.println("npcType ==="+npcType);
 		if(npcType>NPC.CROSS||npcType<NPC.NORMAL)

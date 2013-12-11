@@ -33,7 +33,7 @@ public class BossManager
 {
 
 	/* static fields */
-	private static BossManager instance=new BossManager();
+	private static BossManager instance = new BossManager();
 
 	/* static methods */
 	public static BossManager getInstance()
@@ -43,7 +43,7 @@ public class BossManager
 
 	/* fields */
 	/** BOSS集合，以BOSS的SID为键 */
-	public Map<Integer,GlobalBossCFG> bossMap=new HashMap<Integer,GlobalBossCFG>();
+	public Map<Integer, GlobalBossCFG> bossMap = new HashMap<Integer, GlobalBossCFG>();
 	/** BOSS结束推送消息 */
 	private BossEndNotice ben;
 	/** 数据服务器 */
@@ -60,27 +60,27 @@ public class BossManager
 	/* properties */
 	public void setBen(BossEndNotice ben)
 	{
-		instance.ben=ben;
+		instance.ben = ben;
 	}
 
 	public void setDS(DataServer ds)
 	{
-		instance.ds=ds;
+		instance.ds = ds;
 	}
 
 	public void setMailFactory(MailFactory mf)
 	{
-		instance.mf=mf;
+		instance.mf = mf;
 	}
 
 	public void setMailSendNotice(MailSendNotice msn)
 	{
-		instance.msn=msn;
+		instance.msn = msn;
 	}
 
 	public void setGlobalBossDao(GlobalBossDao dao)
 	{
-		instance.dao=dao;
+		instance.dao = dao;
 	}
 
 	/* init start */
@@ -90,14 +90,15 @@ public class BossManager
 	/**
 	 * 自动报名
 	 * 
-	 * @param player 玩家对象
+	 * @param player
+	 *            玩家对象
 	 */
 	public void autoSign(Player player)
 	{
-		String error=checkAutoSign(player);
-		if(error!=null)
+		String error = checkAutoSign(player);
+		if (error != null)
 		{
-			throw new DataAccessException(601,error);
+			throw new DataAccessException(601, error);
 		}
 		player.decrGold(GameCFG.getBossAutoSignGold());
 		player.getPlayerInfo().setAutoSignBoss(true);
@@ -106,31 +107,36 @@ public class BossManager
 	/**
 	 * 检查自动报名
 	 * 
-	 * @param player 玩家对象
+	 * @param player
+	 *            玩家对象
 	 * @return
 	 */
 	private String checkAutoSign(Player player)
 	{
-		if(player.getPlayerInfo().isAutoSignBoss())
+		if (player.getPlayerInfo().getAutoBossSign() != 1)
+		{
+			return Lang.F1816;
+		}
+		if (player.getPlayerInfo().isAutoSignBoss())
 		{
 			return Lang.F1811;
 		}
-		if(player.getGold()<GameCFG.getBossAutoSignGold())
+		if (player.getGold() < GameCFG.getBossAutoSignGold())
 		{
 			return Lang.F1812;
 		}
-		boolean isOpen=false;
-		int[] bossSid=GameCFG.getGlobalBossList();
-		for(Integer integer:bossSid)
+		boolean isOpen = false;
+		int[] bossSid = GameCFG.getGlobalBossList();
+		for (Integer integer : bossSid)
 		{
-			GlobalBossCFG gbc=bossMap.get(integer);
-			if(gbc.isOpen())
+			GlobalBossCFG gbc = bossMap.get(integer);
+			if (gbc.isOpen())
 			{
-				isOpen=true;
+				isOpen = true;
 				break;
 			}
 		}
-		if(isOpen)
+		if (isOpen)
 		{
 			return Lang.F1813;
 		}
@@ -143,15 +149,15 @@ public class BossManager
 	 * @param player
 	 * @param bossSid
 	 */
-	public void turnOffAuto(Player player,int bossSid)
+	public void turnOffAuto(Player player, int bossSid)
 	{
-		Map<String,Object> resultMap=checkturnOffAuto(player,bossSid);
-		String error=(String)resultMap.get("error");
-		if(error!=null)
+		Map<String, Object> resultMap = checkturnOffAuto(player, bossSid);
+		String error = (String) resultMap.get("error");
+		if (error != null)
 		{
-			throw new DataAccessException(601,error);
+			throw new DataAccessException(601, error);
 		}
-		GlobalBossCFG gbc=(GlobalBossCFG)resultMap.get("gbc");
+		GlobalBossCFG gbc = (GlobalBossCFG) resultMap.get("gbc");
 		gbc.autoList.remove(player);
 		player.getBfr().setAuto(false);
 	}
@@ -163,42 +169,45 @@ public class BossManager
 	 * @param bossSid
 	 * @return
 	 */
-	private Map<String,Object> checkturnOffAuto(Player player,int bossSid)
+	private Map<String, Object> checkturnOffAuto(Player player, int bossSid)
 	{
-		Map<String,Object> mapInfo=new HashMap<String,Object>();
-		GlobalBossCFG gbc=bossMap.get(bossSid);
-		if(gbc==null)
+		Map<String, Object> mapInfo = new HashMap<String, Object>();
+		GlobalBossCFG gbc = bossMap.get(bossSid);
+		if (gbc == null)
 		{
-			mapInfo.put("error",Lang.F1805);
+			mapInfo.put("error", Lang.F1805);
 			return mapInfo;
 		}
-		if(player.getBfr()==null)
+		if (player.getBfr() == null)
 		{
-			mapInfo.put("error",Lang.F1803);
+			mapInfo.put("error", Lang.F1803);
 			return mapInfo;
 		}
-		mapInfo.put("error",null);
-		mapInfo.put("gbc",gbc);
+		mapInfo.put("error", null);
+		mapInfo.put("gbc", gbc);
 		return mapInfo;
 	}
+
 	/**
 	 * 开启自动战斗
 	 * 
-	 * @param player 玩家对象
+	 * @param player
+	 *            玩家对象
 	 * @param bossSid
 	 */
-	public void turnOnAuto(Player player,int bossSid)
+	public void turnOnAuto(Player player, int bossSid)
 	{
-		Map<String,Object> resultMap=checkturnOnAuto(player,bossSid);
-		String error=(String)resultMap.get("error");
-		if(error!=null)
+		Map<String, Object> resultMap = checkturnOnAuto(player, bossSid);
+		String error = (String) resultMap.get("error");
+		if (error != null)
 		{
-			throw new DataAccessException(601,error);
+			throw new DataAccessException(601, error);
 		}
-		GlobalBossCFG gbc=(GlobalBossCFG)resultMap.get("gbc");
+		GlobalBossCFG gbc = (GlobalBossCFG) resultMap.get("gbc");
 		gbc.autoList.add(player);
 		player.getBfr().setAuto(true);
 	}
+
 	/**
 	 * 检查开启自动战斗
 	 * 
@@ -206,23 +215,23 @@ public class BossManager
 	 * @param bossSid
 	 * @return
 	 */
-	private Map<String,Object> checkturnOnAuto(Player player,int bossSid)
+	private Map<String, Object> checkturnOnAuto(Player player, int bossSid)
 	{
-		Map<String,Object> mapInfo=new HashMap<String,Object>();
-		GlobalBossCFG gbc=bossMap.get(bossSid);
-		if(gbc==null)
+		Map<String, Object> mapInfo = new HashMap<String, Object>();
+		GlobalBossCFG gbc = bossMap.get(bossSid);
+		if (gbc == null)
 		{
-			mapInfo.put("error",Lang.F1805);
+			mapInfo.put("error", Lang.F1805);
 			return mapInfo;
 		}
-		if(player.getBfr()==null)
+		if (player.getBfr() == null)
 		{
-			mapInfo.put("error",Lang.F1803);
+			mapInfo.put("error", Lang.F1803);
 			return mapInfo;
 		}
-		if(!gbc.isOpen())
+		if (!gbc.isOpen())
 		{
-			mapInfo.put("error",Lang.F1807);
+			mapInfo.put("error", Lang.F1807);
 			return mapInfo;
 		}
 		// if(TimeKit.nowTimeMills()<TimeKit.timeOf(gbc.getActiveTime()))
@@ -230,18 +239,18 @@ public class BossManager
 		// mapInfo.put("error",Lang.F1810);
 		// return mapInfo;
 		// }
-		if(player.formation.isEmpty())
+		if (player.formation.isEmpty())
 		{
-			mapInfo.put("error",Lang.F1410);
+			mapInfo.put("error", Lang.F1410);
 			return mapInfo;
 		}
-		// if(player.getVipLevel()<gbc.getVipConfine())
-		// {
-		// mapInfo.put("error",Lang.F1809);
-		// return mapInfo;
-		// }
-		mapInfo.put("error",null);
-		mapInfo.put("gbc",gbc);
+		if (player.getPlayerInfo().getAutoBossFight() != 1)
+		{
+			mapInfo.put("error", Lang.F1809);
+			return mapInfo;
+		}
+		mapInfo.put("error", null);
+		mapInfo.put("gbc", gbc);
 		return mapInfo;
 	}
 
@@ -251,50 +260,50 @@ public class BossManager
 	 * @param player
 	 * @param bossSid
 	 */
-	public ArrayList<Integer> attBoss(Player player,int bossSid)
+	public ArrayList<Integer> attBoss(Player player, int bossSid)
 	{
-		Map<String,Object> resultMap=checkAttBoss(player,bossSid);
-		String error=(String)resultMap.get("error");
-		if(error!=null)
+		Map<String, Object> resultMap = checkAttBoss(player, bossSid);
+		String error = (String) resultMap.get("error");
+		if (error != null)
 		{
-			throw new DataAccessException(601,error);
+			throw new DataAccessException(601, error);
 		}
-		Formation formation_=(Formation)player.formation.clone();
-		BattleCard[] att=formation_.getFormation();
-		if(player.getBfr().getAttUp()>1)
+		Formation formation_ = (Formation) player.formation.clone();
+		BattleCard[] att = formation_.getFormation();
+		if (player.getBfr().getAttUp() > 1)
 		{
-			for(BattleCard battleCard:att)
+			for (BattleCard battleCard : att)
 			{
-				if(battleCard!=null)
+				if (battleCard != null)
 					battleCard.attUp(player.getBfr().getAttUp());
 			}
 		}
-		GlobalBossCFG gbc=(GlobalBossCFG)resultMap.get("gbc");
-		synchronized(gbc)
+		GlobalBossCFG gbc = (GlobalBossCFG) resultMap.get("gbc");
+		synchronized (gbc)
 		{
-			BattleCard[] def=gbc.getMonsters();
-			BattleScene scene=new BattleScene();
-			battleInit(att,def);
+			BattleCard[] def = gbc.getMonsters();
+			BattleScene scene = new BattleScene();
+			battleInit(att, def);
 			scene.setMaxRound(30);
 			scene.setRoundConfine(gbc.getRoundConfine());
-			scene.start(att,def,BattleScene.FIGHT_GLOBALBOSS);
-			scene.getRecord().set(0,scene.getStep());
+			scene.start(att, def, BattleScene.FIGHT_GLOBALBOSS);
+			scene.getRecord().set(0, scene.getStep());
 
 			player.getBfr().setLastAttTime(TimeKit.nowTimeMills());
 			player.getBfr().recordDamage(
-				scene.getBattleRecord().getTotalDamage());
+					scene.getBattleRecord().getTotalDamage());
 
-			gbc.rankMap.put((int)player.getUserId(),player.getBfr());
+			gbc.rankMap.put((int) player.getUserId(), player.getBfr());
 			// 战斗胜利后的处理
-			int win=scene.getRecord().get(scene.getRecord().size()-1);
-			if(win==1)// 胜利
+			int win = scene.getRecord().get(scene.getRecord().size() - 1);
+			if (win == 1)// 胜利
 			{
 				player.getBfr().setFinished(true);
 				gbc.countRank();
 				gbc.setOpen(false);
 				gbc.reset();
 				gbc.autoList.clear();
-				sendReward(gbc,true);
+				sendReward(gbc, true);
 			}
 			return scene.getRecord();
 		}
@@ -308,18 +317,18 @@ public class BossManager
 	 * @param bossSid
 	 * @return
 	 */
-	private Map<String,Object> checkAttBoss(Player player,int bossSid)
+	private Map<String, Object> checkAttBoss(Player player, int bossSid)
 	{
-		Map<String,Object> mapInfo=new HashMap<String,Object>();
-		GlobalBossCFG gbc=bossMap.get(bossSid);
-		if(gbc==null)
+		Map<String, Object> mapInfo = new HashMap<String, Object>();
+		GlobalBossCFG gbc = bossMap.get(bossSid);
+		if (gbc == null)
 		{
-			mapInfo.put("error",Lang.F1805);
+			mapInfo.put("error", Lang.F1805);
 			return mapInfo;
 		}
-		if(player.getBfr()==null)
+		if (player.getBfr() == null)
 		{
-			mapInfo.put("error",Lang.F1803);
+			mapInfo.put("error", Lang.F1803);
 			return mapInfo;
 		}
 		// if(TimeKit.nowTimeMills()<TimeKit.timeOf(gbc.getActiveTime()))
@@ -327,45 +336,46 @@ public class BossManager
 		// mapInfo.put("error",Lang.F1810);
 		// return mapInfo;
 		// }
-		if(!gbc.isOpen())
+		if (!gbc.isOpen())
 		{
-			mapInfo.put("error",Lang.F1807);
+			mapInfo.put("error", Lang.F1807);
 			return mapInfo;
 		}
-		if(player.formation.isEmpty())
+		if (player.formation.isEmpty())
 		{
-			mapInfo.put("error",Lang.F1410);
+			mapInfo.put("error", Lang.F1410);
 			return mapInfo;
 		}
-		if(player.getBfr().getLastAttTime()>0)
+		if (player.getBfr().getLastAttTime() > 0)
 		{
-			if(player.getBfr().getLastAttTime()+TimeKit.MIN_MILLS
-				*gbc.getAttCD()>TimeKit.nowTimeMills())
+			if (player.getBfr().getLastAttTime() + TimeKit.MIN_MILLS
+					* gbc.getAttCD() > TimeKit.nowTimeMills())
 			{
-				mapInfo.put("error",Lang.F1806);
+				mapInfo.put("error", Lang.F1806);
 				return mapInfo;
 			}
 		}
-		mapInfo.put("error",null);
-		mapInfo.put("gbc",gbc);
+		mapInfo.put("error", null);
+		mapInfo.put("gbc", gbc);
 		return mapInfo;
 	}
 
 	/**
 	 * 立即复活功能
 	 */
-	public void relive(Player player,int bossSid)
+	public void relive(Player player, int bossSid)
 	{
-		Map<String,Object> resultMap=checkRelive(player,bossSid);
-		String error=(String)resultMap.get("error");
-		if(error!=null)
+		Map<String, Object> resultMap = checkRelive(player, bossSid);
+		String error = (String) resultMap.get("error");
+		if (error != null)
 		{
-			throw new DataAccessException(601,error);
+			throw new DataAccessException(601, error);
 		}
-		int needGold=Integer.parseInt(resultMap.get("needGold").toString());
+		int needGold = Integer.parseInt(resultMap.get("needGold").toString());
 		player.decrGold(needGold);
 		player.getBfr().setLastAttTime(0);
 	}
+
 	/**
 	 * 检查复活功能
 	 * 
@@ -373,34 +383,35 @@ public class BossManager
 	 * @param bossSid
 	 * @return
 	 */
-	private Map<String,Object> checkRelive(Player player,int bossSid)
+	private Map<String, Object> checkRelive(Player player, int bossSid)
 	{
-		Map<String,Object> mapInfo=new HashMap<String,Object>();
-		GlobalBossCFG gbc=bossMap.get(bossSid);
-		if(gbc==null)
+		Map<String, Object> mapInfo = new HashMap<String, Object>();
+		GlobalBossCFG gbc = bossMap.get(bossSid);
+		if (gbc == null)
 		{
-			mapInfo.put("error",Lang.F1805);
+			mapInfo.put("error", Lang.F1805);
 			return mapInfo;
 		}
-		if(player.getBfr()==null)
+		if (player.getBfr() == null)
 		{
-			mapInfo.put("error",Lang.F1803);
+			mapInfo.put("error", Lang.F1803);
 			return mapInfo;
 		}
-		int needGold=gbc.getReliveGold();
-		if(player.getGold()<needGold)
+		int needGold = gbc.getReliveGold();
+		if (player.getGold() < needGold)
 		{
-			mapInfo.put("error",Lang.F1814);
+			mapInfo.put("error", Lang.F1814);
 			return mapInfo;
 		}
-		if(player.getBfr().getLastAttTime()+TimeKit.MIN_MILLS*gbc.getAttCD()<TimeKit
-			.nowTimeMills()||player.getBfr().getLastAttTime()==0)
+		if (player.getBfr().getLastAttTime() + TimeKit.MIN_MILLS
+				* gbc.getAttCD() < TimeKit.nowTimeMills()
+				|| player.getBfr().getLastAttTime() == 0)
 		{
-			mapInfo.put("error",Lang.F1815);
+			mapInfo.put("error", Lang.F1815);
 			return mapInfo;
 		}
-		mapInfo.put("error",null);
-		mapInfo.put("needGold",needGold);
+		mapInfo.put("error", null);
+		mapInfo.put("needGold", needGold);
 		return mapInfo;
 	}
 
@@ -410,15 +421,15 @@ public class BossManager
 	 * @param player
 	 * @param bossSid
 	 */
-	public void attUp(Player player,int bossSid)
+	public void attUp(Player player, int bossSid)
 	{
-		Map<String,Object> resultMap=checkAttUp(player,bossSid);
-		String error=(String)resultMap.get("error");
-		if(error!=null)
+		Map<String, Object> resultMap = checkAttUp(player, bossSid);
+		String error = (String) resultMap.get("error");
+		if (error != null)
 		{
-			throw new DataAccessException(601,error);
+			throw new DataAccessException(601, error);
 		}
-		int needGold=Integer.parseInt(resultMap.get("needGold").toString());
+		int needGold = Integer.parseInt(resultMap.get("needGold").toString());
 		player.decrGold(needGold);
 		player.getBfr().inAttUp();
 	}
@@ -430,91 +441,95 @@ public class BossManager
 	 * @param bossSid
 	 * @return
 	 */
-	private Map<String,Object> checkAttUp(Player player,int bossSid)
+	private Map<String, Object> checkAttUp(Player player, int bossSid)
 	{
-		Map<String,Object> mapInfo=new HashMap<String,Object>();
-		GlobalBossCFG gbc=bossMap.get(bossSid);
-		if(gbc==null)
+		Map<String, Object> mapInfo = new HashMap<String, Object>();
+		GlobalBossCFG gbc = bossMap.get(bossSid);
+		if (gbc == null)
 		{
-			mapInfo.put("error",Lang.F1805);
+			mapInfo.put("error", Lang.F1805);
 			return mapInfo;
 		}
-		if(player.getBfr()==null)
+		if (player.getBfr() == null)
 		{
-			mapInfo.put("error",Lang.F1803);
+			mapInfo.put("error", Lang.F1803);
 			return mapInfo;
 		}
-		int needGold=gbc.getAttUpGold()*player.getBfr().getAttUp();
-		if(player.getGold()<needGold)
+		int needGold = gbc.getAttUpGold() * player.getBfr().getAttUp();
+		if (player.getGold() < needGold)
 		{
-			mapInfo.put("error",Lang.F1804);
+			mapInfo.put("error", Lang.F1804);
 			return mapInfo;
 		}
-		mapInfo.put("error",null);
-		mapInfo.put("needGold",needGold);
+		mapInfo.put("error", null);
+		mapInfo.put("needGold", needGold);
 		return mapInfo;
 	}
 
 	/**
 	 * 进入BOSS主界面
 	 * 
-	 * @param player 玩家对象
-	 * @param bossSid boss对象ID
+	 * @param player
+	 *            玩家对象
+	 * @param bossSid
+	 *            boss对象ID
 	 */
-	public Map<String,Object> bossMain(Player player,int bossSid)
+	public Map<String, Object> bossMain(Player player, int bossSid)
 	{
-		Map<String,Object> resultMap=checkBossMain(player,bossSid);
-		String error=(String)resultMap.get("error");
-		if(error!=null)
+		Map<String, Object> resultMap = checkBossMain(player, bossSid);
+		String error = (String) resultMap.get("error");
+		if (error != null)
 		{
-			throw new DataAccessException(601,error);
+			throw new DataAccessException(601, error);
 		}
-		if(player.getBfr()==null)
+		if (player.getBfr() == null)
 		{
 			player.setBfr(new BossFightRecord(player.getNickname(),
-				(int)player.getUserId(),bossSid));
+					(int) player.getUserId(), bossSid));
 		}
-		GlobalBossCFG gbc=(GlobalBossCFG)resultMap.get("gbc");
-		List<BossFightRecord> recordList=gbc.countRank();
-		long lastAttTime=player.getBfr().getLastAttTime();
-		long surplusTime=0;
-		if(lastAttTime>0)
+		GlobalBossCFG gbc = (GlobalBossCFG) resultMap.get("gbc");
+		List<BossFightRecord> recordList = gbc.countRank();
+		long lastAttTime = player.getBfr().getLastAttTime();
+		long surplusTime = 0;
+		if (lastAttTime > 0)
 		{
-			long nextAttTime=lastAttTime+gbc.getAttCD()*TimeKit.MIN_MILLS;
-			surplusTime=nextAttTime-TimeKit.nowTimeMills();
-			if(surplusTime<0)
+			long nextAttTime = lastAttTime + gbc.getAttCD() * TimeKit.MIN_MILLS;
+			surplusTime = nextAttTime - TimeKit.nowTimeMills();
+			if (surplusTime < 0)
 			{
-				surplusTime=0;
+				surplusTime = 0;
 			}
 		}
 
-		Map<String,Object> dataMap=new HashMap<String,Object>();
-		dataMap.put("recordList",recordList);
-		dataMap.put("maxHp",gbc.getMaxHp());
-		dataMap.put("curHp",gbc.getCurHp());
-		dataMap.put("surplusTime",surplusTime);
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("recordList", recordList);
+		dataMap.put("maxHp", gbc.getMaxHp());
+		dataMap.put("curHp", gbc.getCurHp());
+		dataMap.put("surplusTime", surplusTime);
 		return dataMap;
 	}
 
 	/**
 	 * 检查进入BOSS界面
 	 * 
-	 * @param player 玩家对象
-	 * @param bossSid BOSS对象ID
+	 * @param player
+	 *            玩家对象
+	 * @param bossSid
+	 *            BOSS对象ID
 	 * @return
 	 */
-	private Map<String,Object> checkBossMain(Player player,int bossSid)
+	private Map<String, Object> checkBossMain(Player player, int bossSid)
 	{
-		Map<String,Object> mapInfo=new HashMap<String,Object>();
-		GlobalBossCFG gbc=bossMap.get(bossSid);
-		if(gbc==null)
+		Map<String, Object> mapInfo = new HashMap<String, Object>();
+		GlobalBossCFG gbc = bossMap.get(bossSid);
+		if (gbc == null)
 		{
-			mapInfo.put("error",Lang.F1805);
+			mapInfo.put("error", Lang.F1805);
 			return mapInfo;
 		}
-		if(!gbc.isOpen())
+		if (!gbc.isOpen())
 		{
-			mapInfo.put("error",Lang.F1801);
+			mapInfo.put("error", Lang.F1801);
 			return mapInfo;
 		}
 		// if(player.getCurIndexForNormalNPC()<gbc.getNormalNPCIndex())
@@ -522,8 +537,8 @@ public class BossManager
 		// mapInfo.put("error",Lang.F1802);
 		// return mapInfo;
 		// }
-		mapInfo.put("error",null);
-		mapInfo.put("gbc",gbc);
+		mapInfo.put("error", null);
+		mapInfo.put("gbc", gbc);
 		return mapInfo;
 	}
 
@@ -532,22 +547,23 @@ public class BossManager
 	 * 
 	 * @param att
 	 * @param def
-	 * @param isGlobalBoss 是否攻击世界BOSS
+	 * @param isGlobalBoss
+	 *            是否攻击世界BOSS
 	 */
-	private void battleInit(BattleCard[] att,BattleCard[] def)
+	private void battleInit(BattleCard[] att, BattleCard[] def)
 	{
-		for(BattleCard battleCard:att)
+		for (BattleCard battleCard : att)
 		{
-			if(battleCard!=null)
+			if (battleCard != null)
 			{
 				battleCard.setSide(1);
 				battleCard.setCurHp(battleCard.getMaxHp());
 				battleCard.setAttack(false);
 			}
 		}
-		for(BattleCard battleCard:def)
+		for (BattleCard battleCard : def)
 		{
-			if(battleCard!=null)
+			if (battleCard != null)
 			{
 				battleCard.setSide(2);
 				battleCard.setAttack(false);
@@ -559,93 +575,95 @@ public class BossManager
 	 * BOSS活动结束后发放奖励
 	 */
 	@SuppressWarnings("unchecked")
-	public void sendReward(GlobalBossCFG gbc,boolean isDeath)
+	public void sendReward(GlobalBossCFG gbc, boolean isDeath)
 	{
-		Iterator<Integer> iterator=gbc.rankMap.keySet().iterator();
+		Iterator<Integer> iterator = gbc.rankMap.keySet().iterator();
 		BossFightRecord bfr;
-		Mail finishMail=null;
-		Mail rankMail=null;
-		Mail damageMail=null;
-		Mail autoMail=null;
+		Mail finishMail = null;
+		Mail rankMail = null;
+		Mail damageMail = null;
+		Mail autoMail = null;
 		ArrayList<Integer> cardList;
-		while(iterator.hasNext())
+		while (iterator.hasNext())
 		{
-			int key=iterator.next();
-			bfr=gbc.rankMap.get(key);
-			Map<String,ArrayList<Object>> rewardMap=gbc.countReward(bfr);
-			ArrayList<Object> finishReward=rewardMap.get("finishReward");
-			ArrayList<Object> rankReward=rewardMap.get("rankReward");
-			ArrayList<Object> damageReward=rewardMap.get("damageReward");
-			if(finishReward!=null)
+			int key = iterator.next();
+			bfr = gbc.rankMap.get(key);
+			Map<String, ArrayList<Object>> rewardMap = gbc.countReward(bfr);
+			ArrayList<Object> finishReward = rewardMap.get("finishReward");
+			ArrayList<Object> rankReward = rewardMap.get("rankReward");
+			ArrayList<Object> damageReward = rewardMap.get("damageReward");
+			if (finishReward != null)
 			{
-				cardList=(ArrayList<Integer>)finishReward.get(0);
-				finishMail=mf.createSystemMail(cardList,0,
-					Integer.parseInt(finishReward.get(2).toString()),0,
-					Integer.parseInt(finishReward.get(1).toString()),0,
-					bfr.getPlayerId());
+				cardList = (ArrayList<Integer>) finishReward.get(0);
+				finishMail = mf.createSystemMail(cardList, 0,
+						Integer.parseInt(finishReward.get(2).toString()), 0,
+						Integer.parseInt(finishReward.get(1).toString()), 0,
+						bfr.getPlayerId());
 			}
-			if(rankReward!=null)
+			if (rankReward != null)
 			{
-				cardList=(ArrayList<Integer>)rankReward.get(0);
-				rankMail=mf.createSystemMail(cardList,0,
-					Integer.parseInt(rankReward.get(2).toString()),0,
-					Integer.parseInt(rankReward.get(1).toString()),0,
-					bfr.getPlayerId());
+				cardList = (ArrayList<Integer>) rankReward.get(0);
+				rankMail = mf.createSystemMail(cardList, 0,
+						Integer.parseInt(rankReward.get(2).toString()), 0,
+						Integer.parseInt(rankReward.get(1).toString()), 0,
+						bfr.getPlayerId());
 			}
-			if(damageReward!=null)
+			if (damageReward != null)
 			{
-				cardList=(ArrayList<Integer>)damageReward.get(0);
-				damageMail=mf.createSystemMail(cardList,0,
-					Integer.parseInt(damageReward.get(2).toString()),0,
-					Integer.parseInt(damageReward.get(1).toString()),0,
-					bfr.getPlayerId());
+				cardList = (ArrayList<Integer>) damageReward.get(0);
+				damageMail = mf.createSystemMail(cardList, 0,
+						Integer.parseInt(damageReward.get(2).toString()), 0,
+						Integer.parseInt(damageReward.get(1).toString()), 0,
+						bfr.getPlayerId());
 			}
-			Session session=ds.getSession(bfr.getNickName());
-			if(session!=null)
+			Session session = ds.getSession(bfr.getNickName());
+			if (session != null)
 			{
-				Player player=(Player)session.getSource();
+				Player player = (Player) session.getSource();
 				player.setBfr(null);
-				if(finishMail!=null) player.addMail(finishMail);
-				if(rankMail!=null) player.addMail(rankMail);
-				if(damageMail!=null) player.addMail(damageMail);
-				msn.send(session,new Object[]{player.getUnreadMailCount()});
+				if (finishMail != null)
+					player.addMail(finishMail);
+				if (rankMail != null)
+					player.addMail(rankMail);
+				if (damageMail != null)
+					player.addMail(damageMail);
+				msn.send(session, new Object[] { player.getUnreadMailCount() });
 			}
 		}
-		ArrayList<Object> autoReward=gbc.countReward();
-		List<Integer> idList=dao.getAllPlayerId();
-		for(Integer integer:idList)
+		ArrayList<Object> autoReward = gbc.countReward();
+		List<Integer> idList = dao.getAllPlayerId();
+		for (Integer integer : idList)
 		{
-			Session session=ds.getSession(integer);
-			if(session!=null)
+			Session session = ds.getSession(integer);
+			if (session != null)
 			{
-				if(isDeath)
-					ben.send(session,new Object[]{Lang.F1807});
+				if (isDeath)
+					ben.send(session, new Object[] { Lang.F1807 });
 				else
-					ben.send(session,new Object[]{Lang.F1808});
-				Player player=(Player)session.getSource();
-				if(player.getPlayerInfo().isAutoSignBoss())
+					ben.send(session, new Object[] { Lang.F1808 });
+				Player player = (Player) session.getSource();
+				if (player.getPlayerInfo().isAutoSignBoss())
 				{
-					cardList=(ArrayList<Integer>)autoReward.get(0);
-					autoMail=mf.createSystemMail(cardList,0,
-						Integer.parseInt(autoReward.get(2).toString()),0,
-						Integer.parseInt(autoReward.get(1).toString()),0,
-						(int)player.getUserId());
+					cardList = (ArrayList<Integer>) autoReward.get(0);
+					autoMail = mf.createSystemMail(cardList, 0,
+							Integer.parseInt(autoReward.get(2).toString()), 0,
+							Integer.parseInt(autoReward.get(1).toString()), 0,
+							(int) player.getUserId());
 					msn.send(session,
-						new Object[]{player.getUnreadMailCount()});
+							new Object[] { player.getUnreadMailCount() });
 					player.getPlayerInfo().setAutoSignBoss(false);
 					player.addMail(autoMail);
 				}
-			}
-			else
+			} else
 			{
-				Player player=dao.getPlayer(integer);
-				if(player.getPlayerInfo().isAutoSignBoss())
+				Player player = dao.getPlayer(integer);
+				if (player.getPlayerInfo().isAutoSignBoss())
 				{
-					cardList=(ArrayList<Integer>)autoReward.get(0);
-					mf.createSystemMail(cardList,0,
-						Integer.parseInt(autoReward.get(2).toString()),0,
-						Integer.parseInt(autoReward.get(1).toString()),0,
-						(int)player.getUserId());
+					cardList = (ArrayList<Integer>) autoReward.get(0);
+					mf.createSystemMail(cardList, 0,
+							Integer.parseInt(autoReward.get(2).toString()), 0,
+							Integer.parseInt(autoReward.get(1).toString()), 0,
+							(int) player.getUserId());
 					player.getPlayerInfo().setAutoSignBoss(false);
 					dao.savePlayerVar(player);
 				}
@@ -660,18 +678,18 @@ public class BossManager
 	 */
 	public int getActiveBossSid()
 	{
-		Iterator<Integer> iterator=bossMap.keySet().iterator();
-		int bossSid=0;
-		for(int i=0;i<bossMap.keySet().size();i++)
+		Iterator<Integer> iterator = bossMap.keySet().iterator();
+		int bossSid = 0;
+		for (int i = 0; i < bossMap.keySet().size(); i++)
 		{
-			if(iterator.hasNext())
+			if (iterator.hasNext())
 			{
-				bossSid=iterator.next();
-				if(bossMap.get(bossSid).isOpen())
+				bossSid = iterator.next();
+				if (bossMap.get(bossSid).isOpen())
 				{
 					break;
 				}
-				bossSid=0;
+				bossSid = 0;
 			}
 		}
 		return bossSid;
@@ -684,17 +702,17 @@ public class BossManager
 	 */
 	public long getActiveBossTime(int bossSid)
 	{
-		long surplusTime=0;
-		if(bossSid!=0)
+		long surplusTime = 0;
+		if (bossSid != 0)
 		{
-			GlobalBossCFG gbc=bossMap.get(bossSid);
-			if(gbc.isOpen())
+			GlobalBossCFG gbc = bossMap.get(bossSid);
+			if (gbc.isOpen())
 			{
-				long time=TimeKit.timeOf(gbc.getActiveTime());
-				surplusTime=time-TimeKit.nowTimeMills();
-				if(surplusTime<0)
+				long time = TimeKit.timeOf(gbc.getActiveTime());
+				surplusTime = time - TimeKit.nowTimeMills();
+				if (surplusTime < 0)
 				{
-					surplusTime=0;
+					surplusTime = 0;
 				}
 			}
 		}
@@ -709,18 +727,18 @@ public class BossManager
 	 */
 	public long getSurplusBossTime(int bossSid)
 	{
-		long surplusTime=0;
-		if(bossSid!=0)
+		long surplusTime = 0;
+		if (bossSid != 0)
 		{
-			GlobalBossCFG gbc=bossMap.get(bossSid);
-			if(gbc.isOpen())
+			GlobalBossCFG gbc = bossMap.get(bossSid);
+			if (gbc.isOpen())
 			{
-				long time=TimeKit.timeOf(gbc.getActiveTime())
-					+(TimeKit.MIN_MILLS*gbc.getTimeConfine());
-				surplusTime=time-TimeKit.nowTimeMills();
-				if(surplusTime<0)
+				long time = TimeKit.timeOf(gbc.getActiveTime())
+						+ (TimeKit.MIN_MILLS * gbc.getTimeConfine());
+				surplusTime = time - TimeKit.nowTimeMills();
+				if (surplusTime < 0)
 				{
-					surplusTime=0;
+					surplusTime = 0;
 				}
 			}
 		}

@@ -15,17 +15,20 @@
 	battleSkip    跳过战斗功能
 	payForAwake   付费醒酒功能
 	autoDrink     自动喝酒功能
+	autoBossFight 世界BOSS自动战斗功能
+	autoBossSign  世界BOSS自动报名功能
+	slaveManaged  打土豪赎身功能
 	-->
-	<sample sid="21372" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="0" buyToken="0"  skillFlushFreeTimes="0" privateSeat="3" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="0" payForAwake="0" autoDrink="0"/>
-	<sample sid="21373" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="2" buyToken="20"  skillFlushFreeTimes="0" privateSeat="3" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0"/>
-	<sample sid="21374" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="2" buyToken="40" skillFlushFreeTimes="0" privateSeat="3" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0"/>
-	<sample sid="21375" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="4" buyToken="60"  skillFlushFreeTimes="1" privateSeat="4" publicSeat="2" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0"/>
-	<sample sid="21376" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="4" buyToken="80"  skillFlushFreeTimes="1" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="0"/>
-	<sample sid="21377" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="6" buyToken="100" skillFlushFreeTimes="2" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
-	<sample sid="21378" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="6" buyToken="120"  skillFlushFreeTimes="2" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
-	<sample sid="21379" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="140"  skillFlushFreeTimes="3" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
-	<sample sid="21380" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="160"  skillFlushFreeTimes="3" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
-	<sample sid="21381" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="10" buyToken="180"  skillFlushFreeTimes="4" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
-	<sample sid="21382" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="10" buyToken="200"  skillFlushFreeTimes="4" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1"/>
+	<sample sid="21372" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="0" buyToken="0"  skillFlushFreeTimes="0" privateSeat="3" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="0" payForAwake="0" autoDrink="0" autoBossFight="0" autoBossSign="0" slaveManaged="0"/>
+	<sample sid="21373" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="2" buyToken="20"  skillFlushFreeTimes="0" privateSeat="3" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0" autoBossFight="0" autoBossSign="0" slaveManaged="0"/>
+	<sample sid="21374" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="2" buyToken="40" skillFlushFreeTimes="0" privateSeat="3" publicSeat="1" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0" autoBossFight="0" autoBossSign="0" slaveManaged="0"/>
+	<sample sid="21375" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="4" buyToken="60"  skillFlushFreeTimes="1" privateSeat="4" publicSeat="2" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="0" autoDrink="0" autoBossFight="0" autoBossSign="0" slaveManaged="0"/>
+	<sample sid="21376" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="4" buyToken="80"  skillFlushFreeTimes="1" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="0" autoBossFight="0" autoBossSign="0" slaveManaged="0"/>
+	<sample sid="21377" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="6" buyToken="100" skillFlushFreeTimes="2" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1" autoBossFight="0" autoBossSign="0" slaveManaged="0"/>
+	<sample sid="21378" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="6" buyToken="120"  skillFlushFreeTimes="2" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1" autoBossFight="0" autoBossSign="0" slaveManaged="1"/>
+	<sample sid="21379" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="140"  skillFlushFreeTimes="3" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1" autoBossFight="0" autoBossSign="0" slaveManaged="1"/>
+	<sample sid="21380" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="8" buyToken="160"  skillFlushFreeTimes="3" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1" autoBossFight="0" autoBossSign="0" slaveManaged="1"/>
+	<sample sid="21381" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="10" buyToken="180"  skillFlushFreeTimes="4" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1" autoBossFight="0" autoBossSign="0" slaveManaged="1"/>
+	<sample sid="21382" class="com.cambrian.dfhm.common.entity.VipCfg" getToken="10" buyToken="200"  skillFlushFreeTimes="4" privateSeat="5" publicSeat="3" cardGoldForsterFreeTimes="0" cardGoldForster="1" battleSkip="1" payForAwake="1" autoDrink="1" autoBossFight="0" autoBossSign="0" slaveManaged="1"/>
 
 </objects>

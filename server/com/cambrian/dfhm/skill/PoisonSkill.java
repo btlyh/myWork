@@ -51,6 +51,7 @@ public class PoisonSkill extends Skill
 		for(int i=0;i<aim.size();i++)
 		{
 			aimCard=aimList[aim.get(i)];
+			if(aimCard==null) continue;
 			// 技能照成伤害：向下取整(卡牌攻击力*技能系数/1000)
 			int value=super.getSkillHurt(attCard.getAtt());
 			// 每回合中毒扣血数：向下取整(（卡牌攻击力*技能系数/1000）*毒效果伤害倍数/1000*回合数)
@@ -79,7 +80,7 @@ public class PoisonSkill extends Skill
 				value=BattleAct.countFloatDamage(value);
 				record.setAttMax(value);
 			}
-			DamageEntity damage = new DamageEntity(damageStatus,value);
+			DamageEntity damage=new DamageEntity(damageStatus,value);
 			addHurt(damage);
 			if(value>0)
 				System.err.println("中毒技能，照成伤害 ==="+value

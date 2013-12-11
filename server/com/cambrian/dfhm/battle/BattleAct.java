@@ -7,6 +7,7 @@ import com.cambrian.common.util.MathKit;
 import com.cambrian.dfhm.battle.entity.DamageEntity;
 import com.cambrian.dfhm.skill.DecrHurtSkill;
 import com.cambrian.dfhm.skill.IncrHurtSkill;
+import com.cambrian.dfhm.skill.NoHurtSkill;
 import com.cambrian.dfhm.skill.Skill;
 
 /**
@@ -346,11 +347,12 @@ public class BattleAct
 					value=0;
 				}
 			}
-			if(value > 0){
+			if(value>0)
+			{
 				value=countFloatDamage(value);
 				record.setAttMax(value);
 			}
-			DamageEntity damage = new DamageEntity(damageStatus,value);
+			DamageEntity damage=new DamageEntity(damageStatus,value);
 			hurtList.add(damage);
 			if(value>0)
 				System.err.println("照成伤害 ==="+value+(crit?"暴击伤害":"普通伤害"));
@@ -410,11 +412,11 @@ public class BattleAct
 		BattleCard aimCard,BattleRecord record)
 	{
 		// System.err.println("技能buff伤害值,多态的基类哦--------------");
-		if(aimCard.hadNoHurtSkill())// 判断放手方是否有免伤状态
+		// 判断攻击方是否有攻状态
+		if(aimCard==null)
 		{
 			return 0;
 		}
-		// 判断攻击方是否有攻状态
 		ArrayList<Skill> deSkill=attCard.getDeSkill();
 		for(Skill skill:deSkill)
 		{
@@ -428,6 +430,11 @@ public class BattleAct
 		deSkill=aimCard.getDeSkill();
 		for(Skill skill:deSkill)
 		{
+			if(skill instanceof NoHurtSkill)
+			{
+				att=skill.buffValue(attCard,att,aimCard,record);
+				break;
+			}
 			if(skill instanceof DecrHurtSkill)
 			{
 				att=skill.buffValue(attCard,att,aimCard,record);

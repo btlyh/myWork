@@ -53,7 +53,7 @@ public class Friend
 		this.name=player.getNickname();
 		this.vipLevel=player.getVipLevel();
 		this.time=0;
-		if(isAlive)
+		if(!isAlive)
 		{
 			this.time=TimeKit.getTimeFromAssgin(player.getLogoutTime());
 		}

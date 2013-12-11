@@ -42,7 +42,7 @@ public class MailFactory
 	public Mail createPlayerMail(String mailContent,String sendName)
 	{
 		Mail mail=new Mail((int)dao.getMailId(),Mail.MAILSTATE_UNREAD,
-			sendName+Lang.TITLE,mailContent,sendName);
+			sendName,mailContent,sendName);
 		return mail;
 	}
 

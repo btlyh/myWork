@@ -437,6 +437,11 @@ public class SlaveManager
 			mapInfo.put("error",Lang.F2221);
 			return mapInfo;
 		}
+		if(player.getPlayerInfo().getSlaveManaged() != 1)
+		{
+			mapInfo.put("error", Lang.F2223);
+			return mapInfo;
+		}
 		mapInfo.put("error",null);
 		mapInfo.put("slave",slave);
 		return mapInfo;

@@ -115,8 +115,10 @@ public class GameCFG
 	private static int[] engulfLevelExp;
 	/** 卡牌吞噬经验回收比例 **/
 	private static float engulfExpPer;
-	/** 当壕赎身次数限制*/
-	private static int ransomConfine;
+//	/** 当壕赎身次数限制*/
+//	private static int ransomConfine;
+	/** 喝酒增加攻击百分比*/
+	private static int drinkAttUp;
 
 	/**角色最大等级**/
 	private static int maxLevel;
@@ -824,16 +826,30 @@ public class GameCFG
 		GameCFG.slaveInformations=slaveInformations;
 	}
 	
+//	/**
+//	 * 获取赎身次数限制
+//	 * */
+//	public static int getRansomConfine()
+//	{
+//		return ransomConfine;
+//	}
+//
+//	public static void setRansomConfine(int ransomConfine)
+//	{
+//		GameCFG.ransomConfine = ransomConfine;
+//	}
+	
 	/**
-	 * 获取赎身次数限制
-	 * */
-	public static int getRansomConfine()
+	 * 获取喝酒增加攻击百分比
+	 * @return
+	 */
+	public static int getDrinkAttUp()
 	{
-		return ransomConfine;
+		return drinkAttUp;
 	}
 
-	public static void setRansomConfine(int ransomConfine)
+	public static void setDrinkAttUp(int drinkAttUp)
 	{
-		GameCFG.ransomConfine = ransomConfine;
+		GameCFG.drinkAttUp = drinkAttUp;
 	}
 }

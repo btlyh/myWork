@@ -220,6 +220,7 @@ public class CardManager
 			if(player.getPlayerInfo().getLeadStep() != -1)//引导第二步 卡牌吞噬 
 			{
 				player.getPlayerInfo().setLeadStep(player.getPlayerInfo().getLeadStep()+1);
+				player.getPlayerInfo().setLeadCardUid(cardId);
 			}	
 		}
 	}
@@ -298,7 +299,7 @@ public class CardManager
 			card.getAtt(),card.getSkillRate(),card.getAttRange(),
 			card.getSkillId(),card.getMaxHp(),card.getCurHp(),index,
 			card.getAimType(),card.getCritRate(),card.getDodgeRate(),0,
-			card.getType(),card.getSid(),card.getCritFactor());
+			card.getType(),card.getSid(),card.getCritFactor(),card.getDrinkStatus());
 		array[index]=bCard;
 	}
 

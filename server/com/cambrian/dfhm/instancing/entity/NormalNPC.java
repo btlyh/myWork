@@ -1,11 +1,11 @@
 package com.cambrian.dfhm.instancing.entity;
 
-
-
 import com.cambrian.common.object.Sample;
 import com.cambrian.common.util.TimeKit;
+import com.cambrian.dfhm.Lang;
 import com.cambrian.dfhm.battle.BattleCard;
 import com.cambrian.dfhm.battle.BattleScene;
+import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.dfhm.monster.Monster;
 
@@ -26,8 +26,9 @@ public class NormalNPC extends NPC
 	private int hardIndex;
 	/** 开启穿越NPC的位置 如果为0则不配置 */
 	private int crossIndex;
-	/**扫荡的奖励ID**/
+	/** 扫荡的奖励ID **/
 	private int sweepId;
+
 	/* constructors */
 
 	/* properties */
@@ -41,12 +42,14 @@ public class NormalNPC extends NPC
 		this.hardIndex=hardIndex;
 	}
 
-	public int getSweepId() {
+	public int getSweepId()
+	{
 		return sweepId;
 	}
 
-	public void setSweepId(int sweepId) {
-		this.sweepId = sweepId;
+	public void setSweepId(int sweepId)
+	{
+		this.sweepId=sweepId;
 	}
 
 	public int getCrossIndex()
@@ -64,25 +67,24 @@ public class NormalNPC extends NPC
 	@Override
 	public String checkAttNpc(Player player,AttRecord checkRecord)
 	{
-//		if(player.getCurIndexForNormalNPC()<getSid())
-//		{
-//			return Lang.F1402;
-//		}
+		if(player.getCurIndexForNormalNPC()<getSid())
+		{
+			return Lang.F1402;
+		}
 		return null;
 	}
 
 	@Override
 	public void handleForWin(Player player)
-	{		
+	{
 		if(getNextSid()>player.getCurIndexForNormalNPC())
 		{
 			player.setCurIndexForNormalNPC(getNextSid());
 			player.getPlayerInfo().setNormalNPCTime(
 				(int)TimeKit.nowTimeMills());
-		
-			
+
 		}
-		player.getPlayerInfo().incrInstancingCount(1);
+		player.getPlayerInfo().addInstancingCount(this.getSid(),1);
 		if(getIsBoss()==BOSS)
 		{
 			if(hardIndex>player.getCurIndexForHardNPC())
@@ -94,8 +96,7 @@ public class NormalNPC extends NPC
 				player.setCurIndexForCorssNPC(crossIndex);
 			}
 		}
-		
-		
+
 	}
 	@Override
 	public void handleForAtt(Player player)
@@ -117,14 +118,15 @@ public class NormalNPC extends NPC
 				card.getLevel(),card.getAtt(),card.getSkillRate(),
 				card.getAttRange(),card.getSkillId(),card.getMaxHp(),
 				card.getCurHp(),i,card.getAimType(),card.getCritRate(),
-				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor());
+				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),
+				card.getCritFactor(),Card.AWAKE);
 			monsters[i]=battleCard;
 		}
 	}
 
-
 	@Override
-	public void winCondition(BattleScene scene,BattleCard[] attList,Player player)
+	public void winCondition(BattleScene scene,BattleCard[] attList,
+		Player player)
 	{
 		// TODO Auto-generated method stub
 

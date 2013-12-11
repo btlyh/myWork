@@ -26,7 +26,7 @@ public class PlayerInfo
 	/** 每日可购买军令数量 */
 	private int buyToken;
 	/** 每轮武魂抽奖次数 */
-	private int extractTimes = 0;
+	private int extractTimes=0;
 	/** 每日刷新技能免费次数 */
 	private int skillFlushFreeTimes;
 	/** 免费金币培养次数 */
@@ -44,6 +44,8 @@ public class PlayerInfo
 	private int autoBossFight;
 	/** 自动报名 */
 	private int autoBossSign;
+	/** 打土豪托管功能 */
+	private int slaveManaged;
 
 	/** 是否已经自动报名 */
 	private boolean isAutoSignBoss;
@@ -54,13 +56,13 @@ public class PlayerInfo
 	private long lastTime;
 	/** 卡牌抽取记录集合 */
 	private ArrayList<TakeCardRecord> takeCardRecords=new ArrayList<TakeCardRecord>();
-	
+
 	/** 可以购买的卡牌SID */
 	private int bestCardSid;
 	/** 积分 */
 	private int normalPoint;
 	/** 是否第一次抽取 */
-//	private boolean isFirst;
+	// private boolean isFirst;
 	/** 总充值金额 */
 	private int payRMB=0;
 	/** 故事模式副本时间 */
@@ -89,7 +91,7 @@ public class PlayerInfo
 	private List<String> enemyList=new ArrayList<String>();
 
 	/** 副本次数 */
-	private int instancingCount;
+	private ArrayList<Integer> instancingCount=new ArrayList<Integer>();
 	/** 排位赛次数 */
 	private int qualifyingCount;
 	/** 排位赛胜利次数 */
@@ -99,17 +101,24 @@ public class PlayerInfo
 
 	private int nextRewardId=21657;// 下一次的领奖ID 用于前台初始化领奖信息
 
-	private int crossMapNum = 10;//当日穿越副本挑战次数
-	
+	private int crossMapNum=10;// 当日穿越副本挑战次数
+
 	/** 已经打过的挑战副本 */
-	private List<Integer> hardNPCList = new ArrayList<Integer>();
-	
-	/*****已经开启的穿越副本****/
-	
-	private List<Integer>crossNPCList = new ArrayList<Integer>(); 
+	private List<Integer> hardNPCList=new ArrayList<Integer>();
+
+	/***** 已经开启的穿越副本 ****/
+
+	private List<Integer> crossNPCList=new ArrayList<Integer>();
+
+	/** 新手引导的第几步 如果为-1 则表示已经完成新手引导 */
+	private int leadStep=1;
+	/** 新手引导操作的卡牌UID */
+	private int leadCardUid=0;
+	/** 上一次军令恢复时间 */
+	private long lastRegainTokenTime=0L;
+
 	/* constructors */
-	/**新手引导的第几步  如果为-1 则表示已经完成新手引导*/
-	private int leadStep = 1;
+
 	/* properties */
 	public int getSkillFlushFreeTimes()
 	{
@@ -131,7 +140,6 @@ public class PlayerInfo
 		this.luckBoxSid=luckBoxSid;
 	}
 
- 
 	public long getLastTime()
 	{
 		return lastTime;
@@ -142,7 +150,6 @@ public class PlayerInfo
 		this.lastTime=lastTime;
 	}
 
-	
 	public int getBestCardSid()
 	{
 		return bestCardSid;
@@ -171,7 +178,7 @@ public class PlayerInfo
 	{
 		this.normalPoint=normalPoint;
 	}
-	
+
 	public int getPayRMB()
 	{
 		return payRMB;
@@ -205,19 +212,19 @@ public class PlayerInfo
 
 	/* methods */
 
-	
-	
 	public int getGetToken()
 	{
 		return getToken;
 	}
 
-	public int getExtractTimes() {
+	public int getExtractTimes()
+	{
 		return extractTimes;
 	}
 
-	public void setExtractTimes(int extractTimes) {
-		this.extractTimes = extractTimes;
+	public void setExtractTimes(int extractTimes)
+	{
+		this.extractTimes=extractTimes;
 	}
 
 	public void setGetToken(int getToken)
@@ -355,6 +362,16 @@ public class PlayerInfo
 		this.autoBossSign=autoBossSign;
 	}
 
+	public int getSlaveManaged()
+	{
+		return slaveManaged;
+	}
+
+	public void setSlaveManaged(int slaveManaged)
+	{
+		this.slaveManaged = slaveManaged;
+	}
+
 	public int getRewardId()
 	{
 		return rewardId;
@@ -385,12 +402,12 @@ public class PlayerInfo
 		this.rewardNum=rewardNum;
 	}
 
-	public int getInstancingCount()
+	public ArrayList<Integer> getInstancingCount()
 	{
 		return instancingCount;
 	}
 
-	public void setInstancingCount(int instancingCount)
+	public void setInstancingCount(ArrayList<Integer> instancingCount)
 	{
 		this.instancingCount=instancingCount;
 	}
@@ -443,14 +460,15 @@ public class PlayerInfo
 	{
 		this.isBuyed=isBuyed;
 	}
-	
-	
-	public int getCrossMapNum() {
+
+	public int getCrossMapNum()
+	{
 		return crossMapNum;
 	}
 
-	public void setCrossMapNum(int crossMapNum) {
-		this.crossMapNum = crossMapNum;
+	public void setCrossMapNum(int crossMapNum)
+	{
+		this.crossMapNum=crossMapNum;
 	}
 
 	public List<Integer> getHardNPCList()
@@ -460,37 +478,53 @@ public class PlayerInfo
 
 	public void setHardNPCList(List<Integer> hardNPCList)
 	{
-		this.hardNPCList = hardNPCList;
+		this.hardNPCList=hardNPCList;
 	}
 
-	
-	
-	
-	public List<Integer> getCrossNPCList() {
+	public List<Integer> getCrossNPCList()
+	{
 		return crossNPCList;
 	}
 
-	public void setCrossNPCList(List<Integer> crossNPCList) {
-		this.crossNPCList = crossNPCList;
+	public void setCrossNPCList(List<Integer> crossNPCList)
+	{
+		this.crossNPCList=crossNPCList;
 	}
-	
-	
-	
 
-
-
-	public int getLeadStep() {
+	public int getLeadStep()
+	{
 		return leadStep;
 	}
 
-	public void setLeadStep(int leadStep) {
-		this.leadStep = leadStep;
+	public void setLeadStep(int leadStep)
+	{
+		this.leadStep=leadStep;
+	}
+
+	public int getLeadCardUid()
+	{
+		return leadCardUid;
+	}
+
+	public void setLeadCardUid(int leadCardUid)
+	{
+		this.leadCardUid=leadCardUid;
+	}
+
+	public long getLastRegainTokenTime()
+	{
+		return lastRegainTokenTime;
+	}
+
+	public void setLastRegainTokenTime(long lastRegainTokenTime)
+	{
+		this.lastRegainTokenTime=lastRegainTokenTime;
 	}
 
 	/** 序列化 和前台通信 */
 	public void bytesWrite(ByteBuffer data)
 	{
-		int len =0;
+		int len=0;
 		data.writeInt(skillFlushFreeTimes);
 		data.writeInt(normalPoint);
 		data.writeInt(extractTimes);
@@ -507,24 +541,24 @@ public class PlayerInfo
 		data.writeInt(duelBuyTimes);
 		data.writeInt(nextRewardId);
 		data.writeInt(crossMapNum);
-		
-		len = hardNPCList.size();
+
+		len=hardNPCList.size();
 		data.writeInt(len);
-		for (Integer integer : hardNPCList)
+		for(Integer integer:hardNPCList)
 		{
 			data.writeInt(integer);
 		}
-		
-		len = crossNPCList.size();
+
+		len=crossNPCList.size();
 		data.writeInt(len);
-		for (Integer integer : crossNPCList)
+		for(Integer integer:crossNPCList)
 		{
 			data.writeInt(integer);
 		}
-		
+
 		data.writeInt(leadStep);
-		
-		
+		data.writeInt(leadCardUid);
+
 	}
 
 	/** 序列化 和DC通信 存 */
@@ -553,7 +587,7 @@ public class PlayerInfo
 		data.writeInt(autoDrink);
 		data.writeInt(autoBossFight);
 		data.writeInt(autoBossSign);
-
+		data.writeInt(slaveManaged);
 		data.writeInt(rewardId);
 		data.writeLong(nextRewardTime);
 		data.writeInt(rewardNum);
@@ -570,25 +604,30 @@ public class PlayerInfo
 		{
 			data.writeUTF(str);
 		}
-		data.writeInt(instancingCount);
+		data.writeInt(instancingCount.size());
+		for(Integer integer:instancingCount)
+		{
+			data.writeInt(integer);
+		}
 		data.writeInt(qualifyingCount);
 		data.writeInt(qualifyingWin);
 		data.writeInt(nextRewardId);
 		data.writeInt(crossMapNum);
 		data.writeInt(hardNPCList.size());
-		for (Integer integer : hardNPCList)
+		for(Integer integer:hardNPCList)
 		{
 			data.writeInt(integer);
 		}
-		
-		
+
 		data.writeInt(crossNPCList.size());
-		for (Integer integer : crossNPCList)
+		for(Integer integer:crossNPCList)
 		{
 			data.writeInt(integer);
 		}
-		
+
 		data.writeInt(leadStep);
+		data.writeInt(leadCardUid);
+		data.writeLong(lastRegainTokenTime);
 	}
 	/** 序列化 和DC通信 取 */
 	public void dbBytesRead(ByteBuffer data)
@@ -618,7 +657,7 @@ public class PlayerInfo
 		autoDrink=data.readInt();
 		autoBossFight=data.readInt();
 		autoBossSign=data.readInt();
-
+		slaveManaged=data.readInt();
 		rewardId=data.readInt();
 		nextRewardTime=data.readLong();
 		rewardNum=data.readInt();
@@ -638,33 +677,38 @@ public class PlayerInfo
 			String str=data.readUTF();
 			enemyList.add(str);
 		}
-		instancingCount=data.readInt();
+		len=data.readInt();
+		for(int i=0;i<len;i++)
+		{
+			int j=data.readInt();
+			instancingCount.add(j);
+		}
 		qualifyingCount=data.readInt();
 		qualifyingWin=data.readInt();
 		nextRewardId=data.readInt();
-		crossMapNum = data.readInt();
+		crossMapNum=data.readInt();
 		len=data.readInt();
-		for (int i = 0; i < len; i++)
+		for(int i=0;i<len;i++)
 		{
 			int index=data.readInt();
 			hardNPCList.add(index);
 		}
-		
-		
+
 		len=data.readInt();
-		for (int i = 0; i < len; i++)
+		for(int i=0;i<len;i++)
 		{
 			int index=data.readInt();
 			crossNPCList.add(index);
 		}
-		leadStep = data.readInt();
+		leadStep=data.readInt();
+		leadCardUid=data.readInt();
+		lastRegainTokenTime=data.readLong();
 	}
 
 	public void decrLuckBoxextractTimes(int times)
 	{
 		extractTimes-=times;
 	}
-
 
 	public void inSoulextractTimes(int times)
 	{
@@ -691,10 +735,21 @@ public class PlayerInfo
 	{
 		duelBuyTimes+=times;
 	}
-
-	public void incrInstancingCount(int times)
+	/** 为特定副本添加次数 */
+	public void addInstancingCount(int sid,int count)
 	{
-		instancingCount+=times;
+		for(int i=0;i<instancingCount.size();i+=2)
+		{
+			int index=instancingCount.get(i);
+			int c=instancingCount.get(i+1);
+			if(index==sid)
+			{
+				instancingCount.set(i+1,c+count);
+				return;
+			}
+		}
+		instancingCount.add(sid);
+		instancingCount.add(count);
 	}
 
 	public void incrQualifyingCount(int times)
@@ -770,32 +825,41 @@ public class PlayerInfo
 	/** 减少积分 */
 	public void decrNormalPoint(int price)
 	{
-		normalPoint -= price;
+		normalPoint-=price;
 	}
-	
 
 	/** 获得挑战了的最高挑战副本SID */
 	public int getHighestHardNPC()
 	{
-		if (hardNPCList.size()>0)
+		if(hardNPCList.size()>0)
 			return hardNPCList.get(hardNPCList.size()-1);
 		else
 			return -1;
 	}
-	
-	/**  添加 打过的 挑战副本和穿越副本**/
+
+	/** 添加 打过的 挑战副本和穿越副本 **/
 	public void addHardNpc(int hardIndex)
 	{
-		if (!hardNPCList.contains(hardIndex))
-			hardNPCList.add(hardIndex);
+		if(!hardNPCList.contains(hardIndex)) hardNPCList.add(hardIndex);
 		Collections.sort(hardNPCList);
 	}
-	
+
 	public void addCrossNpc(int crossIndex)
 	{
-		if (!crossNPCList.contains(crossIndex))
-			crossNPCList.add(crossIndex);
+		if(!crossNPCList.contains(crossIndex)) crossNPCList.add(crossIndex);
 		Collections.sort(crossNPCList);
 	}
-
+	/** 检查是否达到特定副本次数条件 */
+	public boolean checkInstancingCount(int instancingSid,int count)
+	{
+		for(int i=0;i<instancingCount.size();i+=2)
+		{
+			int sid=instancingCount.get(i);
+			if(sid==instancingSid)
+			{
+				if(instancingCount.get(i+1)>=count) return true;
+			}
+		}
+		return false;
+	}
 }

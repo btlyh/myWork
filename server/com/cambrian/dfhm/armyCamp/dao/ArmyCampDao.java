@@ -11,6 +11,7 @@ import com.cambrian.common.sql.ConnectionManager;
 import com.cambrian.common.sql.DBKit;
 import com.cambrian.dfhm.armyCamp.entity.ArmyCamp;
 import com.cambrian.dfhm.bag.CardBag;
+import com.cambrian.dfhm.battle.Formation;
 import com.cambrian.dfhm.common.entity.Player;
 import com.cambrian.game.Session;
 
@@ -140,6 +141,8 @@ public class ArmyCampDao
 	/**获取玩家对象 */
 	public Player getPlayer(String name, Session session)
 	{
+		if (session != null)
+			return (Player)session.getSource();
 		int userId = getUserIdByName(name, session);
 		Field[] array=new Field[2];
 		array[0]=FieldKit.create("nickname",(String)null);
@@ -150,6 +153,17 @@ public class ArmyCampDao
 		Player player=new Player();
 		player.setUserId(userId);
 		player.setNickname(((StringField)array[0]).value);
+		
+		array = new Field[1];
+		array[0]=FieldKit.create("formation", (byte[])null);
+		fields = new Fields(array);
+		DBKit.get("player_info", cm, FieldKit.create("userId", userId), fields);
+		byte[] bytes=((ByteArrayField)array[0]).value;
+		Formation formation = new Formation();
+		if (bytes != null)
+			formation.dbBytesRead(new ByteBuffer(bytes));
+		else return null;
+		player.formation = formation;
 		return player;
 	}
 }

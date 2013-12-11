@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.object.Sample;
+import com.cambrian.dfhm.card.Card;
 import com.cambrian.dfhm.skill.NoHurtSkill;
 import com.cambrian.dfhm.skill.Skill;
 
@@ -80,12 +81,14 @@ public class BattleCard implements Cloneable
 	private int side;
 	/** 类型（白绿蓝紫橙，5种） */
 	private int type;
+	/** 喝酒状态 */
+	private int drinkStatus=Card.AWAKE;
 
 	/* constructors */
 	public BattleCard(int id,String name,String avatar,String tinyAvatar,
 		int level,int att,int skillRate,int attRange,int skillId,int maxHp,
 		int curHp,int index,int aimType,int critRate,int dodgeRate,
-		int awardSid,int type,int sid,int critFactor)
+		int awardSid,int type,int sid,int critFactor,int drinkStatus)
 	{
 		this.id=id;
 		this.name=name;
@@ -111,6 +114,7 @@ public class BattleCard implements Cloneable
 		this.sid=sid;
 		this.critFactor=critFactor;
 		this.level=level;
+		this.drinkStatus=drinkStatus;
 	}
 
 	public BattleCard()
@@ -319,6 +323,15 @@ public class BattleCard implements Cloneable
 		att+=(int)(att*ratio*0.01f);
 	}
 
+	public int getDrinkStatus()
+	{
+		return drinkStatus;
+	}
+
+	public void setDrinkStatus(int drinkStatus)
+	{
+		this.drinkStatus=drinkStatus;
+	}
 	/**
 	 * 扣血
 	 * 
@@ -466,6 +479,7 @@ public class BattleCard implements Cloneable
 		data.writeInt(type);
 		data.writeInt(sid);
 		data.writeInt(critFactor);
+		data.writeInt(drinkStatus);
 	}
 
 	/** 反序列化(和dc通信) */
@@ -519,5 +533,6 @@ public class BattleCard implements Cloneable
 		type=data.readInt();
 		sid=data.readInt();
 		critFactor=data.readInt();
+		drinkStatus=data.readInt();
 	}
 }

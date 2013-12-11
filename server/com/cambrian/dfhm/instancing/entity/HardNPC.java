@@ -114,6 +114,7 @@ public class HardNPC extends NPC
 	@Override
 	public void handleForWin(Player player)
 	{
+		player.getPlayerInfo().addInstancingCount(this.getSid(), 1);
 		if(getIsBoss()!=BOSS&&getNextSid()>player.getCurIndexForHardNPC())
 		{
 			player.setCurIndexForHardNPC(getNextSid());
@@ -124,7 +125,6 @@ public class HardNPC extends NPC
 		}
 		AttRecord attRecord=new AttRecord(getSid(),KILLED,getType());
 		player.addAttRecord(attRecord);
-		player.getPlayerInfo().incrInstancingCount(1);
 		player.getPlayerInfo().addHardNpc(getSid());
 		if (getSid() > player.getPlayerInfo().getHighestHardNPC())
 		{
@@ -151,7 +151,7 @@ public class HardNPC extends NPC
 				card.getLevel(),card.getAtt(),card.getSkillRate(),
 				card.getAttRange(),card.getSkillId(),card.getMaxHp(),
 				card.getCurHp(),i,card.getAimType(),card.getCritRate(),
-				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor());
+				card.getDodgeRate(),card.getAwardSid(),i,card.getSid(),card.getCritFactor(),Card.AWAKE);
 			monsters[i]=battleCard;
 		}
 	}

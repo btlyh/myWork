@@ -69,7 +69,11 @@ public class TaskManager
 			throw new DataAccessException(601, error);
 		}
 		Task task = (Task)resultMap.get("task");
-		task.finish(player);
+		ArrayList<Integer> removeCardList = task.finish(player);
+		for (Integer integer : removeCardList)
+		{
+			player.getCardBag().remove(integer);
+		}
 		TaskAward award = (TaskAward)Sample.getFactory().getSample(task.awardSid);
 		ArrayList<Card> cardList = new ArrayList<Card>();
 		ArrayList<Integer> cardSidList = new ArrayList<Integer>(0);
@@ -126,7 +130,7 @@ public class TaskManager
 			resultMap.put("list", cardSidList);
 		}
 		resultMap.put("award", award);
-		
+		resultMap.put("removeCards", removeCardList);
 		
 		if(player.getPlayerInfo().getLeadStep() != -1)//引导第四步 领取奖励 
 		{
@@ -139,7 +143,7 @@ public class TaskManager
 	private Map<String, Object> checkFinishTask(Player player, int sid)
 	{
 		Map<String, Object> mapInfo = new HashMap<String, Object>();
-		Task task = (Task)Sample.getFactory().getSample(sid);
+		Task task = player.getTasks().getTask(sid);
 		if (task == null)
 		{
 			mapInfo.put("error", Lang.F2401);

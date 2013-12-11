@@ -40,6 +40,8 @@ public class VipCfg extends Sample
 	public int autoBossFight;
 	/** 世界BOSS自动报名 */
 	public int autoBossSign;
+	/** 打土豪托管功能 */
+	public int slaveManaged;
 	/* constructors */
 
 	/* properties */

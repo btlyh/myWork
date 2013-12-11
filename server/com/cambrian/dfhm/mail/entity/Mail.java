@@ -53,6 +53,8 @@ public class Mail
 	private String sendPalyerName;
 	/** 邮件是否是战斗邮件 */
 	private boolean isFight=false;
+	/** 是否是系统邮件*/
+	private boolean isSystem;
 
 	/* constructors */
 
@@ -82,6 +84,7 @@ public class Mail
 		this.sendPalyerName=sendPlayerName;
 		this.sendTime=TimeKit.dateToString(TimeKit.nowTimeMills(),
 			"yyyy年MM月dd日 HH:mm");
+		isSystem=false;
 
 	}
 
@@ -114,6 +117,7 @@ public class Mail
 		cardList.addAll(cards);
 		this.sendPalyerName=sendPlayerName;
 		this.sendTime=TimeKit.dateToString(TimeKit.nowTimeMills(),"yyyy年MM月dd日 HH:mm");;
+		isSystem=true;
 	}
 
 	/* properties */
@@ -243,6 +247,16 @@ public class Mail
 		this.isFight=isFight;
 	}
 
+	public boolean isSystem()
+	{
+		return isSystem;
+	}
+
+	public void setSystem(boolean isSystem)
+	{
+		this.isSystem = isSystem;
+	}
+
 	/** 添加卡牌 */
 	public void addCard(int cardId)
 	{
@@ -283,6 +297,7 @@ public class Mail
 		data.writeInt(normalPoint);
 		data.writeUTF(sendPalyerName);
 		data.writeBoolean(isFight);
+		data.writeBoolean(isSystem);
 	}
 
 	/** 序列化 和DC通信 存 */
@@ -305,6 +320,7 @@ public class Mail
 		data.writeInt(normalPoint);
 		data.writeUTF(sendPalyerName);
 		data.writeBoolean(isFight);
+		data.writeBoolean(isSystem);
 	}
 
 	/** 序列化 和DC通信 取 */
@@ -327,6 +343,7 @@ public class Mail
 		this.normalPoint=data.readInt();
 		this.sendPalyerName=data.readUTF();
 		this.isFight=data.readBoolean();
+		this.isSystem=data.readBoolean();
 	}
 
 	/**
