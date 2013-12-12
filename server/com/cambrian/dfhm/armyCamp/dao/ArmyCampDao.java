@@ -154,8 +154,9 @@ public class ArmyCampDao
 		player.setUserId(userId);
 		player.setNickname(((StringField)array[0]).value);
 		
-		array = new Field[1];
+		array = new Field[2];
 		array[0]=FieldKit.create("formation", (byte[])null);
+		array[1]=FieldKit.create("cardBag", (byte[])null);
 		fields = new Fields(array);
 		DBKit.get("player_info", cm, FieldKit.create("userId", userId), fields);
 		byte[] bytes=((ByteArrayField)array[0]).value;
@@ -164,6 +165,12 @@ public class ArmyCampDao
 			formation.dbBytesRead(new ByteBuffer(bytes));
 		else return null;
 		player.formation = formation;
+		bytes=((ByteArrayField)array[1]).value;
+		CardBag cardBag = new CardBag();
+		if (bytes != null)
+			cardBag.dbBytesRead(new ByteBuffer(bytes));
+		else return null;
+		player.setCardBag(cardBag);
 		return player;
 	}
 }

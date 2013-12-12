@@ -126,7 +126,7 @@ public class ArmyCamp
 		{
 			historyLogList = new ArrayList<String>();
 		}
-		if (historyLogList.size() > 6)
+		if (historyLogList.size() > GameCFG.getInformationSize())
 		{
 			historyLogList.remove(0);
 		}

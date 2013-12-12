@@ -257,10 +257,10 @@ public class QualifyingManager
 			player.getPlayerInfo().incrNormalPoint(point);
 			player.getPlayerInfo().incrQualifyingWin(1);
 			changeRanking(player.getNickname(), tarName);
-			myLog = "大获全胜";
-			log = "落荒而逃";
+			myLog = "胜利";
+			log = "失败";
 			Mail mail = mf.createFightBackMail(
-					player.getNickname() + "挑战并战胜了你", Mail.MAILSTATE_UNREAD);
+					player.getNickname() + "挑战并战胜了您", Mail.MAILSTATE_UNREAD);
 			mail.setFight(true);
 			tarPlayer.addMail(mail);
 			Session session = ds.getSession(tarName);
@@ -284,10 +284,10 @@ public class QualifyingManager
 				player.getPlayerInfo().incrNormalPoint(point);
 				player.getPlayerInfo().incrQualifyingWin(1);
 				changeRanking(player.getNickname(), tarName);
-				myLog = "大获全胜";
-				log = "侥幸获胜";
+				myLog = "胜利";
+				log = "胜利";
 				Mail mail = mf.createFightBackMail(player.getNickname()
-						+ "挑战并战胜了你", Mail.MAILSTATE_UNREAD);
+						+ "挑战并战胜了您", Mail.MAILSTATE_UNREAD);
 				mail.setFight(true);
 				tarPlayer.addMail(mail);
 				Session session = ds.getSession(tarName);
@@ -299,8 +299,8 @@ public class QualifyingManager
 			{
 				point = GameCFG.getDuelLosePoint();
 				player.getPlayerInfo().incrNormalPoint(point);
-				myLog = "不幸落败";
-				log = "落荒而逃";
+				myLog = "失败";
+				log = "失败";
 			}
 			resultMap.put("record", scene.getRecord());
 			resultMap.put("battleCards", tarBattleCards);
@@ -364,28 +364,28 @@ public class QualifyingManager
 			if (win > 0)
 			{
 				if (rank < rankBack)
-					str = "，你的排名升至" + rank + "。";
+					str = "，您的排名升至" + rank + "。";
 				else
-					str = ",你的排名保持不变。";
+					str = ",您的排名不变。";
 			}else
 			{
-				str = ",你的排名保持不变。";
+				str = ",您的排名不变。";
 			}
-			historyLog = date + " 你挑战了（" + name + "），" + log + str;
+			historyLog = date + " 您挑战（" + name + "）" + log + str;
 		}
 		else
 		{
 			if (win > 0)
 			{
 				if (rank > rankBack)
-					str = "，你的排名降至" + rank + "。";
+					str = "，您的排名降至" + rank + "。";
 				else
-					str = ",你的排名保持不变。";
+					str = ",您的排名不变。";
 			}else
 			{
-				str = ",你的排名保持不变。";
+				str = ",您的排名不变。";
 			}
-			historyLog = date + " (" + name + ")挑战了你，" + log + str;
+			historyLog = date + " (" + name + ")挑战你" + log + str;
 		}
 		return historyLog;
 	}
@@ -531,5 +531,10 @@ public class QualifyingManager
 	private void saveQualifying()
 	{
 		dao.setQualifying(qualifying);
+	}
+	/** 获得玩家排名 */
+	public int getPlayerRank(String nickname)
+	{
+		return qualifying.getPlayerRank(nickname);
 	}
 }

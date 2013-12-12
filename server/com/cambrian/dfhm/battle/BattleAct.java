@@ -220,7 +220,7 @@ public class BattleAct
 		if(aimCard.getIndex()%2==0)
 		{
 			for(int i=0;i<aimList.length;i+=2)
-				if(aimCard!=null&&aimCard.getCurHp()>0) list.add(i);
+				if(aimList[i]!=null&&aimList[i].getCurHp()>0) list.add(i);
 		}
 		else
 			list.add(aimCard.getIndex());
@@ -254,7 +254,7 @@ public class BattleAct
 			||aimCard.getIndex()==3)
 		{
 			for(int i=1;i<4;i++)
-				if(aimCard!=null&&aimCard.getCurHp()>0) list.add(i);
+				if(aimList[i]!=null&&aimList[i].getCurHp()>0) list.add(i);
 		}
 		else
 			list.add(aimCard.getIndex());

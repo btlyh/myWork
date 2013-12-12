@@ -45,7 +45,7 @@ public class DataServer extends ChangeListenerList implements TimerListener,
 	/** 默认超时时间 */
 	public static final int TIMEOUT=600000;
 	/** 默认活跃超时时间 */
-	public static final int ACTIVE_TIMEOUT=180000;
+	public static final int ACTIVE_TIMEOUT=360000;
 	/** 默认保存超时时间 */
 	public static final int SAVE_TIMEOUT=300000;
 	/** 登录改变 */

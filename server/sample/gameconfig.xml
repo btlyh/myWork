@@ -210,7 +210,7 @@
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setSlaveKeepTime">7</method>
 	</obj>
-		<!-- 当壕赎身次数限制 -->
+	<!-- 卡牌最高等级-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setMaxlevel">90</method>
 	</obj>
@@ -218,6 +218,16 @@
 	<!-- 喝酒攻击力加成-->
 	<obj class="com.cambrian.dfhm.back.GameCFG">
 		<method name="setDrinkAttUp">20</method>
+	</obj>
+
+	<!-- 日常任务可领取数量-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setCanTakeDaylyCount">3</method>
+	</obj>
+
+	<!-- 日常任务从多少个任务里面随机取-->
+	<obj class="com.cambrian.dfhm.back.GameCFG">
+		<method name="setRandomDaylyCount">10</method>
 	</obj>
 	
 </objects>

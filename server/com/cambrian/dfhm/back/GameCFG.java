@@ -119,6 +119,10 @@ public class GameCFG
 //	private static int ransomConfine;
 	/** 喝酒增加攻击百分比*/
 	private static int drinkAttUp;
+	/** 日常任务可领取数量 */
+	private static int canTakeDaylyCount;
+	/** 日常任务从多少个任务里面随机取 */
+	private static int randomDaylyCount;
 
 	/**角色最大等级**/
 	private static int maxLevel;
@@ -851,5 +855,25 @@ public class GameCFG
 	public static void setDrinkAttUp(int drinkAttUp)
 	{
 		GameCFG.drinkAttUp = drinkAttUp;
+	}
+
+	public static int getCanTakeDaylyCount()
+	{
+		return canTakeDaylyCount;
+	}
+
+	public static void setCanTakeDaylyCount(int canTakeDaylyCount)
+	{
+		GameCFG.canTakeDaylyCount = canTakeDaylyCount;
+	}
+
+	public static int getRandomDaylyCount()
+	{
+		return randomDaylyCount;
+	}
+
+	public static void setRandomDaylyCount(int randomDaylyCount)
+	{
+		GameCFG.randomDaylyCount = randomDaylyCount;
 	}
 }

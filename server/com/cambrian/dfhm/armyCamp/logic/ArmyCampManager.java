@@ -2,7 +2,6 @@ package com.cambrian.dfhm.armyCamp.logic;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -254,7 +253,12 @@ public class ArmyCampManager
 	public Player walkAround(Player player, Session session)
 	{
 		Session[] sessions = ds.getSessionMap().getSessions();
-		List<Session> sessionList = Arrays.asList(sessions);
+		List<Session> sessionList = new ArrayList<Session>();
+		for (Session session2 : sessions)
+		{
+			if (session2 != null)
+				sessionList.add(session2);
+		}
 		List<Integer> firends = new ArrayList<Integer>();
 		for (Integer integer : player.getFriendInfo().getFriendList())
 		{
@@ -270,8 +274,7 @@ public class ArmyCampManager
 				kickSessionList.add(firendSession);
 			}
 		}
-		List<Session> list = new ArrayList<Session>();
-		while (list.size() < sessionList.size())
+		while (sessionList.size()>0)
 		{
 			Session randomSession = sessionList.get(MathKit.randomValue(0,
 					sessionList.size()));
@@ -281,8 +284,7 @@ public class ArmyCampManager
 				player.getArmyCamp().setWalkSession(randomSession);
 				return (Player) randomSession.getSource();
 			}
-			if (!list.contains(randomSession))
-				list.add(randomSession);
+			sessionList.remove(randomSession);
 		}
 		return null;
 	}

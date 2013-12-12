@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import com.cambrian.common.actor.Actor;
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.object.Sample;
-import com.cambrian.common.timer.TimerCenter;
-import com.cambrian.common.timer.TimerEvent;
 import com.cambrian.common.util.ChangeListener;
 import com.cambrian.common.util.TimeKit;
 import com.cambrian.dfhm.armyCamp.entity.ArmyCamp;
@@ -465,6 +463,10 @@ public class Player extends Sample implements Actor
 	public synchronized void incrToken(int token)
 	{
 		this.curToken+=token;
+		if(this.curToken >= maxtToken)
+		{
+			this.playerInfo.setLastRegainTokenTime(0l);
+		}
 	}
 
 	public void incrSoul(int soul)
@@ -811,7 +813,7 @@ public class Player extends Sample implements Actor
 		/** µÇÂ¼Ê±±éÀú¾üÕÊ */
 		if(nickname!=null)
 		{
-			ArmyCampManager.getInstance().enterArmyCamp(this,nickname);
+			//ArmyCampManager.getInstance().enterArmyCamp(this,nickname);
 			QualifyingManager.getInstance().addPlayer(nickname);
 		}
 

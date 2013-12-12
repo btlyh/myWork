@@ -117,7 +117,11 @@ public class Task extends Sample implements Comparable<Task>
 			return false;
 		if (player.getPlayerInfo().getQualifyingWin() < qualifyingWin)
 			return false;
-		
+		if (qualifyingRank != 0)
+		{
+			if (QualifyingManager.getInstance().getPlayerRank(player.getNickname()) > qualifyingRank)
+				return false;
+		}
 		return true;
 	}
 	/** 完成任务 */
@@ -191,6 +195,8 @@ public class Task extends Sample implements Comparable<Task>
 	{
 		if (!checkTake(player)) return false;
 		this.status = TAKED;
+		if(this.instancingCount>1)
+			this.instancingCount += player.getPlayerInfo().getInsCount(this.instancingSid);
 		return true;
 	}
 
@@ -199,7 +205,7 @@ public class Task extends Sample implements Comparable<Task>
 	{
 		data.writeInt(getSid());
 		data.writeInt(status);
-		System.err.println("前台序列化任务---------SID===="+getSid()+"   satus===="+status);
+		System.err.println("前台序列化任务---------SID===="+getSid()+"   satus===="+status +"     isdayli====="+isDayly);
 	}
 
 	@Override
@@ -214,9 +220,9 @@ public class Task extends Sample implements Comparable<Task>
 	{
 		this.status = data.readInt();
 	}
+	
 	public int compareTo(Task o)
 	{
-		return this.getSid() - o.getSid();
+		return this.instancingSid - o.instancingSid;
 	}
-
 }

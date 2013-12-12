@@ -320,10 +320,10 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 
 		// // -----º”‘ÿÕÊº“” º˛----
 		ArrayList list=new ArrayList();
-		Field[] array=new Field[12];
+		Field[] array=new Field[14];
 		array[0]=FieldKit.create("mailId",0L);
 		array[1]=FieldKit.create("state",0);
-		array[2]=FieldKit.create("sendTime",0L);
+		array[2]=FieldKit.create("sendTime",(String)null);
 		array[3]=FieldKit.create("title",(String)null);
 		array[4]=FieldKit.create("content",(String)null);
 		array[5]=FieldKit.create("cardList",(String)null);
@@ -333,6 +333,8 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		array[9]=FieldKit.create("soulPoint",0);
 		array[10]=FieldKit.create("normalPoint",0);
 		array[11]=FieldKit.create("sendPlayerName",(String)null);
+		array[12]=FieldKit.create("isFight",(Boolean)null);
+		array[13]=FieldKit.create("isSystem",(Boolean)null);
 		Fields fields=new Fields(array);
 		DBKit.getAll("t_mail",cm,
 			FieldKit.create("userId",(int)p.getUserId()),fields,list);
@@ -368,6 +370,10 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 				.getValue().toString()));
 			mail.setSendPalyerName(fields.get("sendPlayerName").getValue()
 				.toString());
+			mail.setFight(Boolean.parseBoolean(fields.get("isFight")
+				.getValue().toString()));
+			mail.setSystem(Boolean.parseBoolean(fields.get("isSystem")
+				.getValue().toString()));
 			p.addMail(mail);
 		}
 
@@ -504,9 +510,12 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		array[7]=FieldKit.create("logoutTime",p.getLogoutTime());
 		array[8]=FieldKit.create("buyTokenNum",p.getBuyTokenNum());
 		array[9]=FieldKit.create("vipLevel",p.getVipLevel());
-		array[10]=FieldKit.create("curIndexForNormalNPC",p.getCurIndexForNormalNPC());
-		array[11]=FieldKit.create("curIndexForHardNPC",p.getCurIndexForHardNPC());
-		array[12]=FieldKit.create("curIndexForCorssNPC",p.getCurIndexForCorssNPC());
+		array[10]=FieldKit.create("curIndexForNormalNPC",
+			p.getCurIndexForNormalNPC());
+		array[11]=FieldKit.create("curIndexForHardNPC",
+			p.getCurIndexForHardNPC());
+		array[12]=FieldKit.create("curIndexForCorssNPC",
+			p.getCurIndexForCorssNPC());
 		return new Fields(array);
 	}
 
@@ -527,8 +536,8 @@ public class GameDCAccess extends ChangeAdapter implements DBAccess
 		array[10]=FieldKit.create("normalPoint",mail.getNormalPoint());
 		array[11]=FieldKit.create("userId",userId);
 		array[12]=FieldKit.create("sendPlayerName",mail.getSendPalyerName());
-		array[13]=FieldKit.create("isFight", mail.isFight());
-		array[14]=FieldKit.create("isSystem", mail.isSystem());
+		array[13]=FieldKit.create("isFight",mail.isFight());
+		array[14]=FieldKit.create("isSystem",mail.isSystem());
 		return new Fields(array);
 	}
 

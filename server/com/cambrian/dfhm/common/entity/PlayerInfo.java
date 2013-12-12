@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.cambrian.common.net.ByteBuffer;
 import com.cambrian.common.object.Sample;
+import com.cambrian.dfhm.back.GameCFG;
 import com.cambrian.dfhm.card.Card;
 
 /**
@@ -765,7 +766,7 @@ public class PlayerInfo
 	/** 添加排位赛记录 */
 	public void addQualifyingLog(String log)
 	{
-		if(qualifyingLog.size()>5) qualifyingLog.remove(0);
+		if(qualifyingLog.size()>GameCFG.getInformationSize()) qualifyingLog.remove(0);
 		qualifyingLog.add(log);
 	}
 
@@ -861,5 +862,18 @@ public class PlayerInfo
 			}
 		}
 		return false;
+	}
+	/** 获得指定副本已经打过的次数 */
+	public int getInsCount(int sid)
+	{
+		for (int i = 0; i < instancingCount.size(); i+=2)
+		{
+			int instancingSid = instancingCount.get(i);
+			if(instancingSid == sid)
+			{
+				return instancingCount.get(i+1);
+			}
+		}
+		return 0;
 	}
 }

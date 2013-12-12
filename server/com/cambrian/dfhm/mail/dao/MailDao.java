@@ -98,7 +98,7 @@ public class MailDao
 	 */
 	public void addMail(Mail mail,int userId)
 	{
-		Field[] array=new Field[13];
+		Field[] array=new Field[15];
 		array[0]=FieldKit.create("mailId",mail.getMailId());
 		array[1]=FieldKit.create("state",mail.getState());
 		array[2]=FieldKit.create("sendTime",mail.getSendTime());
@@ -112,6 +112,8 @@ public class MailDao
 		array[10]=FieldKit.create("normalPoint",mail.getNormalPoint());
 		array[11]=FieldKit.create("userId",userId);
 		array[12]=FieldKit.create("sendPlayerName",mail.getSendPalyerName());
+		array[13]=FieldKit.create("isFight", mail.isFight());
+		array[14]=FieldKit.create("isSystem", mail.isSystem());
 
 		DBKit.set(TABLE,cm,FieldKit.create("mailId",mail.getMailId()),
 			new Fields(array));
